@@ -7,6 +7,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     Author     : chrisvuong
 */
 
+/* 
+Put the following in the <head> section
+<link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet" type="text/css" >
+
+*/
 html * {
     font-family: Helvetica, sans-serif;
 }
