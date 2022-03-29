@@ -17,9 +17,16 @@
     <header>
         <button id="home">IoTBay</button>
         <input type="text" id="search" name="search" placeholder="Search items"/>
-        <button id="searchbtn"><i class="fa fa-search"></i></button>
-        <button id="accountbtn"><i class="fa fa-user-circle"></i></button>
-        <button id="cartbtn"><i class="fa fa-shopping-cart"></i></button>
+        <button class="searchbtn"><i class="fa fa-search"></i></button>
+        <div class="dropdown" style="float:right;">
+            <a href="viewcart.jsp" class="topbarbtn"><i class="fa fa-shopping-cart"></i></a>
+        </div>
+        <div class="dropdown" style="float:right;">
+            <button class="dropbtn"><i class="fa fa-user-circle"></i></button>
+            <div class="dropdown-content">
+                <a href="logout.jsp">Logout</a>
+            </div>
+        </div>
     </header>
     <body>
         <div>
