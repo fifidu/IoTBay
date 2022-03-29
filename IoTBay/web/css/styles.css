@@ -89,7 +89,7 @@ input[type=text] {
     padding: 10px;
 }
 
-#searchbtn:hover {
+.searchbtn:hover {
     background-color: darkorange;
 }
 
@@ -159,4 +159,4 @@ li a:hover:not(.active) {
 .dropdown:hover .dropdown-content {display: block;}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: lightskyblue;}
+.dropdown:hover .dropbtn {background-color: lightblue;}
