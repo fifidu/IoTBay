@@ -24,15 +24,17 @@
         <div class="dropdown" style="float:right;">
             <button class="dropbtn"><i class="fa fa-user-circle"></i> <jsp:getProperty name="user" property="firstName"/></button>
             <div class="dropdown-content">
-                <a href="logout.jsp">Logout</a>
+                <a class="dropdown-link" href="edituser.jsp">Edit Account</a>
+                <a class="dropdown-link" href="vieworder.jsp>">View Orders</a>
+                <a class="dropdown-link" href="logout.jsp">Logout</a>
             </div>
         </div>
     </header>
     <body>
         <div>
             <ul class="navbar">
-                <li><a class="active">Home</a></li>
-                <li><a>Products</a></li>
+                <li><a class="navbar-link-active">Home</a></li>
+                <li><a class="navbar-link">Products</a></li>
             </ul>
         </div>
         <div class="main">

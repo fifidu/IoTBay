@@ -27,7 +27,7 @@ footer {
 }
 
 /* Index Page */
-a:link, a:visited {
+.main-link:link, .main-link:visited {
     display: inline-block;
     background-color: black;
     color: white;
@@ -117,7 +117,7 @@ li {
   float: left;
 }
 
-li a {
+.dropdown-link {
   display: block;
   color: white;
   text-align: center;
@@ -125,12 +125,24 @@ li a {
   text-decoration: none;
 }
 
-li a:hover:not(.active) {
+.dropdown-link:hover:not(.active) {
   background-color: #111;
 }
 
-.active {
-  background-color: orange;
+.navbar-link {
+    display: inline-block;
+    background-color: black;
+    color: white;
+    padding: 16px;
+    text-decoration: none;
+}
+
+.navbar-link-active {
+    background-color: orange;
+    display: inline-block;
+    color: white;
+    padding: 16px;
+    text-decoration: none;
 }
 
 
@@ -165,7 +177,7 @@ li a:hover:not(.active) {
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content .dropdown-link:hover {background-color: #ddd;}
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {display: block;}

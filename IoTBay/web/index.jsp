@@ -17,7 +17,7 @@
         <h1>Welcome to IoTBay!</h1>
         <div>
             <p>To place an order, please</p> 
-            <a href = login.jsp>Login</a>
-            <a href = register.jsp>Register</a></div>
+            <a class="main-link" href = login.jsp>Login</a>
+            <a class="main-link" href = register.jsp>Register</a></div>
     </body>
 </html>
