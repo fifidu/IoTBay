@@ -13,6 +13,9 @@ html * {
     margin: 0;
 }
 
+p {
+    color: red;
+}
 
 header {
     background-color: lightskyblue;
