@@ -74,20 +74,15 @@ input {
   background-color: lightblue;
 }
 
-button {
-    background-color: lightskyblue;
-    display: inline-block;
-    font-size: 30px;
-    height: 70px;
+.searchbar {
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 20px;
     border: none;
 }
 
-.searchbar {
-    font-size: 20px;
-    height: 38px;
-}
-
-#home {
+.homebutton {
+    background-color: lightskyblue;
     border: none;
     font-size: 30px;
     height: 70px;
@@ -96,9 +91,11 @@ button {
 
 .searchbtn {
     background-color: orange;
-    font-size: 25px;
-    height: 50px;
-    padding: 10px;
+    margin-top: 8px;
+    padding: 8px 10px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
 }
 
 .searchbtn:hover {
@@ -147,6 +144,8 @@ li {
 
 
 .dropbtn {
+    background-color: lightskyblue;
+    display: inline-block;
     padding: 17px 25px;
     font-size: 30px;
     height: 70px;
