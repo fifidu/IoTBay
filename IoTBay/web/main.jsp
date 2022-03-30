@@ -16,7 +16,7 @@
     </head>
     <header>
         <button id="home">IoTBay</button>
-        <input type="text" class="searchbar" name="search" placeholder="Search items"/>
+        <input type="search" class="searchbar" name="search" placeholder="Search items"/>
         <button class="searchbtn"><i class="fa fa-search"></i></button>
         <div class="dropdown" style="float:right;">
             <a href="viewcart.jsp" class="topbarbtn"><i class="fa fa-shopping-cart"></i></a>
