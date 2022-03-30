@@ -26,6 +26,15 @@ footer {
     color: white;
 }
 
+/* Index Page */
+a:link, a:visited {
+    display: inline-block;
+    background-color: black;
+    color: white;
+    padding: 16px;
+    text-decoration: none;
+}
+
 /* Register Page */
 input[type=submit] {
     background-color: green;
