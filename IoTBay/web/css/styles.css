@@ -26,12 +26,6 @@ footer {
     color: white;
 }
 
-.navbar {
-    height: 50px;
-    padding: 0;
-    margin: 0;
-}
-
 /* Register Page */
 input[type=submit] {
     background-color: green;
@@ -51,6 +45,12 @@ input {
 
 
 /* Main Page */
+.navbar {
+    height: 50px;
+    padding: 0;
+    margin: 0;
+}
+
 .topbarbtn {
     background-color: lightskyblue;
     color: black;
@@ -73,7 +73,7 @@ button {
     border: none;
 }
 
-input[type=text] {
+.searchbar {
     font-size: 20px;
     height: 38px;
 }
