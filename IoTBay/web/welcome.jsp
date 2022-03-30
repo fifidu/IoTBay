@@ -24,6 +24,7 @@
         </jsp:useBean>
         
         <h2>Welcome, <jsp:getProperty name="user" property="firstName"/></h2>
+        <p>Your email is <jsp:getProperty name="user" property="emailAddress"/></p>
         <a href="main.jsp">Continue to Store</a>
     </body>
 </html>
