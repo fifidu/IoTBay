@@ -1,4 +1,4 @@
-<%--
+-<%--
     Document   : main
     Created on : 27/03/2022, 1:11:50 PM
     Author     : chrisvuong
@@ -22,7 +22,7 @@
             <a href="viewcart.jsp" class="topbarbtn"><i class="fa fa-shopping-cart"></i></a>
         </div>
         <div class="dropdown" style="float:right;">
-            <button class="dropbtn"><i class="fa fa-user-circle"></i></button>
+            <button class="dropbtn"><i class="fa fa-user-circle"></i> <jsp:getProperty name="user" property="firstName"/></button>
             <div class="dropdown-content">
                 <a href="logout.jsp">Logout</a>
             </div>

@@ -18,19 +18,19 @@
             <table>
                 <tr>
                     <td>First Name:</td>
-                    <td><input type="text" id="fname" name="fname" required></td>
+                    <td><input type="text" id="fname" name="firstName" required></td>
                 </tr>
                 <tr>
                     <td>Last Name:</td>
-                    <td><input type="text" id="lname" name="lname" required></td>
+                    <td><input type="text" id="lname" name="lastName" required></td>
                 </tr>
                 <tr>
                     <td>Email:</td>
-                    <td><input type="email" id="email" name="email" required></td>
+                    <td><input type="email" id="email" name="emailAddress" required></td>
                 </tr>
                 <tr>
                     <td>Contact Number:</td>
-                    <td><input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required></td>
+                    <td><input type="tel" id="phone" name="phoneNo" pattern="[0-9]{10}" required></td>
                 </tr>
                 <tr>
                     <td>Password:</td>
