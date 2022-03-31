@@ -42,7 +42,7 @@
                 </tr>                
                 <tr>
                     <td>Agree to terms of service?</td>
-                    <td><input type="checkbox" id="tos" name="tos"></td>
+                    <td><input type="checkbox" id="tos" name="tos" required></td>
                 </tr>
             </table>
             <input type="submit" value="Register">
