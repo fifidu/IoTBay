@@ -40,7 +40,6 @@
 
         <main>
             <nav>
-                <a class="nav-item">Home</a>
                 <a class="nav-item">Product</a>
             </nav>
             <div class="content">
