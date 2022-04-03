@@ -12,7 +12,6 @@
 }
 
 * {
-    font-family: inherit;
     color: white;
     text-decoration: none;
     margin: 0;
@@ -93,9 +92,8 @@ header {
 
 .header-button {
     height: 100%;
-    padding-left: 10px;
-    padding-right: 10px;
-    width: 100px;
+    padding-left: 5%;
+    padding-right: 5%;
     background-color: #404040;
     display: flex;
     justify-content: center;
