@@ -48,7 +48,7 @@ Configuration
 After installation, no further configuration is required.
 
 Group Members
-—-----------------------------------------
+------------------------------------------
 *Christopher Vuong, 13568530
 *Tammihn Ha, 14242008
 *Minh Quan Tran, 14065662
