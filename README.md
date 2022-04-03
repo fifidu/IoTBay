@@ -28,19 +28,19 @@ NetBeans IDE 12.6
 Installation
 ------------------------------------------
 Glassfish 4.1.2
-Download Glassfish 4.1.2 from https://javaee.github.io/glassfish/download
-Unzip the Glassfish zip file at a desired location
-Open Command Prompt (Windows) or Terminal (macOS) 
-Change the directory to the Glassfish installation directory and run the following: “bin/asadmin”
-In order to deploy the file, you must start a domain. Run the following to start a domain: “start-domain [domain name]”
-To deploy the file run the following: “deploy [directory to file]”
-Go to desired browser and type the following: “http://localhost:8080/IoTBay
+* Download Glassfish 4.1.2 from https://javaee.github.io/glassfish/download
+* Unzip the Glassfish zip file at a desired location
+* Open Command Prompt (Windows) or Terminal (macOS) 
+* Change the directory to the Glassfish installation directory and run the following: “bin/asadmin”
+* In order to deploy the file, you must start a domain. Run the following to start a domain: “start-domain [domain name]”
+* To deploy the file run the following: “deploy [directory to file]”
+* Go to desired browser and type the following: “http://localhost:8080/IoTBay
 
 NetBeans IDE 12.6
-Download Glassfish 4.1.2 from https://javaee.github.io/glassfish/download
-Unzip the Glassfish zip file at a desired location
-Open the IoTBay.war file in NetBeans IDE 12.6
-Press
+* Download Glassfish 4.1.2 from https://javaee.github.io/glassfish/download
+* Unzip the Glassfish zip file at a desired location
+* Open the IoTBay.war file in NetBeans IDE 12.6
+* Press Run Project
 
 
 Configuration
@@ -49,8 +49,8 @@ After installation, no further configuration is required.
 
 Group Members
 ------------------------------------------
-*Christopher Vuong, 13568530
-*Tammihn Ha, 14242008
-*Minh Quan Tran, 14065662
-*Fifi Du, 14240547
-*Sharmila Rahman, 14275198
+* Christopher Vuong, 13568530
+* Tammihn Ha, 14242008
+* Minh Quan Tran, 14065662
+* Fifi Du, 14240547
+* Sharmila Rahman, 14275198
