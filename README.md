@@ -2,7 +2,7 @@
 Group 30 - Introduction to Software Development [Autumn 2022]
 
 Contents of this file
-—-----------------------—-----------------------—-----------------------—-----------------------—-----------------------—-----------------------—----------
+------------------------------------------
 *Project Description
 *Requirements
 *Installation
@@ -10,7 +10,7 @@ Contents of this file
 *Group Members
 
 Introduction
-—----------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------
 The IoTBay web application allows its users (IoTBay staff and customers) to register an account in order to access the main store page. Returning users can log into the application using an email address and password.
 
 ‘index.jsp’ serves as the landing page, from which the user can either login (login.jsp) or register (register.jsp) to access the main store page (main.jsp). From the main page, the user can log out (logout.jsp), upon which their session will be terminated.
@@ -20,13 +20,13 @@ To view the accompanying report, visit: https://docs.google.com/document/d/1xJ9-
 To suggest changes or view version history, visit: https://github.com/fifidu/IoTBay
 
 Requirements
-—-----------------------—-----------------------—-----------------------—-----------------------—-----------------------—-----------------------—----------
+------------------------------------------
 Java 8u321
 Glassfish 4.1.2
 NetBeans IDE 12.6
 
 Installation
-—-----------------------—-----------------------—-----------------------—-----------------------—-----------------------—-----------------------—----------
+------------------------------------------
 Glassfish 4.1.2
 Download Glassfish 4.1.2 from https://javaee.github.io/glassfish/download
 Unzip the Glassfish zip file at a desired location
@@ -44,11 +44,11 @@ Press
 
 
 Configuration
-—-----------------------
+------------------------------------------
 After installation, no further configuration is required.
 
 Group Members
-—-----------------------
+—-----------------------------------------
 *Christopher Vuong, 13568530
 *Tammihn Ha, 14242008
 *Minh Quan Tran, 14065662
