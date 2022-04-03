@@ -3,11 +3,11 @@ Group 30 - Introduction to Software Development [Autumn 2022]
 
 Contents of this file
 ------------------------------------------
-*Project Description
-*Requirements
-*Installation
-*Configuration
-*Group Members
+* Project Description
+* Requirements
+* Installation
+* Configuration
+* Group Members
 
 Introduction
 ------------------------------------------
