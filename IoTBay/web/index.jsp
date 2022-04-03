@@ -11,13 +11,26 @@
         <title>Home - IoTBay</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="./css/styles.css" rel="stylesheet" type="text/css" >
+        <link href="./css/index.css" rel="stylesheet" type="text/css" >
+        <link href="./css/header.css" rel="stylesheet" type="text/css" >
+<!--        <link href="./css/styles.css" rel="stylesheet" type="text/css" >-->
     </head>
     <body>
-        <h1>Welcome to IoTBay!</h1>
-        <div>
-            <p>To place an order, please</p> 
-            <a class="main-link" href = login.jsp>Login</a>
-            <a class="main-link" href = register.jsp>Register</a></div>
+        <header>
+            <div class="header-content">
+                <div class="header-start">
+                    <a class="header-button" href="index.jsp"><h3>IoTBay</h3></a>
+                </div>
+            </div>
+            
+            <div class="header-outline"></div>
+        </header>
+        
+        <div class="page-content"> <!<!-- Everything in the middle of the screen -->
+            <h1>Welcome to IoTBay!</h1><br>
+            <p>To place an order, please</p><br>
+            <a class="main-link" href = login.jsp>Login</a> or
+            <a class="main-link" href = register.jsp>Register</a>
+        </div>
     </body>
 </html>

@@ -7,3 +7,63 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     Author     : chrisvuong
 */
 
+body {
+    background-color: #202020;
+}
+
+.page-content {
+    padding-top: 240px; /* to ensure that the content is safely below the header */
+    margin: auto;
+    width: 40%; 
+    text-align: center; /*center-aligning text */
+}
+
+nav {
+    height: 100%;
+    width: 8%;
+    padding-right: 1rem;
+    min-width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.nav-item {
+  width: 100%;
+  height: 40px;
+  padding-left: 5%;
+  padding-right: 5%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #303030;
+  border-left: #005ce6 solid 2px;
+  transition: all 0.2s;
+}
+
+.nav-item:hover {
+  border-left: #005ce6 solid 7px;
+  width: calc(100% - 5px);
+}
+
+.content {
+    flex-grow: 1;
+}
+
+.main-link:link, .main-link:visited, input[type=submit] {
+    height: 100%;
+    padding: 2%;
+    background-color: #404040;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+table { /* centering the form without affecting position of 'Register' button */
+    width: 45%;
+    margin: auto;
+    text-align: right;
+}

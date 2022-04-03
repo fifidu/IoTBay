@@ -9,11 +9,23 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="./css/styles.css" rel="stylesheet" type="text/css" >
+        <link href="./css/login.css" rel="stylesheet" type="text/css" >
+        <link href="./css/header.css" rel="stylesheet" type="text/css" >
         <title>Login - IoTBay</title>
     </head>
     <body>
-        <h1>Login</h1>
+        <header>
+            <div class="header-content">
+                <div class="header-start">
+                    <a class="header-button" href="index.jsp"><h3>IoTBay</h3></a>
+                </div>
+            </div>
+            
+            <div class="header-outline"></div>
+        </header>
+        
+        <div class="page-content">
+            <h1>Login</h1>
         <form action="welcome.jsp" method="post">
             <table>
                 <tr>
@@ -23,13 +35,16 @@
                 <tr>
                     <td>Password:</td>
                     <td><input type="password" id="password" name="password" required></td>
-                </tr>              
+                </tr>
+                <br>
             </table>
+            <br>
             <input type="submit" value="Login">
-        </form>
+        </form><br>
         <div>
-            <p>Don't have an account?</p>
+            <p>Don't have an account?</p><br>
             <a class="main-link" href="register.jsp">Create an account</a>
+        </div>
         </div>
     </body>
 </html>

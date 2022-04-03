@@ -9,12 +9,25 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet" type="text/css" >
+        <link href="./css/logout.css" rel="stylesheet" type="text/css" >
+        <link href="./css/header.css" rel="stylesheet" type="text/css" >
+<!--        <link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet" type="text/css" >-->
         <title>Logout</title>
     </head>
     <body>
+        <header>
+            <div class="header-content">
+                <div class="header-start">
+                    <a class="header-button" href="index.jsp"><h3>IoTBay</h3></a>
+                </div>
+            </div>
+            
+            <div class="header-outline"></div>
+        </header>
         <% session.invalidate(); %>
-        <h1>You have been logged out</h1>
-        <p>Click here to return to <a href = "index.jsp">index</a> </p>
+        <div class="page-content">
+            <h1>You have been logged out</h1><br>
+            <p><a class="underline-link" href = "index.jsp">Click here to return to index</a> </p>
+        </div>
     </body>
 </html>
