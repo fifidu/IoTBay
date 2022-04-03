@@ -28,7 +28,7 @@
         <div class="page-content"> <!<!-- Everything in the middle of the screen -->
             <h1>Welcome to IoTBay!</h1><br>
             <p>To place an order, please</p><br>
-            <a class="main-link" href = login.jsp>Login</a> or
+            <a class="main-link" href = login.jsp>Login</a> or  
             <a class="main-link" href = register.jsp>Register</a>
         </div>
     </body>

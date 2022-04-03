@@ -43,7 +43,6 @@
                 <a class="nav-item">Product</a>
             </nav>
             <div class="content">
-                <p>Nothing to see here...</p>
             </div>
         </main>
     </body>

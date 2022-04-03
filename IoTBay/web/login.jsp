@@ -25,23 +25,15 @@
         </header>
         
         <div class="page-content">
-            <h1>Login</h1>
-        <form action="welcome.jsp" method="post">
-            <table>
-                <tr>
-                    <td>Email:</td>
-                    <td><input type="email" id="email" name="email" required></td>
-                </tr>
-                <tr>
-                    <td>Password:</td>
-                    <td><input type="password" id="password" name="password" required></td>
-                </tr>
-                <br>
-            </table>
-            <br>
-            <input type="submit" value="Login">
-        </form><br>
-        <div>
+            <form action="welcome.jsp" method="post">
+                <h1 class="title">Login</h1>
+                <label><b>Email</b></label><br>
+                <input type="email" id="email" name="email" required><br><br>
+                <label><b>Password</b></label><br>
+                <input type="password" id="password" name="password" required><br><br>
+                <input type="submit" value="Login">
+            </form>
+        <div class="second-content">
             <p>Don't have an account?</p><br>
             <a class="main-link" href="register.jsp">Create an account</a>
         </div>

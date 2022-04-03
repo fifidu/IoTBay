@@ -93,8 +93,9 @@ header {
 
 .header-button {
     height: 100%;
-    padding-left: 5%;
-    padding-right: 5%;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100px;
     background-color: #404040;
     display: flex;
     justify-content: center;

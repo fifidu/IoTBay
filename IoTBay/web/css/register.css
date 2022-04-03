@@ -12,10 +12,9 @@ body {
 }
 
 .page-content {
-    padding-top: 240px; /* to ensure that the content is safely below the header */
+    padding-top: 100px; /* to ensure that the content is safely below the header */
     margin: auto;
-    width: 40%; 
-    text-align: center; /*center-aligning text */
+    width: 400px; 
 }
 
 nav {
@@ -51,9 +50,9 @@ nav {
     flex-grow: 1;
 }
 
-.main-link:link, .main-link:visited, input[type=submit] {
+.main-link:link, .main-link:visited {
     height: 100%;
-    padding: 2%;
+    padding: 10px;
     background-color: #404040;
     display: flex;
     justify-content: center;
@@ -69,5 +68,32 @@ table { /* centering the form without affecting position of 'Register' button */
 }
 
 input[type=text], input[type=email], input[type=password], input[type=tel] {
+    width: 100%;
     color: black;
+}
+
+form {
+    background-color: #303030;
+    padding: 20px;
+}
+
+.title {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+input[type=submit]  {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px;
+    background-color: #404040;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.second-content {
+    padding: 10px;
+    text-align: center;
 }

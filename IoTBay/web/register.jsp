@@ -25,43 +25,26 @@
         </header>
         
         <div class="page-content">
-            <h1>Register</h1>
             <form action="welcome.jsp" method="post">
-                <table>
-                    <tr>
-                        <td>First Name:</td>
-                        <td><input type="text" id="fname" name="firstName" required></td>
-                    </tr>
-                    <tr>
-                        <td>Last Name:</td>
-                        <td><input type="text" id="lname" name="lastName" required></td>
-                    </tr>
-                    <tr>
-                        <td>Email:</td>
-                        <td><input type="email" id="email" name="emailAddress" required></td>
-                    </tr>
-                    <tr>
-                        <td>Contact Number:</td>
-                        <td><input type="tel" id="phone" name="phoneNo" pattern="[0-9]{10}" required></td>
-                    </tr>
-                    <tr>
-                        <td>Password:</td>
-                        <td><input type="password" id="password" name="password" required></td>
-                    </tr>
-                    <tr>
-                        <td>Confirm Password:</td>
-                        <td><input type="password" id="cpassword" name="cpassword" required></td>
-                    </tr>                
-                    <tr>
-                        <td>Agree to terms of service?</td>
-                        <td><input type="checkbox" id="tos" name="tos" required></td>
-                    </tr>
-                </table>
+                <h1 class="title">Register</h1>
+                <label><b>First Name</b></label><br>
+                <input type="text" id="fname" name="firstName" required><br><br>
+                <label><b>Last Name</b></label><br>
+                <input type="text" id="lname" name="lastName" required><br><br>
+                <label><b>Email</b></label><br>
+                <input type="email" id="email" name="emailAddress" required><br><br>
+                <label><b>Phone Number</b></label><br>
+                <input type="tel" id="phone" name="phoneNo" pattern="[0-9]{10}" required><br><br>
+                <label><b>Password</b></label><br>
+                <input type="password" id="password" name="password" required><br><br>
+                <label><b>Confirm Password</b></label><br>
+                <input type="password" id="cpassword" name="cpassword" required><br><br>
+                <label><b>Agree to terms of service?</b> <input type="checkbox" id="tos" name="tos" required></label><br><br>
                 <input type="submit" value="Register">
-            </form><br>
-            <div>
-            <p>Already have an account? <a href="login.jsp">Login</a></p>
+            </form>
         </div>
+        <div class="second-content">
+            <p>Already have an account? <a href="login.jsp">Login</a></p>
         </div>
     </body>
 </html>
