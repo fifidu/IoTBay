@@ -61,3 +61,7 @@ nav {
     border-radius: 8px;
     display: inline-block;
 }
+
+input[type=email], input[type=password] {
+    color: black;
+}

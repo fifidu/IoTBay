@@ -67,3 +67,7 @@ table { /* centering the form without affecting position of 'Register' button */
     margin: auto;
     text-align: right;
 }
+
+input[type=text], input[type=email], input[type=password], input[type=tel] {
+    color: black;
+}

@@ -11,7 +11,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="./css/logout.css" rel="stylesheet" type="text/css" >
         <link href="./css/header.css" rel="stylesheet" type="text/css" >
-<!--        <link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet" type="text/css" >-->
         <title>Logout</title>
     </head>
     <body>
