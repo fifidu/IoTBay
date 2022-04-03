@@ -63,11 +63,6 @@ nav {
     
 }
 
-input[type=email], input[type=password] {
-    width: 100%;
-    color: black;
-}
-
 form {
     background-color: #303030;
     padding: 20px;
@@ -87,6 +82,11 @@ input[type=submit]  {
     justify-content: center;
     align-items: center;
     border-radius: 8px;
+}
+
+input[type=email], input[type=password] {
+    width: 100%;
+    color: black;
 }
 
 .second-content {
