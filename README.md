@@ -22,12 +22,12 @@ To suggest changes or view version history, visit: https://github.com/fifidu/IoT
 Requirements
 ------------------------------------------
 * Java 8u321
-* Glassfish 4.1.2
+* Glassfish 4.1
 * NetBeans IDE 12.6
 
 Installation
 ------------------------------------------
-**Glassfish 4.1.2**
+**Glassfish 4.1**
 * Download Glassfish 4.1.2 from https://javaee.github.io/glassfish/download
 * Unzip the Glassfish zip file at a desired location
 * Open Command Prompt (Windows) or Terminal (macOS) 
