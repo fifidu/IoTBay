@@ -1,3 +1,9 @@
+<%-- 
+    Document   : orders
+    Created on : 23/04/2022, 10:21:27 PM
+    Author     : chrisvuong
+--%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -7,7 +13,7 @@
         <link href="./css/main.css" rel="stylesheet" type="text/css" >
         <link href="./css/header.css" rel="stylesheet" type="text/css" >
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <title>Store - IoTBay</title>
+        <title>Orders - IoTBay</title>
     </head>
 
     <body>
@@ -28,7 +34,7 @@
                         <a><i class="fa fa-user-circle"></i> Hello, <jsp:getProperty name="user" property="firstName"/></a>
                         <div class="user-menu">
                             <a class="header-button" href="edituser.jsp">Edit Account</a>
-                            <a class="header-button" href="orders.jsp>">My Orders</a>
+                            <a class="header-button" href="orders.jsp>">View Orders</a>
                             <a class="header-button" href="logout.jsp">Logout</a>
                         </div>
                     </div>
@@ -43,6 +49,13 @@
                 <a class="nav-item">Product</a>
             </nav>
             <div class="content">
+                <table>
+                    <th>Order</th>
+                    <th>Date</th>
+                    <th>Payment Status</th>
+                    <th>Fulfillment Status</th>
+                    <th>Total</th>
+                </table>
             </div>
         </main>
     </body>
