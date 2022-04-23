@@ -37,7 +37,7 @@ Installation
 * Go to desired browser and type the following: “http://localhost:8080/IoTBay
 
 **NetBeans IDE 12.6**
-* Download Glassfish 4.1.2 from https://javaee.github.io/glassfish/download
+* Download Glassfish 4.1 from https://javaee.github.io/glassfish/download
 * Unzip the Glassfish zip file at a desired location
 * Open the IoTBay.war file in NetBeans IDE 12.6
 * Press Run Project
