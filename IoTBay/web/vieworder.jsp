@@ -1,5 +1,5 @@
 <%-- 
-    Document   : cart
+    Document   : vieworder
     Created on : 30/04/2022, 3:04:06 PM
     Author     : chrisvuong
 --%>
@@ -11,10 +11,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="./css/orders.css" rel="stylesheet" type="text/css" >
+        <link href="./css/cart.css" rel="stylesheet" type="text/css" >
         <link href="./css/header.css" rel="stylesheet" type="text/css" >
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <title>Cart - IoTBay</title>
+        <title>View Order - IoTBay</title>
     </head>
 
     <body>
@@ -32,7 +32,7 @@
 
                 <div class="header-end">
                     <div class="user-info header-button">
-                        <a><i class="fa fa-user-circle"></i> Hello, <%--<jsp:getProperty name="user" property="firstName"/>--%></a>
+                        <a><i class="fa fa-user-circle"></i> Hello, <jsp:getProperty name="user" property="firstName"/></a>
                         <div class="user-menu">
                             <a class="header-button" href="edituser.jsp">Edit Account</a>
                             <a class="header-button" href="orders.jsp>">My Orders</a>

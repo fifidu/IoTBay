@@ -90,7 +90,7 @@ public class OrderBean implements java.io.Serializable {
     }
 
     public void setFulfillmentStatus(String fulfillmentStatus) {
-        this.fulfillmentStatus = fulfillmentStatus
+        this.fulfillmentStatus = fulfillmentStatus;
     }
 
     public void setTotalCost(double totalCost) {
