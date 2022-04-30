@@ -22,12 +22,12 @@ To suggest changes or view version history, visit: https://github.com/fifidu/IoT
 Requirements
 ------------------------------------------
 * Java 8u321
-* Glassfish 4.1.2
+* Glassfish 4.1
 * NetBeans IDE 12.6
 
 Installation
 ------------------------------------------
-**Glassfish 4.1.2**
+**Glassfish 4.1**
 * Download Glassfish 4.1.2 from https://javaee.github.io/glassfish/download
 * Unzip the Glassfish zip file at a desired location
 * Open Command Prompt (Windows) or Terminal (macOS) 
@@ -37,7 +37,7 @@ Installation
 * Go to desired browser and type the following: “http://localhost:8080/IoTBay
 
 **NetBeans IDE 12.6**
-* Download Glassfish 4.1.2 from https://javaee.github.io/glassfish/download
+* Download Glassfish 4.1 from https://javaee.github.io/glassfish/download
 * Unzip the Glassfish zip file at a desired location
 * Open the IoTBay.war file in NetBeans IDE 12.6
 * Press Run Project
