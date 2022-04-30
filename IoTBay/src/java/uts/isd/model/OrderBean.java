@@ -96,5 +96,5 @@ public class OrderBean implements java.io.Serializable {
     public void setTotalCost(double totalCost) {
         this.totalCost = totalCost;
     }
-    
+
 }

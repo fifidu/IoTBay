@@ -8,14 +8,16 @@ package uts.isd.model;
  *
  * @author chrisvuong
  */
-public class CartBean implements java.io.Serializable {
+
+public class CartLineBean implements java.io.Serializable {
+
 
     private int cartID;
     private int productID;
     private int quantity;
 
-    public CartBean() {
-
+    public CartLineBean() {
+      
     }
 
     public int getCartID() {
