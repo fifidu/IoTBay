@@ -7,12 +7,12 @@
  * Created: 04/05/2022
  */
 
-CREATE TABLE Inventory {
-    ProductID INT,
-    ProductName VARCHAR,
-    ProductSupplier VARCHAR,
-    ProductDescription VARCHAR,
-    ProductCost DOUBLE,
-    QuantityAvailable INT,
-    QuantitySold INT
-};
+CREATE TABLE Inventory (
+    productId int,
+    productName varchar(50), /* specify limit */ 
+    productSupplier varchar(50),
+    productDescription varchar(255),
+    productCost double,
+    quantityAvailable int,
+    quantitySold int
+);
