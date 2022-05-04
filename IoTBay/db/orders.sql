@@ -7,3 +7,12 @@
  * Created: 26/04/2022
  */
 
+CREATE TABLE Orders {
+    OrderID int,
+    CustomerID int,
+    CartID int,
+    OrderDate timestamp,
+    OrderStatus varchar(30),
+    TotalCost double
+};
+

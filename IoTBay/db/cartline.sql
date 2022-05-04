@@ -7,3 +7,8 @@
  * Created: 26/04/2022
  */
 
+CREATE TABLE CartLine {
+    CartID int,
+    ProductID int,
+    Quantity int
+};

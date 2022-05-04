@@ -7,3 +7,7 @@
  * Created: 26/04/2022
  */
 
+CREATE TABLE Cart {
+    CartID int,
+    CustomerID int
+};

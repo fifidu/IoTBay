@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package uts.isd.model.dao;
-import java.sql.Connection;
+import java.sql.*;
 
 /**
  *
@@ -11,7 +11,7 @@ import java.sql.Connection;
  */
 public class DBManager {
 
-    private statement st;
+    private Statement st;
 
     public DBManager(Connection conn) throws SQLException {
         st = conn.createStatement();
