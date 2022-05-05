@@ -7,15 +7,14 @@
  * Created: 26/04/2022
  */
 
-CREATE TABLE Orders {
-    OrderID int,
-    CustomerID int,
-    CartID int,
-    OrderDate timestamp,
-    OrderStatus varchar(30),
-    TotalCost double
-};
-
-SELECT * FROM Orders;
-
-INSERT INTO Orders 
+CREATE TABLE orders (
+    orderID int,
+    customerID int,
+    cartID int,
+    orderDate timestamp,
+    orderStatus varchar(30),
+    totalCost double,
+    CONSTRAINT orders_PK PRIMARY KEY (orderID),
+    CONSTRAINT orders_FK1 FOREIGN KEY (customerID) REFERENCES customer,
+    CONSTRAINT orders_FK2 FOREIGN KEY (cartID) REFERENCES cart
+);
