@@ -12,3 +12,5 @@ CREATE TABLE CartLine {
     ProductID int,
     Quantity int
 };
+
+SELECT * FROM CartLine;

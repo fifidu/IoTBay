@@ -16,3 +16,6 @@ CREATE TABLE Orders {
     TotalCost double
 };
 
+SELECT * FROM Orders;
+
+INSERT INTO Orders 

@@ -11,3 +11,5 @@ CREATE TABLE Cart {
     CartID int,
     CustomerID int
 };
+
+SELECT * FROM Cart;
