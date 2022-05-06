@@ -10,9 +10,9 @@
 CREATE TABLE payment (
     paymentID int NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     orderID int,
-    cardnumber int,
-    cardname varchar(30),
-    cardexpiry date,
+    cardNumber int,
+    cardName varchar(30),
+    cardExpiry date,
     CONSTRAINT payment_PK PRIMARY KEY (paymentID),
     CONSTRAINT payment_FK FOREIGN KEY (orderID) REFERENCES orders
 );
