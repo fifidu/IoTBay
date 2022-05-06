@@ -27,6 +27,10 @@ public class DBManager {
     public void addOrder(int customerID, int cartID) throws SQLException {
         
     }
+  
+    public void createOrder(int customerID) throws SQLException {
+
+    }
 
     /* Update Order */
     public void addOrderItem(int cartID, int productID, int quantity) throws SQLException {
@@ -79,4 +83,5 @@ public class DBManager {
     public void sortByTotalCostDescend(int customerID) throws SQLException {
 
     }
+
 }
