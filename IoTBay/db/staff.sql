@@ -17,10 +17,10 @@ CREATE TABLE staff (
     CONSTRAINT staff_PK  PRIMARY KEY (staffID)
 );
 
-INSERT INTO staff VALUES ('Tracy', 'Nightingale', 't.night@darkmail.com', 0429273951);
-INSERT INTO staff VALUES ('Christine', 'Wong', 'cwong15@trollmail.com', 0487295738);
-INSERT INTO staff VALUES ('Peter', 'Pan', 'ppan@fairymail.com', 0483039233);
-INSERT INTO staff VALUES ('Jack', 'Sparrow', 'j.sparrow@rummail.com', 0484628462);
-INSERT INTO staff VALUES ('Steve', 'Minecraft', 'steve.m@crafty.com', 0494748293);
+INSERT INTO staff VALUES ('Tracy', 'Nightingale', 't.night@darkmail.com', 0429273951, 'May the odds be ever in your favour');
+INSERT INTO staff VALUES ('Christine', 'Wong', 'cwong15@trollmail.com', 0487295738, 'Any strong emotions release the panda');
+INSERT INTO staff VALUES ('Peter', 'Pan', 'ppan@fairymail.com', 0483039233, 'Faith, trust and pixie dust');
+INSERT INTO staff VALUES ('Jack', 'Sparrow', 'j.sparrow@rummail.com', 0484628462, 'Savvy?');
+INSERT INTO staff VALUES ('Steve', 'Minecraft', 'steve.m@crafty.com', 0494748293, 'Steve was blown up by a creeper');
 
 SELECT * FROM staff;
