@@ -11,7 +11,6 @@ import java.sql.*;
  */
 public class DBManager {
 
-
     private Statement st;
 
     public DBManager(Connection conn) throws SQLException {
@@ -21,21 +20,14 @@ public class DBManager {
     /* Order Class */
     /* Find Customer Orders */
     public void findOrder(int customerID) throws SQLException {
-        String fetch = "select * from iotuser.orders inner join iotuser.cart on iotuser.orders.cartID = iotuser.cart.cartID where customerID = '" + customerID + "'";
-        ResultSet rs = st.executeQuery(fetch);
 
-        while (rs.next()) {
-            int orderID = rs.getInt("orderID");
-
-        }
- 
     }
 
     /* Create Order */
     public void addOrder(int customerID, int cartID) throws SQLException {
         
     }
-
+  
     public void createOrder(int customerID) throws SQLException {
 
     }
