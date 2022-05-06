@@ -17,11 +17,11 @@ create table customer (
     CONSTRAINT customer_PK PRIMARY KEY (customerID)
 );
 
-INSERT INTO customer (cusFName, cusLName, cusEmailAddress, cusContactNumber, cusPassword) VALUES ('John', 'Smith', 'john.smith@email.com', '0401010010', 'ChipsAreGreat');
-INSERT INTO customer (cusFName, cusLName, cusEmailAddress, cusContactNumber, cusPassword) VALUES ('Samantha', 'Green', 'sam.green@email.com', '0483826496', 'GreenIsNotMyFavColour');
-INSERT INTO customer (cusFName, cusLName, cusEmailAddress, cusContactNumber, cusPassword) VALUES ('Long', 'Bottom', 'long.bottom@email.com', '0482957283', 'ShortTopLeft');
-INSERT INTO customer (cusFName, cusLName, cusEmailAddress, cusContactNumber, cusPassword) VALUES ('Jill', 'Nill', 'jill.nill@email.com', '0483728573', 'JackAndJillWentUpTheHill');
-INSERT INTO customer (cusFName, cusLName, cusEmailAddress, cusContactNumber, cusPassword) VALUES ('Steven', 'Strange', 'steven.strange@avengers.com', '0438724104', 'DoctorStrangeIsPowerful');
+INSERT INTO customer (cusFName, cusLName, cusEmailAddress, cusContactNumber, cusPassword) VALUES ('John', 'Smith', 'john.smith@email.com', '0401010010', 'Chips are great');
+INSERT INTO customer (cusFName, cusLName, cusEmailAddress, cusContactNumber, cusPassword) VALUES ('Samantha', 'Green', 'sam.green@email.com', '0483826496', 'Green is not my favourite colour');
+INSERT INTO customer (cusFName, cusLName, cusEmailAddress, cusContactNumber, cusPassword) VALUES ('Long', 'Bottom', 'long.bottom@email.com', '0482957283', 'Short top left the city');
+INSERT INTO customer (cusFName, cusLName, cusEmailAddress, cusContactNumber, cusPassword) VALUES ('Jill', 'Nill', 'jill.nill@email.com', '0483728573', 'Jack and Jill went up the hill');
+INSERT INTO customer (cusFName, cusLName, cusEmailAddress, cusContactNumber, cusPassword) VALUES ('Steven', 'Strange', 'steven.strange@avengers.com', '0438724104', 'Doctor Strange is powerful');
 
 SELECT * FROM customer;
 
