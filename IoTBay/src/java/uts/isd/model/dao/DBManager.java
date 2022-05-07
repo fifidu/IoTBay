@@ -71,8 +71,20 @@ public class DBManager {
         }
     }
 
-    public void showCartItems(int customerID) throws SQLException {
+    public void showCustomerCartItems(int customerID) throws SQLException {
         String fetch = "SELECT * FROM iotuser.cartline INNER JOIN iotuser.cart ON iotuser.cartline.cartid = iotuser.cart.cartid WHERE iotuser.cart.customerID = " + customerID + ";";
+        ResultSet rs = st.executeQuery(fetch);
+
+        while (rs.next()) {
+            int cartID = rs.getInt("cartID");
+            int productID = rs.getInt("productID");
+            int quantity = rs.getInt("quantity");
+            System.out.println(cartID + ", " + productID + ", " + quantity);
+        }
+    }
+
+    public void showAllCartItems() throws SQLException {
+        String fetch = "SELECT * FROM iotuser.cartline";
         ResultSet rs = st.executeQuery(fetch);
 
         while (rs.next()) {
