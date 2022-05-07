@@ -149,6 +149,7 @@ public class TestDB {
                 case 'S':
                     testShowAllCartItems();
                 default:
+                    System.out.println("Unknown Command");
             }
         }
     }
@@ -229,6 +230,7 @@ public class TestDB {
                 case 'D':
                 case 'S':
                 default:
+                    System.out.println("Unknown Command");
             }
         }
     }
@@ -244,6 +246,7 @@ public class TestDB {
                 case 'D':
                 case 'S':
                 default:
+                    System.out.println("Unknown Command");
             }
         }
     }
@@ -259,6 +262,7 @@ public class TestDB {
                 case 'D':
                 case 'S':
                 default:
+                    System.out.println("Unknown Command");
             }
         }
     }
@@ -274,6 +278,7 @@ public class TestDB {
                 case 'D':
                 case 'S':
                 default:
+                    System.out.println("Unknown Command");
             }
         }
     }
@@ -289,6 +294,7 @@ public class TestDB {
                 case 'D':
                 case 'S':
                 default:
+                    System.out.println("Unknown Command");
             }
         }
     }
@@ -304,7 +310,9 @@ public class TestDB {
                 case 'D':
                 case 'S':
                 default:
+                    System.out.println("Unknown Command");
             }
         }
     }
+
 }
