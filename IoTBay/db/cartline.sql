@@ -16,12 +16,12 @@ CREATE TABLE cartLine (
     CONSTRAINT cartLine_FK2 FOREIGN KEY (productID) REFERENCES product
 );
 
-INSERT INTO cartLine (cartID, productID, quantity) VALUES (1, 5, 1);
-INSERT INTO cartLine (cartID, productID, quantity) VALUES (1, 3, 1);
-INSERT INTO cartLine (cartID, productID, quantity) VALUES (2, 4, 3);
-INSERT INTO cartLine (cartID, productID, quantity) VALUES (3, 1, 1);
-INSERT INTO cartLine (cartID, productID, quantity) VALUES (4, 2, 1);
-INSERT INTO cartLine (cartID, productID, quantity) VALUES (5, 4, 2);
+INSERT INTO cartLine VALUES (1, 5, 1);
+INSERT INTO cartLine VALUES (1, 3, 1);
+INSERT INTO cartLine VALUES (2, 4, 3)
+INSERT INTO cartLine VALUES (3, 1, 1);
+INSERT INTO cartLine VALUES (4, 2, 1);
+INSERT INTO cartLine VALUES (5, 4, 2);
 
 
 SELECT * FROM cartLine;
