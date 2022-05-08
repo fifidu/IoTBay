@@ -4,22 +4,28 @@
  */
 package uts.isd.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 /**
  *
  * @author chrisvuong
  */
-public class OrderBean implements java.io.Serializable {
+public class Order {
 
     private int orderID;
     private int customerID;
     private int cartID;
-    private LocalDateTime orderDate;
+    private LocalDate orderDate;
     private String orderStatus;
     private double totalCost;
 
-    public OrderBean() {
-
+    public Order(int orderID, int customerID, int cartID, LocalDate orderDate, String orderStatus, double totalCost) {
+        this.orderID = orderID;
+        this.customerID = customerID;
+        this.cartID = cartID;
+        this.orderDate = orderDate;
+        this.orderStatus = orderStatus;
+        this.totalCost = totalCost;
     }
 
     public int getOrderID() {
@@ -34,7 +40,7 @@ public class OrderBean implements java.io.Serializable {
         return this.cartID;
     }
 
-    public LocalDateTime getOrderDate() {
+    public LocalDate getOrderDate() {
         return this.orderDate;
     }
 
@@ -58,11 +64,11 @@ public class OrderBean implements java.io.Serializable {
         this.cartID = cartID;
     }
 
-    public void setOrderDate(LocalDateTime orderDate) {
+    public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
     }
 
-    public void setOrderStatus(String paymentStatus) {
+    public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
     }
 
