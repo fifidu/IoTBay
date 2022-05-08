@@ -18,11 +18,11 @@ CREATE TABLE product (
     CONSTRAINT product_PK PRIMARY KEY (productID)
 );
 
-INSERT INTO product (productName, productSupplier, productDescription, productCost, quantityAvailable, quantitySold) VALUES ('Mesh Modem', 'FEthernet', 'Fastest Mesh Modem you can get for your home!', 349.99, 5, 5);
-INSERT INTO product (productName, productSupplier, productDescription, productCost, quantityAvailable, quantitySold) VALUES ('USB-C Hub', 'HT Tech', 'USB-C Hub for Laptop', 29.99, 4, 10);
-INSERT INTO product (productName, productSupplier, productDescription, productCost, quantityAvailable, quantitySold) VALUES ('iPhone 13', 'Apple', 'The Newest iPhone', 1299.99, 10, 10);
-INSERT INTO product (productName, productSupplier, productDescription, productCost, quantityAvailable, quantitySold) VALUES ('Flashlight 5W', 'Camping Supplies Co.', 'Brighter than your future', 49.99, 1, 100);
-INSERT INTO product (productName, productSupplier, productDescription, productCost, quantityAvailable, quantitySold) VALUES ('Computer Speakers','Logitech', 'Computer Speakers for Home Office', 69.99, 20, 10);
+INSERT INTO product VALUES ('Mesh Modem', 'FEthernet', 'Fastest Mesh Modem you can get for your home!', 349.99, 5, 5);
+INSERT INTO product VALUES ('USB-C Hub', 'HT Tech', 'USB-C Hub for Laptop', 29.99, 4, 10);
+INSERT INTO product VALUES ('iPhone 13', 'Apple', 'The Newest iPhone', 1299.99, 10, 10);
+INSERT INTO product VALUES ('Flashlight 5W', 'Camping Supplies Co.', 'Brighter than your future', 49.99, 1, 100);
+INSERT INTO product VALUES ('Computer Speakers','Logitech', 'Computer Speakers for Home Office', 69.99, 20, 10);
 
 SELECT * FROM product;
 
