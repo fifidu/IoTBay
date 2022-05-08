@@ -8,19 +8,19 @@
  */
 
 CREATE TABLE orders (
-    orderID int NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    orderID int NOT NULL,
     cartID int,
     orderDate date,
     orderStatus varchar(30),
-    totalCost decimal(10,2),
+    totalCost DOUBLE(6,2),
     CONSTRAINT orders_PK PRIMARY KEY (orderID),
     CONSTRAINT orders_FK1 FOREIGN KEY (cartID) REFERENCES cart
 );
 
-INSERT INTO orders VALUES (1, '2020-06-20', 'Delivered', 1369.98);
-INSERT INTO orders VALUES (2, '2020-09-06', 'Delivered', 149.97); 
-INSERT INTO orders VALUES (3, '2021-09-16', 'Delivered', 349.99);
-INSERT INTO orders VALUES (4, '2021-12-07', 'Processing', 29.99);
-INSERT INTO orders VALUES (5, '2022-02-27', 'Processing', 99.98);
+INSERT INTO orders VALUES (1, 1, '20200620', 'Delivered', 1369.98);
+INSERT INTO orders VALUES (2, 2, '20200906', 'Delivered', 149.97); 
+INSERT INTO orders VALUES (3, 3, '20210916', 'Delivered', 349.99);
+INSERT INTO orders VALUES (4, 4, '20211207', 'Processing', 29.99);
+INSERT INTO orders VALUES (5, 5, '20220227', 'Processing', 99.98);
 
 SELECT * FROM orders;
