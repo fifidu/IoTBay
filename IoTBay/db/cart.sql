@@ -14,10 +14,10 @@ CREATE TABLE cart (
     CONSTRAINT cart_FK FOREIGN KEY (customerID) REFERENCES customer
 );
 
-INSERT INTO customer (customerID) VALUES (1);
-INSERT INTO customer (customerID) VALUES (1);
-INSERT INTO customer (customerID) VALUES (2);
-INSERT INTO customer (customerID) VALUES (3);
-INSERT INTO customer (customerID) VALUES (4);
+INSERT INTO customer VALUES (1);
+INSERT INTO customer VALUES (1);
+INSERT INTO customer VALUES (2);
+INSERT INTO customer VALUES (3);
+INSERT INTO customer VALUES (4);
 
 SELECT * FROM cart;
