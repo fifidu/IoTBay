@@ -17,8 +17,8 @@ public class Staff {
     private String staffPass;
     private String staffContactNumber;
 
-    public Customer(int staffID, String staffFName, String staffLName, String staffEmailAddress, String staffPass, String staffContactNumber) {
-        this.staffrID = staffID;
+    public Staff(int staffID, String staffFName, String staffLName, String staffEmailAddress, String staffPass, String staffContactNumber) {
+        this.staffID = staffID;
         this.staffFName = staffFName;
         this.staffLName = staffLName;
         this.staffEmailAddress = staffEmailAddress;
