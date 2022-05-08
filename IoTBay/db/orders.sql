@@ -17,10 +17,10 @@ CREATE TABLE orders (
     CONSTRAINT orders_FK1 FOREIGN KEY (cartID) REFERENCES cart
 );
 
-INSERT INTO orders (cartID, orderDate, orderStatus, totalCost) VALUES (1, '2020-06-20', 'Delivered', 1369.98);
-INSERT INTO orders (cartID, orderDate, orderStatus, totalCost) VALUES (2, '2020-09-06', 'Delivered', 149.97); 
-INSERT INTO orders (cartID, orderDate, orderStatus, totalCost) VALUES (3, '2021-09-16', 'Delivered', 349.99);
-INSERT INTO orders (cartID, orderDate, orderStatus, totalCost) VALUES (4, '2021-12-07', 'Processing', 29.99);
-INSERT INTO orders (cartID, orderDate, orderStatus, totalCost) VALUES (5, '2022-02-27', 'Processing', 99.98);
+INSERT INTO orders VALUES (1, '2020-06-20', 'Delivered', 1369.98);
+INSERT INTO orders VALUES (2, '2020-09-06', 'Delivered', 149.97); 
+INSERT INTO orders VALUES (3, '2021-09-16', 'Delivered', 349.99);
+INSERT INTO orders VALUES (4, '2021-12-07', 'Processing', 29.99);
+INSERT INTO orders VALUES (5, '2022-02-27', 'Processing', 99.98);
 
 SELECT * FROM orders;
