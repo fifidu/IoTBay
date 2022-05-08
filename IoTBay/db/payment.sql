@@ -17,10 +17,10 @@ CREATE TABLE payment (
     CONSTRAINT payment_FK FOREIGN KEY (orderID) REFERENCES orders
 );
 
-INSERT INTO payment (orderID, cardName, cardNumber, cardExpiry) VALUES (1, 1111222233334444, 'John Smith', 2024-01-01);
-INSERT INTO payment (orderID, cardName, cardNumber, cardExpiry) VALUES (2, 1111222233334444, 'John Smith', 2024-01-01);
-INSERT INTO payment (orderID, cardName, cardNumber, cardExpiry) VALUES (3, 1111222233334411, 'Samantha Green', 2024-03-01);
-INSERT INTO payment (orderID, cardName, cardNumber, cardExpiry) VALUES (4, 1111222233334412, 'Long Bottom', 2024-04-01);
-INSERT INTO payment (orderID, cardName, cardNumber, cardExpiry) VALUES (5, 1111222233334413, 'Steven Strange', 2024-05-01);
+INSERT INTO payment VALUES (1, 1111222233334444, 'John Smith', 2024-01-01);
+INSERT INTO payment VALUES (2, 1111222233334444, 'John Smith', 2024-01-01);
+INSERT INTO payment VALUES (3, 1111222233334411, 'Samantha Green', 2024-03-01);
+INSERT INTO payment VALUES (4, 1111222233334412, 'Long Bottom', 2024-04-01);
+INSERT INTO payment VALUES (5, 1111222233334413, 'Steven Strange', 2024-05-01);
 
 SELECT * from payment;
