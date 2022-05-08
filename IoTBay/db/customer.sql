@@ -17,11 +17,11 @@ create table customer (
     CONSTRAINT customer_PK PRIMARY KEY (customerID)
 );
 
-INSERT INTO customer VALUES ('John', 'Smith', 'john.smith@email.com', '0401010010', 'ChipsAreGreat');
-INSERT INTO customer VALUES ('Samantha', 'Green', 'sam.green@email.com', '0483826496', 'GreenIsNotMyFavColour');
-INSERT INTO customer VALUES ('Long', 'Bottom', 'long.bottom@email.com', '0482957283', 'ShortTopLeft');
-INSERT INTO customer VALUES ('Jill', 'Nill', 'jill.nill@email.com', '0483728573', 'JackAndJillWentUpTheHill');
-INSERT INTO customer VALUES ('Steven', 'Strange', 'steven.strange@avengers.com', '0438724104', 'DoctorStrangeIsPowerful');
+INSERT INTO customer VALUES ('John', 'Smith', 'john.smith@email.com', '0401010010');
+INSERT INTO customer VALUES ('Samantha', 'Green', 'sam.green@email.com', '0483826496');
+INSERT INTO customer VALUES ('Long', 'Bottom', 'long.bottom@email.com', '0482957283');
+INSERT INTO customer VALUES ('Jill', 'Nill', 'jill.nill@email.com', '0483728573');
+INSERT INTO customer VALUES ('Steven', 'Strange', 'steven.strange@avengers.com', '0438724104');
 
 SELECT * FROM customer;
 
