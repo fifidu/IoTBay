@@ -8,16 +8,18 @@ package uts.isd.model;
  *
  * @author chrisvuong
  */
+import java.util.HashMap;
+
 public class CartLine {
 
     private int cartID;
     private int productID;
     private int quantity;
+    private HashMap<Integer, Integer> cartItems;
 
-    public CartLine(int cartID, int productID, int quantity) {
+    public CartLine(int cartID) {
         this.cartID = cartID;
-        this.productID = productID;
-        this.quantity = quantity;
+        cartItems = new HashMap<>();
     }
 
     public int getCartID() {
