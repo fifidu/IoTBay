@@ -72,6 +72,10 @@ public class DBManager {
         st.executeUpdate("DELETE FROM iotuser.cartline WHERE cartID = " + cartID + "AND productID = " + productID + ";");
     }
 
+    public void deleteAllOrderItems(int cartID) throws SQLException {
+        st.executeUpdate("DELETE FROM iotuser.cartline WHERE cartID = " + cartID);
+    }
+
     // Show Customer Cart Items
     public void showCustomerCartItems(int customerID) throws SQLException {
         String fetch = "SELECT * FROM iotuser.cartline INNER JOIN iotuser.cart ON iotuser.cartline.cartid = iotuser.cart.cartid WHERE iotuser.cart.customerID = " + customerID + ";";
@@ -102,7 +106,7 @@ public class DBManager {
     
     /* Order Database */
     // Create Order
-    public void addOrder(int cartID) throws SQLException {
+    public void createOrder(int cartID) throws SQLException {
         String orderStatus = "Processing";
         LocalDate orderDate = LocalDate.now();
         double totalCost = 0.00;
@@ -115,7 +119,7 @@ public class DBManager {
             totalCost += productCost;
         }
 
-        st.executeUpdate("INSERT INTO iotuser.orders (cartID, orderDate, orderStatus, totalCost) " + "VALUES (" + cartID + "," + orderStatus + "," + orderDate + "," + totalCost + ");");
+        st.executeUpdate("INSERT INTO iotuser.orders " + "VALUES (" + cartID + "," + orderStatus + "," + orderDate + "," + totalCost + ");");
     }
 
     // Update Order Status
@@ -124,7 +128,7 @@ public class DBManager {
     }
 
     /* Show Customer Orders */
-    public void showOrders(int customerID) throws SQLException {
+    public void showCustomerOrders(int customerID) throws SQLException {
         String fetch = "SELECT * from iotuser.orders INNER JOIN iotuser.cart ON iotuser.orders.cartID = iotuser.cart.cartID WHERE customerID = '" + customerID + "';";
         ResultSet rs = st.executeQuery(fetch);
 
@@ -169,7 +173,7 @@ public class DBManager {
     }
 
     /* Sort Orders */
-    public void sortByOrderIDAscend(int customerID) throws SQLException {
+    public void sortByOrderIDAsc(int customerID) throws SQLException {
         String fetch = "SELECT * FROM iotuser.orders WHERE iotuser.orders.customerid = " + customerID + " ORDER BY iotuser.orders.orderid ASC";
         ResultSet rs = st.executeQuery(fetch);
         
@@ -183,7 +187,7 @@ public class DBManager {
         }
     }
 
-    public void sortByOrderIDDescend(int customerID) throws SQLException {
+    public void sortByOrderIDDesc(int customerID) throws SQLException {
         String fetch = "SELECT * FROM iotuser.orders WHERE iotuser.orders.customerid = " + customerID + " ORDER BY iotuser.orders.orderid DESC";
         ResultSet rs = st.executeQuery(fetch);
         
@@ -197,7 +201,7 @@ public class DBManager {
         }
     }
 
-    public void sortByDateAscend(int customerID) throws SQLException {
+    public void sortByOrderDateAsc(int customerID) throws SQLException {
         String fetch = "SELECT * FROM iotuser.orders WHERE iotuser.orders.customerid = " + customerID + " ORDER BY iotuser.orders.orderdate ASC";
         ResultSet rs = st.executeQuery(fetch);
         
@@ -211,7 +215,7 @@ public class DBManager {
         }
     }
 
-    public void sortByDateDescend(int customerID) throws SQLException {
+    public void sortByOrderDateDesc(int customerID) throws SQLException {
         String fetch = "SELECT * FROM iotuser.orders WHERE iotuser.orders.customerid = " + customerID + " ORDER BY iotuser.orders.orderdate DESC";
         ResultSet rs = st.executeQuery(fetch);
         
@@ -225,7 +229,7 @@ public class DBManager {
         }
     }
 
-    public void sortByTotalCostAscend(int customerID) throws SQLException {
+    public void sortByTotalCostAsc(int customerID) throws SQLException {
         String fetch = "SELECT * FROM iotuser.orders WHERE iotuser.orders.customerid = " + customerID + " ORDER BY iotuser.orders.totalcost ASC";
         ResultSet rs = st.executeQuery(fetch);
         
@@ -239,7 +243,7 @@ public class DBManager {
         }
     }
 
-    public void sortByTotalCostDescend(int customerID) throws SQLException {
+    public void sortByTotalCostDesc(int customerID) throws SQLException {
         String fetch = "SELECT * FROM iotuser.orders WHERE iotuser.orders.customerid = " + customerID + " ORDER BY iotuser.orders.totalcost DESC";
         ResultSet rs = st.executeQuery(fetch);
         
