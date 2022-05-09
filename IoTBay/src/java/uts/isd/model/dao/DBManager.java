@@ -84,7 +84,7 @@ public class DBManager {
     }
 
     public void showAllCartItems() throws SQLException {
-        String fetch = "SELECT * FROM iotuser.cartline";
+        String fetch = "SELECT * FROM iotuser.cartline;";
         ResultSet rs = st.executeQuery(fetch);
 
         while (rs.next()) {
@@ -114,7 +114,10 @@ public class DBManager {
     }
   
     public void createCart(int customerID) throws SQLException {
-        st.executeUpdate("INSERT INTO iotuser.cart (customerID) " + "VALUES ('" + customerID + "')");
+        String fetch = "SELECT COUNT(*) FROM iotuser.cart;";
+        ResultSet rs = st.executeQuery(fetch);
+      
+        st.executeUpdate("INSERT INTO iotuser.cart (customerID) " + "VALUES ('" + customerID + "');");
     }
 
     /* Update Order */
