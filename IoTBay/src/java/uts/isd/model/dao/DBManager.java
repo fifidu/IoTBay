@@ -33,6 +33,7 @@ public class DBManager {
     public void showCustomerCarts(int customerID) throws SQLException {
         String fetch = "SELECT * FROM cart WHERE customerID = " + customerID;
         ResultSet rs = st.executeQuery(fetch);
+        System.out.println("Cart ID, Customer ID");
         while (rs.next()) {
             int cartID = rs.getInt("cartID");
             int cusID = rs.getInt("customerID");
@@ -43,6 +44,7 @@ public class DBManager {
     public void showAllCarts() throws SQLException {
         String fetch = "SELECT * FROM cart";
         ResultSet rs = st.executeQuery(fetch);
+        System.out.println("Cart ID, Customer ID");
         while (rs.next()) {
             int cartID = rs.getInt("cartID");
             int customerID = rs.getInt("customerID");
@@ -90,14 +92,14 @@ public class DBManager {
     }
 
     // Show Customer Cart Items
-    public void showCustomerCartItems(int customerID) throws SQLException {
-        String fetch = "SELECT * FROM iotuser.cartline INNER JOIN iotuser.cart ON iotuser.cartline.cartid = iotuser.cart.cartid WHERE iotuser.cart.customerID = " + customerID;
+    public void showCustomerCartItems(int cartID) throws SQLException {
+        String fetch = "SELECT * FROM iotuser.cartline WHERE cartID = " + cartID;
         ResultSet rs = st.executeQuery(fetch);
+        System.out.println("Product ID, Quantity");
         while (rs.next()) {
-            int cartID = rs.getInt("cartID");
             int productID = rs.getInt("productID");
             int quantity = rs.getInt("quantity");
-            System.out.println(cartID + ", " + productID + ", " + quantity);
+            System.out.println(productID + ", " + quantity);
         }
     }
 
@@ -105,6 +107,7 @@ public class DBManager {
     public void showAllCartItems() throws SQLException {
         String fetch = "SELECT * FROM cartline";
         ResultSet rs = st.executeQuery(fetch);
+        System.out.println("Cart ID, Product ID, Quantity");
         while (rs.next()) {
             int cartID = rs.getInt("cartID");
             int productID = rs.getInt("productID");
@@ -122,12 +125,12 @@ public class DBManager {
         String orderStatus = "Active";
         LocalDate orderDate = LocalDate.now();
         double totalCost = 0.00;
-        st.executeUpdate("INSERT INTO iotuser.orders " + "VALUES (" + orderID + ", " + cartID + "," + orderDate + "," + orderStatus + "," + totalCost + ")");
+        st.executeUpdate("INSERT INTO iotuser.orders " + "VALUES (" + orderID + ", " + cartID + ",'" + orderDate + "','" + orderStatus + "'," + totalCost + ")");
     }
 
     public void updateTotalCost(int cartID) throws SQLException {
         double totalCost = 0.00;
-        String fetch = "SELECT * FROM iotuser.cartline WHERE iotuser.cartline.cartid = " + cartID;
+        String fetch = "SELECT * FROM cartline INNER JOIN product ON cartline.productID = product.productID WHERE cartid = " + cartID;
         ResultSet rs = st.executeQuery(fetch);
         while (rs.next()) {
             double productCost = rs.getDouble("productCost") * rs.getInt("quantity");
@@ -139,22 +142,24 @@ public class DBManager {
 
     // Update Order Status
     public void updateOrderStatus(int orderID, String orderStatus) throws SQLException {
-        st.executeUpdate("UPDATE iotuser.orders SET orderStatus = " + orderStatus + " WHERE orderID = " + orderID);
+        st.executeUpdate("UPDATE iotuser.orders SET orderStatus = '" + orderStatus + "' WHERE orderID = " + orderID);
     }
 
-    public void cancelOrder(int orderID) throws SQLException {
-        String fetch = "SELECT * FROM iotuser.orders WHERE orderID = " + orderID;
-        ResultSet rs = st.executeQuery(fetch);
-        int cartID = rs.getInt("cartID");
+    public void cancelOrder(int orderID, int cartID) throws SQLException {
+        cancelledOrderItems(cartID);         
         String cancel = "Cancelled";   
         updateOrderStatus(orderID, cancel);
-        cancelledOrderItems(cartID);
+    }
+
+    public void submitOrder(int orderID) throws SQLException {
+        updateOrderStatus(orderID, "Submitted");
     }
 
     /* Show Customer Orders */
     public void showCustomerOrders(int customerID) throws SQLException {
         String fetch = "SELECT * from orders INNER JOIN cart ON orders.cartID = cart.cartID WHERE customerID = " + customerID;
         ResultSet rs = st.executeQuery(fetch);
+        System.out.println("Order ID, Cart ID, Order Date, Order Status, Total Cost");
         while (rs.next()) {
             int orderID = rs.getInt("orderID");
             int cartID = rs.getInt("cartID");
@@ -169,6 +174,7 @@ public class DBManager {
     public void showAllOrders() throws SQLException {
         String fetch = "SELECT * FROM orders";
         ResultSet rs = st.executeQuery(fetch);
+        System.out.println("Order ID, Cart ID, Order Date, Order Status, Total Cost");
         while (rs.next()) {
             int orderID = rs.getInt("orderID");
             int cartID = rs.getInt("cartID");
@@ -183,6 +189,7 @@ public class DBManager {
     public void searchOrder(int customerID, String searchInput) throws SQLException {
         String fetch = "SELECT * FROM iotuser.orders WHERE iotuser.orders.customerid = " + customerID + "AND (iotuser.orders.orderid LIKE '%" + searchInput + "%' OR iotuser.orders.orderDate LIKE '%" + searchInput + "%')";
         ResultSet rs = st.executeQuery(fetch);
+        System.out.println("Order ID, Cart ID, Order Date, Order Status, Total Cost");
         while (rs.next()) {
             int orderID = rs.getInt("orderID");
             int cartID = rs.getInt("cartID");
@@ -197,6 +204,7 @@ public class DBManager {
     public void sortByOrderIDAsc(int customerID) throws SQLException {
         String fetch = "SELECT * FROM iotuser.orders WHERE iotuser.orders.customerid = " + customerID + " ORDER BY iotuser.orders.orderid ASC";
         ResultSet rs = st.executeQuery(fetch);
+        System.out.println("Order ID, Cart ID, Order Date, Order Status, Total Cost");
         while (rs.next()) {
             int orderID = rs.getInt("orderID");
             int cartID = rs.getInt("cartID");
@@ -210,6 +218,7 @@ public class DBManager {
     public void sortByOrderIDDesc(int customerID) throws SQLException {
         String fetch = "SELECT * FROM iotuser.orders WHERE iotuser.orders.customerid = " + customerID + " ORDER BY iotuser.orders.orderid DESC";
         ResultSet rs = st.executeQuery(fetch);
+        System.out.println("Order ID, Cart ID, Order Date, Order Status, Total Cost");
         while (rs.next()) {
             int orderID = rs.getInt("orderID");
             int cartID = rs.getInt("cartID");
@@ -223,6 +232,7 @@ public class DBManager {
     public void sortByOrderDateAsc(int customerID) throws SQLException {
         String fetch = "SELECT * FROM iotuser.orders WHERE iotuser.orders.customerid = " + customerID + " ORDER BY iotuser.orders.orderdate ASC";
         ResultSet rs = st.executeQuery(fetch);
+        System.out.println("Order ID, Cart ID, Order Date, Order Status, Total Cost");
         while (rs.next()) {
             int orderID = rs.getInt("orderID");
             int cartID = rs.getInt("cartID");
@@ -236,6 +246,7 @@ public class DBManager {
     public void sortByOrderDateDesc(int customerID) throws SQLException {
         String fetch = "SELECT * FROM iotuser.orders WHERE iotuser.orders.customerid = " + customerID + " ORDER BY iotuser.orders.orderdate DESC";
         ResultSet rs = st.executeQuery(fetch);
+        System.out.println("Order ID, Cart ID, Order Date, Order Status, Total Cost");
         while (rs.next()) {
             int orderID = rs.getInt("orderID");
             int cartID = rs.getInt("cartID");
@@ -249,6 +260,7 @@ public class DBManager {
     public void sortByTotalCostAsc(int customerID) throws SQLException {
         String fetch = "SELECT * FROM iotuser.orders WHERE iotuser.orders.customerid = " + customerID + " ORDER BY iotuser.orders.totalcost ASC";
         ResultSet rs = st.executeQuery(fetch);
+        System.out.println("Order ID, Cart ID, Order Date, Order Status, Total Cost");
         while (rs.next()) {
             int orderID = rs.getInt("orderID");
             int cartID = rs.getInt("cartID");
@@ -262,6 +274,7 @@ public class DBManager {
     public void sortByTotalCostDesc(int customerID) throws SQLException {
         String fetch = "SELECT * FROM iotuser.orders WHERE iotuser.orders.customerid = " + customerID + " ORDER BY iotuser.orders.totalcost DESC";
         ResultSet rs = st.executeQuery(fetch);
+        System.out.println("Order ID, Cart ID, Order Date, Order Status, Total Cost");
         while (rs.next()) {
             int orderID = rs.getInt("orderID");
             int cartID = rs.getInt("cartID");

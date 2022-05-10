@@ -98,6 +98,7 @@ public class TestDB {
                     break;
                 case "d":
                     testDeleteCart();
+                    break;
                 case "sa":
                     testShowAllCarts();
                     break;
@@ -116,7 +117,6 @@ public class TestDB {
                     break;
             }
         }
-        runQueries();
     }
 
     private void testCreateCart() {
@@ -202,7 +202,6 @@ public class TestDB {
                     break;
             }
         }
-        runQueries();
     }
 
     private void testAddOrderItem() {
@@ -291,7 +290,6 @@ public class TestDB {
                     break;
             }
         }
-        runQueries();
     }
     
     // Test Orders Database
@@ -307,6 +305,8 @@ public class TestDB {
                     break;
                 case "ca":
                     testCancelOrder();
+                case "s":
+                    testSubmitOrder();
                     break;
                 case "sc":
                     testShowCustomerOrders();
@@ -320,6 +320,8 @@ public class TestDB {
                 case "h":
                     System.out.println("c -> create order");
                     System.out.println("u -> update order status");
+                    System.out.println("ca -> cancel order");
+                    System.out.println("s -> submit order");
                     System.out.println("sa -> show all orders");
                     System.out.println("sc -> show customer orders");
                     System.out.println("so -> search orders");
@@ -330,7 +332,6 @@ public class TestDB {
                     break;
             }
         }
-        runQueries();
     }
 
     private void testCreateOrder() throws SQLException {
@@ -352,10 +353,10 @@ public class TestDB {
     }
 
     private void testUpdateOrderStatus() throws SQLException {
-        System.out.print("Order ID: ");
-        int orderID = in.nextInt();
         System.out.print("Order Status: ");
         String orderStatus = in.nextLine();
+        System.out.print("Order ID: ");
+        int orderID = in.nextInt();
         
         try {
             db.updateOrderStatus(orderID, orderStatus);
@@ -369,15 +370,28 @@ public class TestDB {
     private void testCancelOrder() throws SQLException {
         System.out.print("Order ID: ");
         int orderID = in.nextInt();
+        System.out.print("Cart ID: ");
+        int cartID = in.nextInt();
 
         try {
-            db.cancelOrder(orderID);
+            db.cancelOrder(orderID, cartID);
         } catch (SQLException ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         System.out.println("Order " + orderID + " has been cancelled");
     }
+
+    private void testSubmitOrder() throws SQLException {
+        System.out.print("Order ID: ");
+        int orderID = in.nextInt();
+
+        try {
+            db.submitOrder(orderID);
+        } catch (SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }   
 
     private void testShowCustomerOrders() throws SQLException {
         System.out.print("Customer ID: ");
@@ -420,7 +434,6 @@ public class TestDB {
                     break;
             }
         }
-        runQueries();
     }
     
     // Test Product Database
@@ -433,7 +446,6 @@ public class TestDB {
                     break;
             }
         }
-        runQueries();
     }
     
     // Test Shipping Database
@@ -446,7 +458,6 @@ public class TestDB {
                     break;
             }
         }
-        runQueries();
     }
     
     // Test Staff Database
@@ -459,7 +470,6 @@ public class TestDB {
                     break;
             }
         }
-        runQueries();
     }
 
 }
