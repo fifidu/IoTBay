@@ -11,25 +11,28 @@ package uts.isd.controller;
 import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
-import uts.isd.model.dao.*;
 import uts.isd.model.dao.DBManager;
+import uts.isd.model.dao.DBConnector;
+
 
 
 public class TestDB {
+    
     private static Scanner in = new Scanner(System.in);
     private DBConnector connector;
     private Connection conn;
     private DBManager db;
  
     public static void main(String[] args) throws SQLException {
-        (new TestDB()).runQueries();
+        TestDB test = new TestDB();
+        test.runQueries();
     }
 
     public TestDB() {
         try {
-        connector = new DBConnector();
-        conn = connector.openConnection();
-        db = new DBManager(conn);
+            connector = new DBConnector();
+            conn = connector.openConnection();
+            db = new DBManager(conn);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -46,21 +49,29 @@ public class TestDB {
             switch (s) {
                 case "cart":
                     cartQueries();
+                    break;
                 case "cartline":
                     cartLineQueries();
+                    break;
                 case "customer":
                     customerQueries();
+                    break;
                 case "orders":
                     ordersQueries();
+                    break;
                 case "payment":
                     paymentQueries();
+                    break;
                 case "product":
                     productQueries();
+                    break;
                 case "shipping":
                     shippingQueries();
+                    break;
                 case "staff":
                     staffQueries();
-                case "help":
+                    break;
+                case "h":
                     System.out.println("cart -> cart database");
                     System.out.println("cartline -> cartline database");
                     System.out.println("customer -> customer database");
@@ -69,11 +80,14 @@ public class TestDB {
                     System.out.println("shipping -> shipping database");
                     System.out.println("staff -> staff database");
                     System.out.println("* -> exit database");
+                    break;
                 default:
                     System.out.println("Unknown Command");
+                    break;
             }
         }
     }
+
     // Test Cart Database
     private void cartQueries() throws SQLException {
         String s;
@@ -81,30 +95,36 @@ public class TestDB {
             switch (s) {
                 case "c":
                     testCreateCart();
-                case "d":
-                    testDeleteCart();
+                    break;
                 case "sa":
                     testShowAllCarts();
+                    break;
                 case "sc":
                     testShowCustomerCarts();
+                    break;
                 case "h":
                     System.out.println("c -> create cart");
                     System.out.println("d -> delete carts");
                     System.out.println("sa -> show all carts");
                     System.out.println("sc -> show customer carts");
                     System.out.println("* -> return to database selection");
+                    break;
                 default:
                     System.out.println("Unknown Command");
+                    break;
             }
         }
+        runQueries();
     }
 
     private void testCreateCart() {
+        System.out.print("Cart ID: ");
+        int cartID = in.nextInt();
         System.out.print("Customer ID: ");
         int customerID = in.nextInt();
         
         try {
-            db.createCart(customerID);
+            db.createCart(cartID, customerID);
         } catch (SQLException ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -123,18 +143,6 @@ public class TestDB {
         }
     }
 
-    private void testDeleteCart() {
-        System.out.print("Cart ID: ");
-        int cartID = in.nextInt();
-        
-        try {
-            db.deleteCart(cartID);
-        } catch (SQLException ex) {
-            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("Cart " + cartID + " has been deleted");
-    }
-
     private void testShowAllCarts() {
         try {
             db.showAllCarts();
@@ -150,16 +158,22 @@ public class TestDB {
             switch (s) {
                 case "a":
                     testAddOrderItem();
+                    break;
                 case "d":
                     testDeleteOrderItem();
+                    break;
                 case "da":
                     testDeleteAllOrderItems();
+                    break;
                 case "u":
                     testUpdateOrderItemQuantity();
+                    break;
                 case "sa":
                     testShowAllCartItems();
+                    break;
                 case "sc":
                     testShowCustomerCartItems();
+                    break;
                 case "h":
                     System.out.println("a -> add order item");
                     System.out.println("u -> upate order item quantity");
@@ -167,10 +181,13 @@ public class TestDB {
                     System.out.println("sa -> show all cart items");
                     System.out.println("sc -> show customer cart items");
                     System.out.println("* -> return to database selection");
+                    break;
                 default:
                     System.out.println("Unknown Command");
+                    break;
             }
         }
+        runQueries();
     }
 
     private void testAddOrderItem() {
@@ -256,8 +273,10 @@ public class TestDB {
             switch (s) {
                 default:
                     System.out.println("Unknown Command");
+                    break;
             }
         }
+        runQueries();
     }
     
     // Test Orders Database
@@ -267,55 +286,53 @@ public class TestDB {
             switch (s) {
                 case "c":
                     testCreateOrder();
+                    break;
                 case "u":
                     testUpdateOrderStatus();
+                    break;
+                case "ca":
+                    testCancelOrder();
+                    break;
                 case "sc":
                     testShowCustomerOrders();
+                    break;
                 case "sa":
                     testShowAllOrders();
+                    break;
                 case "so":
                     testSearchOrders();
-                case "ida":
-                    testSortByOrderIDAsc();
-                case "idd":
-                    testSortByOrderIDDesc();
-                case "dta":
-                    testSortByOrderDateAsc();
-                case "dtd":
-                    testSortByOrderDateDesc();
-                case "tca":
-                    testSortByTotalCostAsc();
-                case "tcd":
-                    testSortByTotalCostDesc();
+                    break;
                 case "h":
                     System.out.println("c -> create order");
                     System.out.println("u -> update order status");
                     System.out.println("sa -> show all orders");
                     System.out.println("sc -> show customer orders");
                     System.out.println("so -> search orders");
-                    System.out.println("ida -> sort by order id ascending");
-                    System.out.println("idd -> sort by order id descending");
-                    System.out.println("dta -> sort by order date ascending");
-                    System.out.println("dtd -> sort by order date descending");
-                    System.out.println("tca -> sort by total cost ascending");
-                    System.out.println("tcd -> sort by total cost descending");
                     System.out.println("* -> return to database selection");
+                    break;
                 default:
                     System.out.println("Unknown Command");
+                    break;
             }
         }
+        runQueries();
     }
 
     private void testCreateOrder() throws SQLException {
+        System.out.print("Customer ID: ");
+        int customerID = in.nextInt();
+        System.out.print("Order ID: ");
+        int orderID = in.nextInt();
         System.out.print("Cart ID: ");
         int cartID = in.nextInt();
         
         try {
-            db.createOrder(cartID);
+            db.createOrder(orderID, cartID, customerID);
         } catch (SQLException ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("Order for Cart " + cartID + " has been created");
+
+        System.out.println("Order " + orderID + " for Customer " + customerID + " has been created");
 
     }
 
@@ -330,7 +347,21 @@ public class TestDB {
         } catch (SQLException ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         System.out.println("Order " + orderID + " has been updated with status " + orderStatus);
+    }
+
+    private void testCancelOrder() throws SQLException {
+        System.out.print("Order ID: ");
+        int orderID = in.nextInt();
+
+        try {
+            db.cancelOrder(orderID);
+        } catch (SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        System.out.println("Order " + orderID + " has been cancelled");
     }
 
     private void testShowCustomerOrders() throws SQLException {
@@ -365,72 +396,6 @@ public class TestDB {
         }
     }
 
-    private void testSortByOrderIDAsc() throws SQLException {
-        System.out.print("Customer ID: ");
-        int customerID = in.nextInt();
-        
-        try {
-            db.sortByOrderIDAsc(customerID);
-        } catch (SQLException ex) {
-            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void testSortByOrderIDDesc() throws SQLException {
-        System.out.print("Customer ID: ");
-        int customerID = in.nextInt();
-        
-        try {
-            db.sortByOrderIDDesc(customerID);
-        } catch (SQLException ex) {
-            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void testSortByOrderDateAsc() throws SQLException {
-        System.out.print("Customer ID: ");
-        int customerID = in.nextInt();
-        
-        try {
-            db.sortByOrderDateAsc(customerID);
-        } catch (SQLException ex) {
-            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void testSortByOrderDateDesc() throws SQLException {
-        System.out.print("Customer ID: ");
-        int customerID = in.nextInt();
-        
-        try {
-            db.sortByOrderDateDesc(customerID);
-        } catch (SQLException ex) {
-            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void testSortByTotalCostAsc() throws SQLException {
-        System.out.print("Customer ID: ");
-        int customerID = in.nextInt();
-        
-        try {
-            db.sortByTotalCostAsc(customerID);
-        } catch (SQLException ex) {
-            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void testSortByTotalCostDesc() throws SQLException {
-        System.out.print("Customer ID: ");
-        int customerID = in.nextInt();
-        
-        try {
-            db.sortByTotalCostDesc(customerID);
-        } catch (SQLException ex) {
-            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     // Test Payment Database
     private void paymentQueries() throws SQLException {
         String s;
@@ -438,8 +403,10 @@ public class TestDB {
             switch (s) {
                 default:
                     System.out.println("Unknown Command");
+                    break;
             }
         }
+        runQueries();
     }
     
     // Test Product Database
@@ -449,8 +416,10 @@ public class TestDB {
             switch (s) {
                 default:
                     System.out.println("Unknown Command");
+                    break;
             }
         }
+        runQueries();
     }
     
     // Test Shipping Database
@@ -460,8 +429,10 @@ public class TestDB {
             switch (s) {
                 default:
                     System.out.println("Unknown Command");
+                    break;
             }
         }
+        runQueries();
     }
     
     // Test Staff Database
@@ -471,8 +442,10 @@ public class TestDB {
             switch (s) {
                 default:
                     System.out.println("Unknown Command");
+                    break;
             }
         }
+        runQueries();
     }
 
 }
