@@ -96,6 +96,8 @@ public class TestDB {
                 case "c":
                     testCreateCart();
                     break;
+                case "d":
+                    testDeleteCart();
                 case "sa":
                     testShowAllCarts();
                     break;
@@ -104,7 +106,7 @@ public class TestDB {
                     break;
                 case "h":
                     System.out.println("c -> create cart");
-                    System.out.println("d -> delete carts");
+                    System.out.println("d -> delete cart");
                     System.out.println("sa -> show all carts");
                     System.out.println("sc -> show customer carts");
                     System.out.println("* -> return to database selection");
@@ -130,6 +132,19 @@ public class TestDB {
         }
         
         System.out.println("New Cart for Customer " + customerID + " has been created");
+    }
+
+    private void testDeleteCart() {
+        System.out.print("Cart ID: ");
+        int cartID = in.nextInt();
+
+        try {
+            db.deleteCart(cartID);
+        } catch (SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        System.out.println("Cart " + cartID + " has been deleted");
     }
     
     private void testShowCustomerCarts() {
@@ -219,7 +234,7 @@ public class TestDB {
         } catch (SQLException ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("Product " + productID + "in Cart " + cartID + " has been updated with Quantity " + quantity);
+        System.out.println("Product " + productID + " in Cart " + cartID + " has been updated with Quantity " + quantity);
     }
 
     private void testDeleteOrderItem() {
@@ -233,7 +248,7 @@ public class TestDB {
         } catch (SQLException ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("Product " + productID + "has been deleted from Cart " + cartID);
+        System.out.println("Product " + productID + " has been deleted from Cart " + cartID);
     }
 
     private void testDeleteAllOrderItems() {
@@ -388,7 +403,6 @@ public class TestDB {
         int customerID = in.nextInt();
         System.out.print("Order Status: ");
         String searchInput = in.nextLine();
-        
         try {
             db.searchOrder(customerID, searchInput);
         } catch (SQLException ex) {

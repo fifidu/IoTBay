@@ -22,9 +22,13 @@ public class DBManager {
     /* Cart Database */
     // Create Cart (if automated only use customerID as parameter)
     public void createCart(int cartID, int customerID) throws SQLException {
-        st.executeUpdate("INSERT INTO cart " + "VALUES (" + cartID + "," + customerID + ")");
+        st.executeUpdate("INSERT INTO cart VALUES (" + cartID + "," + customerID + ")");
     }
-    
+
+    public void deleteCart(int cartID) throws SQLException {
+        st.executeUpdate("DELETE FROM cart WHERE cartID = " + cartID);
+    }
+
     // Show Customer Carts
     public void showCustomerCarts(int customerID) throws SQLException {
         String fetch = "SELECT * FROM cart WHERE customerID = " + customerID;
@@ -118,7 +122,7 @@ public class DBManager {
         String orderStatus = "Active";
         LocalDate orderDate = LocalDate.now();
         double totalCost = 0.00;
-        st.executeUpdate("INSERT INTO iotuser.orders " + "VALUES (" + orderID + ", " + cartID + "," + orderStatus + "," + orderDate + "," + totalCost + ")");
+        st.executeUpdate("INSERT INTO iotuser.orders " + "VALUES (" + orderID + ", " + cartID + "," + orderDate + "," + orderStatus + "," + totalCost + ")");
     }
 
     public void updateTotalCost(int cartID) throws SQLException {
@@ -126,10 +130,10 @@ public class DBManager {
         String fetch = "SELECT * FROM iotuser.cartline WHERE iotuser.cartline.cartid = " + cartID;
         ResultSet rs = st.executeQuery(fetch);
         while (rs.next()) {
-            double productCost = rs.getDouble("productID") * rs.getInt("quantity");
+            double productCost = rs.getDouble("productCost") * rs.getInt("quantity");
             totalCost += productCost;
         }
-        st.executeUpdate("UPDATE iotuser.orders SET totalCost = " + totalCost);
+        st.executeUpdate("UPDATE iotuser.orders SET totalCost = " + totalCost + " WHERE cartID = " + cartID);
     }
 
 
