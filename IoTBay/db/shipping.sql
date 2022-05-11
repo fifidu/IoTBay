@@ -17,7 +17,7 @@ CREATE TABLE shipping(
 	addressPostal varchar(10),
 	orderStatus varchar(20),
 	currentLocation varchar(255),
-    estDelivery date,
+        estDelivery date,
 	CONSTRAINT shipping_PK PRIMARY KEY (trackingID),
 	CONSTRAINT shipping_FK FOREIGN KEY (orderID) REFERENCES orders
 );

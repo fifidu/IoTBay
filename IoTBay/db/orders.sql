@@ -12,7 +12,7 @@ CREATE TABLE orders (
     cartID int,
     orderDate date,
     orderStatus varchar(30),
-    totalCost DOUBLE(6,2),
+    totalCost decimal(6,2),
     CONSTRAINT orders_PK PRIMARY KEY (orderID),
     CONSTRAINT orders_FK1 FOREIGN KEY (cartID) REFERENCES cart
 );

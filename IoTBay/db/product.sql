@@ -12,10 +12,10 @@ CREATE TABLE product (
     productName varchar(50),
     productSupplier varchar(50),
     productDescription varchar(255),
-    productCost DOUBLE(6,2),
+    productCost decimal(6,2),
     quantityAvailable int,
     quantitySold int,
-    CONSTRAINT inventory_PK PRIMARY KEY (productID)
+    CONSTRAINT product_PK PRIMARY KEY (productID)
 );
 
 INSERT INTO product VALUES (1, 'Mesh Modem', 'FEthernet', 'Fastest Mesh Modem you can get for your home!', 349.99, 5, 5);
