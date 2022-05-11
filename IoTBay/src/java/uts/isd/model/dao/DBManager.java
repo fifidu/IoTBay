@@ -42,6 +42,7 @@ public class DBManager {
             System.out.println(cartID + ", " + cusID);
         }
     }
+
     // Show All Carts
     public void showAllCarts() throws SQLException {
         String fetch = "SELECT * FROM cart";
@@ -53,7 +54,19 @@ public class DBManager {
             System.out.println(cartID + ", " + customerID);
         }
     }
-    
+
+    public ArrayList<Cart> fetchCarts() throws SQLException {
+        String fetch = "SELECT * FROM cart";
+        ResultSet rs = st.executeQuery(fetch);
+        ArrayList<Cart> temp = new ArrayList();
+        while (rs.next()) {
+            int cartID = rs.getInt("cartID");
+            int customerID = rs.getInt("customerID");
+            temp.add(new Cart(cartID, customerID));
+        }
+        return temp;
+    }
+
     /* CartLine Database */
     // Add Item
     public void addOrderItem(int cartID, int productID, int quantity) throws SQLException {
@@ -116,14 +129,25 @@ public class DBManager {
 
     // Show Customer Cart Items
     public void showCustomerCartItems(int cartID) throws SQLException {
-        String fetch = "SELECT * FROM iotuser.cartline WHERE cartID = " + cartID;
+        ArrayList<CartLine> cartList = fetchCartItems(cartID);
+        for (CartLine cl: cartList) {
+            System.out.println(cl.getProductID() + ", " + cl.getProductName() + ", " + cl.getQuantity()); 
+        }
+    }
+
+    public ArrayList<CartLine> fetchCartItems(int cartID) throws SQLException {
+        String fetch = "SELECT * FROM IOTUSER.cartline INNER JOIN IOTUSER.product ON cartline.productID = product.productID WHERE cartID = " + cartID;
         ResultSet rs = st.executeQuery(fetch);
-        System.out.println("Product ID, Quantity");
+        ArrayList<CartLine> temp = new ArrayList();
         while (rs.next()) {
             int productID = rs.getInt("productID");
+            String productName = rs.getString("productName");
+            double productCost = rs.getDouble("productCost");
             int quantity = rs.getInt("quantity");
-            System.out.println(productID + ", " + quantity);
+            double total = productCost * quantity;
+            temp.add(new CartLine(cartID, productID, productName, productCost, quantity, total));
         }
+        return temp;
     }
 
     // Show All Cart Items
@@ -180,33 +204,51 @@ public class DBManager {
 
     /* Show Customer Orders */
     public void showCustomerOrders(int customerID) throws SQLException {
-        String fetch = "SELECT * from orders INNER JOIN cart ON orders.cartID = cart.cartID WHERE customerID = " + customerID;
+        ArrayList<Order> orderList = fetchCustomerOrders(customerID);
+        for (Order ord: orderList) {
+            System.out.println(ord.getOrderID() + ", " + ord.getCartID() + ", " + ord.getOrderDate() + ", " + ord.getOrderStatus() + ", " + ord.getTotalCost());
+        }
+    }
+
+    public ArrayList<Order> fetchCustomerOrders(int customerID) throws SQLException {
+        String fetch = "SELECT * FROM IOTUSER.orders INNER JOIN IOTUSER.cart ON orders.cartID = cart.cartID WHERE customerID = " + customerID;
         ResultSet rs = st.executeQuery(fetch);
-        System.out.println("Order ID, Cart ID, Order Date, Order Status, Total Cost");
+        ArrayList<Order> temp = new ArrayList();
         while (rs.next()) {
             int orderID = rs.getInt("orderID");
             int cartID = rs.getInt("cartID");
-            Date orderDate = rs.getDate("orderDate");
+            Date sqlOrderDate = rs.getDate("orderDate");
+            LocalDate javaOrderDate = sqlOrderDate.toLocalDate();
             String orderStatus = rs.getString("orderStatus");
             double totalCost = rs.getDouble("totalCost");
-            System.out.println(orderID + ", " + cartID + ", " + orderDate + ", " + orderStatus + ", " + totalCost);
+            temp.add(new Order(orderID, cartID, javaOrderDate, orderStatus, totalCost));
+        }  
+        return temp;
+    }
+    // Show All Orders
+    public void showAllOrders() throws SQLException {
+        ArrayList<Order> orderList = fetchOrders();
+        for (Order ord: orderList) {
+            System.out.println(ord.getOrderID() + ", " + ord.getCartID() + ", " + ord.getOrderDate() + ", " + ord.getOrderStatus() + ", " + ord.getTotalCost());
         }   
     }
 
-    // Show All Orders
-    public void showAllOrders() throws SQLException {
+    public ArrayList<Order> fetchOrders() throws SQLException {
         String fetch = "SELECT * FROM orders";
         ResultSet rs = st.executeQuery(fetch);
-        System.out.println("Order ID, Cart ID, Order Date, Order Status, Total Cost");
+        ArrayList<Order> temp = new ArrayList();
         while (rs.next()) {
             int orderID = rs.getInt("orderID");
             int cartID = rs.getInt("cartID");
-            Date orderDate = rs.getDate("orderDate");
+            Date sqlOrderDate = rs.getDate("orderDate");
+            LocalDate javaOrderDate = sqlOrderDate.toLocalDate();
             String orderStatus = rs.getString("orderStatus");
             double totalCost = rs.getDouble("totalCost");
-            System.out.println(orderID + ", " + cartID + ", " + orderDate + ", " + orderStatus + ", " + totalCost);
+            temp.add(new Order(orderID, cartID, javaOrderDate, orderStatus, totalCost));
         }  
+        return temp;
     }
+
 
     /* Search Orders */
     public void searchOrder(int customerID, String searchInput) throws SQLException {

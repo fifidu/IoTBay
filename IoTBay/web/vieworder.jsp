@@ -4,6 +4,8 @@
     Author     : chrisvuong
 --%>
 
+<%@page import="uts.isd.model.CartLine"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -32,10 +34,10 @@
 
                 <div class="header-end">
                     <div class="user-info header-button">
-                        <a><i class="fa fa-user-circle"></i> Hello, <jsp:getProperty name="user" property="firstName"/></a>
+                        <a><i class="fa fa-user-circle"></i> Hello, </a>
                         <div class="user-menu">
                             <a class="header-button" href="edituser.jsp">Edit Account</a>
-                            <a class="header-button" href="orders.jsp>">My Orders</a>
+                            <a class="header-button" href="ViewOrdersController">My Orders</a>
                             <a class="header-button" href="logout.jsp">Logout</a>
                         </div>
                     </div>
@@ -51,9 +53,23 @@
             </nav>
             <div class="page-content">
                 <table>
-                    <th>Item Name</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Product Cost</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                    <% ArrayList<CartLine> cartList = (ArrayList<CartLine>)request.getAttribute("cartList");
+                       for (CartLine cl: cartList) { %>
+                       <tr>
+                           <td><%=cl.getProductID()%></td>
+                           <td><%=cl.getProductName()%></td>
+                           <td><%=cl.getProductCost()%></td>
+                           <td><%=cl.getQuantity()%></td>
+                           <td><%=cl.getTotal()%></td>
+                       </tr>
+                    <%}%>
                 </table>
             </div>
         </main>

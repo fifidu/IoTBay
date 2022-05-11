@@ -62,9 +62,12 @@ nav {
 table {
     background-color: #303030;
     padding: 20px;
+    width: 600px;
 }
 
 .title {
     text-align: center;
     padding: 10px;
 }
+
+

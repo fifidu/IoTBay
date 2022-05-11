@@ -3,6 +3,8 @@
     Created on : 23/04/2022, 10:21:27 PM
     Author     : chrisvuong
 --%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="uts.isd.model.Order"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -34,7 +36,7 @@
                         <a><i class="fa fa-user-circle"></i> Hello, <%-- <jsp:getProperty name="user" property="firstName"/> --%></a>
                         <div class="user-menu">
                             <a class="header-button" href="edituser.jsp">Edit Account</a>
-                            <a class="header-button" href="orders.jsp>">My Orders</a>
+                            <a class="header-button" href="ViewOrdersController">My Orders</a>
                             <a class="header-button" href="logout.jsp">Logout</a>
                         </div>
                     </div>
@@ -57,7 +59,15 @@
                         <th>Order Status</th>
                         <th>Total Cost</th>
                     </tr>
-                    <% String s = "HI";%>
+                    <% ArrayList<Order> orderList = (ArrayList<Order>)request.getAttribute("orderList");
+                       for (Order ord: orderList) { %>
+                       <tr>
+                           <td><a href="ViewCartController?cartID=<%=ord.getCartID()%>"><%=ord.getOrderID()%></td>
+                           <td><%=ord.getOrderDate()%></td>
+                           <td><%=ord.getOrderStatus()%></td>
+                           <td><%=ord.getTotalCost()%></td>
+                       </tr>
+                    <%}%>
                 </table>
             </div>
         </main>
