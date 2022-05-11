@@ -51,11 +51,13 @@
             <div class="page-content">
                 <h1 class="title">Orders</h1>
                 <table>
-                    <th>Order</th>
-                    <th>Date</th>
-                    <th>Payment Status</th>
-                    <th>Fulfillment Status</th>
-                    <th>Total</th>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Order Date</th>
+                        <th>Order Status</th>
+                        <th>Total Cost</th>
+                    </tr>
+                    <% String s = "HI";%>
                 </table>
             </div>
         </main>

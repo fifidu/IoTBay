@@ -391,6 +391,8 @@ public class TestDB {
         } catch (SQLException ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        System.out.println("Order " + orderID + " has been submitted");
     }   
 
     private void testShowCustomerOrders() throws SQLException {

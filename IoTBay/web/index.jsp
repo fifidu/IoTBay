@@ -31,5 +31,6 @@
             <a class="main-link" href = login.jsp>Login</a> or  
             <a class="main-link" href = register.jsp>Register</a>
         </div>
+        <jsp:include page="/ConnServlet" flush="true" />
     </body>
 </html>
