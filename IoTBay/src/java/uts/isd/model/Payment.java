@@ -17,6 +17,7 @@ public class Payment {
     private int cardNumber;
     private String cardName;
     private LocalDate cardExpiry;
+    private int cvv;
 
     public Payment(int paymentID, int orderID, int cardNumber, String cardName, LocalDate cardExpiry) {
         this.paymentID = paymentID;
