@@ -19,12 +19,13 @@ public class Payment {
     private LocalDate cardExpiry;
     private int cvv;
 
-    public Payment(int paymentID, int orderID, int cardNumber, String cardName, LocalDate cardExpiry) {
+    public Payment(int paymentID, int orderID, int cardNumber, String cardName, LocalDate cardExpiry, int cvv) {
         this.paymentID = paymentID;
         this.orderID = orderID;
         this.cardNumber = cardNumber;
         this.cardName = cardName;
         this.cardExpiry = cardExpiry;
+        this.cvv = cvv;
     }
 
     public int getPaymentID() {
@@ -41,6 +42,10 @@ public class Payment {
 
     public String getCardName() {
         return this.cardName;
+    }
+
+    public int getCvv() {
+        return this.cvv;
     }
 
     public LocalDate getCardExpiry() {
@@ -66,4 +71,7 @@ public class Payment {
     public void setCardExpiry(LocalDate cardExpiry) {
         this.cardExpiry = cardExpiry;
     }
-}
+
+    public void setCvv(int cvv) {
+        this.cvv = cvv;
+    }
