@@ -357,7 +357,7 @@ public class DBManager {
     /* Product*/
     //Create product (staff only)
     public void createProduct(int productID, String productName, String productType, String productSupplier, String productDescription, double productCost, int quantityAvailable) throws SQLException {
-        st.executeUpdate("INSERT INTO IOTUSER.product " + "VALUES ('" + productID + "', '" + productName + "', '" + productType + "', '" + productSupplier + "', '" + productDescription + "', '" + productCost + "', '" + quantityAvailable + "', '0'"); //0 being the quantity sold
+        st.executeUpdate("INSERT INTO IOTUSER.product " + "VALUES ('" + productID + "', '" + productName + "', '" + productType + "', '" + productSupplier + "', '" + productDescription + "', '" + productCost + "', '" + quantityAvailable + "')");
     }
 
     //Read/Find a product (customer or staff)
