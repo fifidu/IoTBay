@@ -8,16 +8,18 @@ package uts.isd.model;
  *
  * @author chrisvuong
  */
+import java.util.HashMap;
 
-public class CartLineBean implements java.io.Serializable {
-
+public class CartLine {
 
     private int cartID;
     private int productID;
     private int quantity;
+    private HashMap<Integer, Integer> cartItems;
 
-    public CartLineBean() {
-      
+    public CartLine(int cartID) {
+        this.cartID = cartID;
+        cartItems = new HashMap<>();
     }
 
     public int getCartID() {
