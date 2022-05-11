@@ -59,21 +59,42 @@ public class DBManager {
     public void addOrderItem(int cartID, int productID, int quantity) throws SQLException {
         st.executeUpdate("INSERT INTO iotuser.cartline " + "VALUES (" + cartID + "," + productID + "," + quantity + ")");
         updateTotalCost(cartID);
-        // Update Product Quantity
+        decreaseProductQuantity(productID, quantity);
     }
     
     // Update Quantity
-    public void updateOrderItemQuantity(int cartID, int productID, int quantity) throws SQLException {
-        st.executeUpdate("UPDATE iotuser.cartline SET quantity = " + quantity + " WHERE cartID = " + cartID + " AND productID = " + productID);
-        updateTotalCost(cartID);
-        // Update Product Quantity
+    public void updateOrderItemQuantity(int cartID, int productID, int quantity /* 4 */) throws SQLException {
+        int quantityDiff;
+        String fetch = "SELECT * FROM IOTUSER.cartline WHERE cartID = " + cartID + " AND productID = " + productID; 
+        ResultSet rs = st.executeQuery(fetch);
+        while (rs.next()) {
+            int oldQuantity = rs.getInt("quantity");
+            if (quantity /* 4 */ > oldQuantity /* 3 */) {
+                quantityDiff = quantity - oldQuantity;
+                decreaseProductQuantity(productID, quantityDiff);
+                st.executeUpdate("UPDATE iotuser.cartline SET quantity = " + quantity + " WHERE cartID = " + cartID + " AND productID = " + productID);
+                updateTotalCost(cartID);
+            } else if (quantity /* 2 */ < oldQuantity /* 3 */) {
+                quantityDiff = oldQuantity - quantity;
+                increaseProductQuantity(productID, quantityDiff);
+                st.executeUpdate("UPDATE iotuser.cartline SET quantity = " + quantity + " WHERE cartID = " + cartID + " AND productID = " + productID);
+                updateTotalCost(cartID);
+            } else {
+                System.out.println("Product ID " + productID + " already has Quantity " + quantity);
+            }
+        }
     }
     
     // Delete Item
     public void deleteOrderItem(int cartID, int productID) throws SQLException {
-        st.executeUpdate("DELETE FROM iotuser.cartline WHERE cartID = " + cartID + " AND productID = " + productID);
+        String fetch = "SELECT * FROM IOTUSER.cartline WHERE cartID " + cartID + " AND productID = " + productID;
+        ResultSet rs = st.executeQuery(fetch);
+        while (rs.next()) {
+            int quantity = rs.getInt("quantity");
+            increaseProductQuantity(productID, quantity);
+        }
+        st.executeUpdate("DELETE FROM IOTUSER.cartline WHERE cartID = " + cartID + " AND productID = " + productID);
         updateTotalCost(cartID);
-        // Update Product Quantity
     }
 
     public void deleteAllOrderItems(int cartID) throws SQLException {
@@ -343,6 +364,26 @@ public class DBManager {
     //Update product
     public void updateProduct(int productID, String productName, String productType, String productSupplier, String productDescription, double productCost, int quantityAvailable) throws SQLException {
         st.executeUpdate("UPDATE IOTUSER.product SET productName = '" + productName + "', productType = '" + productType + "', productSuppler = '" + productSupplier + "', productDescription = '" + productDescription + "', productCost = '" + productCost + "', quantityAvailable = '" + quantityAvailable + "' WHERE productID = '" + productID + "'");
+    }
+
+    // Increase product quantity available
+    public void increaseProductQuantity(int productID, int quantity) throws SQLException {
+        String fetch = "SELECT * FROM product WHERE productID = " + productID;
+        ResultSet rs = st.executeQuery(fetch);
+        while (rs.next()) {
+            int newQuantity = rs.getInt("quantityAvailable") + quantity;
+            st.executeUpdate("UPDATE IOTUSER.product SET quantityAvailable = " + newQuantity + " WHERE productID = " + productID);
+        }
+    }
+
+    // Decrease product quantity available 
+    public void decreaseProductQuantity(int productID, int quantity) throws SQLException {
+        String fetch = "SELECT * FROM product WHERE productID = " + productID;
+        ResultSet rs = st.executeQuery(fetch);
+        while (rs.next()) {
+            int newQuantity = rs.getInt("quantityAvailable") - quantity;
+            st.executeUpdate("UPDATE IOTUSER.product SET quantityAvailable = " + newQuantity + " WHERE productID = " + productID);
+        }
     }
 
     //Delete product
