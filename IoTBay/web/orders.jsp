@@ -67,7 +67,7 @@
                            <td><%=ord.getOrderID()%></td>
                            <td><%=ord.getOrderDate()%></td>
                            <td><%=ord.getOrderStatus()%></td>
-                           <td><%=ord.getTotalCost()%></td>
+                           <td>$<%=ord.getTotalCost()%></td>
                            <% if (ord.getOrderStatus().equals("Active")) {%>
                            <td><a href="ViewCartController?cartID=<%=ord.getCartID()%>">Edit</td>
                            <% } else {%>

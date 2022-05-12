@@ -197,6 +197,13 @@ public class DBManager {
     }
 
     /* Customer Database */
+    public void addCustomer(int customerID, String cusEmailAddress, String cusPass ) throws SQLException {
+        st.executeUpdate("INSERT INTO customer (customerID, cusEmailAddress, cusPass) VALUES (" + customerID + ", " + cusEmailAddress + ", " + cusPass + ")");
+    }
+    
+    public void deleteCustomer (int customerID) throws SQLException {
+        st.executeUpdate("DELETE FROM customer WHERE customerID = " + customerID);
+    }
     
     /* Order Database */
     // Create New Order for Customer
