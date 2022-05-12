@@ -74,10 +74,11 @@ table {
 }
 
 tr {
-    width: 1000px;
+    width: 600px;
 }
 
 td {
+    width: 100px;
     padding: 20px;
 }
 

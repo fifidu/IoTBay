@@ -75,19 +75,20 @@ table {
 }
 
 tr {
-    width: 1000px;
+    width: 600px;
 }
 
 td {
     padding: 20px;
+    width: 100px;
 }
 
 .button {
-    width: 50px;
+    display: flex;
+    width: 100px;
     font-size: 16px;
     padding: 10px;
     background-color: #404040;
-    display: block;
     justify-content: center;
     align-items: center;
     border-radius: 8px;

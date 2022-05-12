@@ -13,7 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="./css/cart.css" rel="stylesheet" type="text/css" >
+        <link href="./css/vieworder.css" rel="stylesheet" type="text/css" >
         <link href="./css/header.css" rel="stylesheet" type="text/css" >
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>View Order - IoTBay</title>
@@ -67,9 +67,9 @@
                                 <tr>
                                     <td><%=cl.getProductID()%></td>
                                     <td><%=cl.getProductName()%></td>
-                                    <td><%=cl.getProductCost()%></td>
+                                    <td>$<%=cl.getProductCost()%></td>
                                     <td><%=cl.getQuantity()%></td>
-                                    <td><%=cl.getItemTotal()%></td>
+                                    <td>$<%=cl.getItemTotal()%></td>
                                     <% if (cl.getOrderStatus().equals("Active")) {%>
                                 </tr>
                                     <%}
@@ -80,7 +80,7 @@
                             <td></td>
                             <td></td>
                             <td>Total Cost</td>
-                            <td><%=request.getAttribute("totalCost")%></td>
+                            <td>$<%=request.getAttribute("totalCost")%></td>
                         </tr>
                 </table>
             </div>
