@@ -7,6 +7,8 @@ package uts.isd.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,14 +27,16 @@ public class ViewCartController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         DBManager manager = (DBManager) session.getAttribute("manager");
-        String tempCartID = request.getParameter("cartID");
-        int cartID = Integer.valueOf(tempCartID);
+        int cartID = Integer.valueOf(request.getParameter("cartID"));
         
         try {
             ArrayList<CartLine> cartList = manager.fetchCartItems(cartID);
-            request.setAttribute("cartList", cartList);
-        } catch (SQLException e) {
-            System.out.println("Exception is: " + e);
+            double totalCost = manager.calculateTotalCost(cartID);
+            request.setAttribute("cartList", cartList); 
+            request.setAttribute("totalCost", totalCost);
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewCartController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Exception is: " + ex);
         }
 
         request.getRequestDispatcher("vieworder.jsp").include(request, response);   

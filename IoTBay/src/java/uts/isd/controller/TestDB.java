@@ -338,18 +338,14 @@ public class TestDB {
     private void testCreateOrder() throws SQLException {
         System.out.print("Customer ID: ");
         int customerID = in.nextInt();
-        System.out.print("Order ID: ");
-        int orderID = in.nextInt();
-        System.out.print("Cart ID: ");
-        int cartID = in.nextInt();
         
         try {
-            db.createOrder(orderID, cartID, customerID);
+            db.createOrder(customerID);
         } catch (SQLException ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        System.out.println("Order " + orderID + " for Customer " + customerID + " has been created");
+        System.out.println("New order for Customer " + customerID + " has been created");
 
     }
 

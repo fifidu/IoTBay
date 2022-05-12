@@ -36,7 +36,7 @@
                         <a><i class="fa fa-user-circle"></i> Hello, <%-- <jsp:getProperty name="user" property="firstName"/> --%></a>
                         <div class="user-menu">
                             <a class="header-button" href="edituser.jsp">Edit Account</a>
-                            <a class="header-button" href="ViewOrdersController">My Orders</a>
+                            <a class="header-button" href="ViewOrdersController?customerID=<%=1%>">My Orders</a>
                             <a class="header-button" href="logout.jsp">Logout</a>
                         </div>
                     </div>
@@ -52,20 +52,27 @@
             </nav>
             <div class="page-content">
                 <h1 class="title">Orders</h1>
-                <table>
+                <a class="button" href="CreateOrderController?customerID=<%=1%>">Create Order</a>
+                <table class="center">
                     <tr>
                         <th>Order ID</th>
                         <th>Order Date</th>
                         <th>Order Status</th>
                         <th>Total Cost</th>
+                        <th></th>
                     </tr>
                     <% ArrayList<Order> orderList = (ArrayList<Order>)request.getAttribute("orderList");
                        for (Order ord: orderList) { %>
                        <tr>
-                           <td><a href="ViewCartController?cartID=<%=ord.getCartID()%>"><%=ord.getOrderID()%></td>
+                           <td><%=ord.getOrderID()%></td>
                            <td><%=ord.getOrderDate()%></td>
                            <td><%=ord.getOrderStatus()%></td>
                            <td><%=ord.getTotalCost()%></td>
+                           <% if (ord.getOrderStatus().equals("Active")) {%>
+                           <td><a href="ViewCartController?cartID=<%=ord.getCartID()%>">Edit</td>
+                           <% } else {%>
+                           <td><a href="ViewCartController?cartID=<%=ord.getCartID()%>">View</td>
+                           <%}%>
                        </tr>
                     <%}%>
                 </table>

@@ -27,6 +27,16 @@ public class DBManager {
         st.executeUpdate("INSERT INTO cart VALUES (" + cartID + "," + customerID + ")");
     }
 
+    public int countCarts() throws SQLException {
+        String fetch = "SELECT COUNT(*) FROM IOTUSER.cart";
+        ResultSet rs = st.executeQuery(fetch);
+        int count = 0;
+        while (rs.next()) {
+            count = rs.getInt(1);
+        }
+        return count;
+    }
+
     public void deleteCart(int cartID) throws SQLException {
         st.executeUpdate("DELETE FROM cart WHERE cartID = " + cartID);
     }
@@ -136,20 +146,43 @@ public class DBManager {
     }
 
     public ArrayList<CartLine> fetchCartItems(int cartID) throws SQLException {
-        String fetch = "SELECT * FROM IOTUSER.cartline INNER JOIN IOTUSER.product ON cartline.productID = product.productID WHERE cartID = " + cartID;
+        String fetch = "SELECT * FROM ((IOTUSER.cartline INNER JOIN IOTUSER.orders ON cartline.cartID = orders.cartID) INNER JOIN IOTUSER.product ON cartline.productID = product.productID) WHERE cartline.cartID = " + cartID;
         ResultSet rs = st.executeQuery(fetch);
         ArrayList<CartLine> temp = new ArrayList();
         while (rs.next()) {
             int productID = rs.getInt("productID");
             String productName = rs.getString("productName");
+            String orderStatus = rs.getString("orderStatus");
             double productCost = rs.getDouble("productCost");
             int quantity = rs.getInt("quantity");
-            double total = productCost * quantity;
-            temp.add(new CartLine(cartID, productID, productName, productCost, quantity, total));
+            double itemTotal = productCost * quantity;
+            double totalCost = rs.getDouble("totalCost");
+            temp.add(new CartLine(cartID, productID, productName, orderStatus, productCost, quantity, itemTotal, totalCost));
         }
         return temp;
     }
 
+    public double calculateTotalCost(int cartID) throws SQLException {
+        String fetch = "SELECT productCost, quantity FROM ((IOTUSER.cartline INNER JOIN IOTUSER.orders ON cartline.cartID = orders.cartID) INNER JOIN IOTUSER.product ON cartline.productID = product.productID) WHERE cartline.cartID = " + cartID;
+        ResultSet rs = st.executeQuery(fetch);
+        double totalCost = 0.00;
+        while (rs.next()) {
+            double productCost = rs.getDouble("productCost");
+            int quantity = rs.getInt("quantity");
+            totalCost += productCost * quantity;
+        }
+        return totalCost;
+    }
+
+    public int countCartItems(int cartID) throws SQLException {
+        int count = 0;
+        String fetch = "SELECT COUNT(*) FROM IOTUSER.cartline WHERE cartID = " + cartID;
+        ResultSet rs = st.executeQuery(fetch);
+        while (rs.next()) {
+            count = rs.getInt(1);
+        }
+        return count;
+    }
     // Show All Cart Items
     public void showAllCartItems() throws SQLException {
         String fetch = "SELECT * FROM cartline";
@@ -166,13 +199,42 @@ public class DBManager {
     /* Customer Database */
     
     /* Order Database */
-    // Create Order (if automated only use customerID as parameter)
-    public void createOrder(int orderID, int cartID, int customerID) throws SQLException {
-        createCart(cartID, customerID); // If automated only use customerID as parameter
+    // Create New Order for Customer
+    public Order createOrder(int customerID) throws SQLException {
+        int orderID = countOrders() + 1;
+        int cartID = countCarts() + 1;
         String orderStatus = "Active";
         LocalDate orderDate = LocalDate.now();
         double totalCost = 0.00;
+        createCart(cartID, customerID);
+
         st.executeUpdate("INSERT INTO iotuser.orders " + "VALUES (" + orderID + ", " + cartID + ",'" + orderDate + "','" + orderStatus + "'," + totalCost + ")");
+
+        return new Order(orderID, cartID, orderDate, orderStatus, totalCost);
+    }
+
+    // Count number of orders in Orders database
+    public int countOrders() throws SQLException {
+        String fetch = "SELECT COUNT(*) FROM IOTUSER.orders";
+        ResultSet rs = st.executeQuery(fetch);
+        int count = 0;
+        while (rs.next()) {
+            count = rs.getInt(1);
+        }
+        return count;
+    }
+
+    public boolean checkActiveOrders(int customerID) throws SQLException {
+        String fetch = "SELECT * FROM IOTUSER.orders INNER JOIN IOTUSER.cart ON orders.cartID = cart.cartID WHERE customerID = " + customerID;
+        ResultSet rs = st.executeQuery(fetch);
+
+        while (rs.next()) {
+            String orderStatus = rs.getString("orderStatus");
+            if (orderStatus.equals("Active")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void updateTotalCost(int cartID) throws SQLException {
@@ -211,7 +273,7 @@ public class DBManager {
     }
 
     public ArrayList<Order> fetchCustomerOrders(int customerID) throws SQLException {
-        String fetch = "SELECT * FROM IOTUSER.orders INNER JOIN IOTUSER.cart ON orders.cartID = cart.cartID WHERE customerID = " + customerID;
+        String fetch = "SELECT * FROM IOTUSER.orders INNER JOIN IOTUSER.cart ON orders.cartID = cart.cartID WHERE customerID = " + customerID + " ORDER BY IOTUSER.orders.orderDate DESC";
         ResultSet rs = st.executeQuery(fetch);
         ArrayList<Order> temp = new ArrayList();
         while (rs.next()) {

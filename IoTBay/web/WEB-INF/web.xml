@@ -12,6 +12,14 @@
         <servlet-name>ViewOrdersController</servlet-name>
         <servlet-class>uts.isd.controller.ViewOrdersController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SubmitOrderController</servlet-name>
+        <servlet-class>uts.isd.controller.SubmitOrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateOrderController</servlet-name>
+        <servlet-class>uts.isd.controller.CreateOrderController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ConnServlet</servlet-name>
         <url-pattern>/ConnServlet</url-pattern>
@@ -23,6 +31,14 @@
     <servlet-mapping>
         <servlet-name>ViewOrdersController</servlet-name>
         <url-pattern>/ViewOrdersController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubmitOrderController</servlet-name>
+        <url-pattern>/SubmitOrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateOrderController</servlet-name>
+        <url-pattern>/CreateOrderController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

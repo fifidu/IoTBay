@@ -37,7 +37,7 @@
                         <a><i class="fa fa-user-circle"></i> Hello, </a>
                         <div class="user-menu">
                             <a class="header-button" href="edituser.jsp">Edit Account</a>
-                            <a class="header-button" href="ViewOrdersController">My Orders</a>
+                            <a class="header-button" href="ViewOrdersController?customerID=<%=1%>">My Orders</a>
                             <a class="header-button" href="logout.jsp">Logout</a>
                         </div>
                     </div>
@@ -52,7 +52,8 @@
                 <a class="nav-item">Product</a>
             </nav>
             <div class="page-content">
-                <table>
+                <h1 class="title">Cart</h1>
+                <table class="center">
                     <tr>
                         <th>Product ID</th>
                         <th>Product Name</th>
@@ -60,16 +61,27 @@
                         <th>Quantity</th>
                         <th>Price</th>
                     </tr>
-                    <% ArrayList<CartLine> cartList = (ArrayList<CartLine>)request.getAttribute("cartList");
-                       for (CartLine cl: cartList) { %>
-                       <tr>
-                           <td><%=cl.getProductID()%></td>
-                           <td><%=cl.getProductName()%></td>
-                           <td><%=cl.getProductCost()%></td>
-                           <td><%=cl.getQuantity()%></td>
-                           <td><%=cl.getTotal()%></td>
-                       </tr>
-                    <%}%>
+                    <%  ArrayList<CartLine> cartList = (ArrayList<CartLine>)request.getAttribute("cartList");
+                        if (cartList.size() != 0) {
+                            for (CartLine cl: cartList) { %>
+                                <tr>
+                                    <td><%=cl.getProductID()%></td>
+                                    <td><%=cl.getProductName()%></td>
+                                    <td><%=cl.getProductCost()%></td>
+                                    <td><%=cl.getQuantity()%></td>
+                                    <td><%=cl.getItemTotal()%></td>
+                                    <% if (cl.getOrderStatus().equals("Active")) {%>
+                                </tr>
+                                    <%}
+                            }
+                        }%>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Total Cost</td>
+                            <td><%=request.getAttribute("totalCost")%></td>
+                        </tr>
                 </table>
             </div>
         </main>
