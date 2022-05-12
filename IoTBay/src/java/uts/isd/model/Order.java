@@ -13,15 +13,13 @@ import java.time.LocalDate;
 public class Order {
 
     private int orderID;
-    private int customerID;
     private int cartID;
     private LocalDate orderDate;
     private String orderStatus;
     private double totalCost;
 
-    public Order(int orderID, int customerID, int cartID, LocalDate orderDate, String orderStatus, double totalCost) {
+    public Order(int orderID, int cartID, LocalDate orderDate, String orderStatus, double totalCost) {
         this.orderID = orderID;
-        this.customerID = customerID;
         this.cartID = cartID;
         this.orderDate = orderDate;
         this.orderStatus = orderStatus;
@@ -30,10 +28,6 @@ public class Order {
 
     public int getOrderID() {
         return this.orderID;
-    }
-
-    public int getCustomerID() {
-        return this.customerID;
     }
 
     public int getCartID() {
@@ -54,10 +48,6 @@ public class Order {
 
     public void setOrderID(int orderID) {
         this.orderID = orderID;
-    }
-
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
     }
 
     public void setCartID(int cartID) {

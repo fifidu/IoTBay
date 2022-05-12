@@ -11,6 +11,7 @@ package uts.isd.controller;
 import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
+import uts.isd.model.*;
 import uts.isd.model.dao.DBManager;
 import uts.isd.model.dao.DBConnector;
 
@@ -337,18 +338,14 @@ public class TestDB {
     private void testCreateOrder() throws SQLException {
         System.out.print("Customer ID: ");
         int customerID = in.nextInt();
-        System.out.print("Order ID: ");
-        int orderID = in.nextInt();
-        System.out.print("Cart ID: ");
-        int cartID = in.nextInt();
         
         try {
-            db.createOrder(orderID, cartID, customerID);
+            db.createOrder(customerID);
         } catch (SQLException ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        System.out.println("Order " + orderID + " for Customer " + customerID + " has been created");
+        System.out.println("New order for Customer " + customerID + " has been created");
 
     }
 
@@ -443,10 +440,119 @@ public class TestDB {
         String s;
         while (!"*".equals(s = readChoice().toLowerCase())) {
             switch (s) {
+                case "c":
+                    testCreateProduct();
+                case "s":
+                    testFindProduct();
+                case "f":
+                    testFetchProducts();
+                case "u":
+                    testUpdateProduct();
+                case "d":
+                    testDeleteProduct();                      
                 default:
                     System.out.println("Unknown Command");
                     break;
             }
+        }
+    }
+
+    //Testing createProduct()
+    private void testCreateProduct() throws SQLException {
+        System.out.print("Product ID: ");
+        int enteredProductID = in.nextInt();
+        System.out.print("Product name: ");
+        String enteredProductName = in.nextLine();
+        System.out.print("Product type: ");
+        String enteredProductType = in.nextLine();
+        System.out.print("Product supplier: ");
+        String enteredProductSupplier = in.nextLine();
+        System.out.print("Product description: ");
+        String enteredProductDescription = in.nextLine();
+        System.out.print("Product cost: ");
+        double enteredProductCost = in.nextDouble();
+        System.out.print("Product quantity: ");
+        int enteredProductQuantity = in.nextInt();
+
+        try {
+            db.createProduct(enteredProductID, enteredProductName, enteredProductType, enteredProductSupplier, enteredProductDescription, enteredProductCost, enteredProductQuantity);
+        }
+
+        catch (SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    //Testing findProduct()
+    private void testFindProduct() throws SQLException {
+        System.out.print("Search: ");
+        String searched = in.nextLine();
+
+        try {
+            db.findProduct(searched);
+        }
+
+        catch (SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    //Testing fetchProducts()
+    private void testFetchProducts() throws SQLException {
+        try {
+            ArrayList<Product> products = db.fetchProducts();
+            System.out.println("PRODUCTS TABLE");
+            
+            for (Product p : products) {
+                System.out.printf("%-20s %-30s %-20s %-10s \n", p.getProductID(), p.getProductName(), p.getProductType(), p.getProductSupplier(), p.getProductDescription(), p.getProductCost(), p.getQuantityAvailable());
+            }
+//            products.stream().forEach((product) -> {
+//                System.out.printf("%-20s %-30s %-20s %-10s \n", product.getProductID(), product.getProductName(), product.getProductType(), product.getProductSupplier(), product.getProductDescription(), product.getProductCost(), product.getQuantityAvailable());
+//            });
+        }
+
+        catch (SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    //Testing updateProduct()
+    private void testUpdateProduct() throws SQLException {
+        System.out.print("Product ID: ");
+        int enteredProductID = in.nextInt();
+        System.out.print("Product name: ");
+        String enteredProductName = in.nextLine();
+        System.out.print("Product type: ");
+        String enteredProductType = in.nextLine();
+        System.out.print("Product supplier: ");
+        String enteredProductSupplier = in.nextLine();
+        System.out.print("Product description: ");
+        String enteredProductDescription = in.nextLine();
+        System.out.print("Product cost: ");
+        double enteredProductCost = in.nextDouble();
+        System.out.print("Product quantity: ");
+        int enteredProductQuantity = in.nextInt();
+
+        try {
+            db.updateProduct(enteredProductID, enteredProductName, enteredProductType, enteredProductSupplier, enteredProductDescription, enteredProductCost, enteredProductQuantity);
+        }
+
+        catch (SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    //Testing deleteProduct()
+    private void testDeleteProduct() throws SQLException {
+        System.out.print("Name of product to delete: ");
+        String enteredProductName = in.nextLine();
+
+        try {
+            db.deleteProduct(enteredProductName);
+        }
+
+        catch (SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

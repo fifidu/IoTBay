@@ -56,15 +56,43 @@ nav {
 .page-content {
     padding-top: 100px; /* to ensure that the content is safely below the header */
     margin: auto;
-    width: 400px; 
 }
 
 table {
     background-color: #303030;
     padding: 20px;
+    text-align: center;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .title {
     text-align: center;
     padding: 10px;
 }
+
+tr {
+    width: 600px;
+}
+
+td {
+    padding: 20px;
+    width: 100px;
+}
+
+.button {
+    display: flex;
+    width: 100px;
+    font-size: 16px;
+    padding: 10px;
+    background-color: #404040;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    
+}
+
+
