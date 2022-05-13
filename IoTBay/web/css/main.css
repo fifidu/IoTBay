@@ -30,6 +30,10 @@ nav {
     align-items: flex-start;
 }
 
+caption {
+    padding-top: 20px;
+}
+
 .nav-item {
   width: 100%;
   height: 40px;
@@ -51,4 +55,8 @@ nav {
 
 .content {
     flex-grow: 1;
+}
+
+.device-table, .device-table-header {
+    border: 1px solid;
 }
