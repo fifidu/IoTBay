@@ -8,7 +8,8 @@ package uts.isd.model;
  *
  * @author chrisvuong
  */
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Payment {
 
@@ -16,10 +17,12 @@ public class Payment {
     private int orderID;
     private int cardNumber;
     private String cardName;
-    private LocalDate cardExpiry;
+    private String cardExpiryString;
+    DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    LocalDateTime cardExpiry = LocalDateTime.parse(cardExpiryString, formattedDate);
     private int cvv;
 
-    public Payment(int paymentID, int orderID, int cardNumber, String cardName, LocalDate cardExpiry, int cvv) {
+    public Payment(int paymentID, int orderID, int cardNumber, String cardName, LocalDateTime cardExpiry, int cvv) {
         this.paymentID = paymentID;
         this.orderID = orderID;
         this.cardNumber = cardNumber;
@@ -48,7 +51,7 @@ public class Payment {
         return this.cvv;
     }
 
-    public LocalDate getCardExpiry() {
+    public LocalDateTime getCardExpiry() {
         return this.cardExpiry;
     }
 
@@ -68,7 +71,7 @@ public class Payment {
         this.cardName = cardName;
     }
 
-    public void setCardExpiry(LocalDate cardExpiry) {
+    public void setCardExpiry(LocalDateTime cardExpiry) {
         this.cardExpiry = cardExpiry;
     }
 
