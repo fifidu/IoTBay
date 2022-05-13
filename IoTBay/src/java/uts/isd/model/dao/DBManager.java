@@ -197,69 +197,18 @@ public class DBManager {
     }
 
     /* Customer Database */
-    // Checks if email exists in customer table
-    public boolean checkCustomer(String emailAddress) throws SQLException {
-        String fetch = "SELECT * FROM IOTUSER.customer WHERE cusEmailAddress = '" + emailAddress + "'";
-        ResultSet rs = st.executeQuery(fetch);
-
-        while (rs.next()) {
-            String cusEmailAddress = rs.getString("cusEmailAddress");
-            if (cusEmailAddress.equals(emailAddress)) {
-            return true;
-            }
-        }
-        return false;
-}
-    
-    // Checks if email and password match
-    public Customer findCustomer(String emailAddress, String password) throws SQLException {
-        String fetch = "SELECT * FROM IOTUSER.customer WHERE cusEmailAddress = '" + emailAddress + "'";
-        ResultSet rs = st.executeQuery(fetch);
-
-        while (rs.next()) {
-            String cusEmailAddress = rs.getString("cusEmailAddress");
-            String cusPass = rs.getString("cusPass");
-
-            if (cusEmailAddress.equals(emailAddress) && cusPass.equals(password)) {
-                int customerID = rs.getInt("customerID");
-                String cusFName = rs.getString("cusFName");
-                String cusLName = rs.getString("cusLName");
-                String cusContactNumber = rs.getString("cusContactNumber");
-                return new Customer(customerID, cusFName, cusLName, cusEmailAddress, cusPass, cusContactNumber);
-            }
-        }
-        return null;
-    }
-
-   // Finds the next available customerID 
-    public int nextAvailableCustomerID() throws SQLException {
-        int nextID = 0;
-        String fetch = "SELECT * FROM IOTUSER.customer";
-        ResultSet rs = st.executeQuery(fetch);
-        while (rs.next()) {
-            nextID = rs.getInt("customerID");
-        }
-        return nextID + 1;
-    }
-
-    // Adds new customer to database and creates Customer object to store information for display on the website
-    public Customer addCustomer(String cusFName, String cusLName, String cusEmailAddress, String cusPass, String cusContactNumber) throws SQLException {
-        int customerID = nextAvailableCustomerID();
-
-        st.executeUpdate("INSERT INTO IOTUSER.customer VALUES (" + customerID + ", '" + cusFName + "', '" + cusLName + "', '"+ cusEmailAddress + "', '" + cusPass + "', '" + cusContactNumber + "')");
-
-        return new Customer(customerID, cusFName, cusLName, cusEmailAddress, cusPass, cusContactNumber);
+    public void addCustomer(int customerID, String cusEmailAddress, String cusPass ) throws SQLException {
+        st.executeUpdate("INSERT INTO customer (customerID, cusEmailAddress, cusPass) VALUES (" + customerID + ", " + cusEmailAddress + ", " + cusPass + ")");
     }
     
-
     public void deleteCustomer (int customerID) throws SQLException {
-        st.executeUpdate("DELETE FROM IOTUSER.customer WHERE customerID = " + customerID);
+        st.executeUpdate("DELETE FROM customer WHERE customerID = " + customerID);
     }
     
-    public Customer updateCustomer (int customerID, String cusFName, String cusLName, String cusEmailAddress, String cusPass, String cusContactNumber) throws SQLException{
-        st.executeUpdate("UPDATE IOTUSER.customer SET cusEmailAddress = '" + cusEmailAddress + "', cusFName= '" + cusFName + "', cusLName = '" + cusLName + "', cusPass = '" + cusPass + "', cusContactNumber = '" + cusContactNumber + "' WHERE cusID" );
-        return new Customer(customerID, cusFName, cusLName, cusEmailAddress, cusPass, cusContactNumber);
+    /public void updateCustomer (int customerID, String cusEmailAddress, String cusFName, String cusLName, cusPass, cusContactNumber ) throws SQLException{
+        st.executeUpdate("UPDATE ")
     }
+    
     /* Order Database */
     // Create New Order for Customer
     public Order createOrder(int customerID) throws SQLException {
@@ -473,7 +422,22 @@ public class DBManager {
             System.out.println(orderID + ", " + cartID + ", " + orderDate + ", " + orderStatus + ", " + totalCost);
         }
     }
-/* Payment Database */
+    /* Payment Database */
+    // Create details (links to orderID)
+    public void addPayment(int paymentID, int orderID, int cardNumber, String cardName, LocalDate cardExpiry, int cvv) throws SQLException {
+    st.executeUpdate("INSERT INTO IOTUSER.payment VALUES (" + paymentID + ", " + orderID + ", " + cardNumber + ", '" + cardName + "', " + cardExpiry + ", " + cvv);
+    }
+
+    // View saved order payment details
+
+    // View order history list
+
+    // Search payment records based on paymentID and date
+
+    // Update details
+
+    // Delete details
+
 /* Product Database */
 /* Shipping Database */
 /* Staff Database */
