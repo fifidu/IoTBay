@@ -11,9 +11,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="./css/login.css" rel="stylesheet" type="text/css" >
         <link href="./css/header.css" rel="stylesheet" type="text/css" >
-        <title>Login - IoTBay</title>
+        <title>Customer Login - IoTBay</title>
     </head>
-    <body>
+    <body onload = "startTime() ">
         <header>
             <div class="header-content">
                 <div class="header-start">
@@ -25,7 +25,7 @@
         </header>
         
         <div class="page-content">
-            <form action="welcome.jsp" method="post">
+            <form action=" LoginServlet" method="post">
                 <h1 class="title">Login</h1>
                 <label><b>Email</b></label><br>
                 <input type="email" id="email" name="email" required><br><br>

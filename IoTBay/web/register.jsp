@@ -25,7 +25,7 @@
         </header>
         
         <div class="page-content">
-            <form action="welcome.jsp" method="post">
+            <form action="RegisterController" method="post">
                 <h1 class="title">Register</h1>
                 <label><b>First Name</b></label><br>
                 <input type="text" id="fname" name="firstName" required><br><br>
@@ -39,7 +39,6 @@
                 <input type="password" id="password" name="password" required><br><br>
                 <label><b>Confirm Password</b></label><br>
                 <input type="password" id="cpassword" name="cpassword" required><br><br>
-                <label><b>Agree to terms of service?</b> <input type="checkbox" id="tos" name="tos" required></label><br><br>
                 <input type="submit" value="Register">
             </form>
         </div>

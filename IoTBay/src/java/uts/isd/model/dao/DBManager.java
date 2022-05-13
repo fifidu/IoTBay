@@ -197,17 +197,42 @@ public class DBManager {
     }
 
     /* Customer Database */
+
+    public Customer checkCustomer(String email) throws SQLException {
+        /*
+        checks if email exists in customer table
+        */
+    }
+    public void validateCustomer () throws SQLException {
+        /*
+        checks if email and password match
+        */
+    }
+    
     public void addCustomer(int customerID, String cusEmailAddress, String cusPass ) throws SQLException {
-        st.executeUpdate("INSERT INTO customer (customerID, cusEmailAddress, cusPass) VALUES (" + customerID + ", " + cusEmailAddress + ", " + cusPass + ")");
+        st.executeUpdate("INSERT INTO IOTUSER.customer (customerID, cusEmailAddress, cusPass) VALUES ('" + customerID + "', '" + cusEmailAddress + "', '" + cusPass + "')");
     }
     
     public void deleteCustomer (int customerID) throws SQLException {
-        st.executeUpdate("DELETE FROM customer WHERE customerID = " + customerID);
+        st.executeUpdate("DELETE FROM IOTUSER.customer WHERE customerID = " + customerID);
     }
     
-    public void updateCustomer (int customerID, String cusEmailAddress, String cusFName, String cusLName, cusPass, cusContactNumber ) throws SQLException{
-        st.executeUpdate("UPDATE ")
+    public void updateCustomer (int customerID, String cusEmailAddress, String cusFName, String cusLName, String cusPass, String cusContactNumber ) throws SQLException{
+        st.executeUpdate("UPDATE IOTUSER.customer SET cusEmailAddress = '" + cusEmailAddress + "', cusFName= '" + cusFName + "', cusLName = '" + cusLName + "', cusPass = '" + cusPass + "', cusContactNumber = '" + cusContactNumber + "' WHERE cusID" );
     }
+    
+    public Customer fetchCustomer (String email) throws SQLException {
+         ResultSet rs = st.executeQuery("SELECT * FROM customer WHERE cusEmailAddress= '" + email + "'");
+         while (rs.next()) {
+             int customerID = rs.getInt("customerID");
+             String cusEmailAddress = rs.getString("cusEmailAddress");
+             String cusFName = rs.getString("cusFName");
+             String cusLName = rs.getString("cusLName");
+             String cusPass = rs.getString("cusPass");
+             String cusContactNumber = rs.getString("cusContactNumber");
+         }
+         return new Customer(customerID, cusFName, cusLName, cusEmailAddress, cusPass, cusContactNumber); 
+   }
     
     /* Order Database */
     // Create New Order for Customer
