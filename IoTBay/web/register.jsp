@@ -24,21 +24,30 @@
             <div class="header-outline"></div>
         </header>
         
+        <%
+        String emailFormatErr = (String) session.getAttribute("emailFormatErr");
+        String passFormatErr = (String) session.getAttribute("passFormatErr");
+        String confirmPassErr = (String) session.getAttribute("confirmPassErr");
+        String nameFormatErr = (String) session.getAttribute("nameFormatErr");
+        String contactFormatErr = (String) session.getAttribute("contactFormatErr");
+        String existingAccountErr = (String) session.getAttribute("existingAccountErr");
+        %>
         <div class="page-content">
             <form action="RegisterController" method="post">
                 <h1 class="title">Register</h1>
-                <label><b>First Name</b></label><br>
-                <input type="text" id="fname" name="firstName" required><br><br>
-                <label><b>Last Name</b></label><br>
-                <input type="text" id="lname" name="lastName" required><br><br>
-                <label><b>Email</b></label><br>
-                <input type="email" id="email" name="emailAddress" required><br><br>
-                <label><b>Phone Number</b></label><br>
-                <input type="tel" id="phone" name="phoneNo" pattern="[0-9]{10}" required><br><br>
-                <label><b>Password</b></label><br>
-                <input type="password" id="password" name="password" required><br><br>
-                <label><b>Confirm Password</b></label><br>
-                <input type="password" id="cpassword" name="cpassword" required><br><br>
+                <p><span class="err-msg"><%=(existingAccountErr != null ? existingAccountErr : "")%></span></p>
+                <label><b>First Name</b> <span class="err-msg"><%=(nameFormatErr != null ? nameFormatErr : "")%></span></label><br>
+                <input type="text" id="fname" name="cusFName" ><br><br>
+                <label><b>Last Name</b> <span class="err-msg"><%=(nameFormatErr != null ? nameFormatErr : "")%></span></label><br>
+                <input type="text" id="lname" name="cusLName" ><br><br>
+                <label><b>Email</b> <span class="err-msg"><%=(emailFormatErr != null ? emailFormatErr : "")%></span></label><br>
+                <input type="text" id="email" name="cusEmailAddress" ><br><br>
+                <label><b>Phone Number</b> <span class="err-msg"><%=(contactFormatErr != null ? contactFormatErr : "")%></span></label><br>
+                <input type="text" id="phone" name="cusContactNumber" pattern="[0-9]{10}" ><br><br>
+                <label><b>Password</b> <span class="err-msg"><%=(passFormatErr != null ? passFormatErr : "")%></span></label><br>
+                <input type="password" id="password" name="cusPass" ><br><br>
+                <label><b>Confirm Password</b> <span class="err-msg"><%=(confirmPassErr != null ? confirmPassErr : "")%></span></label><br>
+                <input type="password" id="cpassword" name="cusConfirmPass" ><br><br>
                 <input type="submit" value="Register">
             </form>
         </div>
