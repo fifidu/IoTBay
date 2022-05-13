@@ -7,6 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import uts.isd.model.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 /**
@@ -424,7 +425,7 @@ public class DBManager {
     }
     /* Payment Database */
     // Create details (links to orderID)
-    public void addPayment(int paymentID, int orderID, int cardNumber, String cardName, LocalDate cardExpiry, int cvv) throws SQLException {
+    public void createPayment(int paymentID, int orderID, int cardNumber, String cardName, LocalDateTime cardExpiry, int cvv) throws SQLException {
     st.executeUpdate("INSERT INTO IOTUSER.payment VALUES (" + paymentID + ", " + orderID + ", " + cardNumber + ", '" + cardName + "', " + cardExpiry + ", " + cvv);
     }
 

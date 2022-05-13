@@ -14,6 +14,8 @@ import java.util.logging.*;
 import uts.isd.model.*;
 import uts.isd.model.dao.DBManager;
 import uts.isd.model.dao.DBConnector;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 
@@ -428,10 +430,40 @@ public class TestDB {
         String s;
         while (!"*".equals(s = readChoice().toLowerCase())) {
             switch (s) {
+                case "c":
+                    testCreatePayment();
+                    break;
                 default:
                     System.out.println("Unknown Command");
                     break;
             }
+        }
+    }
+
+    // Test createPayment()
+    private void testCreatePayment() throws SQLException {
+        System.out.print("Payment ID: ");
+        int paymentID = in.nextInt();
+        System.out.print("Order ID: ");
+        int orderID = in.nextInt();
+        System.out.print("Card Number: ");
+        int cardNumber = in.nextInt();
+        System.out.print("Card Name: ");
+        String cardName = in.nextLine();
+        System.out.print("Card Expiry: ");
+        String cardExpiryString = in.next();
+        DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime cardExpiry = LocalDateTime.parse(cardExpiryString, formattedDate);
+        System.out.print("CVV: ");
+        int cvv = in.nextInt();
+
+        try {
+            db.createPayment(paymentID, orderID, cardNumber, cardName, cardExpiry, cvv);
+            System.out.println("Payment details created!");
+        }
+
+        catch (SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
