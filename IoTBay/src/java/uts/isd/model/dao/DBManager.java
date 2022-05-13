@@ -498,10 +498,24 @@ public class DBManager {
     //Create product (staff only)
     public void createProduct(int productID, String productName, String productType, String productSupplier, String productDescription, double productCost, int quantityAvailable) throws SQLException {
         st.executeUpdate("INSERT INTO IOTUSER.product " + "VALUES (" + productID + ", '" + productName + "', '" + productType + "', '" + productSupplier + "', '" + productDescription + "', " + productCost + ", " + quantityAvailable + ")");
+        //return new Product(productID, productName, productType, productSupplier, productDescription, productCost, quantityAvailable);
     }
 
     //Read/Find a product (customer or staff)
     //List all device records
+    public boolean checkProduct(int productID) throws SQLException {
+        String fetch = "SELECT * FROM IOTUSER.product WHERE productID = '" + productID + "'";
+        ResultSet rs = st.executeQuery(fetch);
+
+        while (rs.next()) {
+            int existingProductID = rs.getInt("productID");
+            if (existingProductID == productID) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public ArrayList<Product> fetchProducts() throws SQLException {
         String fetch = "SELECT * FROM IOTUSER.product";
         ResultSet rs = st.executeQuery(fetch);

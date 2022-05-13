@@ -66,3 +66,28 @@ caption {
     margin: auto;
     width: 400px; 
 }
+
+.err-msg {
+    color: red;
+}
+
+input[type=submit]  {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px;
+    background-color: #404040;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.create-product-form {
+    background-color: #303030;
+    padding: 20px;
+}
+
+.create-product-form-input {
+    width: 100%;
+    color: black;
+}
