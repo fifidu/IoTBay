@@ -66,6 +66,8 @@ nav {
 form {
     background-color: #303030;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .title {
@@ -73,8 +75,13 @@ form {
     padding-bottom: 10px;
 }
 
-input[type=submit]  {
+input {
+    box-sizing: border-box;
+    margin-bottom: 10px;
     width: 100%;
+}
+
+input[type=submit]  {
     font-size: 16px;
     padding: 10px;
     background-color: #404040;
@@ -85,7 +92,6 @@ input[type=submit]  {
 }
 
 input[type=text], input[type=password] {
-    width: 100%;
     color: black;
 }
 

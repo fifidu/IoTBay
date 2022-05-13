@@ -32,10 +32,10 @@
             <form action="LoginController" method="post">
                 <h1 class="title">Login</h1>
                 <p><span class="err-msg"><%=(unregisteredErr != null ? unregisteredErr : "")%></span></p>
-                <label><b>Email</b> <span class="err-msg"><%=(emailFormatErr != null ? emailFormatErr : "")%></span></label><br>
-                <input type="text" id="email" name="cusEmailAddress"><br><br>
-                <label><b>Password</b> <span class="err-msg"><%=(incorrectPassErr != null ? incorrectPassErr : "")%></span></label><br>
-                <input type="password" id="password" name="cusPass"><br><br>
+                <label><b>Email</b> <span class="err-msg"><%=(emailFormatErr != null ? emailFormatErr : "")%></span></label>
+                <input type="text" id="email" name="cusEmailAddress">
+                <label><b>Password</b> <span class="err-msg"><%=(incorrectPassErr != null ? incorrectPassErr : "")%></span></label>
+                <input type="password" id="password" name="cusPass">
                 <input type="submit" value="Login">
             </form>
         <div class="second-content">
