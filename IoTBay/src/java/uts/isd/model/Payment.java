@@ -8,21 +8,17 @@ package uts.isd.model;
  *
  * @author chrisvuong
  */
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Payment {
 
     private int paymentID;
     private int orderID;
-    private int cardNumber;
+    private String cardNumber;
     private String cardName;
-    private String cardExpiryString;
-    DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    LocalDateTime cardExpiry = LocalDateTime.parse(cardExpiryString, formattedDate);
+    private String cardExpiry;
     private int cvv;
 
-    public Payment(int paymentID, int orderID, int cardNumber, String cardName, LocalDateTime cardExpiry, int cvv) {
+    public Payment(int paymentID, int orderID, String cardNumber, String cardName, String cardExpiry, int cvv) {
         this.paymentID = paymentID;
         this.orderID = orderID;
         this.cardNumber = cardNumber;
@@ -39,7 +35,7 @@ public class Payment {
         return this.orderID;
     }
 
-    public int getCardNumber() {
+    public String getCardNumber() {
         return this.cardNumber;
     }
 
@@ -51,7 +47,7 @@ public class Payment {
         return this.cvv;
     }
 
-    public LocalDateTime getCardExpiry() {
+    public String getCardExpiry() {
         return this.cardExpiry;
     }
 
@@ -63,7 +59,7 @@ public class Payment {
         this.orderID = orderID;
     }
 
-    public void setCardNumber(int cardNumber) {
+    public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
 
@@ -71,7 +67,7 @@ public class Payment {
         this.cardName = cardName;
     }
 
-    public void setCardExpiry(LocalDateTime cardExpiry) {
+    public void setCardExpiry(String cardExpiry) {
         this.cardExpiry = cardExpiry;
     }
 

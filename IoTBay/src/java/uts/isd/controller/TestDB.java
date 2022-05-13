@@ -14,8 +14,7 @@ import java.util.logging.*;
 import uts.isd.model.*;
 import uts.isd.model.dao.DBManager;
 import uts.isd.model.dao.DBConnector;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 
 
 
@@ -443,19 +442,17 @@ public class TestDB {
     // Test createPayment()
     private void testCreatePayment() throws SQLException {
         System.out.print("Payment ID: ");
-        int paymentID = in.nextInt();
+        int paymentID = Integer.parseInt(in.nextLine());
         System.out.print("Order ID: ");
-        int orderID = in.nextInt();
+        int orderID = Integer.parseInt(in.nextLine());
         System.out.print("Card Number: ");
-        int cardNumber = in.nextInt();
+        String cardNumber = in.nextLine();
         System.out.print("Card Name: ");
         String cardName = in.nextLine();
         System.out.print("Card Expiry: ");
-        String cardExpiryString = in.next();
-        DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDateTime cardExpiry = LocalDateTime.parse(cardExpiryString, formattedDate);
+        String cardExpiry = in.nextLine();
         System.out.print("CVV: ");
-        int cvv = in.nextInt();
+        int cvv = Integer.parseInt(in.nextLine());
 
         try {
             db.createPayment(paymentID, orderID, cardNumber, cardName, cardExpiry, cvv);

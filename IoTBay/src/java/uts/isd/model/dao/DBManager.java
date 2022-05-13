@@ -206,9 +206,9 @@ public class DBManager {
         st.executeUpdate("DELETE FROM customer WHERE customerID = " + customerID);
     }
     
-    /public void updateCustomer (int customerID, String cusEmailAddress, String cusFName, String cusLName, cusPass, cusContactNumber ) throws SQLException{
-        st.executeUpdate("UPDATE ")
-    }
+//    public void updateCustomer (int customerID, String cusEmailAddress, String cusFName, String cusLName, cusPass, cusContactNumber ) throws SQLException{
+//        st.executeUpdate("UPDATE ")
+//    }
     
     /* Order Database */
     // Create New Order for Customer
@@ -425,8 +425,8 @@ public class DBManager {
     }
     /* Payment Database */
     // Create details (links to orderID)
-    public void createPayment(int paymentID, int orderID, int cardNumber, String cardName, LocalDateTime cardExpiry, int cvv) throws SQLException {
-    st.executeUpdate("INSERT INTO IOTUSER.payment VALUES (" + paymentID + ", " + orderID + ", " + cardNumber + ", '" + cardName + "', " + cardExpiry + ", " + cvv);
+    public void createPayment(int paymentID, int orderID, String cardNumber, String cardName, String cardExpiry, int cvv) throws SQLException {
+    st.executeUpdate("INSERT INTO IOTUSER.payment VALUES (" + paymentID + ", " + orderID + ", '" + cardNumber + "', '" + cardName + "', '" + cardExpiry + "', '" + cvv + "')");
     }
 
     // View saved order payment details
