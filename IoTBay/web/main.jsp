@@ -1,5 +1,7 @@
 <%@page import="uts.isd.model.Customer"%>
 <!DOCTYPE html>
+<%@page import="java.util.ArrayList"%>
+<%@page import="uts.isd.model.Product"%>
 <html lang="en" dir="ltr">
 
     <head>
@@ -15,7 +17,7 @@
         <header>
             <div class="header-content">
                 <div class="header-start">
-                    <a class="header-button" href="main.jsp"><h3>IoTBay</h3></a>
+                    <a class="header-button" href="ShowProductsController"><h3>IoTBay</h3></a>
                 </div>
 
                 <div class="header-center">
@@ -43,9 +45,36 @@
 
         <main>
             <nav>
-                <a class="nav-item">Product</a>
+                <a class="nav-item">All Products</a>
             </nav>
             <div class="content">
+                <table class="device-table">
+                    <caption><h3>Device Catalogue</h3></caption>
+                    <tr>
+                        <th class="device-table-header">Product ID</th>
+                        <th class="device-table-header">Product Type</th>
+                        <th class="device-table-header">Product Name</th>
+                        <th class="device-table-header">Product Supplier</th>
+                        <th class="device-table-header">Product Description</th>
+                        <th class="device-table-header">Product Cost</th>
+                        <th class="device-table-header">Quantity Available</th>
+                        <th class="device-table-header"></th>
+                        <th></th>
+                    </tr>
+                    <% ArrayList<Product> productList = (ArrayList<Product>)session.getAttribute("productList");
+                       for (Product prod: productList) { %>
+                       <tr>
+                           <td><%=prod.getProductID()%></td>
+                           <td><%=prod.getProductName()%></td>
+                           <td><%=prod.getProductType()%></td>
+                           <td><%=prod.getProductSupplier()%></td>
+                           <td><%=prod.getProductDescription()%></td>
+                           <td><%=prod.getProductCost()%></td>
+                           <td><%=prod.getQuantityAvailable()%></td>
+                           <td><a href="ViewProductController?productID=<%=prod.getProductID()%>">View</a></td>
+                       </tr>
+                    <%}%>
+                </table>
             </div>
         </main>
     </body>

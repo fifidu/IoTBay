@@ -32,6 +32,14 @@
         <servlet-name>FetchProductsController</servlet-name>
         <servlet-class>uts.isd.controller.FetchProductsController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewProductController</servlet-name>
+        <servlet-class>uts.isd.controller.ViewProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowProductsController</servlet-name>
+        <servlet-class>uts.isd.controller.ShowProductsController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ConnServlet</servlet-name>
         <url-pattern>/ConnServlet</url-pattern>
@@ -63,6 +71,14 @@
     <servlet-mapping>
         <servlet-name>FetchProductsController</servlet-name>
         <url-pattern>/FetchProductsController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewProductController</servlet-name>
+        <url-pattern>/ViewProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowProductsController</servlet-name>
+        <url-pattern>/ShowProductsController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

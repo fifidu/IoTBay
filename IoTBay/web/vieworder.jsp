@@ -24,7 +24,7 @@
         <header>
             <div class="header-content">
                 <div class="header-start">
-                    <a class="header-button" href="main.jsp"><h3>IoTBay</h3></a>
+                    <a class="header-button" href="ShowProductsController"><h3>IoTBay</h3></a>
                 </div>
 
                 <div class="header-center">
