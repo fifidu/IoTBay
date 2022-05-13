@@ -430,7 +430,7 @@ public class DBManager {
     /* Product*/
     //Create product (staff only)
     public void createProduct(int productID, String productName, String productType, String productSupplier, String productDescription, double productCost, int quantityAvailable) throws SQLException {
-        st.executeUpdate("INSERT INTO IOTUSER.product " + "VALUES ('" + productID + "', '" + productName + "', '" + productType + "', '" + productSupplier + "', '" + productDescription + "', '" + productCost + "', '" + quantityAvailable + "')");
+        st.executeUpdate("INSERT INTO IOTUSER.product " + "VALUES (" + productID + ", '" + productName + "', '" + productType + "', '" + productSupplier + "', '" + productDescription + "', " + productCost + ", " + quantityAvailable + ")");
     }
 
     //Read/Find a product (customer or staff)
@@ -454,31 +454,27 @@ public class DBManager {
     }
 
     //Search for device based on name or type
-    public Product findProduct(String searchedString) throws SQLException {
-        String fetch = "SELECT * FROM IOTUSER.product WHERE productName = '" + searchedString + "' OR productType = '" + searchedString + "'";
+    public ArrayList<Product> findProduct(String searchedString) throws SQLException {
+        String fetch = "SELECT * FROM IOTUSER.product WHERE upper(productName) LIKE '%" + searchedString.toUpperCase() + "%' OR upper(productType) LIKE '%" + searchedString.toUpperCase() + "%'";
         ResultSet rs = st.executeQuery(fetch);
+        ArrayList<Product> temp = new ArrayList();
 
         while (rs.next()) {
-            String actualProductName = rs.getString(2);
-            String actualProductType = rs.getString(3);
-
-            if (actualProductName.equals(searchedString) || actualProductType.equals(searchedString)) {
-                int returnedProductID = rs.getInt(1);
-                String returnedProductName = rs.getString(2);
-                String returnedProductType = rs.getString(3);
-                String returnedProductSupplier = rs.getString(4);
-                String returnedProductDescription = rs.getString(5);
-                double returnedProductCost = rs.getDouble(6);
-                int returnedQuantityAvailable = rs.getInt(7);
-                return new Product(returnedProductID, returnedProductName, returnedProductType, returnedProductSupplier, returnedProductDescription, returnedProductCost, returnedQuantityAvailable);
-            }
+            int returnedProductID = rs.getInt(1);
+            String returnedProductName = rs.getString(2);
+            String returnedProductType = rs.getString(3);
+            String returnedProductSupplier = rs.getString(4);
+            String returnedProductDescription = rs.getString(5);
+            double returnedProductCost = rs.getDouble(6);
+            int returnedQuantityAvailable = rs.getInt(7);
+            temp.add(new Product(returnedProductID, returnedProductName, returnedProductType, returnedProductSupplier, returnedProductDescription, returnedProductCost, returnedQuantityAvailable));
         }
-        return null;
+        return temp;
     }
 
     //Update product
     public void updateProduct(int productID, String productName, String productType, String productSupplier, String productDescription, double productCost, int quantityAvailable) throws SQLException {
-        st.executeUpdate("UPDATE IOTUSER.product SET productName = '" + productName + "', productType = '" + productType + "', productSuppler = '" + productSupplier + "', productDescription = '" + productDescription + "', productCost = '" + productCost + "', quantityAvailable = '" + quantityAvailable + "' WHERE productID = '" + productID + "'");
+        st.executeUpdate("UPDATE IOTUSER.product SET productName = '" + productName + "', productType = '" + productType + "', productSupplier = '" + productSupplier + "', productDescription = '" + productDescription + "', productCost = " + productCost + ", quantityAvailable = " + quantityAvailable + " WHERE productID = " + productID);
     }
 
     // Increase product quantity available

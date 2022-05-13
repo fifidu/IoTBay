@@ -442,14 +442,19 @@ public class TestDB {
             switch (s) {
                 case "c":
                     testCreateProduct();
+                    break;
                 case "s":
                     testFindProduct();
+                    break;
                 case "f":
                     testFetchProducts();
+                    break;
                 case "u":
                     testUpdateProduct();
+                    break;
                 case "d":
-                    testDeleteProduct();                      
+                    testDeleteProduct();
+                    break;                      
                 default:
                     System.out.println("Unknown Command");
                     break;
@@ -460,7 +465,7 @@ public class TestDB {
     //Testing createProduct()
     private void testCreateProduct() throws SQLException {
         System.out.print("Product ID: ");
-        int enteredProductID = in.nextInt();
+        int enteredProductID = Integer.parseInt(in.nextLine());
         System.out.print("Product name: ");
         String enteredProductName = in.nextLine();
         System.out.print("Product type: ");
@@ -476,6 +481,7 @@ public class TestDB {
 
         try {
             db.createProduct(enteredProductID, enteredProductName, enteredProductType, enteredProductSupplier, enteredProductDescription, enteredProductCost, enteredProductQuantity);
+            System.out.println("Product created!");
         }
 
         catch (SQLException ex) {
@@ -489,7 +495,16 @@ public class TestDB {
         String searched = in.nextLine();
 
         try {
-            db.findProduct(searched);
+            if (db.findProduct(searched) != null) {
+                ArrayList<Product> products = db.findProduct(searched);
+                System.out.println("Search results:");
+
+                for (Product p : products) {
+                    System.out.printf("%-5s %-20s %-20s %-20s %-70s %-10s %-10s \n", p.getProductID(), p.getProductName(), p.getProductType(), p.getProductSupplier(), p.getProductDescription(), p.getProductCost(), p.getQuantityAvailable());
+                }
+                System.out.println("All search results for " + searched);
+            }
+            else {System.out.println("No results found.");}
         }
 
         catch (SQLException ex) {
@@ -504,7 +519,7 @@ public class TestDB {
             System.out.println("PRODUCTS TABLE");
             
             for (Product p : products) {
-                System.out.printf("%-20s %-30s %-20s %-10s \n", p.getProductID(), p.getProductName(), p.getProductType(), p.getProductSupplier(), p.getProductDescription(), p.getProductCost(), p.getQuantityAvailable());
+                System.out.printf("%-5s %-20s %-20s %-20s %-70s %-10s %-10s \n", p.getProductID(), p.getProductName(), p.getProductType(), p.getProductSupplier(), p.getProductDescription(), p.getProductCost(), p.getQuantityAvailable());
             }
 //            products.stream().forEach((product) -> {
 //                System.out.printf("%-20s %-30s %-20s %-10s \n", product.getProductID(), product.getProductName(), product.getProductType(), product.getProductSupplier(), product.getProductDescription(), product.getProductCost(), product.getQuantityAvailable());
@@ -519,7 +534,7 @@ public class TestDB {
     //Testing updateProduct()
     private void testUpdateProduct() throws SQLException {
         System.out.print("Product ID: ");
-        int enteredProductID = in.nextInt();
+        int enteredProductID = Integer.parseInt(in.nextLine());
         System.out.print("Product name: ");
         String enteredProductName = in.nextLine();
         System.out.print("Product type: ");
@@ -535,6 +550,7 @@ public class TestDB {
 
         try {
             db.updateProduct(enteredProductID, enteredProductName, enteredProductType, enteredProductSupplier, enteredProductDescription, enteredProductCost, enteredProductQuantity);
+            System.out.println("Product updated!");
         }
 
         catch (SQLException ex) {
@@ -549,6 +565,7 @@ public class TestDB {
 
         try {
             db.deleteProduct(enteredProductName);
+            System.out.println("Product deleted!");
         }
 
         catch (SQLException ex) {
