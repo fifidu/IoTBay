@@ -97,7 +97,3 @@ input[type=submit]  {
     padding: 10px;
     text-align: center;
 }
-
-.err-msg {
-    color: red;
-}

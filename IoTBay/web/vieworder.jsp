@@ -4,7 +4,6 @@
     Author     : chrisvuong
 --%>
 
-<%@page import="uts.isd.model.Customer"%>
 <%@page import="uts.isd.model.CartLine"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -32,15 +31,13 @@
                         <input id="search" type="text" name="search-query" placeholder="Search"/>
                     </form>
                 </div>
-                <%
-                Customer customer = (Customer) session.getAttribute("customer");
-                %>
+
                 <div class="header-end">
                     <div class="user-info header-button">
-                        <a><i class="fa fa-user-circle"></i> Hello, <%=customer.getCusFName()%></a>
+                        <a><i class="fa fa-user-circle"></i> Hello, </a>
                         <div class="user-menu">
                             <a class="header-button" href="edituser.jsp">Edit Account</a>
-                            <a class="header-button" href="ViewOrdersController">My Orders</a>
+                            <a class="header-button" href="ViewOrdersController?customerID=<%=1%>">My Orders</a>
                             <a class="header-button" href="logout.jsp">Logout</a>
                         </div>
                     </div>
@@ -64,7 +61,7 @@
                         <th>Quantity</th>
                         <th>Price</th>
                     </tr>
-                    <%  ArrayList<CartLine> cartList = (ArrayList<CartLine>) session.getAttribute("cartList");
+                    <%  ArrayList<CartLine> cartList = (ArrayList<CartLine>)request.getAttribute("cartList");
                         if (cartList.size() != 0) {
                             for (CartLine cl: cartList) { %>
                                 <tr>
@@ -84,7 +81,7 @@
                             <td></td>
                             <td></td>
                             <td>Total Cost</td>
-                            <td>$<%=session.getAttribute("totalCost")%></td>
+                            <td>$<%=request.getAttribute("totalCost")%></td>
                         </tr>
                 </table>
             </div>

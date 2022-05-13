@@ -197,70 +197,43 @@ public class DBManager {
     }
 
     /* Customer Database */
-    // Checks if email exists in customer table
-    public boolean checkCustomer(String emailAddress) throws SQLException {
-        String fetch = "SELECT * FROM IOTUSER.customer WHERE cusEmailAddress = '" + emailAddress + "'";
-        ResultSet rs = st.executeQuery(fetch);
 
-        while (rs.next()) {
-            String cusEmailAddress = rs.getString("cusEmailAddress");
-            if (cusEmailAddress.equals(emailAddress)) {
-            return true;
-            }
-        }
-        return false;
+    public Customer checkCustomer(String email) throws SQLException {
+        /*
+        checks if email exists in customer table
+        */
+    }
+    public void validateCustomer () throws SQLException {
+        /*
+        checks if email and password match
+        */
     }
     
-    // Checks if email and password match
-    public Customer findCustomer(String emailAddress, String password) throws SQLException {
-        String fetch = "SELECT * FROM IOTUSER.customer WHERE cusEmailAddress = '" + emailAddress + "'";
-        ResultSet rs = st.executeQuery(fetch);
-
-        while (rs.next()) {
-            String cusEmailAddress = rs.getString("cusEmailAddress");
-            String cusPass = rs.getString("cusPass");
-
-            if (cusEmailAddress.equals(emailAddress) && cusPass.equals(password)) {
-                int customerID = rs.getInt("customerID");
-                String cusFName = rs.getString("cusFName");
-                String cusLName = rs.getString("cusLName");
-                String cusContactNumber = rs.getString("cusContactNumber");
-                return new Customer(customerID, cusFName, cusLName, cusEmailAddress, cusPass, cusContactNumber);
-            }
-        }
-        return null;
-    }
-
-   // Finds the next available customerID 
-    public int nextAvailableCustomerID() throws SQLException {
-        int nextID = 0;
-        String fetch = "SELECT * FROM IOTUSER.customer";
-        ResultSet rs = st.executeQuery(fetch);
-        while (rs.next()) {
-            nextID = rs.getInt("customerID");
-        }
-        return nextID + 1;
-    }
-
-    // Adds new customer to database and creates Customer object to store information for display on the website
-    public Customer addCustomer(String cusFName, String cusLName, String cusEmailAddress, String cusPass, String cusContactNumber) throws SQLException {
-        int customerID = nextAvailableCustomerID();
-
-        st.executeUpdate("INSERT INTO IOTUSER.customer VALUES (" + customerID + ", '" + cusFName + "', '" + cusLName + "', '"+ cusEmailAddress + "', '" + cusPass + "', '" + cusContactNumber + "')");
-
-        return new Customer(customerID, cusFName, cusLName, cusEmailAddress, cusPass, cusContactNumber);
+    public void addCustomer(int customerID, String cusEmailAddress, String cusPass ) throws SQLException {
+        st.executeUpdate("INSERT INTO IOTUSER.customer (customerID, cusEmailAddress, cusPass) VALUES ('" + customerID + "', '" + cusEmailAddress + "', '" + cusPass + "')");
     }
     
-
     public void deleteCustomer (int customerID) throws SQLException {
         st.executeUpdate("DELETE FROM IOTUSER.customer WHERE customerID = " + customerID);
     }
     
-    public Customer updateCustomer (int customerID, String cusFName, String cusLName, String cusEmailAddress, String cusPass, String cusContactNumber) throws SQLException{
+    public void updateCustomer (int customerID, String cusEmailAddress, String cusFName, String cusLName, String cusPass, String cusContactNumber ) throws SQLException{
         st.executeUpdate("UPDATE IOTUSER.customer SET cusEmailAddress = '" + cusEmailAddress + "', cusFName= '" + cusFName + "', cusLName = '" + cusLName + "', cusPass = '" + cusPass + "', cusContactNumber = '" + cusContactNumber + "' WHERE cusID" );
-        return new Customer(customerID, cusFName, cusLName, cusEmailAddress, cusPass, cusContactNumber);
     }
-
+    
+    public Customer fetchCustomer (String email) throws SQLException {
+         ResultSet rs = st.executeQuery("SELECT * FROM customer WHERE cusEmailAddress= '" + email + "'");
+         while (rs.next()) {
+             int customerID = rs.getInt("customerID");
+             String cusEmailAddress = rs.getString("cusEmailAddress");
+             String cusFName = rs.getString("cusFName");
+             String cusLName = rs.getString("cusLName");
+             String cusPass = rs.getString("cusPass");
+             String cusContactNumber = rs.getString("cusContactNumber");
+         }
+         return new Customer(customerID, cusFName, cusLName, cusEmailAddress, cusPass, cusContactNumber); 
+   }
+    
     /* Order Database */
     // Create New Order for Customer
     public Order createOrder(int customerID) throws SQLException {

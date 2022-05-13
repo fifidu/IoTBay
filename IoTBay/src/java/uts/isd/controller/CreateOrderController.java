@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import uts.isd.model.Customer;
 import uts.isd.model.Order;
 import uts.isd.model.dao.DBManager;
 
@@ -28,8 +27,7 @@ public class CreateOrderController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         DBManager manager = (DBManager) session.getAttribute("manager");
-        Customer customer = (Customer) session.getAttribute("customer");
-        int customerID = customer.getCustomerID();
+        int customerID = Integer.valueOf(request.getParameter("customerID"));
 
         try {
             if (manager.checkActiveOrders(customerID)) {

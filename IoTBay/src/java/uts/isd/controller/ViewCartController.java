@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import uts.isd.model.CartLine;
-import uts.isd.model.Customer;
 import uts.isd.model.dao.DBManager;
 
 /**

@@ -28,7 +28,7 @@
             <form action="welcome.jsp" method="post">
                 <h1 class="title">Login</h1>
                 <label><b>Email</b></label><br>
-                <input type="textß" id="email" name="email" required><br><br>
+                <input type="email" id="email" name="email" required><br><br>
                 <label><b>Password</b></label><br>
                 <input type="password" id="password" name="password" required><br><br>
                 <input type="submit" value="Login">

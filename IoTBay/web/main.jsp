@@ -1,4 +1,3 @@
-<%@page import="uts.isd.model.Customer"%>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -23,15 +22,13 @@
                         <input id="search" type="text" name="search-query" placeholder="Search"/>
                     </form>
                 </div>
-                <%
-                Customer customer = (Customer) session.getAttribute("customer");
-                %>
+
                 <div class="header-end">
                     <div class="user-info header-button">
-                        <a><i class="fa fa-user-circle"></i> Hello, <%=customer.getCusFName()%></a>
+                        <a><i class="fa fa-user-circle"></i> Hello,</a>
                         <div class="user-menu">
                             <a class="header-button" href="edituser.jsp">Edit Account</a>
-                            <a class="header-button" href="ViewOrdersController">My Orders</a>
+                            <a class="header-button" href="ViewOrdersController?customerID=<%=1%>">My Orders</a>
                             <a class="header-button" href="logout.jsp">Logout</a>
                         </div>
                     </div>
