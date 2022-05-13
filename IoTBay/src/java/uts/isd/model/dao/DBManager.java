@@ -205,6 +205,10 @@ public class DBManager {
         st.executeUpdate("DELETE FROM customer WHERE customerID = " + customerID);
     }
     
+    public void updateCustomer (int customerID, String cusEmailAddress, String cusFName, String cusLName, cusPass, cusContactNumber ) throws SQLException{
+        st.executeUpdate("UPDATE ")
+    }
+    
     /* Order Database */
     // Create New Order for Customer
     public Order createOrder(int customerID) throws SQLException {
