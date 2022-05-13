@@ -30,7 +30,7 @@ public class ViewOrdersController extends HttpServlet {
 
         try {
             ArrayList<Order> orderList = manager.fetchCustomerOrders(customerID);
-            request.setAttribute("orderList", orderList);
+            session.setAttribute("orderList", orderList);
         } catch (SQLException ex) {
             Logger.getLogger(ViewCartController.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Exception is: " + ex);
