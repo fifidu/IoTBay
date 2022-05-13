@@ -71,8 +71,9 @@
                                     <td><%=cl.getQuantity()%></td>
                                     <td>$<%=cl.getItemTotal()%></td>
                                     <% if (cl.getOrderStatus().equals("Active")) {%>
+                                    <td>Edit</td>
                                 </tr>
-                                    <%}
+                                    <%} 
                             }
                         }%>
                         <tr>

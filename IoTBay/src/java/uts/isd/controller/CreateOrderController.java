@@ -31,11 +31,11 @@ public class CreateOrderController extends HttpServlet {
 
         try {
             if (manager.checkActiveOrders(customerID)) {
-                request.setAttribute("orderUpdate", "Order Creation Unsuccessful: Active Order Already Exists");
+                session.setAttribute("orderUpdate", "Order Creation Unsuccessful: Active Order Already Exists");
             } else {
                 Order newOrder = manager.createOrder(customerID);
-                request.setAttribute("activeOrder", newOrder);
-                request.setAttribute("orderUpdate", "Order Created");
+                session.setAttribute("activeOrder", newOrder);
+                session.setAttribute("orderUpdate", "Order Created");
             }           
         } catch (SQLException ex) {
             Logger.getLogger(CreateOrderController.class.getName()).log(Level.SEVERE, null, ex);
