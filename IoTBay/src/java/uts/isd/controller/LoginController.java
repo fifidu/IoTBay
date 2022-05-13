@@ -35,8 +35,8 @@ public class LoginController extends HttpServlet {
         String cusPass = request.getParameter("cusPass");
 
         if (!validator.validateEmail(cusEmailAddress)) {
-            session.setAttribute("emailFormatError", "Incorrect Email Format");
-            request.getRequestDispatcher("register.jsp").include(request, response);
+            session.setAttribute("emailFormatErr", "Incorrect Email Format");
+            request.getRequestDispatcher("login.jsp").include(request, response);
         } else {
             try {
                 customer = manager.findCustomer(cusEmailAddress, cusPass);

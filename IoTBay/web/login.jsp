@@ -26,12 +26,14 @@
         <%
         String unregisteredErr = (String) session.getAttribute("unregisteredErr");
         String incorrectPassErr = (String) session.getAttribute("incorrectPassErr");
+        String emailFormatErr = (String) session.getAttribute("emailFormatErr");
         %>
         <div class="page-content">
             <form action="LoginController" method="post">
                 <h1 class="title">Login</h1>
-                <label><b>Email</b> <span class="err-msg"><%=(unregisteredErr != null ? unregisteredErr : "")%></span></label><br>
-                <input type="email" id="email" name="cusEmailAddress"><br><br>
+                <p><span class="err-msg"><%=(unregisteredErr != null ? unregisteredErr : "")%></span></p>
+                <label><b>Email</b> <span class="err-msg"><%=(emailFormatErr != null ? emailFormatErr : "")%></span></label><br>
+                <input type="text" id="email" name="cusEmailAddress"><br><br>
                 <label><b>Password</b> <span class="err-msg"><%=(incorrectPassErr != null ? incorrectPassErr : "")%></span></label><br>
                 <input type="password" id="password" name="cusPass"><br><br>
                 <input type="submit" value="Login">

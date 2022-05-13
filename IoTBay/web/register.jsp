@@ -41,9 +41,9 @@
                 <label><b>Last Name</b> <span class="err-msg"><%=(nameFormatErr != null ? nameFormatErr : "")%></span></label><br>
                 <input type="text" id="lname" name="cusLName" ><br><br>
                 <label><b>Email</b> <span class="err-msg"><%=(emailFormatErr != null ? emailFormatErr : "")%></span></label><br>
-                <input type="email" id="email" name="cusEmailAddress" ><br><br>
+                <input type="text" id="email" name="cusEmailAddress" ><br><br>
                 <label><b>Phone Number</b> <span class="err-msg"><%=(contactFormatErr != null ? contactFormatErr : "")%></span></label><br>
-                <input type="tel" id="phone" name="cusContactNumber" pattern="[0-9]{10}" ><br><br>
+                <input type="text" id="phone" name="cusContactNumber" pattern="[0-9]{10}" ><br><br>
                 <label><b>Password</b> <span class="err-msg"><%=(passFormatErr != null ? passFormatErr : "")%></span></label><br>
                 <input type="password" id="password" name="cusPass" ><br><br>
                 <label><b>Confirm Password</b> <span class="err-msg"><%=(confirmPassErr != null ? confirmPassErr : "")%></span></label><br>

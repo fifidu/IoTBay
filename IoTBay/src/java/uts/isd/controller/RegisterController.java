@@ -45,7 +45,7 @@ public class RegisterController extends HttpServlet {
             session.setAttribute("passFormatErr", "Incorrect Password Format");
             request.getRequestDispatcher("register.jsp").include(request, response);
         } else if (!cusPass.equals(cusConfirmPass)) {
-            session.setAttribute("confirmPassErr", "Password and Confirm Password are not the same");
+            session.setAttribute("confirmPassErr", "Passwords are not the same");
             request.getRequestDispatcher("register.jsp").include(request, response);
         } else if (!validator.validateName(cusFName)) {
             session.setAttribute("nameFormatErr", "Incorrect Name Format");
