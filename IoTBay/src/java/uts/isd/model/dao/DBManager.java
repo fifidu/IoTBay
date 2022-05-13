@@ -202,7 +202,6 @@ public class DBManager {
         String fetch = "SELECT * FROM IOTUSER.customer WHERE cusEmailAddress = '" + emailAddress + "'";
         ResultSet rs = st.executeQuery(fetch);
 
-<<<<<<< Updated upstream
         while (rs.next()) {
             String cusEmailAddress = rs.getString("cusEmailAddress");
             if (cusEmailAddress.equals(emailAddress)) {
@@ -210,18 +209,7 @@ public class DBManager {
             }
         }
         return false;
-=======
-//    public Customer checkCustomer(String email) throws SQLException {
-//        /*
-//        checks if email exists in customer table
-//        */
-//    }
-    public void validateCustomer () throws SQLException {
-        /*
-        checks if email and password match
-        */
->>>>>>> Stashed changes
-    }
+}
     
     // Checks if email and password match
     public Customer findCustomer(String emailAddress, String password) throws SQLException {
@@ -272,24 +260,6 @@ public class DBManager {
         st.executeUpdate("UPDATE IOTUSER.customer SET cusEmailAddress = '" + cusEmailAddress + "', cusFName= '" + cusFName + "', cusLName = '" + cusLName + "', cusPass = '" + cusPass + "', cusContactNumber = '" + cusContactNumber + "' WHERE cusID" );
         return new Customer(customerID, cusFName, cusLName, cusEmailAddress, cusPass, cusContactNumber);
     }
-<<<<<<< Updated upstream
-
-=======
-    
-//    public Customer fetchCustomer (String email) throws SQLException {
-//         ResultSet rs = st.executeQuery("SELECT * FROM customer WHERE cusEmailAddress= '" + email + "'");
-//         while (rs.next()) {
-//             int customerID = rs.getInt("customerID");
-//             String cusEmailAddress = rs.getString("cusEmailAddress");
-//             String cusFName = rs.getString("cusFName");
-//             String cusLName = rs.getString("cusLName");
-//             String cusPass = rs.getString("cusPass");
-//             String cusContactNumber = rs.getString("cusContactNumber");
-//         }
-//         return new Customer(customerID, cusFName, cusLName, cusEmailAddress, cusPass, cusContactNumber); 
-//   }
-    
->>>>>>> Stashed changes
     /* Order Database */
     // Create New Order for Customer
     public Order createOrder(int customerID) throws SQLException {
