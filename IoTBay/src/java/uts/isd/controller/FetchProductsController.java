@@ -35,6 +35,6 @@ public class FetchProductsController extends HttpServlet {
             Logger.getLogger(FetchProductsController.class.getName()).log(Level.SEVERE, null, sqled);
             System.out.println("Fetch failed with error: " + sqled);
         }
-        
+        request.getRequestDispatcher("staffmain.jsp").include(request, response);
     }
 }
