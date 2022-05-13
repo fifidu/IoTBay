@@ -28,7 +28,7 @@
 
             <h2>Welcome, </h2><br>
             <p>Your email is </p><br>
-            <a class="main-link" href="main.jsp">Continue to Store</a>
+            <a class="main-link" href="FetchProductsController">Continue to Store</a>
         </div>
     </body>
 </html>

@@ -60,6 +60,7 @@
                         <th class="device-table-header">Product Cost</th>
                         <th class="device-table-header">Quantity Available</th>
                         <th class="device-table-header"></th>
+                        <th></th>
                     </tr>
                     <% ArrayList<Product> productList = (ArrayList<Product>)session.getAttribute("productList");
                        for (Product prod: productList) { %>
@@ -71,6 +72,7 @@
                            <td><%=prod.getProductDescription()%></td>
                            <td><%=prod.getProductCost()%></td>
                            <td><%=prod.getQuantityAvailable()%></td>
+                           <td></td>
                            <!--<td><a href="ViewCartController?cartID=
                            <%--<%=ord.getCartID()%> --%>
                            ">Edit</td>-->
