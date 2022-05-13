@@ -17,6 +17,6 @@ import uts.isd.model.dao.DBManager;
  *
  * @author fifidu
  */
-public class ProductController extends HttpServlet {
+public class CreateProductController extends HttpServlet {
     
 }
