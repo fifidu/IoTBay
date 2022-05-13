@@ -23,6 +23,7 @@ import uts.isd.model.dao.DBManager;
  */
 public class RegisterController extends HttpServlet {
 
+<<<<<<< Updated upstream
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -30,6 +31,52 @@ public class RegisterController extends HttpServlet {
         Validator validator = new Validator();
         validator.clear(session);
         Customer customer = null;
+=======
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+//    @Override
+//    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//                HttpSession session = request.getSession();
+//                DBManager manager = (DBManager) session.getAttribute("manager");
+//                Validator validate = new Validator();
+//                String cusFName = request.getParameter("cusFName"); 
+//                String cusLName = request.getParameter("cusLName");
+//                String cusEmailAddress = request.getParameter("cusEmailAddress");
+//                /* add all attribtues from register form
+//                
+//                */
+//                if(validate.validateEmail(cusEmailAddress)){
+//                    /* if true then go ahead
+//                    else return error of invalid format
+//                    */
+//                    else
+//                }
+//                if(validate.validateName(cusFName)){
+//                    else 
+//                }
+//                if(validate.validateName(cusLName)){
+//                    else 
+//                }
+//                if(validate.validatePassword(cusPass)){
+//                    else 
+//                }
+//                /*
+//                check if in customer database
+//                */
+//                try {
+//                    
+//                }
+//        
+//    }
+>>>>>>> Stashed changes
 
         String cusFName = request.getParameter("cusFName");
         String cusLName = request.getParameter("cusLName");
