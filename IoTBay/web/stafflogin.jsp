@@ -27,11 +27,11 @@
         <div class="page-content">
             <form action="welcome.jsp" method="post">
                 <h1 class="title">Login</h1>
-                <label><b>Email</b></label><br>
-                <input type="textß" id="email" name="email" required><br><br>
-                <label><b>Password</b></label><br>
-                <input type="password" id="password" name="password" required><br><br>
-                <input type="submit" value="Login">
+                <label><b>Email</b></label>
+                <input type="email" id="email" name="email" required />
+                <label><b>Password</b></label>
+                <input type="password" id="password" name="password" required />
+                <input type="submit" value="Login" />
             </form>
         <div class="second-content">
             <p>Don't have an account?</p><br>

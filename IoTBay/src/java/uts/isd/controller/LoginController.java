@@ -41,7 +41,7 @@ public class LoginController extends HttpServlet {
             try {
                 customer = manager.findCustomer(cusEmailAddress, cusPass);
                 if (!manager.checkCustomer(cusEmailAddress)) {
-                    session.setAttribute("unregisteredErr", "Email address is already used");
+                    session.setAttribute("unregisteredErr", "Email address is not registered");
                     request.getRequestDispatcher("login.jsp").include(request, response);
                 } else if (customer != null) {
                     session.setAttribute("customer", customer);

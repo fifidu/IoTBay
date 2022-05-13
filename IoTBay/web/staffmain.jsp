@@ -16,7 +16,7 @@
         <header>
             <div class="header-content">
                 <div class="header-start">
-                    <a class="header-button" href="main.jsp"><h3>IoTBay</h3></a>
+                    <a class="header-button" href="FetchProductsController"><h3>IoTBay</h3></a>
                 </div>
 
                 <div class="header-center">
@@ -48,7 +48,7 @@
                 <table class="device-table">
                     <caption><h3>Device Catalogue</h3></caption>
                     <tr>
-                        <th class="device-table-header">ProductID</th>
+                        <th class="device-table-header">Product ID</th>
                         <th class="device-table-header">Product Type</th>
                         <th class="device-table-header">Product Name</th>
                         <th class="device-table-header">Product Supplier</th>
@@ -68,10 +68,7 @@
                            <td><%=prod.getProductDescription()%></td>
                            <td><%=prod.getProductCost()%></td>
                            <td><%=prod.getQuantityAvailable()%></td>
-                           <td></td>
-                           <!--<td><a href="ViewCartController?cartID=
-                           <%--<%=ord.getCartID()%> --%>
-                           ">Edit</td>-->
+                           <td><a href="UpdateProductController?productID=<%=prod.getProductID()%>">View</a></td>
                        </tr>
                     <%}%>
                 </table>

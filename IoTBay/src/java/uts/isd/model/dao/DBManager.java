@@ -488,6 +488,22 @@ public class DBManager {
         return temp;
     }
 
+    public ArrayList<Product> fetchIndividualProduct(int productID) throws SQLException {
+        String fetch = "SELECT * FROM IOTUSER.product WHERE productID = " + productID;
+        ResultSet rs = st.executeQuery(fetch);
+        ArrayList<Product> temp = new ArrayList();
+
+        while (rs.next()) {
+            String productName = rs.getString(2);
+            String productType = rs.getString(3);
+            String productSupplier = rs.getString(4);
+            String productDescription = rs.getString(5);
+            double productCost = rs.getDouble(6);
+            int quantityAvailable = rs.getInt(7);
+            temp.add(new Product(productID, productName, productType, productSupplier, productDescription, productCost, quantityAvailable));
+        }
+        return temp;
+    }
     //Update product
     public void updateProduct(int productID, String productName, String productType, String productSupplier, String productDescription, double productCost, int quantityAvailable) throws SQLException {
         st.executeUpdate("UPDATE IOTUSER.product SET productName = '" + productName + "', productType = '" + productType + "', productSupplier = '" + productSupplier + "', productDescription = '" + productDescription + "', productCost = " + productCost + ", quantityAvailable = " + quantityAvailable + " WHERE productID = " + productID);

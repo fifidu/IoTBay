@@ -7,6 +7,7 @@ package uts.isd.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -14,36 +15,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import uts.isd.model.Customer;
-import uts.isd.model.Order;
+import uts.isd.model.Product;
 import uts.isd.model.dao.DBManager;
 
 /**
  *
  * @author chrisvuong
  */
-public class CreateOrderController extends HttpServlet {
+public class ShowProductsController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         DBManager manager = (DBManager) session.getAttribute("manager");
-        Customer customer = (Customer) session.getAttribute("customer");
-        int customerID = customer.getCustomerID();
 
         try {
-            if (manager.checkActiveOrders(customerID)) {
-                session.setAttribute("orderUpdate", "Order Creation Unsuccessful: Active Order Already Exists");
-            } else {
-                Order newOrder = manager.createOrder(customerID);
-                session.setAttribute("activeOrder", newOrder);
-                session.setAttribute("orderUpdate", "Order Created");
-            }           
-        } catch (SQLException ex) {
-            Logger.getLogger(CreateOrderController.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Exception is: " + ex);
+            ArrayList<Product> productList = manager.fetchProducts();
+            session.setAttribute("productList", productList);
         }
-
-        request.getRequestDispatcher("ViewOrdersController").include(request, response);
+        catch (SQLException sqled) {
+            //insert line to post error to website
+            Logger.getLogger(FetchProductsController.class.getName()).log(Level.SEVERE, null, sqled);
+            System.out.println("Fetch failed with error: " + sqled);
+        }
+        request.getRequestDispatcher("main.jsp").include(request, response);
     }
+
+
 }

@@ -1,21 +1,23 @@
 /*
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
 */
-/* 
-    Created on : 01/04/2022, 10:55:30 PM
-    Author     : chrisvuong
+/*
+    Created on : 13 May 2022, 23:52:00 pm
+    Author     : vuongchris
 */
 
 body {
     background-color: #202020;
 }
 
-.page-content {
-    padding-top: 100px; /* to ensure that the content is safely below the header */
-    margin: auto;
-    width: 400px; 
-    
+main {
+    position: relative;
+    top: 57px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 nav {
@@ -48,58 +50,54 @@ nav {
 }
 
 .content {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
-.main-link:link, .main-link:visited {
-    height: 100%;
-    padding: 10px;
-    background-color: #404040;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 8px;
-    display: inline-block;
-    
+.page-content {
+    padding-top: 100px; /* to ensure that the content is safely below the header */
+    margin: auto;
 }
 
-form {
+table {
     background-color: #303030;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
+    text-align: center;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .title {
     text-align: center;
-    padding-bottom: 10px;
+    padding: 10px;
 }
 
-input {
-    box-sizing: border-box;
-    margin-bottom: 10px;
-    width: 100%;
+tr {
+    width: 600px;
 }
 
-input[type=submit]  {
+td {
+    padding: 20px;
+    width: 100px;
+}
+
+.button {
+    display: flex;
+    width: 100px;
     font-size: 16px;
     padding: 10px;
     background-color: #404040;
-    display: block;
     justify-content: center;
     align-items: center;
     border-radius: 8px;
+    
 }
 
-input[type=text], input[type=password] {
+input[type=number] {
+    text-align: center;
     color: black;
 }
 
-.second-content {
-    padding: 10px;
-    text-align: center;
-}
 
-.err-msg {
-    color: red;
-}

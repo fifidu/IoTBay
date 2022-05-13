@@ -3,6 +3,7 @@
     Created on : 13/05/2022, 16:00:00 PM
     Author     : chrisvuong
 --%>
+<%@page import="uts.isd.model.Product"%>
 <%@page import="uts.isd.model.Customer"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="uts.isd.model.Order"%>
@@ -23,7 +24,7 @@
         <header>
             <div class="header-content">
                 <div class="header-start">
-                    <a class="header-button" href="main.jsp"><h3>IoTBay</h3></a>
+                    <a class="header-button" href="ShowProductsController"><h3>IoTBay</h3></a>
                 </div>
 
                 <div class="header-center">
@@ -36,7 +37,7 @@
                 %>
                 <div class="header-end">
                     <div class="user-info header-button">
-                        <a><i class="fa fa-user-circle"></i> Hello, <%=customer.getCusFName()%>></a>
+                        <a><i class="fa fa-user-circle"></i> Hello, <%=customer.getCusFName()%></a>
                         <div class="user-menu">
                             <a class="header-button" href="edituser.jsp">Edit Account</a>
                             <a class="header-button" href="ViewOrdersController">My Orders</a>
@@ -55,7 +56,6 @@
             </nav>
             <div class="page-content">
                 <h1 class="title">Orders</h1>
-                <a class="button" href="CreateOrderController?customerID=<%=1%>">Create Order</a>
                 <table class="center">
                     <tr>
                         <th>Product ID</th>
@@ -64,21 +64,19 @@
                         <th>Product Cost</th>
                         <th></th>
                     </tr>
-                    <% ArrayList<Order> orderList = (ArrayList<Order>)session.getAttribute("orderList");
-                       for (Order ord: orderList) { %>
+                    <% ArrayList<Product> activeProduct = (ArrayList<Product>)session.getAttribute("activeProduct");
+                       for (Product prod: activeProduct) { %>
                        <tr>
-                           <td><%=ord.getOrderID()%></td>
-                           <td><%=ord.getOrderDate()%></td>
-                           <td><%=ord.getOrderStatus()%></td>
-                           <td>$<%=ord.getTotalCost()%></td>
-                           <% if (ord.getOrderStatus().equals("Active")) {%>
-                           <td><a href="ViewCartController?cartID=<%=ord.getCartID()%>">Edit</td>
-                           <% } else {%>
-                           <td><a href="ViewCartController?cartID=<%=ord.getCartID()%>">View</td>
-                           <%}%>
+                           <td><%=prod.getProductID()%></td>
+                           <td><%=prod.getProductName()%></td>
+                           <td><%=prod.getProductDescription()%></td>
+                           <td>$<%=prod.getProductCost()%></td>
                        </tr>
                     <%}%>
                 </table>
+                <form action="AddItemToCartController" method="post">
+                    <input type="number" name="quantity" value="0">
+                </form>
             </div>
         </main>
     </body>
