@@ -61,7 +61,7 @@
                         <th>Total Cost</th>
                         <th></th>
                     </tr>
-                    <% ArrayList<Order> orderList = (ArrayList<Order>)request.getAttribute("orderList");
+                    <% ArrayList<Order> orderList = (ArrayList<Order>)session.getAttribute("orderList");
                        for (Order ord: orderList) { %>
                        <tr>
                            <td><%=ord.getOrderID()%></td>

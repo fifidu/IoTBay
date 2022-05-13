@@ -32,8 +32,8 @@ public class ViewCartController extends HttpServlet {
         try {
             ArrayList<CartLine> cartList = manager.fetchCartItems(cartID);
             double totalCost = manager.calculateTotalCost(cartID);
-            request.setAttribute("cartList", cartList); 
-            request.setAttribute("totalCost", totalCost);
+            session.setAttribute("cartList", cartList); 
+            session.setAttribute("totalCost", totalCost);
         } catch (SQLException ex) {
             Logger.getLogger(ViewCartController.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Exception is: " + ex);
