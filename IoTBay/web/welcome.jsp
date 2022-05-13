@@ -4,6 +4,7 @@
     Author     : fifidu
 --%>
 
+<%@page import="uts.isd.model.Customer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,18 +24,15 @@
             
             <div class="header-outline"></div>
         </header>
+        
+        <%
+        Customer customer = (Customer) session.getAttribute("customer");
+        %>
+        
         <div class="page-content">
             <h1>IoTBay</h1><br>
-
-            <jsp:useBean id="user" class="uts.isd.model.UserBean" scope="session"/>
-            <jsp:setProperty name="user" property="firstName" value="${param.firstName}"/>
-            <jsp:setProperty name="user" property="lastName" value="${param.lastName}"/>
-            <jsp:setProperty name="user" property="emailAddress" value="${param.emailAddress}"/>
-            <jsp:setProperty name="user" property="phoneNo" value="${param.phoneNo}"/>
-            <jsp:setProperty name="user" property="password" value="${param.password}"/>
-
-            <h2>Welcome, <jsp:getProperty name="user" property="firstName"/></h2><br>
-            <p>Your email is <jsp:getProperty name="user" property="emailAddress"/></p><br>
+            <h2>Welcome, <%=customer.getCusFName()%></h2><br>
+            <p>Your email is <%=customer.getCusEmailAddress()%></p><br>
             <a class="main-link" href="main.jsp">Continue to Store</a>
         </div>
     </body>

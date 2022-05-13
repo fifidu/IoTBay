@@ -93,3 +93,7 @@ input[type=email], input[type=password] {
     padding: 10px;
     text-align: center;
 }
+
+.err-msg {
+    color: red;
+}
