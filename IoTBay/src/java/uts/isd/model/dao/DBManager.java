@@ -504,12 +504,12 @@ public class DBManager {
     //Read/Find a product (customer or staff)
     //List all device records
     public boolean checkProduct(int productID) throws SQLException {
-        String fetch = "SELECT * FROM IOTUSER.product WHERE productID = '" + productID + "'";
+        String fetch = "SELECT * FROM IOTUSER.product";
         ResultSet rs = st.executeQuery(fetch);
 
         while (rs.next()) {
-            int existingProductID = rs.getInt("productID");
-            if (existingProductID == productID) {
+            int existingProductID = rs.getInt(1);
+            if (productID == existingProductID) {
                 return true;
             }
         }
@@ -568,6 +568,22 @@ public class DBManager {
             temp.add(new Product(productID, productName, productType, productSupplier, productDescription, productCost, quantityAvailable));
         }
         return temp;
+    }
+
+    public Product getIndividualProduct(int productID) throws SQLException {
+        String fetch = "SELECT * FROM IOTUSER.product WHERE productID = " + productID;
+        ResultSet rs = st.executeQuery(fetch);
+        while (rs.next()) {
+            String productName = rs.getString(2);
+            String productType = rs.getString(3);
+            String productSupplier = rs.getString(4);
+            String productDescription = rs.getString(5);
+            double productCost = rs.getDouble(6);
+            int quantityAvailable = rs.getInt(7);
+            Product individualProduct = new Product(productID, productName, productType, productSupplier, productDescription, productCost, quantityAvailable);
+            return individualProduct;
+        }
+        return null;
     }
     //Update product
     public void updateProduct(int productID, String productName, String productType, String productSupplier, String productDescription, double productCost, int quantityAvailable) throws SQLException {
