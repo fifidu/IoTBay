@@ -22,6 +22,12 @@
                     <a class="header-button" href="main.jsp"><h3>IoTBay</h3></a>
                 </div>
 
+<!--                <div class="header-center">
+                    <form id="searchForm" action="">
+                        <input id="search" type="text" name="search-query" placeholder="Search"/>
+                    </form>
+                </div>-->
+
                 <div class="header-end">
                     <div class="user-info header-button">
                         <a><i class="fa fa-user-circle"></i> Hello, <%--<jsp:getProperty name="user" property="firstName"/> --%></a>
@@ -46,25 +52,23 @@
             String prodCostFormatErr = (String) session.getAttribute("prodCostFormatErr");
             String prodQuantityFormatErr = (String) session.getAttribute("prodQuantityFormatErr");
             String existingProductErr = (String) session.getAttribute("existingProductErr");
-            String prodCreateSuccess = (String) session.getAttribute("prodCreateSuccess");
             %>
             <div class="page-content">
                 <form class="create-product-form" action="CreateProductController" method="post">
                     <caption><h3>Add a product to the catalogue</h3></caption>
-                    <p><span class="success-msg"><%=(prodCreateSuccess != null ? prodCreateSuccess : "")%></span></p><br>
-                    <p><span class="err-msg"><%=(existingProductErr != null ? existingProductErr : "")%></span></p><br>
+                    <p><span class="err-msg"><%=(existingProductErr != null ? existingProductErr : "")%></span></p>
                     <label><b>ProductID</b> <span class="err-msg"><%=(prodIDFormatErr != null ? prodIDFormatErr : "")%></span></label><br>
                     <input class="create-product-form-input" type="number" id="pid" name="prodID" ><br><br>
-                    <label><b>Product Name</b> </label><br>
+                    <label><b>Product Name</b> <span class="err-msg"></span></label><br>
                     <input class="create-product-form-input" type="text" id="pname" name="prodName" ><br><br>
-                    <label><b>Product Type</b></label><br>
+                    <label><b>Product Type</b> <span class="err-msg"></span></label><br>
                     <input class="create-product-form-input" type="text" id="ptype" name="prodType" ><br><br>
-                    <label><b>Product Supplier</b></label><br>
+                    <label><b>Product Supplier</b> <span class="err-msg"></span></label><br>
                     <input class="create-product-form-input" type="text" id="psupp" name="prodSupplier"><br><br>
-                    <label><b>Product Description</b></label><br>
+                    <label><b>Product Description</b> <span class="err-msg"></span></label><br>
                     <input class="create-product-form-input" type="text" id="pdesc" name="prodDescription" ><br><br>
                     <label><b>Product Cost</b> <span class="err-msg"><%=(prodCostFormatErr != null ? prodCostFormatErr : "")%></span></label><br>
-                    <input class="create-product-form-input" type="number" step="0.01" id="pcost" name="prodCost" ><br><br>
+                    <input class="create-product-form-input" type="number" step="0.01" id="pcost" name="prodCost" ><br>
                     <label><b>Quantity to be available</b> <span class="err-msg"><%=(prodQuantityFormatErr != null ? prodQuantityFormatErr : "")%></span></label><br>
                     <input class="create-product-form-input" type="number" id="pquant" name="quantAvailable" ><br><br>
                     <input type="submit" value="Create">

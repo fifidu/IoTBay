@@ -94,17 +94,17 @@ public class DBManager {
         while (rs.next()) {
             newQuantity = rs.getInt("quantity") + quantity;
         }
-
+        
         st.executeUpdate("UPDATE IOTUSER.cartline SET quantity = " + newQuantity + " WHERE cartID = " + cartID + " AND productID = " + productID);
         updateTotalCost(cartID);
     }
-
+    
     // Update Quantity
     public void updateOrderItemQuantity(int cartID, int productID, int quantity) throws SQLException {
         st.executeUpdate("UPDATE IOTUSER.cartline SET quantity = " + quantity + " WHERE cartID = " + cartID + " AND productID = " + productID);
         updateTotalCost(cartID);
     }
-
+    
     // Delete Item
     public void deleteOrderItem(int cartID, int productID) throws SQLException {
         st.executeUpdate("DELETE FROM IOTUSER.cartline WHERE cartID = " + cartID + " AND productID = " + productID);
@@ -120,7 +120,7 @@ public class DBManager {
     public void showCustomerCartItems(int cartID) throws SQLException {
         ArrayList<CartLine> cartList = fetchCartItems(cartID);
         for (CartLine cl: cartList) {
-            System.out.println(cl.getProductID() + ", " + cl.getProductName() + ", " + cl.getQuantity());
+            System.out.println(cl.getProductID() + ", " + cl.getProductName() + ", " + cl.getQuantity()); 
         }
     }
 
@@ -147,7 +147,7 @@ public class DBManager {
         while (rs.next()) {
             int returnedProductID = rs.getInt("productID");
             if (returnedProductID == productID) {
-                return true;
+                return true;    
             }
         }
         return false;
@@ -201,7 +201,7 @@ public class DBManager {
         }
         return false;
 }
-
+    
     // Checks if email and password match
     public Customer findCustomer(String emailAddress, String password) throws SQLException {
         String fetch = "SELECT * FROM IOTUSER.customer WHERE cusEmailAddress = '" + emailAddress + "'";
@@ -222,7 +222,7 @@ public class DBManager {
         return null;
     }
 
-   // Finds the next available customerID
+   // Finds the next available customerID 
     public int nextAvailableCustomerID() throws SQLException {
         int nextID = 0;
         String fetch = "SELECT * FROM IOTUSER.customer";
@@ -241,11 +241,11 @@ public class DBManager {
 
         return new Customer(customerID, cusFName, cusLName, cusEmailAddress, cusPass, cusContactNumber);
     }
-
+    
     public void deleteCustomer (int customerID) throws SQLException {
         st.executeUpdate("DELETE FROM customer WHERE customerID = " + customerID);
     }
-
+    
     public Customer updateCustomer (int customerID, String cusFName, String cusLName, String cusEmailAddress, String cusPass, String cusContactNumber) throws SQLException{
         st.executeUpdate("UPDATE IOTUSER.customer SET cusEmailAddress = '" + cusEmailAddress + "', cusFName= '" + cusFName + "', cusLName = '" + cusLName + "', cusPass = '" + cusPass + "', cusContactNumber = '" + cusContactNumber + "' WHERE customerID = " + customerID);
         return new Customer(customerID, cusFName, cusLName, cusEmailAddress, cusPass, cusContactNumber);
@@ -259,7 +259,7 @@ public class DBManager {
         String orderStatus = "Active";
         LocalDate orderDate = LocalDate.now();
         double totalCost = 0.00;
-
+    
         saveActiveOrder(customerID);
         createCart(cartID, customerID);
 
@@ -268,7 +268,7 @@ public class DBManager {
         return new Order(orderID, cartID, orderDate, orderStatus, totalCost);
     }
 
-   // Finds the next available orderID
+   // Finds the next available orderID 
     public int nextAvailableOrderID() throws SQLException {
         int nextID = 0;
         String fetch = "SELECT * FROM IOTUSER.orders";
@@ -349,7 +349,7 @@ public class DBManager {
         st.executeUpdate("UPDATE IOTUSER.orders SET orderStatus = '" + orderStatus + "' WHERE orderID = " + orderID);
     }
 
-    public void cancelOrder(int orderID) throws SQLException {
+    public void cancelOrder(int orderID) throws SQLException {       
         String orderStatus = "Cancelled";
         updateOrderStatus(orderID, orderStatus);
     }
@@ -386,7 +386,7 @@ public class DBManager {
             String orderStatus = rs.getString("orderStatus");
             double totalCost = rs.getDouble("totalCost");
             temp.add(new Order(orderID, cartID, javaOrderDate, orderStatus, totalCost));
-        }
+        }  
         return temp;
     }
     // Show All Orders
@@ -394,7 +394,7 @@ public class DBManager {
         ArrayList<Order> orderList = fetchOrders();
         for (Order ord: orderList) {
             System.out.println(ord.getOrderID() + ", " + ord.getCartID() + ", " + ord.getOrderDate() + ", " + ord.getOrderStatus() + ", " + ord.getTotalCost());
-        }
+        }   
     }
 
     public ArrayList<Order> fetchOrders() throws SQLException {
@@ -409,7 +409,7 @@ public class DBManager {
             String orderStatus = rs.getString("orderStatus");
             double totalCost = rs.getDouble("totalCost");
             temp.add(new Order(orderID, cartID, javaOrderDate, orderStatus, totalCost));
-        }
+        }  
         return temp;
     }
 
@@ -515,92 +515,26 @@ public class DBManager {
     }
     /* Payment Database */
     // Create details (links to orderID)
-    public void createPayment(int paymentID, int orderID, int customerID, String cardNumber, String cardName, String cardExpiry, int cvv, String paymentDate) throws SQLException {
-        st.executeUpdate("INSERT INTO IOTUSER.payment VALUES (" + paymentID + ", " + orderID + ", " + customerID + ", '" + cardNumber + "', '" + cardName + "', '" + cardExpiry + "', '" + cvv + "', '" + paymentDate + "')");
+    public void createPayment(int paymentID, int orderID, int cardNumber, String cardName, LocalDateTime cardExpiry, int cvv) throws SQLException {
+    st.executeUpdate("INSERT INTO IOTUSER.payment VALUES (" + paymentID + ", " + orderID + ", " + cardNumber + ", '" + cardName + "', " + cardExpiry + ", " + cvv);
     }
 
     // View saved order payment details
-    public ArrayList<Payment> viewPaymentDetails(int orderID) throws SQLException {
-        String fetch = "SELECT * from IOTUSER.payment WHERE orderID = " + orderID;
-        ResultSet rs = st.executeQuery(fetch);
-        ArrayList<Payment> temp = new ArrayList();
-
-        while (rs.next()) {
-            int returnedOrderID = rs.getInt(2);
-                if (returnedOrderID==orderID) {
-                    int paymentID = rs.getInt(1);
-                    int customerID = rs.getInt(3);
-                    String cardNumber = rs.getString(4);
-                    String cardName = rs.getString(5);
-                    String cardExpiry = rs.getString(6);
-                    int cvv = rs.getInt(7);
-                    String paymentDate = rs.getString(8);
-                    temp.add(new Payment(paymentID, returnedOrderID, customerID, cardNumber, cardName, cardExpiry, cvv, paymentDate));
-            }
-        }
-        return temp;
-    }
 
     // View order history list
-    public ArrayList<Payment> viewOrderHistory(int customerID) throws SQLException {
-        String fetch = "SELECT * from IOTUSER.payment WHERE customerID = " + customerID;
-        ResultSet rs = st.executeQuery(fetch);
-        ArrayList<Payment> temp = new ArrayList();
-
-        while (rs.next()) {
-            int returnedCustomerID = rs.getInt(3);
-            if (returnedCustomerID==customerID) {
-                int paymentID = rs.getInt(1);
-                int orderID = rs.getInt(2);
-                String cardNumber = rs.getString(4);
-                String cardName = rs.getString(5);
-                String cardExpiry = rs.getString(6);
-                int cvv = rs.getInt(7);
-                String paymentDate = rs.getString(8);
-                temp.add(new Payment(paymentID,orderID,returnedCustomerID,cardNumber,cardName,cardExpiry,cvv,paymentDate));
-            }
-        }
-        return temp;
-    }
 
     // Search payment records based on paymentID and date
-    public ArrayList<Payment> searchPaymentRecords(int paymentID, String paymentDate) throws SQLException {
-        String fetch = "SELECT * from IOTUSER.payment WHERE paymentID = " + paymentID + " OR paymentDate = '" + paymentDate + "'";
-        ResultSet rs = st.executeQuery(fetch);
-        ArrayList<Payment> temp = new ArrayList();
-
-        while (rs.next()) {
-            int returnedPaymentID = rs.getInt(1);
-            String returnedPaymentDate = rs.getString(8);
-            if (returnedPaymentID==paymentID && returnedPaymentDate.equals(paymentDate)) {
-                int orderID = rs.getInt(2);
-                int customerID = rs.getInt(3);
-                String cardNumber = rs.getString(4);
-                String cardName = rs.getString(5);
-                String cardExpiry = rs.getString(6);
-                int cvv = rs.getInt(7);
-                temp.add(new Payment(returnedPaymentID,orderID,customerID,cardNumber,cardName,cardExpiry,cvv,returnedPaymentDate));
-            }
-        }
-        return temp;
-    }
 
     // Update details
-    public void updatePayment(int paymentID, String cardNumber, String cardName, String cardExpiry, int cvv, String paymentDate) throws SQLException {
-        st.executeUpdate("UPDATE IOTUSER.payment WHERE paymentID = " + paymentID + " SET cardnumber = '" + cardNumber + "', cardname = '" + cardName + "', cardexpiry = '" + cardExpiry + "', cardcvv = '" + cvv + "', '" + paymentDate + "'");
-    }
 
     // Delete details
-    public void deletePayment(int paymentID) throws SQLException {
-        st.executeUpdate("DELETE FROM IOTUSER.payment WHERE paymentID = " + paymentID);
-    }
 
 /* Product Database */
 /* Shipping Database */
 /* Staff Database */
-
+    
      public boolean checkStaff(String emailAddress) throws SQLException {
-        String fetch = "SELECT * FROM IOTUSER.staff WHERE staffEmailAddress = '" + emailAddress + "'";
+        String fetch = "SELECT * FROM IOTUSER.staff WHERE EmailAddress = '" + emailAddress + "'";
         ResultSet rs = st.executeQuery(fetch);
 
         while (rs.next()) {
@@ -611,7 +545,7 @@ public class DBManager {
         }
         return false;
 }
-
+    
     // Checks if email and password match
     public Staff findStaff(String emailAddress, String password) throws SQLException {
         String fetch = "SELECT * FROM IOTUSER.staff WHERE staffEmailAddress = '" + emailAddress + "'";
@@ -631,7 +565,7 @@ public class DBManager {
         }
         return null;
     }
-
+    
     public Staff updateStaff (int staffID, String staffFName, String staffLName, String staffEmailAddress, String staffPass, String staffContactNumber) throws SQLException{
         st.executeUpdate("UPDATE IOTUSER.staff SET staffFName= '" + staffFName + "', staffLName = '" + staffLName + "', staffPass = '" + staffPass + "', staffContactNumber = '" + staffContactNumber + "' WHERE staffID = " + staffID );
         return new Staff(staffID, staffFName, staffLName, staffEmailAddress, staffPass, staffContactNumber);
@@ -647,12 +581,12 @@ public class DBManager {
     //Read/Find a product (customer or staff)
     //List all device records
     public boolean checkProduct(int productID) throws SQLException {
-        String fetch = "SELECT * FROM IOTUSER.product";
+        String fetch = "SELECT * FROM IOTUSER.product WHERE productID = '" + productID + "'";
         ResultSet rs = st.executeQuery(fetch);
 
         while (rs.next()) {
-            int existingProductID = rs.getInt(1);
-            if (productID == existingProductID) {
+            int existingProductID = rs.getInt("productID");
+            if (existingProductID == productID) {
                 return true;
             }
         }
@@ -712,21 +646,6 @@ public class DBManager {
         return null;
     }
 
-    public Product getIndividualProduct(int productID) throws SQLException {
-        String fetch = "SELECT * FROM IOTUSER.product WHERE productID = " + productID;
-        ResultSet rs = st.executeQuery(fetch);
-        while (rs.next()) {
-            String productName = rs.getString(2);
-            String productType = rs.getString(3);
-            String productSupplier = rs.getString(4);
-            String productDescription = rs.getString(5);
-            double productCost = rs.getDouble(6);
-            int quantityAvailable = rs.getInt(7);
-            Product individualProduct = new Product(productID, productName, productType, productSupplier, productDescription, productCost, quantityAvailable);
-            return individualProduct;
-        }
-        return null;
-    }
     //Update product
     public void updateProduct(int productID, String productName, String productType, String productSupplier, String productDescription, double productCost, int quantityAvailable) throws SQLException {
         st.executeUpdate("UPDATE IOTUSER.product SET productName = '" + productName + "', productType = '" + productType + "', productSupplier = '" + productSupplier + "', productDescription = '" + productDescription + "', productCost = " + productCost + ", quantityAvailable = " + quantityAvailable + " WHERE productID = " + productID);
@@ -742,7 +661,7 @@ public class DBManager {
         }
     }
 
-    // Decrease product quantity available
+    // Decrease product quantity available 
     public void decreaseProductQuantity(int productID, int quantity) throws SQLException {
         String fetch = "SELECT * FROM IOTUSER.product WHERE productID = " + productID;
         ResultSet rs = st.executeQuery(fetch);

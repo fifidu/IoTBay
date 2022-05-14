@@ -8,27 +8,27 @@ package uts.isd.model;
  *
  * @author chrisvuong
  */
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Payment {
 
     private int paymentID;
     private int orderID;
-    private int customerID;
-    private String cardNumber;
+    private int cardNumber;
     private String cardName;
-    private String cardExpiry;
+    private String cardExpiryString;
+    DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    LocalDateTime cardExpiry = LocalDateTime.parse(cardExpiryString, formattedDate);
     private int cvv;
-    private String paymentDate;
 
-    public Payment(int paymentID, int orderID, int customerID, String cardNumber, String cardName, String cardExpiry, int cvv, String paymentDate) {
+    public Payment(int paymentID, int orderID, int cardNumber, String cardName, LocalDateTime cardExpiry, int cvv) {
         this.paymentID = paymentID;
         this.orderID = orderID;
-        this.customerID = customerID;
         this.cardNumber = cardNumber;
         this.cardName = cardName;
         this.cardExpiry = cardExpiry;
         this.cvv = cvv;
-        this.paymentDate = paymentDate;
     }
 
     public int getPaymentID() {
@@ -39,11 +39,7 @@ public class Payment {
         return this.orderID;
     }
 
-    public int getCustomerID() {
-        return this.customerID;
-    }
-
-    public String getCardNumber() {
+    public int getCardNumber() {
         return this.cardNumber;
     }
 
@@ -51,16 +47,12 @@ public class Payment {
         return this.cardName;
     }
 
-    public String getCardExpiry() {
-        return this.cardExpiry;
-    }
-
     public int getCvv() {
         return this.cvv;
     }
 
-    public String getPaymentDate() {
-        return this.paymentDate;
+    public LocalDateTime getCardExpiry() {
+        return this.cardExpiry;
     }
 
     public void setPaymentID(int paymentID) {
@@ -71,11 +63,7 @@ public class Payment {
         this.orderID = orderID;
     }
 
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
-    }
-
-    public void setCardNumber(String cardNumber) {
+    public void setCardNumber(int cardNumber) {
         this.cardNumber = cardNumber;
     }
 
@@ -83,15 +71,11 @@ public class Payment {
         this.cardName = cardName;
     }
 
-    public void setCardExpiry(String cardExpiry) {
+    public void setCardExpiry(LocalDateTime cardExpiry) {
         this.cardExpiry = cardExpiry;
     }
 
     public void setCvv(int cvv) {
         this.cvv = cvv;
-    }
-
-    public void setPaymentDate(String paymentDate) {
-        this.paymentDate = paymentDate;
     }
 }

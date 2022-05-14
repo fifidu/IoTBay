@@ -53,13 +53,10 @@ public class CreateProductController extends HttpServlet {
                 int intQuantAvailable = Integer.parseInt(quantAvailable);
                 if (manager.checkProduct(intProdID)) {
                     session.setAttribute("existingProductErr", "A product with this ID already exists");
-                    request.getRequestDispatcher("staffcreateproduct.jsp").include(request, response);
                 }
                 else {
                     manager.createProduct(intProdID, prodName, prodType, prodSupplier, prodDescription, doubleProdCost, intQuantAvailable);
-                    validator.clearProduct(session);
-                    session.setAttribute("prodCreateSuccess", "New product added to catalogue");
-                    request.getRequestDispatcher("staffcreateproduct.jsp").include(request, response);
+                    request.getRequestDispatcher("FetchProductsController").include(request, response);
                 }
             }
             catch (SQLException sqled) {
@@ -67,5 +64,6 @@ public class CreateProductController extends HttpServlet {
                 System.out.println("Product creation failed with error: " + sqled);
             }
         }
+//        request.getRequestDispatcher("staffcreateproduct.jsp").include(request, response);
     }
 }
