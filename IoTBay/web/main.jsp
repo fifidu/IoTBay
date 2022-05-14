@@ -25,9 +25,9 @@
                         <input id="search" type="text" name="search-query" placeholder="Search"/>
                     </form>
                 </div>
-                <%--<%
+                <%
                 Customer customer = (Customer) session.getAttribute("customer");
-                %>--%>
+                %>
                 <div class="header-end">
                     <div class="user-info header-button">
                         <a><i class="fa fa-user-circle"></i> Hello, <%--<%=customer.getCusFName()%>--%></a>
