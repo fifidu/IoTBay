@@ -75,12 +75,16 @@ public class Validator implements Serializable {
             Double.parseDouble(enteredCost);
             return true;
         }
-        catch (NumberFormatException ex) {
+        catch (NumberFormatException | NullPointerException ex) {
             return false;
         }
     }
 
     public void clearProduct(HttpSession session) {
-        
+        session.setAttribute("prodIDFormatErr", "");
+        session.setAttribute("prodCostFormatErr", "");
+        session.setAttribute("prodQuantityFormatErr", "");
+        session.setAttribute("existingProductErr", "");
+        session.setAttribute("prodEditSuccess", "");
     }
 }

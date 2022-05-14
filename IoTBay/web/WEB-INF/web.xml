@@ -45,6 +45,18 @@
         <servlet-class>uts.isd.controller.FindProductController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>CreateProductController</servlet-name>
+        <servlet-class>uts.isd.controller.CreateProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProductController</servlet-name>
+        <servlet-class>uts.isd.controller.UpdateProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditProductController</servlet-name>
+        <servlet-class>uts.isd.controller.EditProductController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>StaffLoginController</servlet-name>
         <servlet-class>uts.isd.controller.StaffLoginController</servlet-class>
     </servlet>
@@ -91,6 +103,18 @@
     <servlet-mapping>
         <servlet-name>FindProductController</servlet-name>
         <url-pattern>/FindProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateProductController</servlet-name>
+        <url-pattern>/CreateProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProductController</servlet-name>
+        <url-pattern>/UpdateProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProductController</servlet-name>
+        <url-pattern>/EditProductController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>StaffLoginController</servlet-name>

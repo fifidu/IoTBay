@@ -613,7 +613,13 @@ public class TestDB {
                     break;
                 case "d":
                     testDeleteProduct();
-                    break;                      
+                    break;
+                case "ch":
+                    testCheckProduct();
+                    break;
+                case "g":
+                    testGetIndividualProduct();
+                    break;                   
                 default:
                     System.out.println("Unknown Command");
                     break;
@@ -727,6 +733,36 @@ public class TestDB {
             System.out.println("Product deleted!");
         }
 
+        catch (SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    //Testing checkProduct()
+    private void testCheckProduct() throws SQLException {
+        System.out.print("ProductID: ");
+        int enteredProductID = Integer.parseInt(in.nextLine());
+        try {
+            if (db.checkProduct(enteredProductID)) {
+                System.out.println("This product already exists");
+            }
+            else {
+                System.out.println("This product does not yet exist");
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    //Testing getIndividualProduct()
+    private void testGetIndividualProduct() throws SQLException {
+        System.out.print("ProductID: ");
+        int enteredProductID = Integer.parseInt(in.nextLine());
+        try {
+            Product returnedProduct = db.getIndividualProduct(enteredProductID);
+            System.out.println(returnedProduct.getProductName());
+        }
         catch (SQLException ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         }
