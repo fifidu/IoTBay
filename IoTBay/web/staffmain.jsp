@@ -1,3 +1,4 @@
+<%@page import="uts.isd.model.Staff"%>
 <!DOCTYPE html>
 <%@page import="java.util.ArrayList"%>
 <%@page import="uts.isd.model.Product"%>
@@ -9,7 +10,7 @@
         <link href="./css/main.css" rel="stylesheet" type="text/css" >
         <link href="./css/header.css" rel="stylesheet" type="text/css" >
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <title>Store - IoTBay</title>
+        <title>Staff Home - IoTBay</title>
     </head>
 
     <body>
@@ -24,10 +25,12 @@
                         <input id="search" type="text" name="search-query" placeholder="Search"/>
                     </form>
                 </div>
-
+                <%
+                Staff staff = (Staff) session.getAttribute("staff");
+                %>
                 <div class="header-end">
                     <div class="user-info header-button">
-                        <a><i class="fa fa-user-circle"></i> Hello, </a>
+                        <a><i class="fa fa-user-circle"></i> Hello, <%=staff.getStaffFName()%></a>
                         <div class="user-menu">
                             <a class="header-button" href="editstaff.jsp">Edit Account</a>
                             <a class="header-button" href="logout.jsp">Logout</a>
