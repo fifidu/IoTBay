@@ -725,11 +725,11 @@ public class TestDB {
 
     //Testing deleteProduct()
     private void testDeleteProduct() throws SQLException {
-        System.out.print("Name of product to delete: ");
-        String enteredProductName = in.nextLine();
+        System.out.print("ID of product to delete: ");
+        int enteredProductID = Integer.parseInt(in.nextLine());
 
         try {
-            db.deleteProduct(enteredProductName);
+            db.deleteProduct(enteredProductID);
             System.out.println("Product deleted!");
         }
 

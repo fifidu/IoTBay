@@ -48,6 +48,10 @@
                 <a class="nav-item" href="staffcreateproduct.jsp">Add a new product</a>
             </nav>
             <div class="content">
+                <!--"Successfully deleted product from catalogue" message-->
+                <% String prodDelSuccess = (String) session.getAttribute("prodDelSuccess");%>
+                <span class="success-msg"><%=(prodDelSuccess != null ? prodDelSuccess : "")%></span>
+                
                 <table class="device-table">
                     <caption><h3>Device Catalogue</h3></caption>
                     <tr>
@@ -71,6 +75,7 @@
                            <td><%=prod.getProductCost()%></td>
                            <td><%=prod.getQuantityAvailable()%></td>
                            <td><a href="EditProductController?productID=<%=prod.getProductID()%>">Edit</a></td>
+                           <td><a href="DeleteProductController?productID=<%=prod.getProductID()%>">Delete</a></td>
                        </tr>
                     <%}%>
                 </table>

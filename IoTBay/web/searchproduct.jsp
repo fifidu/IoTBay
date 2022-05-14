@@ -17,7 +17,7 @@
         <header>
             <div class="header-content">
                 <div class="header-start">
-                    <a class="header-button" href="ShowProductsController"><h3>IoTBay</h3></a>
+                    <a class="header-button" href="FetchProductsController"><h3>IoTBay</h3></a>
                 </div>
 
                 <div class="header-center">
@@ -33,7 +33,6 @@
                         <a><i class="fa fa-user-circle"></i> Hello, <%=customer.getCusFName()%></a>
                         <div class="user-menu">
                             <a class="header-button" href="edituser.jsp">Edit Account</a>
-                            <a class="header-button" href="ViewOrdersController">My Orders</a>
                             <a class="header-button" href="logout.jsp">Logout</a>
                         </div>
                     </div>
@@ -45,7 +44,7 @@
 
         <main>
             <nav>
-                <a class="nav-item" href="ShowProductsController">All Products</a>
+                <a class="nav-item" href="ShowProductsController">All products</a>
             </nav>
             <div class="content">
                 <table class="device-table">
@@ -58,7 +57,6 @@
                         <th class="device-table-header">Product Description</th>
                         <th class="device-table-header">Product Cost</th>
                         <th class="device-table-header">Quantity Available</th>
-                        <th class="device-table-header"></th>
                         <th></th>
                     </tr>
                     <% ArrayList<Product> productList = (ArrayList<Product>)session.getAttribute("productList");

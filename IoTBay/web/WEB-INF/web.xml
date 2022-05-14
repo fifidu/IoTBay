@@ -42,7 +42,7 @@
     </servlet>
     <servlet>
         <servlet-name>FindProductController</servlet-name>
-        <servlet-class>uts.isd.controller.FindProductController</servlet-class>
+        <servlet-class>uts.isd.controller.SearchProductController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CreateProductController</servlet-name>
@@ -59,6 +59,14 @@
     <servlet>
         <servlet-name>StaffLoginController</servlet-name>
         <servlet-class>uts.isd.controller.StaffLoginController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchProductController</servlet-name>
+        <servlet-class>uts.isd.controller.SearchProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteProductController</servlet-name>
+        <servlet-class>uts.isd.controller.DeleteProductController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ConnServlet</servlet-name>
@@ -119,6 +127,14 @@
     <servlet-mapping>
         <servlet-name>StaffLoginController</servlet-name>
         <url-pattern>/StaffLoginController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchProductController</servlet-name>
+        <url-pattern>/SearchProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteProductController</servlet-name>
+        <url-pattern>/DeleteProductController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

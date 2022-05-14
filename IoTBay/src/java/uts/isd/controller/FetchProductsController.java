@@ -31,7 +31,6 @@ public class FetchProductsController extends HttpServlet {
             session.setAttribute("productList", productList);
         }
         catch (SQLException sqled) {
-            //insert line to post error to website
             Logger.getLogger(FetchProductsController.class.getName()).log(Level.SEVERE, null, sqled);
             System.out.println("Fetch failed with error: " + sqled);
         }

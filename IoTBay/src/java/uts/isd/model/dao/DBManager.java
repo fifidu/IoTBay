@@ -715,8 +715,8 @@ public class DBManager {
     }
 
     //Delete product
-    public void deleteProduct(String productName) throws SQLException {
-        st.executeUpdate("DELETE FROM IOTUSER.product WHERE productName = '" + productName + "'");
+    public void deleteProduct(int productID) throws SQLException {
+        st.executeUpdate("DELETE FROM IOTUSER.product WHERE productID = " + productID);
     }
 
 }
