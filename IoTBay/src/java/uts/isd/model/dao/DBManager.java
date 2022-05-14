@@ -580,9 +580,10 @@ public class DBManager {
                 String cardExpiry = rs.getString(6);
                 int cvv = rs.getInt(7);
                 temp.add(new Payment(returnedPaymentID,orderID,customerID,cardNumber,cardName,cardExpiry,cvv,returnedPaymentDate));
+                return temp;
             }
         }
-        return temp;
+        return null;
     }
 
     // Update details

@@ -17,6 +17,9 @@ public class Validator implements Serializable {
     private String namePattern = "[A-Z][a-z]*";       
     private String passwordPattern = "[a-z0-9]{4,}"; 
     private String contactNumberPattern = "[0-9]{10,}";
+    private String cardNumberPattern = "[0-9]{16,}";
+    private String paymentDatePattern = "202+[0-9]{1}+-+[0-1]{1}+[0-9]{1}+-+[0-3]{1}+[0-9]{1}";
+    private String cvvPattern = "[0-9]{4}";
 
     public Validator(){}
 
@@ -89,5 +92,33 @@ public class Validator implements Serializable {
     }
 
     // Validations for adding item to order
+
+
+    // Validations for payment related stuff
+    public boolean validateCardNumber(String enteredCardNo) {
+        return validate(cardNumberPattern,enteredCardNo);
+    }
+
+    public boolean validatePaymentDatePattern(String enteredDate) {
+        return validate(paymentDatePattern,enteredDate);
+    }
+
+    public boolean validateCvv(String enteredCvv) {
+        return validate(cardNumberPattern,enteredCvv);
+    }
+
+    public void clearPayment(HttpSession session) {
+        session.setAttribute("payIDFormatErr", "");
+        session.setAttribute("ordIDFormatErr", "");
+        session.setAttribute("cusIDFormatErr", "");
+        session.setAttribute("cardNoFormatErr", "");
+        session.setAttribute("cardNameFormatErr", "");
+        session.setAttribute("cardExpFormatErr", "");
+        session.setAttribute("cvvFormatErr", "");
+        session.setAttribute("payDateFormatErr", "");
+        session.setAttribute("existingPaymentErr", "");
+        session.setAttribute("paymentDetailsCreated", "");
+        session.setAttribute("paymentDelSuccess", "");
+    }
 
 }

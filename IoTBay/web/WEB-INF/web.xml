@@ -96,6 +96,26 @@
         <servlet-name>ViewProductController</servlet-name>
         <servlet-class>uts.isd.controller.ViewProductController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreatePaymentController</servlet-name>
+        <servlet-class>uts.isd.controller.CreatePaymentController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewPaymentDetails</servlet-name>
+        <servlet-class>uts.isd.controller.ViewPaymentController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeletePaymentController</servlet-name>
+        <servlet-class>uts.isd.controller.DeletePaymentController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdatePaymentController</servlet-name>
+        <servlet-class>uts.isd.controller.UpdatePaymentController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewPaymentHistoryController</servlet-name>
+        <servlet-class>uts.isd.controller.ViewPaymentHistoryController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddToOrderController</servlet-name>
         <url-pattern>/AddToOrderController</url-pattern>
@@ -191,6 +211,26 @@
     <servlet-mapping>
         <servlet-name>ViewProductController</servlet-name>
         <url-pattern>/ViewProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreatePaymentController</servlet-name>
+        <url-pattern>/CreatePaymentController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewPaymentDetails</servlet-name>
+        <url-pattern>/ViewPaymentDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletePaymentController</servlet-name>
+        <url-pattern>/DeletePaymentController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePaymentController</servlet-name>
+        <url-pattern>/UpdatePaymentController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewPaymentHistoryController</servlet-name>
+        <url-pattern>/ViewPaymentHistoryController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
