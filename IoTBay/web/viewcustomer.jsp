@@ -13,7 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="./css/main.css" rel="stylesheet" type="text/css" >
+        <link href="./css/viewcustomer.css" rel="stylesheet" type="text/css" >
         <link href="./css/header.css" rel="stylesheet" type="text/css" >
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>View Customer Details - IoTBay</title>
@@ -46,10 +46,10 @@
 
         <main>
             <div class="content">
-                <h4>First Name: </h4> <p><%=customer.getCusFName()%> </p>
-                <h4>Last Name: </h4> <p><%=customer.getCusLName()%> </p>
-                <h4>Email Address: </h4> <p><%=customer.getCusEmailAddress()%></p>
-                <h4>Phone Number: </h4> <p><%=customer.getCusContactNumber()%></p>
+                <h4>First Name: </h4><p><%=customer.getCusFName()%></p>
+                <h4>Last Name: </h4><p><%=customer.getCusLName()%></p>
+                <h4>Email Address: </h4><p><%=customer.getCusEmailAddress()%></p>
+                <h4>Phone Number: </h4><p><%=customer.getCusContactNumber()%></p>
         </main>
     </body>
 
