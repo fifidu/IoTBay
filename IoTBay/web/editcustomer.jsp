@@ -1,5 +1,5 @@
 <%-- 
-    Document   : edituser
+    Document   : editcustomer
     Created on : 14 May 2022, 12:53:07 am
     Author     : Tammihn Ha
 --%>
