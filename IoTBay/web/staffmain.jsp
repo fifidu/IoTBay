@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="header-center">
-                    <form id="searchForm" action="">
+                    <form id="searchForm" action="FindProductController" method="get">
                         <input id="search" type="text" name="search-query" placeholder="Search"/>
                     </form>
                 </div>
@@ -29,7 +29,7 @@
                     <div class="user-info header-button">
                         <a><i class="fa fa-user-circle"></i> Hello, </a>
                         <div class="user-menu">
-                            <a class="header-button" href="edituser.jsp">Edit Account</a>
+                            <a class="header-button" href="editstaff.jsp">Edit Account</a>
                             <a class="header-button" href="logout.jsp">Logout</a>
                         </div>
                     </div>
@@ -41,21 +41,20 @@
 
         <main>
             <nav>
-                <a class="nav-item">See all products</a>
-                <a class="nav-item">Add a new product</a>
+                <a class="nav-item" href="FetchProductsController">See all products</a>
+                <a class="nav-item" href="staffcreateproduct.jsp">Add a new product</a>
             </nav>
             <div class="content">
                 <table class="device-table">
                     <caption><h3>Device Catalogue</h3></caption>
                     <tr>
                         <th class="device-table-header">Product ID</th>
-                        <th class="device-table-header">Product Type</th>
                         <th class="device-table-header">Product Name</th>
+                        <th class="device-table-header">Product Type</th>
                         <th class="device-table-header">Product Supplier</th>
                         <th class="device-table-header">Product Description</th>
                         <th class="device-table-header">Product Cost</th>
                         <th class="device-table-header">Quantity Available</th>
-                        <th class="device-table-header"></th>
                         <th></th>
                     </tr>
                     <% ArrayList<Product> productList = (ArrayList<Product>)session.getAttribute("productList");

@@ -198,18 +198,69 @@ public class DBManager {
     }
 
     /* Customer Database */
-    public void addCustomer(int customerID, String cusEmailAddress, String cusPass ) throws SQLException {
-        st.executeUpdate("INSERT INTO customer (customerID, cusEmailAddress, cusPass) VALUES (" + customerID + ", " + cusEmailAddress + ", " + cusPass + ")");
+// Checks if email exists in customer table
+    public boolean checkCustomer(String emailAddress) throws SQLException {
+        String fetch = "SELECT * FROM IOTUSER.customer WHERE cusEmailAddress = '" + emailAddress + "'";
+        ResultSet rs = st.executeQuery(fetch);
+
+        while (rs.next()) {
+            String cusEmailAddress = rs.getString("cusEmailAddress");
+            if (cusEmailAddress.equals(emailAddress)) {
+            return true;
+            }
+        }
+        return false;
+}
+    
+    // Checks if email and password match
+    public Customer findCustomer(String emailAddress, String password) throws SQLException {
+        String fetch = "SELECT * FROM IOTUSER.customer WHERE cusEmailAddress = '" + emailAddress + "'";
+        ResultSet rs = st.executeQuery(fetch);
+
+        while (rs.next()) {
+            String cusEmailAddress = rs.getString("cusEmailAddress");
+            String cusPass = rs.getString("cusPass");
+
+            if (cusEmailAddress.equals(emailAddress) && cusPass.equals(password)) {
+                int customerID = rs.getInt("customerID");
+                String cusFName = rs.getString("cusFName");
+                String cusLName = rs.getString("cusLName");
+                String cusContactNumber = rs.getString("cusContactNumber");
+                return new Customer(customerID, cusFName, cusLName, cusEmailAddress, cusPass, cusContactNumber);
+            }
+        }
+        return null;
+    }
+
+   // Finds the next available customerID 
+    public int nextAvailableCustomerID() throws SQLException {
+        int nextID = 0;
+        String fetch = "SELECT * FROM IOTUSER.customer";
+        ResultSet rs = st.executeQuery(fetch);
+        while (rs.next()) {
+            nextID = rs.getInt("customerID");
+        }
+        return nextID + 1;
+    }
+
+    // Adds new customer to database and creates Customer object to store information for display on the website
+    public Customer addCustomer(String cusFName, String cusLName, String cusEmailAddress, String cusPass, String cusContactNumber) throws SQLException {
+        int customerID = nextAvailableCustomerID();
+
+        st.executeUpdate("INSERT INTO IOTUSER.customer VALUES (" + customerID + ", '" + cusFName + "', '" + cusLName + "', '"+ cusEmailAddress + "', '" + cusPass + "', '" + cusContactNumber + "')");
+
+        return new Customer(customerID, cusFName, cusLName, cusEmailAddress, cusPass, cusContactNumber);
     }
     
     public void deleteCustomer (int customerID) throws SQLException {
         st.executeUpdate("DELETE FROM customer WHERE customerID = " + customerID);
     }
     
-//    public void updateCustomer (int customerID, String cusEmailAddress, String cusFName, String cusLName, cusPass, cusContactNumber ) throws SQLException{
-//        st.executeUpdate("UPDATE ")
-//    }
-    
+    public Customer updateCustomer (int customerID, String cusFName, String cusLName, String cusEmailAddress, String cusPass, String cusContactNumber) throws SQLException{
+        st.executeUpdate("UPDATE IOTUSER.customer SET cusEmailAddress = '" + cusEmailAddress + "', cusFName= '" + cusFName + "', cusLName = '" + cusLName + "', cusPass = '" + cusPass + "', cusContactNumber = '" + cusContactNumber + "' WHERE customerID = " + customerID);
+        return new Customer(customerID, cusFName, cusLName, cusEmailAddress, cusPass, cusContactNumber);
+    }
+
     /* Order Database */
     // Create New Order for Customer
     public Order createOrder(int customerID) throws SQLException {
@@ -425,103 +476,84 @@ public class DBManager {
     }
     /* Payment Database */
     // Create details (links to orderID)
-    public void createPayment(int paymentID, int orderID, int customerID, String cardNumber, String cardName, String cardExpiry, int cvv, String paymentDate) throws SQLException {
-        st.executeUpdate("INSERT INTO IOTUSER.payment VALUES (" + paymentID + ", " + orderID + ", " + customerID + ", '" + cardNumber + "', '" + cardName + "', '" + cardExpiry + "', '" + cvv + "', '" + paymentDate + "')");
+    public void createPayment(int paymentID, int orderID, int cardNumber, String cardName, LocalDateTime cardExpiry, int cvv) throws SQLException {
+    st.executeUpdate("INSERT INTO IOTUSER.payment VALUES (" + paymentID + ", " + orderID + ", " + cardNumber + ", '" + cardName + "', " + cardExpiry + ", " + cvv);
     }
 
     // View saved order payment details
-    public ArrayList<Payment> viewPaymentDetails(int orderID) throws SQLException {
-        String fetch = "SELECT * from IOTUSER.payment WHERE orderID = " + orderID;
-        ResultSet rs = st.executeQuery(fetch);
-        ArrayList<Payment> temp = new ArrayList();
-    
-        while (rs.next()) {
-            int returnedOrderID = rs.getInt(2);
-            if (returnedOrderID==orderID) {
-                int paymentID = rs.getInt(1);
-                int customerID = rs.getInt(3);
-                String cardNumber = rs.getString(4);
-                String cardName = rs.getString(5);  
-                String cardExpiry = rs.getString(6);  
-                int cvv = rs.getInt(7);
-                String paymentDate = rs.getString(8);
-                temp.add(new Payment(paymentID, returnedOrderID, customerID, cardNumber, cardName, cardExpiry, cvv, paymentDate));
-            }
-        }
-        return temp;
-    }
 
     // View order history list
-    public ArrayList<Payment> viewOrderHistory(int customerID) throws SQLException {
-        String fetch = "SELECT * from IOTUSER.payment WHERE customerID = " + customerID;
-        ResultSet rs = st.executeQuery(fetch);
-        ArrayList<Payment> temp = new ArrayList();
-    
-        while (rs.next()) {
-            int returnedCustomerID = rs.getInt(3);
-            if (returnedCustomerID==customerID) {
-                int paymentID = rs.getInt(1);
-                int orderID = rs.getInt(2);
-                String cardNumber = rs.getString(4); 
-                String cardName = rs.getString(5);  
-                String cardExpiry = rs.getString(6);  
-                int cvv = rs.getInt(7);
-                String paymentDate = rs.getString(8);
-                temp.add(new Payment(paymentID,orderID,returnedCustomerID,cardNumber,cardName,cardExpiry,cvv,paymentDate));
-            }
-        }
-        return temp;
-    }
 
     // Search payment records based on paymentID and date
-    public ArrayList<Payment> searchPaymentRecords(int paymentID, String paymentDate) throws SQLException {
-        String fetch = "SELECT * from IOTUSER.payment WHERE paymentID = " + paymentID + " OR paymentDate = '" + paymentDate + "'";
-        ResultSet rs = st.executeQuery(fetch);
-        ArrayList<Payment> temp = new ArrayList();
-    
-        while (rs.next()) {
-            int returnedPaymentID = rs.getInt(1);
-            String returnedPaymentDate = rs.getString(8);
-            if (returnedPaymentID==paymentID && returnedPaymentDate.equals(paymentDate)) {
-                int orderID = rs.getInt(2);
-                int customerID = rs.getInt(3);
-                String cardNumber = rs.getString(4); 
-                String cardName = rs.getString(5);
-                String cardExpiry = rs.getString(6);  
-                int cvv = rs.getInt(7);
-                temp.add(new Payment(returnedPaymentID,orderID,customerID,cardNumber,cardName,cardExpiry,cvv,returnedPaymentDate));
-            }
-        }
-        return temp;
-    }
 
     // Update details
-    public void updatePayment(int paymentID, String cardNumber, String cardName, String cardExpiry, int cvv, String paymentDate) throws SQLException {
-        String fetch = "SELECT * FROM IOTUSER.payment WHERE paymentID = " + paymentID;
-        ResultSet rs = st.executeQuery(fetch);
-
-        while (rs.next()) {
-            st.executeUpdate("UPDATE IOTUSER.payment SET cardnumber = '" + cardNumber + "', cardname = '" + cardName + "', cardexpiry = '" + cardExpiry + "', cardcvv = '" + cvv + "', '" + paymentDate + "'");
-        }
-    }
 
     // Delete details
-    public void deletePayment(int paymentID) throws SQLException {
-        st.executeUpdate("DELETE FROM IOTUSER.payment WHERE paymentID = " + paymentID);
-    }
 
 /* Product Database */
 /* Shipping Database */
 /* Staff Database */
+    
+     public boolean checkStaff(String emailAddress) throws SQLException {
+        String fetch = "SELECT * FROM IOTUSER.staff WHERE staffEmailAddress = '" + emailAddress + "'";
+        ResultSet rs = st.executeQuery(fetch);
+
+        while (rs.next()) {
+            String staffEmailAddress = rs.getString("staffEmailAddress");
+            if (staffEmailAddress.equals(emailAddress)) {
+            return true;
+            }
+        }
+        return false;
+}
+    
+    // Checks if email and password match
+    public Staff findStaff(String emailAddress, String password) throws SQLException {
+        String fetch = "SELECT * FROM IOTUSER.staff WHERE staffEmailAddress = '" + emailAddress + "'";
+        ResultSet rs = st.executeQuery(fetch);
+
+        while (rs.next()) {
+            String staffEmailAddress = rs.getString("staffEmailAddress");
+            String staffPass = rs.getString("staffPass");
+
+            if (staffEmailAddress.equals(emailAddress) && staffPass.equals(password)) {
+                int staffID = rs.getInt("staffID");
+                String staffFName = rs.getString("staffFName");
+                String staffLName = rs.getString("staffLName");
+                String staffContactNumber = rs.getString("staffContactNumber");
+                return new Staff(staffID, staffFName, staffLName, staffEmailAddress, staffPass, staffContactNumber);
+            }
+        }
+        return null;
+    }
+    
+    public Staff updateStaff (int staffID, String staffFName, String staffLName, String staffEmailAddress, String staffPass, String staffContactNumber) throws SQLException{
+        st.executeUpdate("UPDATE IOTUSER.staff SET staffFName= '" + staffFName + "', staffLName = '" + staffLName + "', staffPass = '" + staffPass + "', staffContactNumber = '" + staffContactNumber + "' WHERE staffID = " + staffID );
+        return new Staff(staffID, staffFName, staffLName, staffEmailAddress, staffPass, staffContactNumber);
+    }
 
     /* Product*/
     //Create product (staff only)
     public void createProduct(int productID, String productName, String productType, String productSupplier, String productDescription, double productCost, int quantityAvailable) throws SQLException {
         st.executeUpdate("INSERT INTO IOTUSER.product " + "VALUES (" + productID + ", '" + productName + "', '" + productType + "', '" + productSupplier + "', '" + productDescription + "', " + productCost + ", " + quantityAvailable + ")");
+        //return new Product(productID, productName, productType, productSupplier, productDescription, productCost, quantityAvailable);
     }
 
     //Read/Find a product (customer or staff)
     //List all device records
+    public boolean checkProduct(int productID) throws SQLException {
+        String fetch = "SELECT * FROM IOTUSER.product WHERE productID = '" + productID + "'";
+        ResultSet rs = st.executeQuery(fetch);
+
+        while (rs.next()) {
+            int existingProductID = rs.getInt("productID");
+            if (existingProductID == productID) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public ArrayList<Product> fetchProducts() throws SQLException {
         String fetch = "SELECT * FROM IOTUSER.product";
         ResultSet rs = st.executeQuery(fetch);

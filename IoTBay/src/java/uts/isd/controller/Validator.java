@@ -58,4 +58,29 @@ public class Validator implements Serializable {
         session.setAttribute("incorrectPassErr", "");
         session.setAttribute("unregisteredErr", "");
     }
+
+    //Validations for Product-related inputs
+    public boolean validateID(String enteredID) {
+        try {
+            Integer.parseInt(enteredID);
+            return true;
+        }
+        catch (NumberFormatException ex) {
+            return false;
+        }
+    }
+
+    public boolean validateCost(String enteredCost) {
+        try {
+            Double.parseDouble(enteredCost);
+            return true;
+        }
+        catch (NumberFormatException ex) {
+            return false;
+        }
+    }
+
+    public void clearProduct(HttpSession session) {
+        
+    }
 }

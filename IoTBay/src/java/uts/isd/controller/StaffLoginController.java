@@ -1,0 +1,61 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
+package uts.isd.controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import uts.isd.model.Staff;
+import uts.isd.model.dao.DBManager;
+
+/**
+ *
+ * @author Tammihn Ha
+ */
+
+public class StaffLoginController extends HttpServlet {
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        DBManager manager = (DBManager) session.getAttribute("manager");
+        Validator validator = new Validator();
+        validator.clear(session);
+        Staff staff = null;
+
+        String staffEmailAddress = request.getParameter("staffEmailAddress");
+        String staffPass = request.getParameter("staffPass");
+
+        if (!validator.validateEmail(staffEmailAddress)) {
+            session.setAttribute("emailFormatErr", "Incorrect Email Format");
+            request.getRequestDispatcher("stafflogin.jsp").include(request, response);
+        } else {
+            try {
+                staff = manager.findStaff(staffEmailAddress, staffPass);
+                if (!manager.checkStaff(staffEmailAddress)) {
+                    session.setAttribute("unregisteredErr", "Email address is not registered");
+                    request.getRequestDispatcher("stafflogin.jsp").include(request, response);
+                } else if (staff != null) {
+                    session.setAttribute("staff", staff);
+                    request.getRequestDispatcher("staffwelcome.jsp").include(request, response);
+                } else {
+                    session.setAttribute("incorrectPassErr", "Incorrect Password");
+                    request.getRequestDispatcher("stafflogin.jsp").include(request, response);
+                }
+        } catch (SQLException ex) {
+                Logger.getLogger(ViewCartController.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Exception is: " + ex);
+            }
+        }
+    }
+
+}
