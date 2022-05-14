@@ -1,4 +1,3 @@
-<%@page import="uts.isd.model.Customer"%>
 <!DOCTYPE html>
 <%@page import="java.util.ArrayList"%>
 <%@page import="uts.isd.model.Product"%>
@@ -17,7 +16,7 @@
         <header>
             <div class="header-content">
                 <div class="header-start">
-                    <a class="header-button" href="ShowProductsController"><h3>IoTBay</h3></a>
+                    <a class="header-button" href="FetchProductsController"><h3>IoTBay</h3></a>
                 </div>
 
                 <div class="header-center">
@@ -25,15 +24,12 @@
                         <input id="search" type="text" name="search-query" placeholder="Search"/>
                     </form>
                 </div>
-                <%
-                Customer customer = (Customer) session.getAttribute("customer");
-                %>
+
                 <div class="header-end">
                     <div class="user-info header-button">
-                        <a><i class="fa fa-user-circle"></i> Hello, <%=customer.getCusFName()%></a>
+                        <a><i class="fa fa-user-circle"></i> Hello, </a>
                         <div class="user-menu">
                             <a class="header-button" href="edituser.jsp">Edit Account</a>
-                            <a class="header-button" href="ViewOrdersController">My Orders</a>
                             <a class="header-button" href="logout.jsp">Logout</a>
                         </div>
                     </div>
@@ -45,20 +41,20 @@
 
         <main>
             <nav>
-                <a class="nav-item">All Products</a>
+                <a class="nav-item" href="FetchProductsController">See all products</a>
+                <a class="nav-item" href="staffcreateproduct.jsp">Add a new product</a>
             </nav>
             <div class="content">
                 <table class="device-table">
                     <caption><h3>Device Catalogue</h3></caption>
                     <tr>
                         <th class="device-table-header">Product ID</th>
-                        <th class="device-table-header">Product Type</th>
                         <th class="device-table-header">Product Name</th>
+                        <th class="device-table-header">Product Type</th>
                         <th class="device-table-header">Product Supplier</th>
                         <th class="device-table-header">Product Description</th>
                         <th class="device-table-header">Product Cost</th>
                         <th class="device-table-header">Quantity Available</th>
-                        <th class="device-table-header"></th>
                         <th></th>
                     </tr>
                     <% ArrayList<Product> productList = (ArrayList<Product>)session.getAttribute("productList");
@@ -71,7 +67,7 @@
                            <td><%=prod.getProductDescription()%></td>
                            <td><%=prod.getProductCost()%></td>
                            <td><%=prod.getQuantityAvailable()%></td>
-                           <td><a href="ViewProductController?productID=<%=prod.getProductID()%>">View</a></td>
+                           <td><a href="UpdateProductController?productID=<%=prod.getProductID()%>">View</a></td>
                        </tr>
                     <%}%>
                 </table>

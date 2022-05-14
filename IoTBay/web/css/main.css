@@ -13,7 +13,6 @@ body {
 
 main {
     position: relative;
-    top: 57px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -59,4 +58,10 @@ caption {
 
 .device-table, .device-table-header {
     border: 1px solid;
+}
+
+.page-content {
+    padding-top: 100px; /* to ensure that the content is safely below the header */
+    margin: auto;
+    width: 400px; 
 }

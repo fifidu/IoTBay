@@ -1,0 +1,60 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 14 May 2022, 1:24:47 pm
+    Author     : Minh Quan Tran
+*/
+
+body {
+    background-color: #202020;
+}
+
+main {
+    margin: 10px;
+}
+
+.delivery {
+    border-radius: 8px;
+    background-color: #282828;
+    padding: 1rem;
+    width: 80%;
+    margin: auto;
+    margin-top: 0.5rem;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 20px;
+    padding: 0;
+}
+
+li {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.check-icon {
+    position: relative;
+    height: 30px;
+    width: 30px;
+    background-color: white;
+    border-radius: 50%;
+    padding: 0.2rem;
+}
+
+.check-icon img {
+    height: 100%;
+}
+
+.hidden {
+    display: none;
+}
