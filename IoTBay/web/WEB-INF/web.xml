@@ -56,6 +56,10 @@
         <servlet-name>EditProductController</servlet-name>
         <servlet-class>uts.isd.controller.EditProductController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StaffLoginController</servlet-name>
+        <servlet-class>uts.isd.controller.StaffLoginController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ConnServlet</servlet-name>
         <url-pattern>/ConnServlet</url-pattern>
@@ -111,6 +115,10 @@
     <servlet-mapping>
         <servlet-name>EditProductController</servlet-name>
         <url-pattern>/EditProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffLoginController</servlet-name>
+        <url-pattern>/StaffLoginController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

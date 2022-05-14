@@ -19,7 +19,7 @@
 }
 
 header {
-    position: fixed;
+    position: sticky;
     background-color: #282828;
     top: 0;
     width: 100%;
@@ -30,13 +30,13 @@ header {
     align-items: center;
 }
 
-.text-black {
+header .text-black {
     font-family: inherit;
     color: black;
     text-decoration: none;
 }
 
-.pointer {
+header .pointer {
     cursor: pointer;
 }
 
@@ -56,7 +56,7 @@ header {
     background-color: #505050;
 }
 
-.header-content {
+header .header-content {
     height: 50px;
     padding-top: 3px;
     padding-bottom: 3px;
@@ -69,7 +69,7 @@ header {
     justify-content: space-between;
 }
 
-.header-outline {
+header .header-outline {
     height: 1px;
     width: 100%;
     background-image: var(--rainbow-color);
@@ -85,12 +85,12 @@ header {
     }
 }
 
-.header-start {
+header .header-start {
     height: 65%;
     width: 10%;
 }
 
-.header-button {
+header .header-button {
     height: 100%;
     padding-left: 5%;
     padding-right: 5%;
@@ -101,7 +101,7 @@ header {
     border-radius: 8px;
 }
 
-.header-center {
+header .header-center {
     height: 65%;
     width: 30%;
 }
