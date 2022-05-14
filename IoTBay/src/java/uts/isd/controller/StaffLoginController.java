@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,16 +37,16 @@ public class StaffLoginController extends HttpServlet {
 
         if (!validator.validateEmail(staffEmailAddress)) {
             session.setAttribute("emailFormatErr", "Incorrect Email Format");
-            request.getRequestDispatcher("login.jsp").include(request, response);
+            request.getRequestDispatcher("stafflogin.jsp").include(request, response);
         } else {
             try {
-                //staff = manager.findCustomer(staffEmailAddress, staffPass);
-                if (!manager.checkCustomer(staffEmailAddress)) {
+                staff = manager.findStaff(staffEmailAddress, staffPass);
+                if (!manager.checkStaff(staffEmailAddress)) {
                     session.setAttribute("unregisteredErr", "Email address is not registered");
-                    request.getRequestDispatcher("login.jsp").include(request, response);
+                    request.getRequestDispatcher("stafflogin.jsp").include(request, response);
                 } else if (staff != null) {
                     session.setAttribute("staff", staff);
-                    request.getRequestDispatcher("welcome.jsp").include(request, response);
+                    request.getRequestDispatcher("staffwelcome.jsp").include(request, response);
                 } else {
                     session.setAttribute("incorrectPassErr", "Incorrect Password");
                     request.getRequestDispatcher("stafflogin.jsp").include(request, response);
