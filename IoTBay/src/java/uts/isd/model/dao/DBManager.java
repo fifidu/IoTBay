@@ -495,7 +495,7 @@ public class DBManager {
 /* Staff Database */
     
      public boolean checkStaff(String emailAddress) throws SQLException {
-        String fetch = "SELECT * FROM IOTUSER.staff WHERE EmailAddress = '" + emailAddress + "'";
+        String fetch = "SELECT * FROM IOTUSER.staff WHERE staffEmailAddress = '" + emailAddress + "'";
         ResultSet rs = st.executeQuery(fetch);
 
         while (rs.next()) {

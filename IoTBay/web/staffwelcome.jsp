@@ -1,4 +1,4 @@
-ß<%-- 
+<%-- 
     Document   : welcome
     Created on : 16/03/2022, 3:00:18 PM
     Author     : fifidu
@@ -28,6 +28,7 @@
 
             <h2>Welcome, </h2><br>
             <p>Your email is </p><br>
+            
             <a class="main-link" href="FetchProductsController">Continue to Store</a>
         </div>
     </body>
