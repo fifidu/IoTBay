@@ -32,7 +32,7 @@ public class ViewProductController extends HttpServlet {
         int productID = Integer.valueOf(request.getParameter("productID"));
         
         try {
-            Product activeProduct = manager.fetchIndividualProduct(productID);
+            ArrayList<Product> activeProduct = manager.fetchIndividualProduct(productID);
             session.setAttribute("activeProduct", activeProduct);
         } catch (SQLException ex) {
             Logger.getLogger(ViewCartController.class.getName()).log(Level.SEVERE, null, ex);

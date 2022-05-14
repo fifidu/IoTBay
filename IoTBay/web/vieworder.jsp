@@ -4,7 +4,6 @@
     Author     : chrisvuong
 --%>
 
-<%@page import="uts.isd.model.Order"%>
 <%@page import="uts.isd.model.Customer"%>
 <%@page import="uts.isd.model.CartLine"%>
 <%@page import="java.util.ArrayList"%>
@@ -35,7 +34,6 @@
                 </div>
                 <%
                 Customer customer = (Customer) session.getAttribute("customer");
-                Order viewedOrder = (Order) session.getAttribute("viewedOrder");
                 %>
                 <div class="header-end">
                     <div class="user-info header-button">
@@ -58,7 +56,6 @@
             </nav>
             <div class="page-content">
                 <h1 class="title">Cart</h1>
-                <a class="button" href="CancelOrderController?orderID=<%=viewedOrder.getOrderID()%>">Cancel Order</a>
                 <table class="center">
                     <tr>
                         <th>Product ID</th>
@@ -77,10 +74,9 @@
                                     <td><%=cl.getQuantity()%></td>
                                     <td>$<%=cl.getItemTotal()%></td>
                                     <% if (cl.getOrderStatus().equals("Active")) {%>
-                                    <td><a href="ViewEditItemController?productID=<%=cl.getProductID()%>&quantity=<%=cl.getQuantity()%>">Edit</a</td>
-                                    <td><a href="RemoveOrderItemController?productID=<%=cl.getProductID()%>">Remove</a></td>
+                                    <td>Edit</td>
                                 </tr>
-                                        <%} 
+                                    <%} 
                             }
                         }%>
                         <tr>
@@ -91,9 +87,7 @@
                             <td>$<%=session.getAttribute("totalCost")%></td>
                         </tr>
                 </table>
-                <a class="button" href="SubmitOrderController?cartID=<%=viewedOrder.getCartID()%>">Submit Order</a>
             </div>
-                        
         </main>
     </body>
 

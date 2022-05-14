@@ -192,9 +192,6 @@ public class TestDB {
                 case "sc":
                     testShowCustomerCartItems();
                     break;
-                case "ci":
-                    testCheckItemsInCart();
-                    break;
                 case "h":
                     System.out.println("a -> add order item");
                     System.out.println("u -> upate order item quantity");
@@ -286,20 +283,6 @@ public class TestDB {
         }
     }
 
-    private void testCheckItemsInCart() throws SQLException {
-        System.out.print("Cart ID: ");
-        int cartID = in.nextInt();
-        System.out.print("Product ID: ");
-        int productID = in.nextInt();
-
-        try {
-            boolean value = db.checkItemInCart(cartID, productID);
-            System.out.println(value);
-        } catch (SQLException ex) {
-            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     // Test Customer Database
     private void customerQueries() throws SQLException {
         String s;
@@ -386,9 +369,11 @@ public class TestDB {
     private void testCancelOrder() throws SQLException {
         System.out.print("Order ID: ");
         int orderID = in.nextInt();
+        System.out.print("Cart ID: ");
+        int cartID = in.nextInt();
 
         try {
-            db.cancelOrder(orderID);
+            db.cancelOrder(orderID, cartID);
         } catch (SQLException ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -31,8 +31,6 @@ public class ViewOrdersController extends HttpServlet {
         int customerID = customer.getCustomerID();
 
         try {
-            Order activeOrder = manager.findActiveOrder(customerID);
-            session.setAttribute("activeOrder", activeOrder);
             ArrayList<Order> orderList = manager.fetchCustomerOrders(customerID);
             session.setAttribute("orderList", orderList);
         } catch (SQLException ex) {

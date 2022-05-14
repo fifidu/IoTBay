@@ -95,26 +95,8 @@ td {
 }
 
 input[type=number] {
-    width: 100%;
     text-align: center;
-    font-size: 16px;
     color: black;
 }
 
-input[type=submit]  {
-    width: 100%;
-    font-size: 16px;
-    padding: 10px;
-    background-color: #404040;
-    display: block;
-    justify-content: center;
-    align-items: center;
-    border-radius: 8px;
-}
-
-.second-content {
-    background-color: #303030;
-    padding: 20px;
-    text-align: center;
-}
 
