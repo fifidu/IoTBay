@@ -5,8 +5,6 @@
 --%>
 <%@page import="uts.isd.model.Product"%>
 <%@page import="uts.isd.model.Customer"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="uts.isd.model.Order"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -14,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="./css/orders.css" rel="stylesheet" type="text/css" >
+        <link href="./css/viewproduct.css" rel="stylesheet" type="text/css" >
         <link href="./css/header.css" rel="stylesheet" type="text/css" >
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>Orders - IoTBay</title>
@@ -62,21 +60,22 @@
                         <th>Product Name</th>
                         <th>Product Description</th>
                         <th>Product Cost</th>
-                        <th></th>
                     </tr>
-                    <% ArrayList<Product> activeProduct = (ArrayList<Product>)session.getAttribute("activeProduct");
-                       for (Product prod: activeProduct) { %>
+                    <% Product activeProduct = (Product) session.getAttribute("activeProduct"); %>
                        <tr>
-                           <td><%=prod.getProductID()%></td>
-                           <td><%=prod.getProductName()%></td>
-                           <td><%=prod.getProductDescription()%></td>
-                           <td>$<%=prod.getProductCost()%></td>
+                           <td><%=activeProduct.getProductID()%></td>
+                           <td><%=activeProduct.getProductName()%></td>
+                           <td><%=activeProduct.getProductDescription()%></td>
+                           <td>$<%=activeProduct.getProductCost()%></td>
                        </tr>
-                    <%}%>
                 </table>
-                <form action="AddItemToCartController" method="post">
-                    <input type="number" name="quantity" value="0">
-                </form>
+                <div class="second-content">
+                    <form action="AddToOrderController" method="post">
+                        <label><b>Quantity</b> <span class="err-msg"></span></label><br>
+                        <input type="number" id="selectedQuantity" name="selectedQuantity" value="1"><br><br>
+                        <input type="submit" value="Add to Order">
+                    </form>
+                </div>
             </div>
         </main>
     </body>

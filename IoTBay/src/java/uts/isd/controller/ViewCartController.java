@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import uts.isd.model.CartLine;
 import uts.isd.model.Customer;
+import uts.isd.model.Order;
 import uts.isd.model.dao.DBManager;
 
 /**
@@ -32,7 +33,10 @@ public class ViewCartController extends HttpServlet {
         
         try {
             ArrayList<CartLine> cartList = manager.fetchCartItems(cartID);
+            Order viewedOrder = manager.findOrder(cartID);
             double totalCost = manager.calculateTotalCost(cartID);
+            
+            session.setAttribute("viewedOrder", viewedOrder);
             session.setAttribute("cartList", cartList); 
             session.setAttribute("totalCost", totalCost);
         } catch (SQLException ex) {

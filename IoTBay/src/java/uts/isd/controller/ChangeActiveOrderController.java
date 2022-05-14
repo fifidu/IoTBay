@@ -6,7 +6,6 @@ package uts.isd.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -22,24 +21,30 @@ import uts.isd.model.dao.DBManager;
  *
  * @author chrisvuong
  */
-public class ViewOrdersController extends HttpServlet {
+public class ChangeActiveOrderController extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         DBManager manager = (DBManager) session.getAttribute("manager");
         Customer customer = (Customer) session.getAttribute("customer");
+        Order currentActiveOrder = (Order) session.getAttribute("activeOrder");
         int customerID = customer.getCustomerID();
-
+        int currentActiveOrderID = currentActiveOrder.getOrderID();
+        int newActiveOrderID = Integer.valueOf(request.getParameter("orderID"));
+        
         try {
-            Order activeOrder = manager.findActiveOrder(customerID);
-            session.setAttribute("activeOrder", activeOrder);
-            ArrayList<Order> orderList = manager.fetchCustomerOrders(customerID);
-            session.setAttribute("orderList", orderList);
+            manager.updateOrderStatus(currentActiveOrderID, "Saved");
+            manager.updateOrderStatus(newActiveOrderID, "Active");
+            Order newActiveOrder = manager.findActiveOrder(customerID);
+            session.setAttribute("activeOrder", newActiveOrder);
         } catch (SQLException ex) {
-            Logger.getLogger(ViewCartController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CreateOrderController.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Exception is: " + ex);
-        } 
+        }
 
-        request.getRequestDispatcher("orders.jsp").include(request, response);
+        request.getRequestDispatcher("ViewOrdersController").include(request, response);
     }
+
+
 }

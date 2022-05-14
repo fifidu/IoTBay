@@ -87,4 +87,7 @@ public class Validator implements Serializable {
         session.setAttribute("existingProductErr", "");
         session.setAttribute("prodEditSuccess", "");
     }
+
+    // Validations for adding item to order
+
 }
