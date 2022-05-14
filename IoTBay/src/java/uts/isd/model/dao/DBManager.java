@@ -257,7 +257,7 @@ public class DBManager {
     }
     
     public Customer updateCustomer (int customerID, String cusFName, String cusLName, String cusEmailAddress, String cusPass, String cusContactNumber) throws SQLException{
-        st.executeUpdate("UPDATE IOTUSER.customer SET cusEmailAddress = '" + cusEmailAddress + "', cusFName= '" + cusFName + "', cusLName = '" + cusLName + "', cusPass = '" + cusPass + "', cusContactNumber = '" + cusContactNumber + "' WHERE cusID" );
+        st.executeUpdate("UPDATE IOTUSER.customer SET cusEmailAddress = '" + cusEmailAddress + "', cusFName= '" + cusFName + "', cusLName = '" + cusLName + "', cusPass = '" + cusPass + "', cusContactNumber = '" + cusContactNumber + "' WHERE customerID = " + customerID);
         return new Customer(customerID, cusFName, cusLName, cusEmailAddress, cusPass, cusContactNumber);
     }
 
@@ -493,6 +493,44 @@ public class DBManager {
 /* Product Database */
 /* Shipping Database */
 /* Staff Database */
+    
+     public boolean checkStaff(String emailAddress) throws SQLException {
+        String fetch = "SELECT * FROM IOTUSER.staff WHERE EmailAddress = '" + emailAddress + "'";
+        ResultSet rs = st.executeQuery(fetch);
+
+        while (rs.next()) {
+            String staffEmailAddress = rs.getString("staffEmailAddress");
+            if (staffEmailAddress.equals(emailAddress)) {
+            return true;
+            }
+        }
+        return false;
+}
+    
+    // Checks if email and password match
+    public Staff findStaff(String emailAddress, String password) throws SQLException {
+        String fetch = "SELECT * FROM IOTUSER.staff WHERE staffEmailAddress = '" + emailAddress + "'";
+        ResultSet rs = st.executeQuery(fetch);
+
+        while (rs.next()) {
+            String staffEmailAddress = rs.getString("staffEmailAddress");
+            String staffPass = rs.getString("staffPass");
+
+            if (staffEmailAddress.equals(emailAddress) && staffPass.equals(password)) {
+                int staffID = rs.getInt("staffID");
+                String staffFName = rs.getString("staffFName");
+                String staffLName = rs.getString("staffLName");
+                String staffContactNumber = rs.getString("staffContactNumber");
+                return new Staff(staffID, staffFName, staffLName, staffEmailAddress, staffPass, staffContactNumber);
+            }
+        }
+        return null;
+    }
+    
+    public Staff updateStaff (int staffID, String staffFName, String staffLName, String staffEmailAddress, String staffPass, String staffContactNumber) throws SQLException{
+        st.executeUpdate("UPDATE IOTUSER.staff SET staffFName= '" + staffFName + "', staffLName = '" + staffLName + "', staffPass = '" + staffPass + "', staffContactNumber = '" + staffContactNumber + "' WHERE staffID = " + staffID );
+        return new Staff(staffID, staffFName, staffLName, staffEmailAddress, staffPass, staffContactNumber);
+    }
 
     /* Product*/
     //Create product (staff only)
