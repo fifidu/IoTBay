@@ -67,6 +67,8 @@
     <servlet>
         <servlet-name>CancelOrderController</servlet-name>
         <servlet-class>uts.isd.controller.CancelOrderController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>CreateProductController</servlet-name>
         <servlet-class>uts.isd.controller.CreateProductController</servlet-class>
     </servlet>
@@ -157,6 +159,8 @@
     <servlet-mapping>
         <servlet-name>CancelOrderController</servlet-name>
         <url-pattern>/CancelOrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>CreateProductController</servlet-name>
         <url-pattern>/CreateProductController</url-pattern>
     </servlet-mapping>
