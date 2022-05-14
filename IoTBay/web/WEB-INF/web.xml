@@ -21,6 +21,14 @@
         <servlet-class>uts.isd.controller.CreateOrderController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>RemoveOrderItemController</servlet-name>
+        <servlet-class>uts.isd.controller.RemoveOrderItemController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CancelOrderController</servlet-name>
+        <servlet-class>uts.isd.controller.CancelOrderController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>CreateProductController</servlet-name>
         <servlet-class>uts.isd.controller.CreateProductController</servlet-class>
     </servlet>
@@ -115,6 +123,14 @@
     <servlet-mapping>
         <servlet-name>CreateOrderController</servlet-name>
         <url-pattern>/CreateOrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveOrderItemController</servlet-name>
+        <url-pattern>/RemoveOrderItemController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelOrderController</servlet-name>
+        <url-pattern>/CancelOrderController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CreateProductController</servlet-name>
