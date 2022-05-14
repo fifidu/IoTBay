@@ -50,6 +50,10 @@
                 <h4>Last Name: </h4><p><%=customer.getCusLName()%></p>
                 <h4>Email Address: </h4><p><%=customer.getCusEmailAddress()%></p>
                 <h4>Phone Number: </h4><p><%=customer.getCusContactNumber()%></p>
+            </div>
+            <div class="redirectbutton">
+                <a href ="editcustomer.jsp">Edit Details</a>
+            </div>
         </main>
     </body>
 
