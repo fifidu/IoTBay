@@ -70,7 +70,7 @@
                            <td><%=prod.getProductDescription()%></td>
                            <td><%=prod.getProductCost()%></td>
                            <td><%=prod.getQuantityAvailable()%></td>
-                           <td><a href="UpdateProductController?productID=<%=prod.getProductID()%>">View</a></td>
+                           <td><a href="EditProductController?productID=<%=prod.getProductID()%>">Edit</a></td>
                        </tr>
                     <%}%>
                 </table>
