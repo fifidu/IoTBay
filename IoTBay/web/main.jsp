@@ -30,7 +30,7 @@
                 %>
                 <div class="header-end">
                     <div class="user-info header-button">
-                        <a><i class="fa fa-user-circle"></i> Hello, <%--<%=customer.getCusFName()%>--%></a>
+                        <a><i class="fa fa-user-circle"></i> Hello, <%=customer.getCusFName()%></a>
                         <div class="user-menu">
                             <a class="header-button" href="edituser.jsp">Edit Account</a>
                             <a class="header-button" href="ViewOrdersController">My Orders</a>
