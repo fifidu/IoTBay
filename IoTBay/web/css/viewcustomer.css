@@ -67,6 +67,10 @@ caption {
     padding: 50px;
     margin: 50px;    
 }
+.redirect button {
+    width: 50px;
+    border: 15px solid white;
+}
 
 .device-table, .device-table-header {
     border: 1px solid;
