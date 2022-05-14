@@ -44,6 +44,30 @@
         <servlet-name>FindProductController</servlet-name>
         <servlet-class>uts.isd.controller.FindProductController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddToOrderController</servlet-name>
+        <servlet-class>uts.isd.controller.AddToOrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeActiveOrderController</servlet-name>
+        <servlet-class>uts.isd.controller.ChangeActiveOrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateOrderItemController</servlet-name>
+        <servlet-class>uts.isd.controller.UpdateOrderItemController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewEditItemController</servlet-name>
+        <servlet-class>uts.isd.controller.ViewEditItemController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveOrderItemController</servlet-name>
+        <servlet-class>uts.isd.controller.RemoveOrderItemController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CancelOrderController</servlet-name>
+        <servlet-class>uts.isd.controller.CancelOrderController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ConnServlet</servlet-name>
         <url-pattern>/ConnServlet</url-pattern>
@@ -87,6 +111,30 @@
     <servlet-mapping>
         <servlet-name>FindProductController</servlet-name>
         <url-pattern>/FindProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddToOrderController</servlet-name>
+        <url-pattern>/AddToOrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeActiveOrderController</servlet-name>
+        <url-pattern>/ChangeActiveOrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateOrderItemController</servlet-name>
+        <url-pattern>/UpdateOrderItemController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewEditItemController</servlet-name>
+        <url-pattern>/ViewEditItemController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveOrderItemController</servlet-name>
+        <url-pattern>/RemoveOrderItemController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelOrderController</servlet-name>
+        <url-pattern>/CancelOrderController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

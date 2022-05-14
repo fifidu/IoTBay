@@ -83,4 +83,7 @@ public class Validator implements Serializable {
     public void clearProduct(HttpSession session) {
         
     }
+
+    // Validations for adding item to order
+
 }

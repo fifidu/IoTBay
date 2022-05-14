@@ -41,7 +41,7 @@ public class StaffLoginController extends HttpServlet {
             request.getRequestDispatcher("login.jsp").include(request, response);
         } else {
             try {
-                staff = manager.findCustomer(staffEmailAddress, staffPass);
+                //staff = manager.findCustomer(staffEmailAddress, staffPass);
                 if (!manager.checkCustomer(staffEmailAddress)) {
                     session.setAttribute("unregisteredErr", "Email address is not registered");
                     request.getRequestDispatcher("login.jsp").include(request, response);
