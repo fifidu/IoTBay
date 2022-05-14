@@ -432,10 +432,96 @@ public class TestDB {
                 case "c":
                     testCreatePayment();
                     break;
+                case "v":
+                    testViewPaymentDetails();
+                    break;
+                case "o":
+                    testViewOrderHistory();
+                    break;
+                case "s":
+                    testSearchPaymentRecords();
+                    break;
+                case "u":
+                    testUpdatePayment();
+                    break;
+                case "d":
+                    testDeletePayment();
+                    break;
                 default:
                     System.out.println("Unknown Command");
                     break;
             }
+        }
+    }
+
+    // Test viewPaymentDetails()
+    private void testViewPaymentDetails() throws SQLException {
+        System.out.print("Order ID: ");
+        int orderID = Integer.parseInt(in.nextLine());
+
+        try {
+            if (db.viewPaymentDetails(orderID) != null) {
+                ArrayList<Payment> payment = db.viewPaymentDetails(orderID);
+                System.out.println("Payment details: ");
+
+                for (Payment p : payment) {
+                    System.out.printf("%-5s %-5s %-5s %-10s %-12s %-10s %-3s %-10s \n", p.getPaymentID(), p.getOrderID(), p.getCustomerID(), p.getCardNumber(), p.getCardName(), p.getCardExpiry(), p.getCvv(), p.getPaymentDate());
+                }
+            } else {
+                System.out.println("Payment details not found.");
+            }
+        }
+
+        catch (SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    // Test viewOrderHistory()
+    private void testViewOrderHistory() throws SQLException {
+        System.out.print("Customer ID: ");
+        int customerID = Integer.parseInt(in.nextLine());
+
+        try {
+            if (db.viewOrderHistory(customerID) != null) {
+                ArrayList<Payment> payment = db.viewOrderHistory(customerID);
+                System.out.println("Order history: ");
+
+                for (Payment p : payment) {
+                    System.out.printf("%-5s %-5s %-5s %-10s %-12s %-10s %-3s %-10s \n", p.getPaymentID(), p.getOrderID(), p.getCustomerID(), p.getCardNumber(), p.getCardName(), p.getCardExpiry(), p.getCvv(), p.getPaymentDate());
+                }
+            } else {
+                System.out.println("Order history not found.");
+            }
+        }
+
+        catch (SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    // Test searchPaymentRecords()
+    private void testSearchPaymentRecords() throws SQLException {
+        System.out.print("Payment ID: ");
+        int paymentID = Integer.parseInt(in.nextLine());
+        System.out.print("Payment Date: ");
+        String paymentDate = in.nextLine();
+
+        try {
+            if (db.searchPaymentRecords(paymentID,paymentDate) != null) {
+                ArrayList<Payment> payment = db.searchPaymentRecords(paymentID,paymentDate);
+                System.out.println("Payment records found: ");
+
+                for (Payment p : payment) {
+                    System.out.printf("%-5s %-5s %-5s %-10s %-12s %-10s %-3s %-10s \n", p.getPaymentID(), p.getOrderID(), p.getCustomerID(), p.getCardNumber(), p.getCardName(), p.getCardExpiry(), p.getCvv(), p.getPaymentDate());
+                }
+            } else {
+                System.out.println("Payment records not found.");
+            }
+        }
+
+        catch (SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -445,6 +531,8 @@ public class TestDB {
         int paymentID = Integer.parseInt(in.nextLine());
         System.out.print("Order ID: ");
         int orderID = Integer.parseInt(in.nextLine());
+        System.out.print("Customer ID: ");
+        int customerID = Integer.parseInt(in.nextLine());
         System.out.print("Card Number: ");
         String cardNumber = in.nextLine();
         System.out.print("Card Name: ");
@@ -453,10 +541,52 @@ public class TestDB {
         String cardExpiry = in.nextLine();
         System.out.print("CVV: ");
         int cvv = Integer.parseInt(in.nextLine());
+        System.out.print("Payment Date: ");
+        String paymentDate = in.nextLine();
 
         try {
-            db.createPayment(paymentID, orderID, cardNumber, cardName, cardExpiry, cvv);
+            db.createPayment(paymentID, orderID, customerID, cardNumber, cardName, cardExpiry, cvv, paymentDate);
             System.out.println("Payment details created!");
+        }
+
+        catch (SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    // Test updatePayment()
+    private void testUpdatePayment() throws SQLException {
+        System.out.print("Payment ID: ");
+        int paymentID = Integer.parseInt(in.nextLine());
+        System.out.print("Card Number: ");
+        String cardNumber = in.nextLine();
+        System.out.print("Card Name: ");
+        String cardName = in.nextLine();
+        System.out.print("Card Expiry: ");
+        String cardExpiry = in.nextLine();
+        System.out.print("CVV: ");
+        int cvv = Integer.parseInt(in.nextLine());
+        System.out.print("Payment Date: ");
+        String paymentDate = in.nextLine();
+
+        try {
+            db.updatePayment(paymentID, cardNumber, cardName, cardExpiry, cvv, paymentDate);
+            System.out.println("Payment details updated!");
+        }
+
+        catch (SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    // Test deletePayment()
+    private void testDeletePayment() throws SQLException {
+        System.out.print("Payment ID of payment to delete: ");
+        int paymentID = Integer.parseInt(in.nextLine());
+
+        try {
+            db.deletePayment(paymentID);
+            System.out.println("Payment details deleted!");
         }
 
         catch (SQLException ex) {

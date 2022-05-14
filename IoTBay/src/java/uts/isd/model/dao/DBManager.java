@@ -425,19 +425,90 @@ public class DBManager {
     }
     /* Payment Database */
     // Create details (links to orderID)
-    public void createPayment(int paymentID, int orderID, String cardNumber, String cardName, String cardExpiry, int cvv) throws SQLException {
-    st.executeUpdate("INSERT INTO IOTUSER.payment VALUES (" + paymentID + ", " + orderID + ", '" + cardNumber + "', '" + cardName + "', '" + cardExpiry + "', '" + cvv + "')");
+    public void createPayment(int paymentID, int orderID, int customerID, String cardNumber, String cardName, String cardExpiry, int cvv, String paymentDate) throws SQLException {
+        st.executeUpdate("INSERT INTO IOTUSER.payment VALUES (" + paymentID + ", " + orderID + ", " + customerID + ", '" + cardNumber + "', '" + cardName + "', '" + cardExpiry + "', '" + cvv + "', '" + paymentDate + "')");
     }
 
     // View saved order payment details
+    public ArrayList<Payment> viewPaymentDetails(int orderID) throws SQLException {
+        String fetch = "SELECT * from IOTUSER.payment WHERE orderID = " + orderID;
+        ResultSet rs = st.executeQuery(fetch);
+        ArrayList<Payment> temp = new ArrayList();
+    
+        while (rs.next()) {
+            int returnedOrderID = rs.getInt(2);
+            if (returnedOrderID==orderID) {
+                int paymentID = rs.getInt(1);
+                int customerID = rs.getInt(3);
+                String cardNumber = rs.getString(4);
+                String cardName = rs.getString(5);  
+                String cardExpiry = rs.getString(6);  
+                int cvv = rs.getInt(7);
+                String paymentDate = rs.getString(8);
+                temp.add(new Payment(paymentID, returnedOrderID, customerID, cardNumber, cardName, cardExpiry, cvv, paymentDate));
+            }
+        }
+        return temp;
+    }
 
     // View order history list
+    public ArrayList<Payment> viewOrderHistory(int customerID) throws SQLException {
+        String fetch = "SELECT * from IOTUSER.payment WHERE customerID = " + customerID;
+        ResultSet rs = st.executeQuery(fetch);
+        ArrayList<Payment> temp = new ArrayList();
+    
+        while (rs.next()) {
+            int returnedCustomerID = rs.getInt(3);
+            if (returnedCustomerID==customerID) {
+                int paymentID = rs.getInt(1);
+                int orderID = rs.getInt(2);
+                String cardNumber = rs.getString(4); 
+                String cardName = rs.getString(5);  
+                String cardExpiry = rs.getString(6);  
+                int cvv = rs.getInt(7);
+                String paymentDate = rs.getString(8);
+                temp.add(new Payment(paymentID,orderID,returnedCustomerID,cardNumber,cardName,cardExpiry,cvv,paymentDate));
+            }
+        }
+        return temp;
+    }
 
     // Search payment records based on paymentID and date
+    public ArrayList<Payment> searchPaymentRecords(int paymentID, String paymentDate) throws SQLException {
+        String fetch = "SELECT * from IOTUSER.payment WHERE paymentID = " + paymentID + " OR paymentDate = '" + paymentDate + "'";
+        ResultSet rs = st.executeQuery(fetch);
+        ArrayList<Payment> temp = new ArrayList();
+    
+        while (rs.next()) {
+            int returnedPaymentID = rs.getInt(1);
+            String returnedPaymentDate = rs.getString(8);
+            if (returnedPaymentID==paymentID && returnedPaymentDate.equals(paymentDate)) {
+                int orderID = rs.getInt(2);
+                int customerID = rs.getInt(3);
+                String cardNumber = rs.getString(4); 
+                String cardName = rs.getString(5);
+                String cardExpiry = rs.getString(6);  
+                int cvv = rs.getInt(7);
+                temp.add(new Payment(returnedPaymentID,orderID,customerID,cardNumber,cardName,cardExpiry,cvv,returnedPaymentDate));
+            }
+        }
+        return temp;
+    }
 
     // Update details
+    public void updatePayment(int paymentID, String cardNumber, String cardName, String cardExpiry, int cvv, String paymentDate) throws SQLException {
+        String fetch = "SELECT * FROM IOTUSER.payment WHERE paymentID = " + paymentID;
+        ResultSet rs = st.executeQuery(fetch);
+
+        while (rs.next()) {
+            st.executeUpdate("UPDATE IOTUSER.payment SET cardnumber = '" + cardNumber + "', cardname = '" + cardName + "', cardexpiry = '" + cardExpiry + "', cardcvv = '" + cvv + "', '" + paymentDate + "'");
+        }
+    }
 
     // Delete details
+    public void deletePayment(int paymentID) throws SQLException {
+        st.executeUpdate("DELETE FROM IOTUSER.payment WHERE paymentID = " + paymentID);
+    }
 
 /* Product Database */
 /* Shipping Database */
