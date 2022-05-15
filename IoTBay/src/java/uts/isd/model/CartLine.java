@@ -17,6 +17,7 @@ public class CartLine {
     private String orderStatus;
     private double productCost;
     private int quantity;
+    private int quantityAvailable;
     private double itemTotal;
     private double totalCost;
 
@@ -28,13 +29,14 @@ public class CartLine {
     }
 
     // Constructor for displaying information to JSP
-    public CartLine(int cartID, int productID, String productName, String orderStatus, double productCost, int quantity, double itemTotal, double totalCost) {
+    public CartLine(int cartID, int productID, String productName, String orderStatus, double productCost, int quantity, int quantityAvailable, double itemTotal, double totalCost) {
         this.cartID = cartID;
         this.productID = productID;
         this.productName = productName;
         this.orderStatus = orderStatus;
         this.productCost = productCost;
         this.quantity = quantity;
+        this.quantityAvailable = quantityAvailable;
         this.itemTotal = itemTotal;
         this.totalCost = totalCost;
     }
@@ -61,6 +63,10 @@ public class CartLine {
 
     public int getQuantity() {
         return this.quantity;
+    }
+
+    public int getQuantityAvailable() {
+        return this.quantityAvailable;
     }
 
     public double getItemTotal() {
@@ -93,6 +99,10 @@ public class CartLine {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public void setQuantityAvailable(int quantityAvailable) {
+        this.quantityAvailable = quantityAvailable;
     }
 
     public void setItemTotal(double itemTotal) {

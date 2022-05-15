@@ -634,6 +634,8 @@ public class TestDB {
                     break;
                 case "g":
                     testGetIndividualProduct();
+                case "dpq":
+                    testDecreaseProductQuantity();
                     break;                   
                 default:
                     System.out.println("Unknown Command");
@@ -777,6 +779,17 @@ public class TestDB {
         try {
             Product returnedProduct = db.getIndividualProduct(enteredProductID);
             System.out.println(returnedProduct.getProductName());
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void testDecreaseProductQuantity() throws SQLException {
+        System.out.print("Cart ID: ");
+        int cartID = Integer.parseInt(in.nextLine());
+        try {
+            db.decreaseProductQuantity(cartID);
         }
         catch (SQLException ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
