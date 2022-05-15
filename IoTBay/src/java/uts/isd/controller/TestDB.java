@@ -193,6 +193,8 @@ public class TestDB {
                     break;
                 case "ci":
                     testCheckItemsInCart();
+                case "csq":
+                    testCheckSelectedQuantity();
                     break;
                 case "h":
                     System.out.println("a -> add order item");
@@ -299,6 +301,23 @@ public class TestDB {
         }
     }
 
+    private void testCheckSelectedQuantity() throws SQLException {
+        System.out.print("Product ID: ");
+        int productID = in.nextInt();
+        System.out.print("Quantity: ");
+        int quantity = in.nextInt();
+        
+        try {
+            if(db.checkSelectedQuantity(productID, quantity)) {
+                System.out.println("Item can be bought");
+            } else {
+                System.out.println("Item cannot be bought");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     // Test Customer Database
     private void customerQueries() throws SQLException {
         String s;
@@ -396,16 +415,16 @@ public class TestDB {
     }
 
     private void testSubmitOrder() throws SQLException {
-        System.out.print("Order ID: ");
-        int orderID = in.nextInt();
+        System.out.print("Cart ID: ");
+        int cartID = in.nextInt();
 
         try {
-            db.submitOrder(orderID);
+            db.submitOrder(cartID);
         } catch (SQLException ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        System.out.println("Order " + orderID + " has been submitted");
+        System.out.println("CartID " + cartID + " has been submitted");
     }   
 
     private void testShowCustomerOrders() throws SQLException {
@@ -636,7 +655,9 @@ public class TestDB {
                     testGetIndividualProduct();
                 case "dpq":
                     testDecreaseProductQuantity();
-                    break;                   
+                    break;  
+                case "cis":
+                    testCheckItemStock();                 
                 default:
                     System.out.println("Unknown Command");
                     break;
@@ -795,6 +816,22 @@ public class TestDB {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    private void testCheckItemStock() throws SQLException {
+        System.out.print("Product ID: ");
+        int productID = Integer.parseInt(in.nextLine());
+        try {
+            if (db.checkItemStock(productID)) {
+                System.out.println("Available");
+            } else {
+                System.out.println("Out of Stock");
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     
     // Test Shipping Database
     private void shippingQueries() throws SQLException {

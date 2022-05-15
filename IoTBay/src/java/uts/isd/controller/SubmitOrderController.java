@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import uts.isd.model.CartLine;
 import uts.isd.model.Customer;
 import uts.isd.model.Order;
 import uts.isd.model.dao.DBManager;
@@ -32,9 +33,19 @@ public class SubmitOrderController extends HttpServlet {
         int cartID = Integer.valueOf(request.getParameter("cartID"));
         Customer customer = (Customer) session.getAttribute("customer");
         int customerID = customer.getCustomerID();
-        String orderStatus = "Submitted";
 
         try {
+            ArrayList<CartLine> cartList = manager.fetchCartItems(cartID);
+            for (CartLine cl: cartList) {
+                if (!manager.checkItemStock(cl.getProductID())) {
+                    session.setAttribute("outOfStockErr", cl.getProductName() + " is out of stock");
+                    request.getRequestDispatcher("ViewCartController?cartID=" + cartID).include(request, response);
+                } else if (!manager.checkSelectedQuantity(cl.getProductID(), cl.getQuantity())) {
+                    session.setAttribute("selectQuantityErr", "There are " + cl.getQuantityAvailable() + " " + cl.getProductName() + " available. You have selected " + cl.getQuantity());
+                    request.getRequestDispatcher("ViewCartController?cartID=" + cartID).include(request, response);
+                }  
+            }
+
             Order submittedOrder = manager.findOrder(cartID);
             Order newActiveOrder = manager.createOrder(customerID);
             manager.submitOrder(submittedOrder.getOrderID());
