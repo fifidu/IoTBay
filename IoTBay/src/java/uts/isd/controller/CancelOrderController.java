@@ -27,6 +27,10 @@ public class CancelOrderController extends HttpServlet {
         DBManager manager = (DBManager) session.getAttribute("manager");
 
         int orderID = Integer.valueOf(request.getParameter("orderID"));
+        session.removeAttribute("activeOrderMsg");
+        session.removeAttribute("orderUpdate");
+        session.removeAttribute("submittedOrderMsg");
+        session.removeAttribute("cancelledOrderMsg");
 
         try {
             manager.cancelOrder(orderID);

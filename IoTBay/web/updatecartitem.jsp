@@ -47,13 +47,16 @@
 
             <div class="header-outline"></div>
         </header>
-
+<%
+String updatedQuantityMsg = (String) session.getAttribute("updatedQuantityMsg");
+%>
         <main>
             <nav>
                 <a class="nav-item">Product</a>
             </nav>
             <div class="page-content">
                 <h1 class="title">Edit Product</h1>
+                <p><%=(updatedQuantityMsg != null ? updatedQuantityMsg : "")%></p>
                 <table class="center">
                     <tr>
                         <th>Product ID</th>
@@ -75,7 +78,7 @@
                         <input type="number" id="updatedQuantity" name="updatedQuantity" value="<%=session.getAttribute("editQuantity")%>"><br><br>
                         <input type="submit" value="Edit Quantity">
                     </form>
-                    <a class="main-link" href="RemoveOrderItemController?productID=<%=editProduct.getProductID()%>">Remove Item</a>
+                    <a class="button" href="RemoveOrderItemController?productID=<%=editProduct.getProductID()%>">Remove Item</a>
                 </div>
             </div>
         </main>

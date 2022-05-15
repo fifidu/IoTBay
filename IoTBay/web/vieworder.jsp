@@ -51,13 +51,16 @@
 
             <div class="header-outline"></div>
         </header>
-
+<%
+String removeItemMsg = (String) session.getAttribute("removeItemMsg");
+%>
         <main>
             <nav>
                 <a class="nav-item">Product</a>
             </nav>
             <div class="page-content">
                 <h1 class="title">Cart</h1>
+                <p><%=(removeItemMsg != null ? removeItemMsg : "")%></p>
                 <a class="button" href="CancelOrderController?orderID=<%=viewedOrder.getOrderID()%>">Cancel Order</a>
                 <table class="center">
                     <tr>

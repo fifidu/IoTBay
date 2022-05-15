@@ -37,6 +37,11 @@ public class AddToOrderController extends HttpServlet {
         int quantityAvailable = activeProduct.getQuantityAvailable();
         Order activeOrder = (Order) session.getAttribute("activeOrder");
         Customer customer = (Customer) session.getAttribute("customer");
+
+        session.removeAttribute("noStockErr");
+        session.removeAttribute("invalidQuantityErr");
+        session.removeAttribute("addToCartMsg");
+
         try {
             if (activeOrder == null) {
                 Order newOrder = manager.createOrder(customer.getCustomerID());

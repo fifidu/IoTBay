@@ -33,7 +33,10 @@ public class SubmitOrderController extends HttpServlet {
         int cartID = Integer.valueOf(request.getParameter("cartID"));
         Customer customer = (Customer) session.getAttribute("customer");
         int customerID = customer.getCustomerID();
-
+        session.removeAttribute("activeOrderMsg");
+        session.removeAttribute("orderUpdate");
+        session.removeAttribute("submittedOrderMsg");
+        session.removeAttribute("cancelledOrderMsg");
         try {
             ArrayList<CartLine> cartList = manager.fetchCartItems(cartID);
             for (CartLine cl: cartList) {
