@@ -63,8 +63,8 @@
                     <th class="results-table-header">Payment Date</th>
                 </tr>
                 <% 
-                    ArrayList<Payment> paymentDetails = (ArrayList<Payment>)session.getAttribute("paymentDetails");
-                    for (Payment pay: paymentDetails) { %>
+                    ArrayList<Payment> paymentHistory = (ArrayList<Payment>) session.getAttribute("paymentHistory");
+                    for (Payment pay: paymentHistory) { %>
                         <tr>
                             <td><%=pay.getPaymentID()%></td>
                             <td><%=pay.getOrderID()%></td>
@@ -75,7 +75,7 @@
                             <td><%=pay.getCvv()%></td>
                             <td><%=pay.getPaymentDate()%></td>
                         </tr>
-                    }
+                    <%}%>
             </table>
         </div>
     </main>

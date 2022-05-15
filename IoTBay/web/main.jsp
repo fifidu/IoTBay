@@ -34,7 +34,7 @@
                         <div class="user-menu">
                             <a class="header-button" href="viewcustomer.jsp">Account Details</a>
                             <a class="header-button" href="ViewOrdersController">My Orders</a>
-                            <a class="header-button" href="updatepayment.jsp">Payment</a>
+                            <a class="header-button" href="ViewPaymentHistoryController">Payment History</a>
                             <a class="header-button" href="logout.jsp">Logout</a>
                         </div>
                     </div>

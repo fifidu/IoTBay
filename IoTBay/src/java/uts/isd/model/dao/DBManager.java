@@ -551,24 +551,21 @@ public class DBManager {
     }
 
     // View order history list
-    public ArrayList<Payment> viewOrderHistory(int customerID) throws SQLException {
+    public ArrayList<Payment> viewPaymentHistory(int customerID) throws SQLException {
         String fetch = "SELECT * from IOTUSER.payment WHERE customerID = " + customerID;
         ResultSet rs = st.executeQuery(fetch);
         ArrayList<Payment> temp = new ArrayList();
 
         while (rs.next()) {
-            int returnedCustomerID = rs.getInt(3);
-            if (returnedCustomerID==customerID) {
-                int paymentID = rs.getInt(1);
-                int orderID = rs.getInt(2);
-                String cardNumber = rs.getString(4);
-                String cardName = rs.getString(5);
-                String cardExpiry = rs.getString(6);
-                int cvv = rs.getInt(7);
-                Date paymentDate = rs.getDate(8);
+                int paymentID = rs.getInt("paymentID");
+                int orderID = rs.getInt("orderID");
+                String cardNumber = rs.getString("cardNumber");
+                String cardName = rs.getString("cardName");
+                String cardExpiry = rs.getString("cardExpiry");
+                int cvv = rs.getInt("cardcvv");
+                Date paymentDate = rs.getDate("paymentDate");
                 LocalDate changedPaymentDate = paymentDate.toLocalDate();
-                temp.add(new Payment(paymentID,orderID,returnedCustomerID,cardNumber,cardName,cardExpiry,cvv,changedPaymentDate));
-            }
+                temp.add(new Payment(paymentID, orderID, customerID, cardNumber, cardName, cardExpiry, cvv, changedPaymentDate));
         }
         return temp;
     }

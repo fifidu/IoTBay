@@ -29,12 +29,11 @@ public class ViewPaymentHistoryController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         DBManager manager = (DBManager) session.getAttribute("manager");
-        int customerID = Integer.parseInt(request.getParameter("customerID"));
-//        Customer customer = (Customer) session.getAttribute("customer");
-//        int customerID = customer.getCustomerID();
+        Customer customer = (Customer) session.getAttribute("customer");
+        int customerID = customer.getCustomerID();
 
         try {
-            ArrayList<Payment> paymentHistory = manager.viewOrderHistory(customerID);
+            ArrayList<Payment> paymentHistory = manager.viewPaymentHistory(customerID);
             session.setAttribute("paymentHistory", paymentHistory);
         }
         catch (SQLException | NullPointerException sqled) {
