@@ -25,7 +25,7 @@
                     <a class="header-button" href="main.jsp"><h3>IoTBay</h3></a>
                 </div>
                 <div class="header-center">
-                    <form id="searchForm" action="">
+                    <form id="searchForm" action="SearchPaymentsController" method="get">
                         <input id="search" type="text" name="search-query" placeholder="Search"/>
                     </form>
                 </div>
