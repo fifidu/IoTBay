@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="./css/welcome.css" rel="stylesheet" type="text/css" >
+        <link href="./css/editaccount.css" rel="stylesheet" type="text/css" >
         <link href="./css/header.css" rel="stylesheet" type="text/css" >
         <title>Edit Customer - IoTBay</title>
     </head>
