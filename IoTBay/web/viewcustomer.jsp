@@ -45,14 +45,13 @@
         </header>
 
         <main>
-            <div class="content">
-                <h4>First Name: </h4><p><%=customer.getCusFName()%></p>
-                <h4>Last Name: </h4><p><%=customer.getCusLName()%></p>
-                <h4>Email Address: </h4><p><%=customer.getCusEmailAddress()%></p>
-                <h4>Phone Number: </h4><p><%=customer.getCusContactNumber()%></p>
-            </div>
-            <div class="redirectbutton">
-                <a href ="editcustomer.jsp">Edit Details</a>
+            <div class="page-content">
+                <h3>Account Details</h3> <br><br>
+                <h4>First Name: </h4><p><%=customer.getCusFName()%></p><br>
+                <h4>Last Name: </h4><p><%=customer.getCusLName()%></p><br>
+                <h4>Email Address: </h4><p><%=customer.getCusEmailAddress()%></p><br>
+                <h4>Phone Number: </h4><p><%=customer.getCusContactNumber()%></p><br>
+                <p><a class="main-link" href = "editcustomer.jsp">Edit Details</a></p>
             </div>
         </main>
     </body>
