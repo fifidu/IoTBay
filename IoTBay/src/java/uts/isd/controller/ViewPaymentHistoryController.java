@@ -5,6 +5,7 @@
 package uts.isd.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -14,32 +15,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import uts.isd.model.Customer;
-import uts.isd.model.Order;
+import uts.isd.model.Payment;
 import uts.isd.model.dao.DBManager;
 
 /**
  *
- * @author chrisvuong
+ * @author sr
  */
-public class ViewOrdersController extends HttpServlet {
+public class ViewPaymentHistoryController extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         DBManager manager = (DBManager) session.getAttribute("manager");
-        Customer customer = (Customer) session.getAttribute("customer");
-        int customerID = customer.getCustomerID();
+        int customerID = Integer.parseInt(request.getParameter("customerID"));
 
         try {
-            Order activeOrder = manager.findActiveOrder(customerID);
-            session.setAttribute("activeOrder", activeOrder);
-            ArrayList<Order> orderList = manager.fetchCustomerOrders(customerID);
-            session.setAttribute("orderList", orderList);
-        } catch (SQLException ex) {
-            Logger.getLogger(ViewCartController.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Exception is: " + ex);
-        } 
-
-        request.getRequestDispatcher("orders.jsp").include(request, response);
+            ArrayList<Payment> paymentDetails = manager.viewOrderHistory(customerID);
+            session.setAttribute("paymentDetails", paymentDetails);
+        }
+        catch (SQLException sqled) {
+            Logger.getLogger(ViewPaymentHistoryController.class.getName()).log(Level.SEVERE, null, sqled);
+            System.out.println("Unable to view saved payment details due to: " + sqled);
+        }
+        request.getRequestDispatcher("paymenthistory.jsp").include(request, response);
     }
 }

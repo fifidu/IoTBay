@@ -1,11 +1,9 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package uts.isd.controller;
-
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -20,25 +18,23 @@ import uts.isd.model.dao.DBManager;
 
 /**
  *
- * @author chrisvuong
+ * @author fifidu
  */
-public class ShowProductsController extends HttpServlet {
-
+public class SearchProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         DBManager manager = (DBManager) session.getAttribute("manager");
+        String searched = request.getParameter("search-query");
 
         try {
-            ArrayList<Product> productList = manager.fetchProducts();
+            ArrayList<Product> productList = manager.findProduct(searched);
             session.setAttribute("productList", productList);
         }
         catch (SQLException sqled) {
-            Logger.getLogger(FetchProductsController.class.getName()).log(Level.SEVERE, null, sqled);
-            System.out.println("Fetch failed with error: " + sqled);
+            Logger.getLogger(FindProductController.class.getName()).log(Level.SEVERE, null, sqled);
+            System.out.println("Search failed with error: " + sqled);
         }
-        request.getRequestDispatcher("main.jsp").include(request, response);
+        request.getRequestDispatcher("searchproduct.jsp").include(request, response);
     }
-
-
 }

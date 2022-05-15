@@ -3,8 +3,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
 */
 /* 
-    Created on : 31 Mar 2022, 1:20:27 pm
-    Author     : someo
+    Created on : 15/05/2022, 11:04:42 AM
+    Author     : sr
 */
 
 body {
@@ -81,12 +81,12 @@ input[type=submit]  {
     border-radius: 8px;
 }
 
-.create-product-form {
+.create-payment-form {
     background-color: #303030;
     padding: 20px;
 }
 
-.create-product-form-input {
+.create-payment-form-input {
     width: 100%;
     color: black;
 }

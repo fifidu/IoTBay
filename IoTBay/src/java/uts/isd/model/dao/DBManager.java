@@ -28,14 +28,16 @@ public class DBManager {
         st.executeUpdate("INSERT INTO IOTUSER.cart VALUES (" + cartID + "," + customerID + ")");
     }
 
-    public int countCarts() throws SQLException {
-        String fetch = "SELECT COUNT(*) FROM IOTUSER.cart";
+    public int nextAvailableCartID() throws SQLException {
+        int nextID = 0;
+
+        String fetch = "SELECT * FROM IOTUSER.cart";
         ResultSet rs = st.executeQuery(fetch);
-        int count = 0;
+
         while (rs.next()) {
-            count = rs.getInt(1);
+            nextID = rs.getInt("cartID");
         }
-        return count;
+        return nextID + 1;
     }
 
     public void deleteCart(int cartID) throws SQLException {
@@ -83,40 +85,28 @@ public class DBManager {
     public void addOrderItem(int cartID, int productID, int quantity) throws SQLException {
         st.executeUpdate("INSERT INTO IOTUSER.cartline " + "VALUES (" + cartID + "," + productID + "," + quantity + ")");
         updateTotalCost(cartID);
-        decreaseProductQuantity(productID, quantity);
     }
-    
-    // Update Quantity
-    public void updateOrderItemQuantity(int cartID, int productID, int quantity /* 4 */) throws SQLException {
-        int quantityDiff;
-        String fetch = "SELECT * FROM IOTUSER.cartline WHERE cartID = " + cartID + " AND productID = " + productID; 
+
+    public void addQuantityToExistingItem(int cartID, int productID, int quantity) throws SQLException {
+        String fetch = "SELECT * FROM IOTUSER.cartline WHERE cartID = " + cartID + " AND productID = " + productID;
         ResultSet rs = st.executeQuery(fetch);
+        int newQuantity = 0;
         while (rs.next()) {
-            int oldQuantity = rs.getInt("quantity");
-            if (quantity /* 4 */ > oldQuantity /* 3 */) {
-                quantityDiff = quantity - oldQuantity;
-                decreaseProductQuantity(productID, quantityDiff);
-                st.executeUpdate("UPDATE IOTUSER.cartline SET quantity = " + quantity + " WHERE cartID = " + cartID + " AND productID = " + productID);
-                updateTotalCost(cartID);
-            } else if (quantity /* 2 */ < oldQuantity /* 3 */) {
-                quantityDiff = oldQuantity - quantity;
-                increaseProductQuantity(productID, quantityDiff);
-                st.executeUpdate("UPDATE ITOUSER.cartline SET quantity = " + quantity + " WHERE cartID = " + cartID + " AND productID = " + productID);
-                updateTotalCost(cartID);
-            } else {
-                System.out.println("Product ID " + productID + " already has Quantity " + quantity);
-            }
+            newQuantity = rs.getInt("quantity") + quantity;
         }
+
+        st.executeUpdate("UPDATE IOTUSER.cartline SET quantity = " + newQuantity + " WHERE cartID = " + cartID + " AND productID = " + productID);
+        updateTotalCost(cartID);
     }
-    
+
+    // Update Quantity
+    public void updateOrderItemQuantity(int cartID, int productID, int quantity) throws SQLException {
+        st.executeUpdate("UPDATE IOTUSER.cartline SET quantity = " + quantity + " WHERE cartID = " + cartID + " AND productID = " + productID);
+        updateTotalCost(cartID);
+    }
+
     // Delete Item
     public void deleteOrderItem(int cartID, int productID) throws SQLException {
-        String fetch = "SELECT * FROM IOTUSER.cartline WHERE cartID " + cartID + " AND productID = " + productID;
-        ResultSet rs = st.executeQuery(fetch);
-        while (rs.next()) {
-            int quantity = rs.getInt("quantity");
-            increaseProductQuantity(productID, quantity);
-        }
         st.executeUpdate("DELETE FROM IOTUSER.cartline WHERE cartID = " + cartID + " AND productID = " + productID);
         updateTotalCost(cartID);
     }
@@ -124,25 +114,13 @@ public class DBManager {
     public void deleteAllOrderItems(int cartID) throws SQLException {
         st.executeUpdate("DELETE FROM IOTUSER.cartline WHERE cartID = " + cartID);
         updateTotalCost(cartID);
-        // Update Product Quantity
-    }
-
-    public void cancelledOrderItems(int cartID) throws SQLException {
-        String fetch = "SELECT * FROM IOTUSER.cartline WHERE cartID = " + cartID;
-        ResultSet rs = st.executeQuery(fetch);
-        while (rs.next()) {
-            int productID = rs.getInt("productID");
-            int quantity  = rs.getInt("quantity");
-            // Update Product Quantity
-        }
-
     }
 
     // Show Customer Cart Items
     public void showCustomerCartItems(int cartID) throws SQLException {
         ArrayList<CartLine> cartList = fetchCartItems(cartID);
         for (CartLine cl: cartList) {
-            System.out.println(cl.getProductID() + ", " + cl.getProductName() + ", " + cl.getQuantity()); 
+            System.out.println(cl.getProductID() + ", " + cl.getProductName() + ", " + cl.getQuantity());
         }
     }
 
@@ -156,11 +134,24 @@ public class DBManager {
             String orderStatus = rs.getString("orderStatus");
             double productCost = rs.getDouble("productCost");
             int quantity = rs.getInt("quantity");
+            int quantityAvailable = rs.getInt("quantityAvailable");
             double itemTotal = productCost * quantity;
             double totalCost = rs.getDouble("totalCost");
-            temp.add(new CartLine(cartID, productID, productName, orderStatus, productCost, quantity, itemTotal, totalCost));
+            temp.add(new CartLine(cartID, productID, productName, orderStatus, productCost, quantity, quantityAvailable, itemTotal, totalCost));
         }
         return temp;
+    }
+
+    public boolean checkItemInCart(int cartID, int productID) throws SQLException {
+        String fetch = "SELECT * FROM IOTUSER.cartline WHERE cartID = " + cartID;
+        ResultSet rs = st.executeQuery(fetch);
+        while (rs.next()) {
+            int returnedProductID = rs.getInt("productID");
+            if (returnedProductID == productID) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public double calculateTotalCost(int cartID) throws SQLException {
@@ -211,7 +202,7 @@ public class DBManager {
         }
         return false;
 }
-    
+
     // Checks if email and password match
     public Customer findCustomer(String emailAddress, String password) throws SQLException {
         String fetch = "SELECT * FROM IOTUSER.customer WHERE cusEmailAddress = '" + emailAddress + "'";
@@ -232,7 +223,7 @@ public class DBManager {
         return null;
     }
 
-   // Finds the next available customerID 
+   // Finds the next available customerID
     public int nextAvailableCustomerID() throws SQLException {
         int nextID = 0;
         String fetch = "SELECT * FROM IOTUSER.customer";
@@ -251,11 +242,11 @@ public class DBManager {
 
         return new Customer(customerID, cusFName, cusLName, cusEmailAddress, cusPass, cusContactNumber);
     }
-    
+
     public void deleteCustomer (int customerID) throws SQLException {
         st.executeUpdate("DELETE FROM customer WHERE customerID = " + customerID);
     }
-    
+
     public Customer updateCustomer (int customerID, String cusFName, String cusLName, String cusEmailAddress, String cusPass, String cusContactNumber) throws SQLException{
         st.executeUpdate("UPDATE IOTUSER.customer SET cusEmailAddress = '" + cusEmailAddress + "', cusFName= '" + cusFName + "', cusLName = '" + cusLName + "', cusPass = '" + cusPass + "', cusContactNumber = '" + cusContactNumber + "' WHERE customerID = " + customerID);
         return new Customer(customerID, cusFName, cusLName, cusEmailAddress, cusPass, cusContactNumber);
@@ -264,11 +255,13 @@ public class DBManager {
     /* Order Database */
     // Create New Order for Customer
     public Order createOrder(int customerID) throws SQLException {
-        int orderID = countOrders() + 1;
-        int cartID = countCarts() + 1;
+        int orderID = nextAvailableOrderID();
+        int cartID = nextAvailableCartID();
         String orderStatus = "Active";
         LocalDate orderDate = LocalDate.now();
         double totalCost = 0.00;
+
+        saveActiveOrder(customerID);
         createCart(cartID, customerID);
 
         st.executeUpdate("INSERT INTO IOTUSER.orders " + "VALUES (" + orderID + ", " + cartID + ",'" + orderDate + "','" + orderStatus + "'," + totalCost + ")");
@@ -276,15 +269,15 @@ public class DBManager {
         return new Order(orderID, cartID, orderDate, orderStatus, totalCost);
     }
 
-    // Count number of orders in Orders database
-    public int countOrders() throws SQLException {
-        String fetch = "SELECT COUNT(*) FROM IOTUSER.orders";
+   // Finds the next available orderID
+    public int nextAvailableOrderID() throws SQLException {
+        int nextID = 0;
+        String fetch = "SELECT * FROM IOTUSER.orders";
         ResultSet rs = st.executeQuery(fetch);
-        int count = 0;
         while (rs.next()) {
-            count = rs.getInt(1);
+            nextID = rs.getInt("orderID");
         }
-        return count;
+        return nextID + 1;
     }
 
     public boolean checkActiveOrders(int customerID) throws SQLException {
@@ -299,6 +292,46 @@ public class DBManager {
         }
         return false;
     }
+
+    public Order findActiveOrder(int customerID) throws SQLException {
+        String fetch = "SELECT * FROM IOTUSER.orders INNER JOIN IOTUSER.cart ON orders.cartID = cart.cartID WHERE customerID = " + customerID + " AND orderStatus = 'Active'";
+        ResultSet rs = st.executeQuery(fetch);
+
+        while (rs.next()) {
+            int orderID = rs.getInt("orderID");
+            int cartID = rs.getInt("cartID");
+            Date sqlOrderDate = rs.getDate("orderDate");
+            LocalDate javaOrderDate = sqlOrderDate.toLocalDate();
+            String orderStatus = rs.getString("orderStatus");
+            double totalCost = rs.getDouble("totalCost");
+            return new Order(orderID, cartID, javaOrderDate, orderStatus, totalCost);
+        }
+        return null;
+    }
+
+
+    public Order findOrder(int cartID) throws SQLException {
+        String fetch = "SELECT * FROM IOTUSER.orders WHERE cartID = " + cartID;
+        ResultSet rs = st.executeQuery(fetch);
+        while (rs.next()) {
+            int orderID = rs.getInt("orderID");
+            Date sqlOrderDate = rs.getDate("orderDate");
+            LocalDate javaOrderDate = sqlOrderDate.toLocalDate();
+            String orderStatus = rs.getString("orderStatus");
+            double totalCost = rs.getDouble("totalCost");
+            return new Order(orderID, cartID, javaOrderDate, orderStatus, totalCost);
+        }
+        return null;
+    }
+
+    public void saveActiveOrder(int customerID) throws SQLException {
+        Order activeOrder = findActiveOrder(customerID);
+        String orderStatus = "Saved";
+        if (activeOrder != null) {
+            updateOrderStatus(activeOrder.getOrderID(), orderStatus);
+        }
+    }
+
 
     public void updateTotalCost(int cartID) throws SQLException {
         double totalCost = 0.00;
@@ -317,13 +350,14 @@ public class DBManager {
         st.executeUpdate("UPDATE IOTUSER.orders SET orderStatus = '" + orderStatus + "' WHERE orderID = " + orderID);
     }
 
-    public void cancelOrder(int orderID, int cartID) throws SQLException {
-        cancelledOrderItems(cartID);         
-        String cancel = "Cancelled";   
-        updateOrderStatus(orderID, cancel);
+    public void cancelOrder(int orderID) throws SQLException {
+        String orderStatus = "Cancelled";
+        updateOrderStatus(orderID, orderStatus);
     }
 
     public void submitOrder(int orderID) throws SQLException {
+        Order submittedOrder = findOrder(orderID);
+        decreaseProductQuantity(submittedOrder.getCartID());
         updateOrderStatus(orderID, "Submitted");
     }
 
@@ -347,7 +381,7 @@ public class DBManager {
             String orderStatus = rs.getString("orderStatus");
             double totalCost = rs.getDouble("totalCost");
             temp.add(new Order(orderID, cartID, javaOrderDate, orderStatus, totalCost));
-        }  
+        }
         return temp;
     }
     // Show All Orders
@@ -355,7 +389,7 @@ public class DBManager {
         ArrayList<Order> orderList = fetchOrders();
         for (Order ord: orderList) {
             System.out.println(ord.getOrderID() + ", " + ord.getCartID() + ", " + ord.getOrderDate() + ", " + ord.getOrderStatus() + ", " + ord.getTotalCost());
-        }   
+        }
     }
 
     public ArrayList<Order> fetchOrders() throws SQLException {
@@ -370,7 +404,7 @@ public class DBManager {
             String orderStatus = rs.getString("orderStatus");
             double totalCost = rs.getDouble("totalCost");
             temp.add(new Order(orderID, cartID, javaOrderDate, orderStatus, totalCost));
-        }  
+        }
         return temp;
     }
 
@@ -476,24 +510,91 @@ public class DBManager {
     }
     /* Payment Database */
     // Create details (links to orderID)
-    public void createPayment(int paymentID, int orderID, int cardNumber, String cardName, LocalDateTime cardExpiry, int cvv) throws SQLException {
-    st.executeUpdate("INSERT INTO IOTUSER.payment VALUES (" + paymentID + ", " + orderID + ", " + cardNumber + ", '" + cardName + "', " + cardExpiry + ", " + cvv);
+    public void createPayment(int paymentID, int orderID, int customerID, String cardNumber, String cardName, String cardExpiry, int cvv, String paymentDate) throws SQLException {
+        st.executeUpdate("INSERT INTO IOTUSER.payment VALUES (" + paymentID + ", " + orderID + ", " + customerID + ", '" + cardNumber + "', '" + cardName + "', '" + cardExpiry + "', '" + cvv + "', '" + paymentDate + "')");
     }
 
     // View saved order payment details
+    public ArrayList<Payment> viewPaymentDetails(int orderID) throws SQLException {
+        String fetch = "SELECT * from IOTUSER.payment WHERE orderID = " + orderID;
+        ResultSet rs = st.executeQuery(fetch);
+        ArrayList<Payment> temp = new ArrayList();
+
+        while (rs.next()) {
+            int returnedOrderID = rs.getInt(2);
+                if (returnedOrderID==orderID) {
+                    int paymentID = rs.getInt(1);
+                    int customerID = rs.getInt(3);
+                    String cardNumber = rs.getString(4);
+                    String cardName = rs.getString(5);
+                    String cardExpiry = rs.getString(6);
+                    int cvv = rs.getInt(7);
+                    String paymentDate = rs.getString(8);
+                    temp.add(new Payment(paymentID, returnedOrderID, customerID, cardNumber, cardName, cardExpiry, cvv, paymentDate));
+            }
+        }
+        return temp;
+    }
 
     // View order history list
+    public ArrayList<Payment> viewOrderHistory(int customerID) throws SQLException {
+        String fetch = "SELECT * from IOTUSER.payment WHERE customerID = " + customerID;
+        ResultSet rs = st.executeQuery(fetch);
+        ArrayList<Payment> temp = new ArrayList();
+
+        while (rs.next()) {
+            int returnedCustomerID = rs.getInt(3);
+            if (returnedCustomerID==customerID) {
+                int paymentID = rs.getInt(1);
+                int orderID = rs.getInt(2);
+                String cardNumber = rs.getString(4);
+                String cardName = rs.getString(5);
+                String cardExpiry = rs.getString(6);
+                int cvv = rs.getInt(7);
+                String paymentDate = rs.getString(8);
+                temp.add(new Payment(paymentID,orderID,returnedCustomerID,cardNumber,cardName,cardExpiry,cvv,paymentDate));
+            }
+        }
+        return temp;
+    }
 
     // Search payment records based on paymentID and date
+    public ArrayList<Payment> searchPaymentRecords(int paymentID, String paymentDate) throws SQLException {
+        String fetch = "SELECT * from IOTUSER.payment WHERE paymentID = " + paymentID + " OR paymentDate = '" + paymentDate + "'";
+        ResultSet rs = st.executeQuery(fetch);
+        ArrayList<Payment> temp = new ArrayList();
+
+        while (rs.next()) {
+            int returnedPaymentID = rs.getInt(1);
+            String returnedPaymentDate = rs.getString(8);
+            if (returnedPaymentID==paymentID && returnedPaymentDate.equals(paymentDate)) {
+                int orderID = rs.getInt(2);
+                int customerID = rs.getInt(3);
+                String cardNumber = rs.getString(4);
+                String cardName = rs.getString(5);
+                String cardExpiry = rs.getString(6);
+                int cvv = rs.getInt(7);
+                temp.add(new Payment(returnedPaymentID,orderID,customerID,cardNumber,cardName,cardExpiry,cvv,returnedPaymentDate));
+                return temp;
+            }
+        }
+        return null;
+    }
 
     // Update details
+    public void updatePayment(int paymentID, String cardNumber, String cardName, String cardExpiry, int cvv, String paymentDate) throws SQLException {
+        st.executeUpdate("UPDATE IOTUSER.payment SET cardnumber = '" + cardNumber + "', cardname = '" + cardName + "', cardexpiry = '" + cardExpiry + "', cardcvv = '" + cvv + "', '" + paymentDate + "' WHERE paymentID = " + paymentID);
+    }
 
     // Delete details
+    public void deletePayment(int paymentID) throws SQLException {
+        st.executeUpdate("DELETE FROM IOTUSER.payment WHERE paymentID = " + paymentID);
+    }
 
 /* Product Database */
 /* Shipping Database */
 /* Staff Database */
-    
+
      public boolean checkStaff(String emailAddress) throws SQLException {
         String fetch = "SELECT * FROM IOTUSER.staff WHERE staffEmailAddress = '" + emailAddress + "'";
         ResultSet rs = st.executeQuery(fetch);
@@ -506,7 +607,7 @@ public class DBManager {
         }
         return false;
 }
-    
+
     // Checks if email and password match
     public Staff findStaff(String emailAddress, String password) throws SQLException {
         String fetch = "SELECT * FROM IOTUSER.staff WHERE staffEmailAddress = '" + emailAddress + "'";
@@ -526,7 +627,7 @@ public class DBManager {
         }
         return null;
     }
-    
+
     public Staff updateStaff (int staffID, String staffFName, String staffLName, String staffEmailAddress, String staffPass, String staffContactNumber) throws SQLException{
         st.executeUpdate("UPDATE IOTUSER.staff SET staffFName= '" + staffFName + "', staffLName = '" + staffLName + "', staffPass = '" + staffPass + "', staffContactNumber = '" + staffContactNumber + "' WHERE staffID = " + staffID );
         return new Staff(staffID, staffFName, staffLName, staffEmailAddress, staffPass, staffContactNumber);
@@ -542,12 +643,12 @@ public class DBManager {
     //Read/Find a product (customer or staff)
     //List all device records
     public boolean checkProduct(int productID) throws SQLException {
-        String fetch = "SELECT * FROM IOTUSER.product WHERE productID = '" + productID + "'";
+        String fetch = "SELECT * FROM IOTUSER.product";
         ResultSet rs = st.executeQuery(fetch);
 
         while (rs.next()) {
-            int existingProductID = rs.getInt("productID");
-            if (existingProductID == productID) {
+            int existingProductID = rs.getInt(1);
+            if (productID == existingProductID) {
                 return true;
             }
         }
@@ -591,11 +692,25 @@ public class DBManager {
         return temp;
     }
 
-    public ArrayList<Product> fetchIndividualProduct(int productID) throws SQLException {
+    public Product fetchIndividualProduct(int productID) throws SQLException {
         String fetch = "SELECT * FROM IOTUSER.product WHERE productID = " + productID;
         ResultSet rs = st.executeQuery(fetch);
-        ArrayList<Product> temp = new ArrayList();
 
+        while (rs.next()) {
+            String productName = rs.getString("productName");
+            String productType = rs.getString("productType");
+            String productSupplier = rs.getString("productSupplier");
+            String productDescription = rs.getString("productDescription");
+            double productCost = rs.getDouble("productCost");
+            int quantityAvailable = rs.getInt("quantityAvailable");
+            return new Product(productID, productName, productType, productSupplier, productDescription, productCost, quantityAvailable);
+        }
+        return null;
+    }
+
+    public Product getIndividualProduct(int productID) throws SQLException {
+        String fetch = "SELECT * FROM IOTUSER.product WHERE productID = " + productID;
+        ResultSet rs = st.executeQuery(fetch);
         while (rs.next()) {
             String productName = rs.getString(2);
             String productType = rs.getString(3);
@@ -603,9 +718,10 @@ public class DBManager {
             String productDescription = rs.getString(5);
             double productCost = rs.getDouble(6);
             int quantityAvailable = rs.getInt(7);
-            temp.add(new Product(productID, productName, productType, productSupplier, productDescription, productCost, quantityAvailable));
+            Product individualProduct = new Product(productID, productName, productType, productSupplier, productDescription, productCost, quantityAvailable);
+            return individualProduct;
         }
-        return temp;
+        return null;
     }
     //Update product
     public void updateProduct(int productID, String productName, String productType, String productSupplier, String productDescription, double productCost, int quantityAvailable) throws SQLException {
@@ -622,19 +738,24 @@ public class DBManager {
         }
     }
 
-    // Decrease product quantity available 
-    public void decreaseProductQuantity(int productID, int quantity) throws SQLException {
-        String fetch = "SELECT * FROM IOTUSER.product WHERE productID = " + productID;
-        ResultSet rs = st.executeQuery(fetch);
-        while (rs.next()) {
-            int newQuantity = rs.getInt("quantityAvailable") - quantity;
-            st.executeUpdate("UPDATE IOTUSER.product SET quantityAvailable = " + newQuantity + " WHERE productID = " + productID);
-        }
+    // Update quantityAvailable in products database
+    public void updateProductQuantity(int productID, int quantity) throws SQLException {
+        st.executeUpdate("UPDATE IOTUSER.product SET quantityAvailable = " + quantity + " WHERE productID = " + productID);
     }
 
     //Delete product
-    public void deleteProduct(String productName) throws SQLException {
-        st.executeUpdate("DELETE FROM IOTUSER.product WHERE productName = '" + productName + "'");
+    public void deleteProduct(int productID) throws SQLException {
+        st.executeUpdate("DELETE FROM IOTUSER.product WHERE productID = " + productID);
+    }
+
+    // Decrease product quantity available when user submits order
+    public void decreaseProductQuantity(int cartID) throws SQLException {
+        ArrayList<CartLine> cartList = fetchCartItems(cartID);
+        for (CartLine cl: cartList) {
+            int productID = cl.getProductID();
+            int newQuantity = cl.getQuantityAvailable() - cl.getQuantity();
+            updateProductQuantity(productID, newQuantity);
+        }
     }
 
 }

@@ -65,3 +65,8 @@ caption {
     margin: auto;
     width: 400px; 
 }
+
+.success-msg {
+    color: green;
+    padding-left: 15%;
+}

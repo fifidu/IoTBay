@@ -56,7 +56,10 @@
             </nav>
             <div class="page-content">
                 <h1 class="title">Orders</h1>
-                <a class="button" href="CreateOrderController?customerID=<%=1%>">Create Order</a>
+                <div>
+                    <a class="button" href="CreateOrderController?customerID=<%=customer.getCustomerID()%>">Create Order</a>
+                    <a class="button" href="ShowProductsController">Return to Home</a>
+                </div>
                 <table class="center">
                     <tr>
                         <th>Order ID</th>
@@ -76,7 +79,13 @@
                            <td><a href="ViewCartController?cartID=<%=ord.getCartID()%>">Edit</td>
                            <% } else {%>
                            <td><a href="ViewCartController?cartID=<%=ord.getCartID()%>">View</td>
+                           <%}
+                           if (!ord.getOrderStatus().equals("Cancelled")) {%>
+                           <td><a href="CancelOrderController?orderID=<%=ord.getOrderID()%>">Cancel</a></td>
                            <%}%>
+                           <%if (ord.getOrderStatus().equals("Saved")) {%>
+                           <td><a href="ChangeActiveOrderController?orderID=<%=ord.getOrderID()%>">Make Active</a></td>
+                            <%}%>
                        </tr>
                     <%}%>
                 </table>

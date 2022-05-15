@@ -1,48 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
+        <servlet-name>AddToOrderController</servlet-name>
+        <servlet-class>uts.isd.controller.AddToOrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CancelOrderController</servlet-name>
+        <servlet-class>uts.isd.controller.CancelOrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeActiveOrderController</servlet-name>
+        <servlet-class>uts.isd.controller.ChangeActiveOrderController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ConnServlet</servlet-name>
         <servlet-class>uts.isd.controller.ConnServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ViewCartController</servlet-name>
-        <servlet-class>uts.isd.controller.ViewCartController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ViewOrdersController</servlet-name>
-        <servlet-class>uts.isd.controller.ViewOrdersController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SubmitOrderController</servlet-name>
-        <servlet-class>uts.isd.controller.SubmitOrderController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CreateOrderController</servlet-name>
         <servlet-class>uts.isd.controller.CreateOrderController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RegisterController</servlet-name>
-        <servlet-class>uts.isd.controller.RegisterController</servlet-class>
+        <servlet-name>RemoveOrderItemController</servlet-name>
+        <servlet-class>uts.isd.controller.RemoveOrderItemController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LoginController</servlet-name>
-        <servlet-class>uts.isd.controller.LoginController</servlet-class>
+        <servlet-name>CreateProductController</servlet-name>
+        <servlet-class>uts.isd.controller.CreateProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteProductController</servlet-name>
+        <servlet-class>uts.isd.controller.DeleteProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditProductController</servlet-name>
+        <servlet-class>uts.isd.controller.EditProductController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>FetchProductsController</servlet-name>
         <servlet-class>uts.isd.controller.FetchProductsController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewProductController</servlet-name>
-        <servlet-class>uts.isd.controller.ViewProductController</servlet-class>
+        <servlet-name>FindProductController</servlet-name>
+        <servlet-class>uts.isd.controller.FindProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>uts.isd.controller.LoginController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterController</servlet-name>
+        <servlet-class>uts.isd.controller.RegisterController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveOrderController</servlet-name>
+        <servlet-class>uts.isd.controller.RemoveOrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchProductController</servlet-name>
+        <servlet-class>uts.isd.controller.SearchProductController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ShowProductsController</servlet-name>
         <servlet-class>uts.isd.controller.ShowProductsController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>FindProductController</servlet-name>
-        <servlet-class>uts.isd.controller.FindProductController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>StaffLoginController</servlet-name>
@@ -56,49 +76,122 @@
         <servlet-name>EditStaffController</servlet-name>
         <servlet-class>uts.isd.controller.EditStaffController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SubmitOrderController</servlet-name>
+        <servlet-class>uts.isd.controller.SubmitOrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateOrderItemController</servlet-name>
+        <servlet-class>uts.isd.controller.UpdateOrderItemController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProductController</servlet-name>
+        <servlet-class>uts.isd.controller.UpdateProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewCartController</servlet-name>
+        <servlet-class>uts.isd.controller.ViewCartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewEditItemController</servlet-name>
+        <servlet-class>uts.isd.controller.ViewEditItemController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewOrdersController</servlet-name>
+        <servlet-class>uts.isd.controller.ViewOrdersController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewProductController</servlet-name>
+        <servlet-class>uts.isd.controller.ViewProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreatePaymentController</servlet-name>
+        <servlet-class>uts.isd.controller.CreatePaymentController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewPaymentDetails</servlet-name>
+        <servlet-class>uts.isd.controller.ViewPaymentController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeletePaymentController</servlet-name>
+        <servlet-class>uts.isd.controller.DeletePaymentController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdatePaymentController</servlet-name>
+        <servlet-class>uts.isd.controller.UpdatePaymentController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewPaymentHistoryController</servlet-name>
+        <servlet-class>uts.isd.controller.ViewPaymentHistoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchPaymentRecords</servlet-name>
+        <servlet-class>uts.isd.controller.SearchPaymentsController</servlet-class>
+
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddToOrderController</servlet-name>
+        <url-pattern>/AddToOrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelOrderController</servlet-name>
+        <url-pattern>/CancelOrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeActiveOrderController</servlet-name>
+        <url-pattern>/ChangeActiveOrderController</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ConnServlet</servlet-name>
         <url-pattern>/ConnServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewCartController</servlet-name>
-        <url-pattern>/ViewCartController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewOrdersController</servlet-name>
-        <url-pattern>/ViewOrdersController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SubmitOrderController</servlet-name>
-        <url-pattern>/SubmitOrderController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CreateOrderController</servlet-name>
         <url-pattern>/CreateOrderController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>RegisterController</servlet-name>
-        <url-pattern>/RegisterController</url-pattern>
+        <servlet-name>RemoveOrderItemController</servlet-name>
+        <url-pattern>/RemoveOrderItemController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LoginController</servlet-name>
-        <url-pattern>/LoginController</url-pattern>
+        <servlet-name>CreateProductController</servlet-name>
+        <url-pattern>/CreateProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteProductController</servlet-name>
+        <url-pattern>/DeleteProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProductController</servlet-name>
+        <url-pattern>/EditProductController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FetchProductsController</servlet-name>
         <url-pattern>/FetchProductsController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ViewProductController</servlet-name>
-        <url-pattern>/ViewProductController</url-pattern>
+        <servlet-name>FindProductController</servlet-name>
+        <url-pattern>/FindProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/LoginController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterController</servlet-name>
+        <url-pattern>/RegisterController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveOrderItemController</servlet-name>
+        <url-pattern>/RemoveOrderItemController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchProductController</servlet-name>
+        <url-pattern>/SearchProductController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ShowProductsController</servlet-name>
         <url-pattern>/ShowProductsController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>FindProductController</servlet-name>
-        <url-pattern>/FindProductController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>StaffLoginController</servlet-name>
@@ -111,6 +204,58 @@
     <servlet-mapping>
         <servlet-name>EditStaffController</servlet-name>
         <url-pattern>/EditStaffController</url-pattern>
+    </servlet-mapping>      
+    <servlet-mapping>      
+        <servlet-name>SubmitOrderController</servlet-name>
+        <url-pattern>/SubmitOrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateOrderItemController</servlet-name>
+        <url-pattern>/UpdateOrderItemController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProductController</servlet-name>
+        <url-pattern>/UpdateProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCartController</servlet-name>
+        <url-pattern>/ViewCartController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewEditItemController</servlet-name>
+        <url-pattern>/ViewEditItemController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewOrdersController</servlet-name>
+        <url-pattern>/ViewOrdersController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewProductController</servlet-name>
+        <url-pattern>/ViewProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreatePaymentController</servlet-name>
+        <url-pattern>/CreatePaymentController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewPaymentDetails</servlet-name>
+        <url-pattern>/ViewPaymentDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletePaymentController</servlet-name>
+        <url-pattern>/DeletePaymentController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePaymentController</servlet-name>
+        <url-pattern>/UpdatePaymentController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewPaymentHistoryController</servlet-name>
+        <url-pattern>/ViewPaymentHistoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchPaymentRecords</servlet-name>
+        <url-pattern>/SearchPaymentRecords</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
