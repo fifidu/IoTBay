@@ -51,17 +51,26 @@
         <nav>
             <a class="nav-item" href="ViewPaymentController">Saved Payment Details</a>
         </nav>
-        <div class="content">
-            <table class="results-table">
+
+        <div class="page-content">
+            <h1 class="title">Confirm Payment</h1>
+            <div>
+                <ul>
+                    <li><a href="updatepayment.jsp">Update Payment Details</a></li>
+                    <li><a href="DeletePaymentController">Delete Payment Details</a></li>
+                    <li><a href="ViewPaymentHistoryController">Submit Payment Details</a></li>
+                </ul>
+            </div>
+            <table>
                 <tr>
-                    <th class="results-table-header">Payment ID</th>
-                    <th class="results-table-header">Order ID</th>
-                    <th class="results-table-header">Customer ID</th>
-                    <th class="results-table-header">Card Number</th>
-                    <th class="results-table-header">Card Name</th>
-                    <th class="results-table-header">Card Expiry Date</th>
-                    <th class="results-table-header">CVV</th>
-                    <th class="results-table-header">Payment Date</th>
+                    <th>Payment ID</th>
+                    <th>Order ID</th>
+                    <th>Customer ID</th>
+                    <th>Card Number</th>
+                    <th>Card Name</th>
+                    <th>Card Expiry Date</th>
+                    <th>CVV</th>
+                    <th>Payment Date</th>
                 </tr>
                 <% 
                     Payment paymentDetails = (Payment) session.getAttribute("paymentDetails");%>
@@ -76,9 +85,7 @@
                             <td><%=paymentDetails.getPaymentDate()%></td>
                         </tr>
             </table>
-            <a href="updatepayment.jsp">Update Payment Details</a>
-            <a href="DeletePaymentController">Delete Payment Details</a>
-            <a href="ViewPaymentHistoryController">Submit Payment Details</a>
+
         </div>
     </main>
 </html>
