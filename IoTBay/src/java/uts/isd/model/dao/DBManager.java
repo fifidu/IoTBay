@@ -7,7 +7,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import uts.isd.model.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 
 /**
@@ -832,4 +831,36 @@ public class DBManager {
         return true;
     }
 
+    // Adds new customer to database and creates Customer object to store information for display on the website
+    public Shipping addShipping(int orderID, String carrierCode, String street, String city, String state, String country, String postal) throws SQLException {
+        int trackingID = 1;
+        String fetch = "SELECT TRACKINGID FROM IOTUSER.SHIPPING ORDER BY TRACKINGID";
+        ResultSet rs = st.executeQuery(fetch);
+        while (rs.next() && (trackingID == rs.getInt("customerID")) ) {
+            trackingID++;
+        }
+        if (!rs.next()){
+            trackingID++;
+        }
+        
+        LocalDate receivedDate = LocalDate.now();
+        LocalDate despatchDate = LocalDate.now().plusDays(1);
+        int daysBeforeDelivery = 0;
+        switch (carrierCode){
+            case "AUP":
+                daysBeforeDelivery = 15;
+                break;
+            case "DHL":
+                daysBeforeDelivery = 5;
+                break;
+            case "FDX":
+                daysBeforeDelivery = 7;
+                break;
+        }
+        LocalDate deliveryDate = LocalDate.now().plusDays(daysBeforeDelivery);
+
+        st.executeUpdate("INSERT INTO IOTUSER.SHIPPING VALUES (" + trackingID + ", " + orderID + ", '" + carrierCode + "', '"+ street + "', '" + city + "', '" + state + "', '" + country + "', '" + postal + "', 'Order received', '" + receivedDate + "', '" + despatchDate + "', '" + deliveryDate + "')");
+
+        return new Shipping(trackingID, orderID, carrierCode, street, city, state, country, postal, "Order received", receivedDate, despatchDate, deliveryDate);
+    }
 }

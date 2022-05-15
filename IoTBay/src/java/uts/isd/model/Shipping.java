@@ -13,26 +13,30 @@ import java.time.LocalDate;
 public class Shipping {
     private int trackingID;
     private int orderID;
+    private String carrierCode;
     private String addressStreet;
     private String addressCity;
     private String addressState;
     private String addressCountry;
     private String addressPostal;
     private String orderStatus;
-    private String currentLocation;
-    private LocalDate estDelivery;
+    private LocalDate receivedDate;
+    private LocalDate despatchDate;
+    private LocalDate deliveryDate;
 
-    public Shipping(int trackingID, int orderID, String addressStreet, String addressCity, String addressState, String addressCountry, String addressPostal, String orderStatus, String currentLocation, LocalDate estDelivery) {
+    public Shipping(int trackingID, int orderID, String carrierCode, String addressStreet, String addressCity, String addressState, String addressCountry, String addressPostal, String orderStatus, LocalDate receivedDate, LocalDate despatchDate, LocalDate deliveryDate) {
         this.trackingID = trackingID;
         this.orderID = orderID;
+        this.carrierCode = carrierCode;
         this.addressStreet = addressStreet;
         this.addressCity = addressCity;
         this.addressState = addressState;
         this.addressCountry = addressCountry;
         this.addressPostal = addressPostal;
         this.orderStatus = orderStatus;
-        this.currentLocation = currentLocation;
-        this.estDelivery = estDelivery;
+        this.receivedDate = receivedDate;
+        this.despatchDate = despatchDate;
+        this.deliveryDate = deliveryDate;
     }
 
     public int getTrackingID() {
@@ -41,6 +45,10 @@ public class Shipping {
 
     public int getOrderID() {
         return this.orderID;
+    }
+    
+    public String getCarrierCode() {
+        return this.carrierCode;
     }
 
     public String getAddressStreet() {
@@ -66,13 +74,17 @@ public class Shipping {
     public String getOrderStatus() {
         return this.orderStatus;
     }
-
-    public String getCurrentLocation() {
-        return this.currentLocation;
+    
+    public LocalDate getReceivedDate() {
+        return this.receivedDate;
     }
-
-    public LocalDate getEstDelivery() {
-        return this.estDelivery;
+    
+    public LocalDate getDespatchDate() {
+        return this.despatchDate;
+    }
+    
+    public LocalDate getDeliveryDate() {
+        return this.deliveryDate;
     }
 
     public void setTrackingID(int trackingID) {
@@ -81,6 +93,10 @@ public class Shipping {
 
     public void setOrderID(int orderID) {
         this.orderID = orderID;
+    }
+    
+    public void setCarrierCode(String carrierCode) {
+        this.carrierCode = carrierCode;
     }
 
     public void setAddressStreet(String addressStreet) {
@@ -107,12 +123,15 @@ public class Shipping {
         this.orderStatus = orderStatus;
     }
 
-    public void setCurrentLocation(String currentLocation) {
-        this.currentLocation = currentLocation;
-    }
-
-    public void setEstDelivery(LocalDate estDelivery) {
-        this.estDelivery = estDelivery;
+    public void setReceivedDate(LocalDate receivedDate) {
+        this.receivedDate = receivedDate;
     }
     
+    public void setDespatchDate(LocalDate despatchDate) {
+        this.despatchDate = despatchDate;
+    }
+    
+    public void setDeliveryDate(LocalDate deliveryDate) {
+        this.deliveryDate = deliveryDate;
+    }
 }
