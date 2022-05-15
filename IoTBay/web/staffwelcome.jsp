@@ -23,16 +23,13 @@
             
             <div class="header-outline"></div>
         </header>
-        
         <%
         Staff staff = (Staff) session.getAttribute("staff");
         %>
         <div class="page-content">
             <h1>IoTBay</h1><br>
-
             <h2>Welcome, <%=staff.getStaffFName()%></h2><br>
             <p>Your email is <%=staff.getStaffEmailAddress()%></p><br>
-            
             <a class="main-link" href="FetchProductsController">Continue to Store</a>
         </div>
     </body>

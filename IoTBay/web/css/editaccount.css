@@ -1,0 +1,103 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 15 May 2022, 9:37:29 am
+    Author     : Tammihn Ha
+*/
+
+body {
+    background-color: #202020;
+}
+
+.page-content {
+    padding-top: 100px; /* to ensure that the content is safely below the header */
+    margin: auto;
+    width: 400px; 
+}
+
+nav {
+    height: 100%;
+    width: 8%;
+    padding-right: 1rem;
+    min-width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.nav-item {
+  width: 100%;
+  height: 40px;
+  padding-left: 5%;
+  padding-right: 5%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #303030;
+  border-left: #005ce6 solid 2px;
+  transition: all 0.2s;
+}
+
+.nav-item:hover {
+  border-left: #005ce6 solid 7px;
+  width: calc(100% - 5px);
+}
+
+.content {
+    flex-grow: 1;
+}
+
+.main-link:link, .main-link:visited {
+    height: 100%;
+    padding: 10px;
+    background-color: #404040;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+table { /* centering the form without affecting position of 'Register' button */
+    width: 45%;
+    margin: auto;
+    text-align: right;
+}
+
+input[type=text], input[type=email], input[type=password], input[type=tel] {
+    width: 100%;
+    color: black;
+}
+
+form {
+    background-color: #303030;
+    padding: 20px;
+}
+
+.title {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+input[type=submit]  {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px;
+    background-color: #404040;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.second-content {
+    padding: 10px;
+    text-align: center;
+}
+
+.err-msg {
+    color: red;
+}
