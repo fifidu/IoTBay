@@ -69,6 +69,14 @@
         <servlet-class>uts.isd.controller.StaffLoginController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>EditCustomerController</servlet-name>
+        <servlet-class>uts.isd.controller.EditCustomerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditStaffController</servlet-name>
+        <servlet-class>uts.isd.controller.EditStaffController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>SubmitOrderController</servlet-name>
         <servlet-class>uts.isd.controller.SubmitOrderController</servlet-class>
     </servlet>
@@ -119,6 +127,10 @@
     <servlet>
         <servlet-name>SearchPaymentRecords</servlet-name>
         <servlet-class>uts.isd.controller.SearchPaymentsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCustomerController</servlet-name>
+        <servlet-class>uts.isd.controller.DeleteCustomerController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddToOrderController</servlet-name>
@@ -189,6 +201,14 @@
         <url-pattern>/StaffLoginController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>EditCustomerController</servlet-name>
+        <url-pattern>/EditCustomerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditStaffController</servlet-name>
+        <url-pattern>/EditStaffController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>SubmitOrderController</servlet-name>
         <url-pattern>/SubmitOrderController</url-pattern>
     </servlet-mapping>
@@ -239,6 +259,10 @@
     <servlet-mapping>
         <servlet-name>SearchPaymentRecords</servlet-name>
         <url-pattern>/SearchPaymentRecords</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCustomerController</servlet-name>
+        <url-pattern>/DeleteCustomerController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

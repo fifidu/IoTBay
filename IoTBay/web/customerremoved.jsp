@@ -1,17 +1,17 @@
 <%-- 
-    Document   : welcome
-    Created on : 16/03/2022, 3:00:18 PM
-    Author     : fifidu
+    Document   : customerremoved
+    Created on : 15 May 2022, 5:05:09 pm
+    Author     : tammi
 --%>
-<%@page import="uts.isd.model.Staff"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="./css/welcome.css" rel="stylesheet" type="text/css" >
+        <link href="./css/logout.css" rel="stylesheet" type="text/css" >
         <link href="./css/header.css" rel="stylesheet" type="text/css" >
-        <title>Welcome Staff- IoTBay</title>
+        <title>Logout</title>
     </head>
     <body>
         <header>
@@ -23,14 +23,10 @@
             
             <div class="header-outline"></div>
         </header>
-        <%
-        Staff staff = (Staff) session.getAttribute("staff");
-        %>
+        <% session.invalidate(); %>
         <div class="page-content">
-            <h1>IoTBay</h1><br>
-            <h2>Welcome, <%=staff.getStaffFName()%></h2><br>
-            <p>Your email is <%=staff.getStaffEmailAddress()%></p><br>
-            <a class="main-link" href="FetchProductsController">Continue to Store</a>
+            <h1>Your account has been deleted</h1><br>
+            <p><a class="underline-link" href = "index.jsp">Click here to return to index</a> </p>
         </div>
     </body>
 </html>

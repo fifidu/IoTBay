@@ -49,13 +49,22 @@
 
             <div class="header-outline"></div>
         </header>
-
+<%
+String activeOrderMsg = (String) session.getAttribute("activeOrderMsg");
+String orderUpdate = (String) session.getAttribute("orderUpdate");
+String submittedOrderMsg = (String) session.getAttribute("submittedOrderMsg");
+String cancelledOrderMsg = (String) session.getAttribute("cancelledOrderMsg");
+%>
         <main>
             <nav>
                 <a class="nav-item">Product</a>
             </nav>
             <div class="page-content">
                 <h1 class="title">Orders</h1>
+                <p><span class="err-msg"><%=(activeOrderMsg != null ? activeOrderMsg : "")%></p>
+                <p><span class="err-msg"><%=(orderUpdate != null ? orderUpdate : "")%></p>
+                <p><span class="err-msg"><%=(submittedOrderMsg != null ? submittedOrderMsg : "")%></p>
+                <p><span class="err-msg"><%=(cancelledOrderMsg != null ? cancelledOrderMsg : "")%></p>
                 <div>
                     <a class="button" href="CreateOrderController?customerID=<%=customer.getCustomerID()%>">Create Order</a>
                     <a class="button" href="ShowProductsController">Return to Home</a>
@@ -80,7 +89,7 @@
                            <% } else {%>
                            <td><a href="ViewCartController?cartID=<%=ord.getCartID()%>">View</td>
                            <%}
-                           if (!ord.getOrderStatus().equals("Cancelled")) {%>
+                           if (ord.getOrderStatus().equals("Active") || ord.getOrderStatus().equals("Saved")) {%>
                            <td><a href="CancelOrderController?orderID=<%=ord.getOrderID()%>">Cancel</a></td>
                            <%}%>
                            <%if (ord.getOrderStatus().equals("Saved")) {%>

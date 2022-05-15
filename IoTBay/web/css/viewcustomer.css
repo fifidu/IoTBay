@@ -1,0 +1,84 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 15 May 2022, 1:12:48 am
+    Author     : tammihn ha
+*/
+
+body {
+    background-color: #202020;
+}
+
+main {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+nav {
+    height: 100%;
+    width: 8%;
+    padding-right: 1rem;
+    min-width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+caption {
+    padding-top: 20px;
+}
+
+.nav-item {
+  width: 100%;
+  height: 40px;
+  padding-left: 5%;
+  padding-right: 5%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #303030;
+  border-left: #005ce6 solid 2px;
+  transition: all 0.2s;
+}
+
+.nav-item:hover {
+  border-left: #005ce6 solid 7px;
+  width: calc(100% - 5px);
+}
+.device-table, .device-table-header {
+    border: 1px solid;
+}
+
+.page-content {
+    padding-top: 100px; /* to ensure that the content is safely below the header */
+    margin: auto;
+    width: 30%; 
+}
+.main-link:link, .main-link:visited {
+    height: 100%;
+    padding: 20px;
+    margin: auto;
+    width: auto;
+    background-color: #404040;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    display: inline-block;
+}
+.red-link:link, .red-link:visited{
+    height: 100%;
+    padding: 20px;
+    margin: auto;
+    width: auto;
+    background-color: #ff6666;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    display: inline-block;
+}

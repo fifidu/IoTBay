@@ -32,7 +32,7 @@
                     <div class="user-info header-button">
                         <a><i class="fa fa-user-circle"></i> Hello, <%=staff.getStaffFName()%></a>
                         <div class="user-menu">
-                            <a class="header-button" href="editstaff.jsp">Edit Account</a>
+                            <a class="header-button" href="viewstaff.jsp">Account Details</a>
                             <a class="header-button" href="logout.jsp">Logout</a>
                         </div>
                     </div>

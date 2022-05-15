@@ -142,6 +142,18 @@ public class DBManager {
         return temp;
     }
 
+    public boolean checkSelectedQuantity(int productID, int quantity) throws SQLException {
+        String fetch = "SELECT * FROM IOTUSER.cartline INNER JOIN IOTUSER.product ON cartline.productID = product.productID WHERE cartline.productID = " + productID;
+        ResultSet rs = st.executeQuery(fetch);
+        while (rs.next()) {
+            int quantityAvailable = rs.getInt("quantityAvailable");
+            if (quantityAvailable >= quantity) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean checkItemInCart(int cartID, int productID) throws SQLException {
         String fetch = "SELECT * FROM IOTUSER.cartline WHERE cartID = " + cartID;
         ResultSet rs = st.executeQuery(fetch);
@@ -355,10 +367,9 @@ public class DBManager {
         updateOrderStatus(orderID, orderStatus);
     }
 
-    public void submitOrder(int orderID) throws SQLException {
-        Order submittedOrder = findOrder(orderID);
-        decreaseProductQuantity(submittedOrder.getCartID());
-        updateOrderStatus(orderID, "Submitted");
+    public void submitOrder(int cartID) throws SQLException {
+        decreaseProductQuantity(cartID);
+        updateOrderStatus(cartID, "Submitted");
     }
 
     /* Show Customer Orders */
@@ -756,6 +767,18 @@ public class DBManager {
             int newQuantity = cl.getQuantityAvailable() - cl.getQuantity();
             updateProductQuantity(productID, newQuantity);
         }
+    }
+
+    public boolean checkItemStock(int productID) throws SQLException {
+        String fetch = "SELECT * FROM IOTUSER.product WHERE productID = " + productID;
+        ResultSet rs = st.executeQuery(fetch);
+        while (rs.next()) {
+            int quantityAvailable = rs.getInt("quantityAvailable");
+            if (quantityAvailable <= 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

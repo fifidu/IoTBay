@@ -5,6 +5,7 @@
 package uts.isd.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,35 +14,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import uts.isd.model.Customer;
 import uts.isd.model.dao.DBManager;
 
 /**
  *
- * @author chrisvuong
+ * @author tammihn ha
  */
-public class CancelOrderController extends HttpServlet {
-
+public class DeleteCustomerController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         DBManager manager = (DBManager) session.getAttribute("manager");
-
-        int orderID = Integer.valueOf(request.getParameter("orderID"));
-        session.removeAttribute("activeOrderMsg");
-        session.removeAttribute("orderUpdate");
-        session.removeAttribute("submittedOrderMsg");
-        session.removeAttribute("cancelledOrderMsg");
-
+        Customer customer = (Customer) session.getAttribute("customer");
+        
+        int customerID = customer.getCustomerID();
+        
         try {
-            manager.cancelOrder(orderID);
-            session.setAttribute("cancelledOrderMsg", "Order " + orderID + " has been cancelled");
-        } catch (SQLException ex) {
-            Logger.getLogger(CreateOrderController.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Exception is: " + ex);
+            manager.deleteCustomer(customerID);
+            session.setAttribute("cusDelSuccess", "Successfully deleted customer from database");
+            request.getRequestDispatcher("customerremoved.jsp").include(request, response);
         }
-
-        request.getRequestDispatcher("ViewOrdersController").include(request, response);
+        catch (SQLException ex) {
+            Logger.getLogger(DeleteCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Customer delete failed with error: " + ex);
+        }
     }
-
-
 }

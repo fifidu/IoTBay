@@ -31,7 +31,7 @@ public class RemoveOrderItemController extends HttpServlet {
 
         Order activeOrder = (Order) session.getAttribute("activeOrder");
         int productID = Integer.valueOf(request.getParameter("productID"));
-
+        session.removeAttribute("removeItemMsg");
         try {
             Product removedProduct = manager.fetchIndividualProduct(productID);
             manager.deleteOrderItem(activeOrder.getCartID(), productID);
