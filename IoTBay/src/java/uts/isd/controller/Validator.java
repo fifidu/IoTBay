@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
 
 /**
  *
@@ -21,6 +22,8 @@ public class Validator implements Serializable {
     private String cardNamePattern = "([A-Z][a-z]+[\\s])+[A-Z][a-z]*";
     private String paymentDatePattern = "202+[0-9]{1}+-+[0-1]{1}+[0-9]{1}+-+[0-3]{1}+[0-9]{1}";
     private String cvvPattern = "[0-9]{4}";
+    private String postalPattern = "[0-9]{5,}";
+    private String[] carrierCodes = {"AUP", "DHL", "FDX"};
 
     public Validator(){}
 
@@ -127,5 +130,12 @@ public class Validator implements Serializable {
         session.setAttribute("paymentDetailsCreated", "");
         session.setAttribute("paymentDelSuccess", "");
     }
-
+    
+    public boolean validateCarrierCode(String carrierCode){
+        return Arrays.asList(carrierCodes).contains(carrierCode);
+    }
+    
+    public boolean validatePostal(String postal) {
+        return validate(postalPattern, postal);
+    }
 }
