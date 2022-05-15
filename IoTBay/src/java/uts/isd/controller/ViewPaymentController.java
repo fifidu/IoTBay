@@ -32,7 +32,7 @@ public class ViewPaymentController extends HttpServlet {
             ArrayList<Payment> paymentDetails = manager.viewPaymentDetails(orderID);
             session.setAttribute("paymentDetails", paymentDetails);
         }
-        catch (SQLException sqled) {
+        catch (SQLException | NullPointerException sqled) {
             Logger.getLogger(ViewPaymentController.class.getName()).log(Level.SEVERE, null, sqled);
             System.out.println("Unable to view saved payment details due to: " + sqled);
         }

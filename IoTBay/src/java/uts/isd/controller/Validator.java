@@ -19,7 +19,7 @@ public class Validator implements Serializable {
     private String passwordPattern = "[a-z0-9]{4,}"; 
     private String contactNumberPattern = "[0-9]{10,}";
     private String cardNumberPattern = "[0-9]{16}";
-    private String cardNamePattern = "([A-Z][a-z]+[\\s])+[A-Z][a-z]*";
+    private String cardNamePattern = "([A-Z][a-z]*+[\\s])+[A-Z][a-z]*";
     private String paymentDatePattern = "202+[0-9]{1}+-+[0-1]{1}+[0-9]{1}+-+[0-3]{1}+[0-9]{1}";
     private String cvvPattern = "[0-9]{4}";
     private String postalPattern = "[0-9]{5,}";
@@ -114,7 +114,7 @@ public class Validator implements Serializable {
     }
 
     public boolean validateCvv(String enteredCvv) {
-        return validate(cardNumberPattern,enteredCvv);
+        return validate(cvvPattern,enteredCvv);
     }
 
     public void clearPayment(HttpSession session) {
@@ -125,10 +125,10 @@ public class Validator implements Serializable {
         session.setAttribute("cardNameFormatErr", "");
         session.setAttribute("cardExpFormatErr", "");
         session.setAttribute("cvvFormatErr", "");
-        session.setAttribute("payDateFormatErr", "");
         session.setAttribute("existingPaymentErr", "");
         session.setAttribute("paymentDetailsCreated", "");
         session.setAttribute("paymentDelSuccess", "");
+        session.setAttribute("nonexistentPaymentErr", "");
     }
     
     public boolean validateCarrierCode(String carrierCode){

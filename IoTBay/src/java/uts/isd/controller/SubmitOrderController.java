@@ -48,18 +48,18 @@ public class SubmitOrderController extends HttpServlet {
                 }  
             }
 
-            Order submittedOrder = manager.findOrder(cartID);
             Order newActiveOrder = manager.createOrder(customerID);
-            manager.submitOrder(submittedOrder.getOrderID());
+            Order submittedOrder = manager.submitOrder(cartID);
 
             session.setAttribute("orderPageUpdate", "Order " + submittedOrder.getOrderID() + " has been submitted");
             session.setAttribute("activeOrder", newActiveOrder);
+            session.setAttribute("submittedOrder", submittedOrder);
         } catch (SQLException ex) {
             Logger.getLogger(CreateOrderController.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Exception is: " + ex);
         }
 
-        request.getRequestDispatcher("ViewOrdersController").include(request, response);
+        request.getRequestDispatcher("payment.jsp").include(request, response);
     }
 
 }
