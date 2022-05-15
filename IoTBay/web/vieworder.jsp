@@ -52,16 +52,22 @@
             <div class="header-outline"></div>
         </header>
 <%
-String removeItemMsg = (String) session.getAttribute("removeItemMsg");
+    String viewOrderPageUpdate = (String) session.getAttribute("viewOrderPageUpdate");
 %>
         <main>
             <nav>
                 <a class="nav-item">Product</a>
             </nav>
             <div class="page-content">
-                <h1 class="title">Cart</h1>
-                <p><%=(removeItemMsg != null ? removeItemMsg : "")%></p>
-                <a class="button" href="CancelOrderController?orderID=<%=viewedOrder.getOrderID()%>">Cancel Order</a>
+                <h1 class="title">View Order</h1>
+                <p><%=(viewOrderPageUpdate != null ? viewOrderPageUpdate : "")%></p>
+                <div>
+                    <ul>
+                        <li><a class="red-button" href="CancelOrderController?orderID=<%=viewedOrder.getOrderID()%>">Cancel Order</a></li>
+                        <li><a href="SubmitOrderController?cartID=<%=viewedOrder.getCartID()%>">Submit Order</a></li>
+                        <li><a href="ViewOrdersController">Return to Orders</a></li>
+                    </ul>
+                </div>
                 <table class="center">
                     <tr>
                         <th>Product ID</th>
@@ -81,7 +87,7 @@ String removeItemMsg = (String) session.getAttribute("removeItemMsg");
                                     <td>$<%=cl.getItemTotal()%></td>
                                     <% if (cl.getOrderStatus().equals("Active")) {%>
                                     <td><a href="ViewEditItemController?productID=<%=cl.getProductID()%>&quantity=<%=cl.getQuantity()%>">Edit</a</td>
-                                    <td><a href="RemoveOrderItemController?productID=<%=cl.getProductID()%>">Remove</a></td>
+                                    <td><a class="red-button" href="RemoveOrderItemController?productID=<%=cl.getProductID()%>">Remove</a></td>
                                 </tr>
                                         <%} 
                             }
@@ -94,7 +100,6 @@ String removeItemMsg = (String) session.getAttribute("removeItemMsg");
                             <td>$<%=session.getAttribute("totalCost")%></td>
                         </tr>
                 </table>
-                <a class="button" href="SubmitOrderController?cartID=<%=viewedOrder.getCartID()%>">Submit Order</a>
             </div>
                         
         </main>

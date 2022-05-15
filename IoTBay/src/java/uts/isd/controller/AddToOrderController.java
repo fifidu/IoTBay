@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import uts.isd.model.CartLine;
 import uts.isd.model.Customer;
 import uts.isd.model.Order;
 import uts.isd.model.Product;
@@ -38,9 +37,7 @@ public class AddToOrderController extends HttpServlet {
         Order activeOrder = (Order) session.getAttribute("activeOrder");
         Customer customer = (Customer) session.getAttribute("customer");
 
-        session.removeAttribute("noStockErr");
-        session.removeAttribute("invalidQuantityErr");
-        session.removeAttribute("addToCartMsg");
+        session.removeAttribute("addToOrderUpdate");
 
         try {
             if (activeOrder == null) {
@@ -49,18 +46,18 @@ public class AddToOrderController extends HttpServlet {
                 activeOrder = (Order) session.getAttribute("activeOrder");
             }
             if (quantityAvailable == 0) {
-                session.setAttribute("noStockErr", "Item is currently sold out");
+                session.setAttribute("addToOrderUpdate", "Item is currently sold out");
                 request.getRequestDispatcher("viewproduct.jsp").include(request, response);
             } else if (quantity > quantityAvailable) {
-                session.setAttribute("invalidQuantityErr", "Quantity selected is higher than product availability: Quantity Available = " + activeProduct.getQuantityAvailable());
+                session.setAttribute("addToOrderUpdate", "Quantity selected is higher than product availability: Quantity Available = " + activeProduct.getQuantityAvailable());
                 request.getRequestDispatcher("viewproduct.jsp").include(request, response);
             } else if (manager.checkItemInCart(activeOrder.getCartID(), activeProduct.getProductID())){
                 manager.addQuantityToExistingItem(activeOrder.getCartID(), activeProduct.getProductID(), quantity);
-                session.setAttribute("addToCartMsg", activeProduct.getProductName() + " with Quantity " + quantity + "has been added to Order " + activeOrder.getOrderID());
+                session.setAttribute("addToOrderUpdate", activeProduct.getProductName() + " with Quantity " + quantity + " has been added to Order " + activeOrder.getOrderID());
                 request.getRequestDispatcher("viewproduct.jsp").include(request, response);
             } else {
                 manager.addOrderItem(activeOrder.getCartID(), activeProduct.getProductID(), quantity);
-                session.setAttribute("addToCartMsg", activeProduct.getProductName() + " with Quantity " + quantity + "has been added to Order " + activeOrder.getOrderID());
+                session.setAttribute("addToOrderUpdate", activeProduct.getProductName() + " with Quantity " + quantity + " has been added to Order " + activeOrder.getOrderID());
                 request.getRequestDispatcher("viewproduct.jsp").include(request, response);
             } 
         } catch (SQLException ex) {

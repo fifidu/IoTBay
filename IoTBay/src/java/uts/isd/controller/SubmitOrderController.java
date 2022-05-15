@@ -33,10 +33,9 @@ public class SubmitOrderController extends HttpServlet {
         int cartID = Integer.valueOf(request.getParameter("cartID"));
         Customer customer = (Customer) session.getAttribute("customer");
         int customerID = customer.getCustomerID();
-        session.removeAttribute("activeOrderMsg");
-        session.removeAttribute("orderUpdate");
-        session.removeAttribute("submittedOrderMsg");
-        session.removeAttribute("cancelledOrderMsg");
+        
+        session.getAttribute("orderPageUpdate");
+        
         try {
             ArrayList<CartLine> cartList = manager.fetchCartItems(cartID);
             for (CartLine cl: cartList) {
@@ -53,7 +52,7 @@ public class SubmitOrderController extends HttpServlet {
             Order newActiveOrder = manager.createOrder(customerID);
             manager.submitOrder(submittedOrder.getOrderID());
 
-            session.setAttribute("submittedOrderMsg", "Order " + submittedOrder.getOrderID() + " has been submitted");
+            session.setAttribute("orderPageUpdate", "Order " + submittedOrder.getOrderID() + " has been submitted");
             session.setAttribute("activeOrder", newActiveOrder);
         } catch (SQLException ex) {
             Logger.getLogger(CreateOrderController.class.getName()).log(Level.SEVERE, null, ex);

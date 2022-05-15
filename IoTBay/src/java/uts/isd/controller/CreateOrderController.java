@@ -30,15 +30,13 @@ public class CreateOrderController extends HttpServlet {
         DBManager manager = (DBManager) session.getAttribute("manager");
         Customer customer = (Customer) session.getAttribute("customer");
         int customerID = customer.getCustomerID();
-        session.removeAttribute("activeOrderMsg");
-        session.removeAttribute("orderUpdate");
-        session.removeAttribute("submittedOrderMsg");
-        session.removeAttribute("cancelledOrderMsg");
+        
+        session.removeAttribute("orderPageUpdate");
 
         try {
             Order newOrder = manager.createOrder(customerID);
             session.setAttribute("activeOrder", newOrder);
-            session.setAttribute("orderUpdate", "Order " + newOrder.getOrderID() + " has been created");
+            session.setAttribute("orderPageUpdate", "Order " + newOrder.getOrderID() + " has been created");
         } catch (SQLException ex) {
             Logger.getLogger(CreateOrderController.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Exception is: " + ex);

@@ -32,17 +32,15 @@ public class ChangeActiveOrderController extends HttpServlet {
         int customerID = customer.getCustomerID();
         int currentActiveOrderID = currentActiveOrder.getOrderID();
         int newActiveOrderID = Integer.valueOf(request.getParameter("orderID"));
-        session.removeAttribute("activeOrderMsg");
-        session.removeAttribute("orderUpdate");
-        session.removeAttribute("submittedOrderMsg");
-        session.removeAttribute("cancelledOrderMsg");
         
+        session.removeAttribute("orderPageUpdate");
+
         try {
             manager.updateOrderStatus(currentActiveOrderID, "Saved");
             manager.updateOrderStatus(newActiveOrderID, "Active");
             Order newActiveOrder = manager.findActiveOrder(customerID);
             session.setAttribute("activeOrder", newActiveOrder);
-            session.setAttribute("activeOrderMsg", "Order " + newActiveOrder.getOrderID() + " is now active");
+            session.setAttribute("orderPageUpdate", "Order " + newActiveOrder.getOrderID() + " is now active");
         } catch (SQLException ex) {
             Logger.getLogger(CreateOrderController.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Exception is: " + ex);

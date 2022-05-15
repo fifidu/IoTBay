@@ -30,6 +30,8 @@ public class ViewOrdersController extends HttpServlet {
         Customer customer = (Customer) session.getAttribute("customer");
         int customerID = customer.getCustomerID();
 
+        session.removeAttribute("orderPageUpdate");
+
         try {
             Order activeOrder = manager.findActiveOrder(customerID);
             session.setAttribute("activeOrder", activeOrder);

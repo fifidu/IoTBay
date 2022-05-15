@@ -50,10 +50,7 @@
             <div class="header-outline"></div>
         </header>
 <%
-String activeOrderMsg = (String) session.getAttribute("activeOrderMsg");
-String orderUpdate = (String) session.getAttribute("orderUpdate");
-String submittedOrderMsg = (String) session.getAttribute("submittedOrderMsg");
-String cancelledOrderMsg = (String) session.getAttribute("cancelledOrderMsg");
+    String orderPageUpdate = (String) session.getAttribute("orderPageUpdate");
 %>
         <main>
             <nav>
@@ -61,13 +58,12 @@ String cancelledOrderMsg = (String) session.getAttribute("cancelledOrderMsg");
             </nav>
             <div class="page-content">
                 <h1 class="title">Orders</h1>
-                <p><span class="err-msg"><%=(activeOrderMsg != null ? activeOrderMsg : "")%></p>
-                <p><span class="err-msg"><%=(orderUpdate != null ? orderUpdate : "")%></p>
-                <p><span class="err-msg"><%=(submittedOrderMsg != null ? submittedOrderMsg : "")%></p>
-                <p><span class="err-msg"><%=(cancelledOrderMsg != null ? cancelledOrderMsg : "")%></p>
+                <p><%=(orderPageUpdate != null ? orderPageUpdate : "")%></p>
                 <div>
-                    <a class="button" href="CreateOrderController?customerID=<%=customer.getCustomerID()%>">Create Order</a>
-                    <a class="button" href="ShowProductsController">Return to Home</a>
+                    <ul>
+                        <li><a href="CreateOrderController?customerID=<%=customer.getCustomerID()%>">Create Order</a></li>
+                        <li><a href="ShowProductsController">Return to Home</a></li>
+                    </ul>
                 </div>
                 <table class="center">
                     <tr>

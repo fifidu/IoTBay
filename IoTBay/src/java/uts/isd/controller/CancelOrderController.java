@@ -27,14 +27,11 @@ public class CancelOrderController extends HttpServlet {
         DBManager manager = (DBManager) session.getAttribute("manager");
 
         int orderID = Integer.valueOf(request.getParameter("orderID"));
-        session.removeAttribute("activeOrderMsg");
-        session.removeAttribute("orderUpdate");
-        session.removeAttribute("submittedOrderMsg");
-        session.removeAttribute("cancelledOrderMsg");
+        session.removeAttribute("orderPageUpdate");
 
         try {
             manager.cancelOrder(orderID);
-            session.setAttribute("cancelledOrderMsg", "Order " + orderID + " has been cancelled");
+            session.setAttribute("orderPageUpdate", "Order " + orderID + " has been cancelled");
         } catch (SQLException ex) {
             Logger.getLogger(CreateOrderController.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Exception is: " + ex);

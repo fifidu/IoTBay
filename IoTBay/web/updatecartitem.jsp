@@ -55,8 +55,14 @@ String updatedQuantityMsg = (String) session.getAttribute("updatedQuantityMsg");
                 <a class="nav-item">Product</a>
             </nav>
             <div class="page-content">
-                <h1 class="title">Edit Product</h1>
+                <h1 class="title">Update Product</h1>                    
+                <% Product editProduct = (Product) session.getAttribute("editProduct"); %>
                 <p><%=(updatedQuantityMsg != null ? updatedQuantityMsg : "")%></p>
+                <div>
+                    <ul>
+                        <li><a class="red-button" href="RemoveOrderItemController?productID=<%=editProduct.getProductID()%>">Remove Item</a></li>
+                    </ul>
+                </div>
                 <table class="center">
                     <tr>
                         <th>Product ID</th>
@@ -64,7 +70,7 @@ String updatedQuantityMsg = (String) session.getAttribute("updatedQuantityMsg");
                         <th>Product Description</th>
                         <th>Product Cost</th>
                     </tr>
-                    <% Product editProduct = (Product) session.getAttribute("editProduct"); %>
+
                        <tr>
                            <td><%=editProduct.getProductID()%></td>
                            <td><%=editProduct.getProductName()%></td>
@@ -78,7 +84,7 @@ String updatedQuantityMsg = (String) session.getAttribute("updatedQuantityMsg");
                         <input type="number" id="updatedQuantity" name="updatedQuantity" value="<%=session.getAttribute("editQuantity")%>"><br><br>
                         <input type="submit" value="Edit Quantity">
                     </form>
-                    <a class="button" href="RemoveOrderItemController?productID=<%=editProduct.getProductID()%>">Remove Item</a>
+
                 </div>
             </div>
         </main>

@@ -48,19 +48,20 @@
             <div class="header-outline"></div>
         </header>
 <%
-String noStockErr = (String) session.getAttribute("noStockErr");
-String invalidQuantityErr = (String) session.getAttribute("invalidQuantityErr");
-String addToCartMsg = (String) session.getAttribute("addToCartMsg");
+String addToOrderUpdate = (String) session.getAttribute("addToOrderUpdate");
 %>
         <main>
             <nav>
                 <a class="nav-item">Product</a>
             </nav>
             <div class="page-content">
-                <h1 class="title">Orders</h1>
-                <p><span class="err-msg"><%=(noStockErr != null ? noStockErr : "")%></p>
-                <p><span class="err-msg"><%=(invalidQuantityErr != null ? invalidQuantityErr : "")%></p>
-                <p><%=(addToCartMsg != null ? addToCartMsg : "")%></p>
+                <h1 class="title">Product</h1>
+                <p><span class="err-msg"><%=(addToOrderUpdate != null ? addToOrderUpdate : "")%></p>
+                <div>
+                    <ul>
+                        <li><a href="ShowProductsController">Return to Home</a></li>
+                    </ul>
+                </div>
                 <table class="center">
                     <tr>
                         <th>Product ID</th>
@@ -83,6 +84,7 @@ String addToCartMsg = (String) session.getAttribute("addToCartMsg");
                         <input type="submit" value="Add to Order">
                     </form>
                 </div>
+
             </div>
         </main>
     </body>

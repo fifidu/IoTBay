@@ -31,11 +31,11 @@ public class RemoveOrderItemController extends HttpServlet {
 
         Order activeOrder = (Order) session.getAttribute("activeOrder");
         int productID = Integer.valueOf(request.getParameter("productID"));
-        session.removeAttribute("removeItemMsg");
+        session.removeAttribute("viewOrderPageUpdate");
         try {
             Product removedProduct = manager.fetchIndividualProduct(productID);
             manager.deleteOrderItem(activeOrder.getCartID(), productID);
-            session.setAttribute("removeItemMsg", removedProduct.getProductName() + " was removed from Order " + activeOrder.getOrderID());
+            session.setAttribute("viewOrderPageUpdate", removedProduct.getProductName() + " was removed from Order " + activeOrder.getOrderID());
         } catch (SQLException ex) {
             Logger.getLogger(CreateOrderController.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Exception is: " + ex);

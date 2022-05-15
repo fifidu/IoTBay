@@ -31,6 +31,8 @@ public class ViewCartController extends HttpServlet {
         DBManager manager = (DBManager) session.getAttribute("manager");
         int cartID = Integer.valueOf(request.getParameter("cartID"));
         
+        session.removeAttribute("viewOrderPageUpdate");
+
         try {
             ArrayList<CartLine> cartList = manager.fetchCartItems(cartID);
             Order viewedOrder = manager.findOrder(cartID);

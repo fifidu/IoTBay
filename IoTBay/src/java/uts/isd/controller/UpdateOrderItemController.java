@@ -30,6 +30,7 @@ public class UpdateOrderItemController extends HttpServlet {
         Product editProduct = (Product) session.getAttribute("editProduct");
         Order activeOrder = (Order) session.getAttribute("activeOrder");
         int updatedQuantity = Integer.valueOf(request.getParameter("updatedQuantity"));
+        session.removeAttribute("updatedQuantityMsg");
 
         try {
             manager.updateOrderItemQuantity(activeOrder.getCartID(), editProduct.getProductID(), updatedQuantity);
