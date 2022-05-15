@@ -131,6 +131,8 @@
     <servlet>
         <servlet-name>DeleteCustomerController</servlet-name>
         <servlet-class>uts.isd.controller.DeleteCustomerController</servlet-class>
+    </servlet>
+    <servlet>    
         <servlet-name>ShippingController</servlet-name>
         <servlet-class>uts.isd.controller.ShippingController</servlet-class>
     </servlet>
@@ -265,6 +267,8 @@
     <servlet-mapping>
         <servlet-name>DeleteCustomerController</servlet-name>
         <url-pattern>/DeleteCustomerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>    
         <servlet-name>ShippingController</servlet-name>
         <url-pattern>/ShippingController</url-pattern>
     </servlet-mapping>
