@@ -5,7 +5,6 @@
 package uts.isd.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -15,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import uts.isd.model.Customer;
 import uts.isd.model.Payment;
 import uts.isd.model.dao.DBManager;
 
@@ -28,13 +28,14 @@ public class ViewPaymentHistoryController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         DBManager manager = (DBManager) session.getAttribute("manager");
-        int customerID = Integer.parseInt(request.getParameter("customerID"));
+        Customer customer = (Customer) session.getAttribute("customer");
+        int customerID = customer.getCustomerID();
 
         try {
-            ArrayList<Payment> paymentDetails = manager.viewOrderHistory(customerID);
-            session.setAttribute("paymentDetails", paymentDetails);
+            ArrayList<Payment> paymentHistory = manager.viewPaymentHistory(customerID);
+            session.setAttribute("paymentHistory", paymentHistory);
         }
-        catch (SQLException sqled) {
+        catch (SQLException | NullPointerException sqled) {
             Logger.getLogger(ViewPaymentHistoryController.class.getName()).log(Level.SEVERE, null, sqled);
             System.out.println("Unable to view saved payment details due to: " + sqled);
         }

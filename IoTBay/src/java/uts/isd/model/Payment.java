@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package uts.isd.model;
+import java.time.LocalDate;
 
 /**
  *
@@ -18,9 +19,9 @@ public class Payment {
     private String cardName;
     private String cardExpiry;
     private int cvv;
-    private String paymentDate;
+    private LocalDate paymentDate;
 
-    public Payment(int paymentID, int orderID, int customerID, String cardNumber, String cardName, String cardExpiry, int cvv, String paymentDate) {
+    public Payment(int paymentID, int orderID, int customerID, String cardNumber, String cardName, String cardExpiry, int cvv, LocalDate paymentDate) {
         this.paymentID = paymentID;
         this.orderID = orderID;
         this.customerID = customerID;
@@ -59,7 +60,7 @@ public class Payment {
         return this.cvv;
     }
 
-    public String getPaymentDate() {
+    public LocalDate getPaymentDate() {
         return this.paymentDate;
     }
 
@@ -91,7 +92,7 @@ public class Payment {
         this.cvv = cvv;
     }
 
-    public void setPaymentDate(String paymentDate) {
+    public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
     }
 }

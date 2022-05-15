@@ -29,10 +29,9 @@ public class SearchPaymentsController extends HttpServlet {
         HttpSession session = request.getSession();
         DBManager manager = (DBManager) session.getAttribute("manager");
         String searched = request.getParameter("search-query");
-        int intSearched = Integer.parseInt("searched");
 
         try {
-            ArrayList<Payment> paymentHistory = manager.searchPaymentRecords(intSearched, searched);
+            ArrayList<Payment> paymentHistory = manager.searchPaymentRecordsDate(searched);
             session.setAttribute("paymentHistory", paymentHistory);
         }
         catch (SQLException sqled) {
