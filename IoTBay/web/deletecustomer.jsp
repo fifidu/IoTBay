@@ -1,7 +1,7 @@
 <%-- 
-    Document   : viewcustomer
-    Created on : 14 May 2022, 12:53:07 am
-    Author     : Tammihn Ha
+    Document   : deletecustomer
+    Created on : 15 May 2022, 4:42:07 pm
+    Author     : tammihn ha
 --%>
 
 <%@page import="uts.isd.model.Customer"%>
@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>View Customer Details - IoTBay</title>
     </head>
-
+    
     <body>
         <header>
             <div class="header-content">
@@ -43,18 +43,12 @@
 
             <div class="header-outline"></div>
         </header>
-
+                        
         <main>
             <div class="page-content">
-                <h3>Account Details</h3> <br><br>
-                <h4>First Name: </h4><p><%=customer.getCusFName()%></p><br>
-                <h4>Last Name: </h4><p><%=customer.getCusLName()%></p><br>
-                <h4>Email Address: </h4><p><%=customer.getCusEmailAddress()%></p><br>
-                <h4>Phone Number: </h4><p><%=customer.getCusContactNumber()%></p><br>
-                <p><a class="main-link" href = "editcustomer.jsp">Edit Details</a></p><br>
-                <p><a class="red-link" href = "deletecustomer.jsp">Delete Account</a></p>
+                <h4>Confirm delete account?</h4> <br>
+                <p><a class="red-link" href = "DeleteCustomerController">Delete Account</a></p>
             </div>
-        </main>
+        </main>                 
     </body>
-
 </html>
