@@ -29,7 +29,7 @@ public class DeleteProductController extends HttpServlet {
         try {
             manager.deleteProduct(productID);
             session.setAttribute("prodDelSuccess", "Successfully deleted product from catalogue");
-            request.getRequestDispatcher("FetchProductsController").include(request, response);
+            request.getRequestDispatcher("staffmain.jsp").include(request, response);
         }
         catch (SQLException ex) {
             Logger.getLogger(CreateProductController.class.getName()).log(Level.SEVERE, null, ex);

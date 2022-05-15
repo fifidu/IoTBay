@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="header-center">
-                    <form id="searchForm" action="FindProductController" method="get">
+                    <form id="searchForm" action="SearchProductController" method="get">
                         <input id="search" type="text" name="search-query" placeholder="Search"/>
                     </form>
                 </div>

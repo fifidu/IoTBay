@@ -58,7 +58,8 @@
                         <th class="device-table-header">Product Description</th>
                         <th class="device-table-header">Product Cost</th>
                         <th class="device-table-header">Quantity Available</th>
-                        <th></th>
+                        <th class="device-table-header">Edit Product Details</th>
+                        <th class="device-table-header">Delete Product</th>
                     </tr>
                     <% ArrayList<Product> productList = (ArrayList<Product>)session.getAttribute("productList");
                        for (Product prod: productList) { %>

@@ -70,3 +70,7 @@ caption {
     color: green;
     padding-left: 15%;
 }
+
+.view-delete-spacing {
+    padding: 2%;
+}
