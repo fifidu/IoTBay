@@ -48,6 +48,10 @@
         <servlet-name>StaffLoginController</servlet-name>
         <servlet-class>uts.isd.controller.StaffLoginController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditCustomerController</servlet-name>
+        <servlet-class>uts.isd.controller.EditCustomerController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ConnServlet</servlet-name>
         <url-pattern>/ConnServlet</url-pattern>
@@ -95,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>StaffLoginController</servlet-name>
         <url-pattern>/StaffLoginController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCustomerController</servlet-name>
+        <url-pattern>/EditCustomerController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
