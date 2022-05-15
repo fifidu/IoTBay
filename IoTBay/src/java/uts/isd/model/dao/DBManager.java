@@ -367,9 +367,20 @@ public class DBManager {
         updateOrderStatus(orderID, orderStatus);
     }
 
-    public void submitOrder(int cartID) throws SQLException {
+    public Order submitOrder(int cartID) throws SQLException {
         decreaseProductQuantity(cartID);
         updateOrderStatus(cartID, "Submitted");
+
+        String fetch = "SELECT * FROM IOTUSER.orders WHERE cartID = " + cartID;
+        ResultSet rs = st.executeQuery(fetch);
+        while (rs.next()) {
+            int orderID = rs.getInt("orderID");
+            String orderStatus = rs.getString("orderStatus");
+            double totalCost = rs.getDouble("totalCost");
+            LocalDate orderDate = LocalDate.now();
+            return new Order(orderID, cartID, orderDate, orderStatus, totalCost);
+        }
+        return null;
     }
 
     /* Show Customer Orders */
@@ -521,10 +532,21 @@ public class DBManager {
     }
     /* Payment Database */
     // Create details (links to orderID)
-    public Payment createPayment(int paymentID, int orderID, int customerID, String cardNumber, String cardName, String cardExpiry, int cvv) throws SQLException {
+    public Payment createPayment(int orderID, int customerID, String cardNumber, String cardName, String cardExpiry, int cvv) throws SQLException {
+        int paymentID = nextAvailablePaymentID();
         LocalDate paymentDate = LocalDate.now();
         st.executeUpdate("INSERT INTO IOTUSER.payment VALUES (" + paymentID + ", " + orderID + ", " + customerID + ", '" + cardNumber + "', '" + cardName + "', '" + cardExpiry + "', '" + cvv + "', '" + paymentDate + "')");
         return new Payment(paymentID, orderID, customerID, cardNumber, cardName, cardExpiry, cvv, paymentDate);
+    }
+
+    public int nextAvailablePaymentID() throws SQLException {
+        int nextID = 0;
+        String fetch = "SELECT * FROM IOTUSER.payment";
+        ResultSet rs = st.executeQuery(fetch);
+        while (rs.next()) {
+            nextID = rs.getInt("paymentID");
+        }
+        return nextID + 1;
     }
 
     // View saved order payment details
@@ -620,9 +642,10 @@ public class DBManager {
     }
 
     // Update details
-    public void updatePayment(int paymentID, String cardNumber, String cardName, String cardExpiry, int cvv) throws SQLException {
+    public Payment updatePayment(int paymentID, int orderID, int customerID, String cardNumber, String cardName, String cardExpiry, int cvv) throws SQLException {
         LocalDate paymentDate = LocalDate.now();
         st.executeUpdate("UPDATE IOTUSER.payment SET cardnumber = '" + cardNumber + "', cardname = '" + cardName + "', cardexpiry = '" + cardExpiry + "', cardcvv = '" + cvv + "', paymentDate = '" + paymentDate + "' WHERE paymentID = " + paymentID);
+        return new Payment(paymentID, orderID, customerID, cardNumber, cardName, cardExpiry, cvv, paymentDate);
     }
 
     // Delete details

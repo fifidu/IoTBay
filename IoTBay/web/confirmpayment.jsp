@@ -63,23 +63,21 @@
                     <th class="results-table-header">Payment Date</th>
                 </tr>
                 <% 
-                    ArrayList<Payment> paymentDetails = (ArrayList<Payment>)session.getAttribute("paymentDetails");
-                    for (Payment pay: paymentDetails) { %>
+                    Payment paymentDetails = (Payment) session.getAttribute("paymentDetails");%>
                         <tr>
-                            <td><%=pay.getPaymentID()%></td>
-                            <td><%=pay.getOrderID()%></td>
-                            <td><%=pay.getCustomerID()%></td>
-                            <td><%=pay.getCardNumber()%></td>
-                            <td><%=pay.getCardName()%></td>
-                            <td><%=pay.getCardExpiry()%></td>
-                            <td><%=pay.getCvv()%></td>
-                            <td><%=pay.getPaymentDate()%></td>
+                            <td><%=paymentDetails.getPaymentID()%></td>
+                            <td><%=paymentDetails.getOrderID()%></td>
+                            <td><%=paymentDetails.getCustomerID()%></td>
+                            <td><%=paymentDetails.getCardNumber()%></td>
+                            <td><%=paymentDetails.getCardName()%></td>
+                            <td><%=paymentDetails.getCardExpiry()%></td>
+                            <td><%=paymentDetails.getCvv()%></td>
+                            <td><%=paymentDetails.getPaymentDate()%></td>
                         </tr>
-                    }
             </table>
             <a href="updatepayment.jsp">Update Payment Details</a>
             <a href="DeletePaymentController">Delete Payment Details</a>
-            <a href="paymenthistory.jsp">Submit Payment Details</a>
+            <a href="ViewPaymentHistoryController">Submit Payment Details</a>
         </div>
     </main>
 </html>

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import uts.isd.model.Customer;
 import uts.isd.model.Payment;
 import uts.isd.model.dao.DBManager;
 
@@ -23,48 +24,44 @@ import uts.isd.model.dao.DBManager;
  */
 public class UpdatePaymentController extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Validator validator = new Validator();
         DBManager manager = (DBManager) session.getAttribute("manager");
-        Payment payment = null;
+        Payment paymentDetails = (Payment) session.getAttribute("paymentDetails");
         validator.clear(session);
 
-        String payID = request.getParameter("payID");
-        String ordID = request.getParameter("ordID");
-        String cusID = request.getParameter("cusID");
+        int orderID = Integer.valueOf(paymentDetails.getOrderID());
+        int customerID = Integer.valueOf(paymentDetails.getCustomerID());
+        String paymentID = Integer.toString(paymentDetails.getPaymentID());
+
         String cardNo = request.getParameter("cardNo");
         String cardName = request.getParameter("cardName");
         String cardExp = request.getParameter("cardExp");
         String cvv = request.getParameter("cvv");
 
-        if (!validator.validateID(payID)) {
-            session.setAttribute("payIDFormatErr", "Incorrect Payment ID Format - Numbers only");
-            request.getRequestDispatcher("updatepayment.jsp").include(request, response);
-        }
-        else if (!validator.validateCardNumber(cardNo)) {
-            session.setAttribute("cardNoFormatErr", "Incorrect Card Number Format - 16 numbers");
-            request.getRequestDispatcher("updatepayment.jsp").include(request, response);
-        }
-        else if (!validator.validateCardName(cardName)) {
-            session.setAttribute("cardNameFormatErr", "Incorrect Card Name Format");
-            request.getRequestDispatcher("updatepayment.jsp").include(request, response);
-        }
-        else if (!validator.validatePaymentDatePattern(cardExp)) {
-            session.setAttribute("cardExpFormatErr", "Incorrect Card Expiry Date Format - yyyy-mm-dd");
-            request.getRequestDispatcher("updatepayment.jsp").include(request, response);
-        }
-        else if (!validator.validateCvv(cvv)) {
-            session.setAttribute("cvvFormatErr", "Incorrect CVV Format - 4 numbers");
-            request.getRequestDispatcher("updatepayment.jsp").include(request, response);
-        }
-        else {
-            try {
-                int intPayID = Integer.parseInt(payID);
-                int intCvv = Integer.parseInt(cvv);
-                if (manager.searchPaymentRecordsID(intPayID) != null) {
-                    manager.updatePayment(intPayID, cardNo, cardName, cardExp, intCvv);
+        try {
+            if (!validator.validateID(paymentID)) {
+                session.setAttribute("payIDFormatErr", "Incorrect Payment ID Format - Numbers only");
+                request.getRequestDispatcher("updatepayment.jsp").include(request, response);
+            } else if (!validator.validateCardNumber(cardNo)) {
+                session.setAttribute("cardNoFormatErr", "Incorrect Card Number Format - 16 numbers");
+                request.getRequestDispatcher("updatepayment.jsp").include(request, response);
+            } else if (!validator.validateCardName(cardName)) {
+                session.setAttribute("cardNameFormatErr", "Incorrect Card Name Format");
+                request.getRequestDispatcher("updatepayment.jsp").include(request, response);
+            } else if (!validator.validatePaymentDatePattern(cardExp)) {
+                session.setAttribute("cardExpFormatErr", "Incorrect Card Expiry Date Format - yyyy-mm-dd");
+                request.getRequestDispatcher("updatepayment.jsp").include(request, response);
+            } else if (!validator.validateCvv(cvv)) {
+                session.setAttribute("cvvFormatErr", "Incorrect CVV Format - 4 numbers");
+                request.getRequestDispatcher("updatepayment.jsp").include(request, response);
+            } else {
+                int intPaymentID = Integer.valueOf(paymentID);
+                int intCvv = Integer.valueOf(cvv);
+                
+                if (manager.searchPaymentRecordsID(intPaymentID) != null) {
+                    manager.updatePayment(intPaymentID, orderID, customerID, cardNo, cardName, cardExp, intCvv);
                     session.setAttribute("paymentDetailsCreated", "Payment details processed!");
                     request.getRequestDispatcher("ViewPaymentController").include(request, response);
                 }
@@ -73,10 +70,9 @@ public class UpdatePaymentController extends HttpServlet {
                     request.getRequestDispatcher("updatepayment.jsp").include(request, response);
                 }
             }
-            catch (SQLException | NullPointerException ex) {
-                Logger.getLogger(UpdatePaymentController.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("Payment submission failed with error: " + ex);
-            }
+        } catch (SQLException | NullPointerException ex) {
+            Logger.getLogger(UpdatePaymentController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Payment submission failed with error: " + ex);
         }
     }
 }

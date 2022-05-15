@@ -60,18 +60,12 @@
                 <form class="create-payment-form" method="post" action="CreatePaymentController">
                     <caption><h3>Enter your payment details</h3></caption><br>
                     <p><span class="err-msg"> <%=(existingPaymentErr != null ? existingPaymentErr : "")%></span></p>
-                    <label for="payid"><b>Payment ID</b> <span class="err-msg"> <%=(payIDFormatErr != null ? payIDFormatErr : "")%></span></label><br>
-                    <input class="create-payment-form-input" type="number" id="payid" name="payID"><br><br>
-                    <label for="ordid"><b>Order ID</b> <span class="err-msg"> <%=(ordIDFormatErr != null ? ordIDFormatErr : "")%></span></label><br>
-                    <input class="create-payment-form-input" type="number" id="ordid" name="ordID"><br><br>
-                    <label for="cusid"><b>Customer ID</b> <span class="err-msg"> <%=(cusIDFormatErr != null ? cusIDFormatErr : "")%></span></label><br>
-                    <input class="create-payment-form-input" type="number" id="cusid" name="cusID"><br><br>
                     <label for="cardno"><b>Card Number</b> <span class="err-msg"> <%=(cardNoFormatErr != null ? cardNoFormatErr : "")%></span></label><br>
                     <input class="create-payment-form-input" type="number" id="cardno" name="cardNo"><br><br>
                     <label for="cardname"><b>Card Name</b> <span class="err-msg"> <%=(cardNameFormatErr != null ? cardNameFormatErr : "")%></span></label><br>
                     <input class="create-payment-form-input" type="text" id="cardname" name="cardName"><br><br>
                     <label for="cardexp"><b>Card Expiry</b> <span class="err-msg"> <%=(cardExpFormatErr != null ? cardExpFormatErr : "")%></span></label><br>
-                    <input class="create-payment-form-input" type="date" id="cardexp" name="cardExp"><br><br>
+                    <input class="create-payment-form-input" type="text" id="cardexp" name="cardExp"><br><br>
                     <label for="cvv"><b>CVV</b></label> <span class="err-msg"> <%=(cvvFormatErr != null ? cvvFormatErr : "")%></span><br>
                     <input class="create-payment-form-input" type="number" id="cvv" name="cvv"><br><br>
                     <input type="submit" value="Submit">

@@ -470,7 +470,7 @@ public class TestDB {
                     testViewPaymentDetails();
                     break;
                 case "o":
-                    testViewOrderHistory();
+                    testViewPaymentHistory();
                     break;
                 case "s":
                     testSearchPaymentRecordsID();
@@ -515,13 +515,13 @@ public class TestDB {
     }
 
     // Test viewOrderHistory()
-    private void testViewOrderHistory() throws SQLException {
+    private void testViewPaymentHistory() throws SQLException {
         System.out.print("Customer ID: ");
         int customerID = Integer.parseInt(in.nextLine());
 
         try {
-            if (db.viewOrderHistory(customerID) != null) {
-                ArrayList<Payment> payment = db.viewOrderHistory(customerID);
+            if (db.viewPaymentHistory(customerID) != null) {
+                ArrayList<Payment> payment = db.viewPaymentHistory(customerID);
                 System.out.println("Order history: ");
 
                 for (Payment p : payment) {
@@ -602,7 +602,7 @@ public class TestDB {
         int cvv = Integer.parseInt(in.nextLine());
 
         try {
-            db.createPayment(paymentID, orderID, customerID, cardNumber, cardName, cardExpiry, cvv);
+            db.createPayment(orderID, customerID, cardNumber, cardName, cardExpiry, cvv);
             System.out.println("Payment details created!");
         }
 
@@ -615,6 +615,10 @@ public class TestDB {
     private void testUpdatePayment() throws SQLException {
         System.out.print("Payment ID: ");
         int paymentID = Integer.parseInt(in.nextLine());
+        System.out.print("Order ID: ");
+        int orderID = in.nextInt();
+        System.out.print("Customer ID: ");
+        int customerID = in.nextInt();
         System.out.print("Card Number: ");
         String cardNumber = in.nextLine();
         System.out.print("Card Name: ");
@@ -625,7 +629,7 @@ public class TestDB {
         int cvv = Integer.parseInt(in.nextLine());
 
         try {
-            db.updatePayment(paymentID, cardNumber, cardName, cardExpiry, cvv);
+            db.updatePayment(paymentID, orderID, customerID, cardNumber, cardName, cardExpiry, cvv);
             System.out.println("Payment details updated!");
         }
 
