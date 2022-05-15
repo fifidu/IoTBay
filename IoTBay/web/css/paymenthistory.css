@@ -2,9 +2,9 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
 */
-/*
-    Created on : 31 Mar 2022, 1:20:27 pm
-    Author     : someo
+/* 
+    Created on : 15/05/2022, 11:04:42 AM
+    Author     : sr
 */
 
 body {
@@ -56,29 +56,52 @@ caption {
     flex-grow: 1;
 }
 
+.results-table, .results-table-header {
+    border: 1px solid;
+}
+
 .page-content {
     padding-top: 100px; /* to ensure that the content is safely below the header */
     margin: auto;
-    width: 1000px;
+    width: 1000px; 
+}
+
+.err-msg {
+    color: red;
+}
+
+input[type=submit]  {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px;
+    background-color: #404040;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.create-payment-form {
+    background-color: #303030;
+    padding: 20px;
+}
+
+.create-payment-form-input {
+    width: 100%;
+    color: black;
 }
 
 .success-msg {
     color: green;
-    padding-left: 15%;
 }
-
-.view-delete-spacing {
-    padding: 2%;
-}
-
 
 tr {
-    width: 1000px;
+    width: 800px;
 }
 
 td {
     padding: 20px;
-    width: 200px;
+    width: 150px;
 }
 
 table {

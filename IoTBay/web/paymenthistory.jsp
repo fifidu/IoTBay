@@ -13,7 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="./css/payment.css" rel="stylesheet" type="text/css" >
+        <link href="./css/paymenthistory.css" rel="stylesheet" type="text/css" >
         <link href="./css/header.css" rel="stylesheet" type="text/css" >
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>View Payment History - IoTBay</title>
@@ -22,7 +22,7 @@
         <header>
             <div class="header-content">
                 <div class="header-start">
-                    <a class="header-button" href="main.jsp"><h3>IoTBay</h3></a>
+                    <a class="header-button" href="ShowProductsController"><h3>IoTBay</h3></a>
                 </div>
                 <div class="header-center">
                     <form id="searchForm" action="SearchPaymentsController" method="get">
@@ -36,7 +36,9 @@
                     <div class="user-info header-button">
                         <a><i class="fa fa-user-circle"></i> Hello, <%=customer.getCusFName()%></a>
                         <div class="user-menu">
-                            <a class="header-button" href="edituser.jsp">Edit Account</a>
+                            <a class="header-button" href="viewcustomer.jsp">View Account Details</a>
+                            <a class="header-button" href="ViewOrdersController">View Orders</a>
+                            <a class="header-button" href="ViewPaymentHistoryController">View Payment History</a>
                             <a class="header-button" href="logout.jsp">Logout</a>
                         </div>
                     </div>
@@ -50,17 +52,18 @@
         <nav>
             <a class="nav-item" href="ViewPaymentHistoryController">Payment History</a>
         </nav>
-        <div class="content">
-            <table class="results-table">
+        <div class="page-content">
+            <h1 class="title">Payment History</h1>
+            <table>
                 <tr>
-                    <th class="results-table-header">Payment ID</th>
-                    <th class="results-table-header">Order ID</th>
-                    <th class="results-table-header">Customer ID</th>
-                    <th class="results-table-header">Card Number</th>
-                    <th class="results-table-header">Card Name</th>
-                    <th class="results-table-header">Card Expiry Date</th>
-                    <th class="results-table-header">CVV</th>
-                    <th class="results-table-header">Payment Date</th>
+                    <th>Payment ID</th>
+                    <th>Order ID</th>
+                    <th>Customer ID</th>
+                    <th>Card Number</th>
+                    <th>Card Name</th>
+                    <th>Card Expiry Date</th>
+                    <th>CVV</th>
+                    <th>Payment Date</th>
                 </tr>
                 <% 
                     ArrayList<Payment> paymentHistory = (ArrayList<Payment>) session.getAttribute("paymentHistory");

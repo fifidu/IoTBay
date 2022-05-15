@@ -32,7 +32,7 @@
                     <div class="user-info header-button">
                         <a><i class="fa fa-user-circle"></i> Hello, <%=staff.getStaffFName()%></a>
                         <div class="user-menu">
-                            <a class="header-button" href="viewstaff.jsp">Account Details</a>
+                            <a class="header-button" href="viewstaff.jsp">View Account Details</a>
                             <a class="header-button" href="logout.jsp">Logout</a>
                         </div>
                     </div>
@@ -47,23 +47,23 @@
                 <a class="nav-item" href="FetchProductsController">See all products</a>
                 <a class="nav-item" href="staffcreateproduct.jsp">Add a new product</a>
             </nav>
-            <div class="content">
+            <div class="page-content">
                 <!--"Successfully deleted product from catalogue" message-->
+                <h1 class="title">Device Catalogue</h1>
                 <% String prodDelSuccess = (String) session.getAttribute("prodDelSuccess");%>
                 <span class="success-msg"><%=(prodDelSuccess != null ? prodDelSuccess : "")%></span>
                 
-                <table class="device-table">
-                    <caption><h3>Device Catalogue</h3></caption>
+                <table>
                     <tr>
-                        <th class="device-table-header">Product ID</th>
-                        <th class="device-table-header">Product Name</th>
-                        <th class="device-table-header">Product Type</th>
-                        <th class="device-table-header">Product Supplier</th>
-                        <th class="device-table-header">Product Description</th>
-                        <th class="device-table-header">Product Cost</th>
-                        <th class="device-table-header">Quantity Available</th>
-                        <th class="device-table-header">Edit Product Details</th>
-                        <th class="device-table-header">Delete Product</th>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Product Type</th>
+                        <th>Product Supplier</th>
+                        <th>Product Description</th>
+                        <th>Product Cost</th>
+                        <th>Quantity Available</th>
+                        <th>Edit Product Details</th>
+                        <th>Delete Product</th>
                     </tr>
                     <% ArrayList<Product> productList = (ArrayList<Product>)session.getAttribute("productList");
                        for (Product prod: productList) { %>

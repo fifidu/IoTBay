@@ -18,7 +18,7 @@
         <header>
             <div class="header-content">
                 <div class="header-start">
-                    <a class="header-button" href="index.jsp"><h3>IoTBay</h3></a>
+                    <a class="header-button" href="ShowProductsController"><h3>IoTBay</h3></a>
                 </div>
                 <%
                 Customer customer = (Customer) session.getAttribute("customer");
@@ -27,8 +27,9 @@
                     <div class="user-info header-button">
                         <a><i class="fa fa-user-circle"></i> Hello, <%=customer.getCusFName()%></a>
                         <div class="user-menu">
-                            <a class="header-button" href="viewcustomer.jsp">Account Details</a>
-                            <a class="header-button" href="ViewOrdersController">My Orders</a>
+                            <a class="header-button" href="viewcustomer.jsp">View Account Details</a>
+                            <a class="header-button" href="ViewOrdersController">View Orders</a>
+                            <a class="header-button" href="ViewPaymentHistoryController">View Payment History</a>
                             <a class="header-button" href="logout.jsp">Logout</a>
                         </div>
                     </div>

@@ -21,7 +21,7 @@
         <header>
             <div class="header-content">
                 <div class="header-start">
-                    <a class="header-button" href="main.jsp"><h3>IoTBay</h3></a>
+                    <a class="header-button" href="FetchProductsController"><h3>IoTBay</h3></a>
                 </div>
                 <%
                 Staff staff = (Staff) session.getAttribute("staff");
@@ -30,7 +30,7 @@
                     <div class="user-info header-button">
                         <a><i class="fa fa-user-circle"></i> Hello, <%=staff.getStaffFName()%></a>
                         <div class="user-menu">
-                            <a class="header-button" href="edituser.jsp">Edit Account</a>
+                            <a class="header-button" href="viewstaff.jsp">View Account Details</a>
                             <a class="header-button" href="logout.jsp">Logout</a>
                         </div>
                     </div>

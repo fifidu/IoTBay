@@ -32,9 +32,9 @@
                     <div class="user-info header-button">
                         <a><i class="fa fa-user-circle"></i> Hello, <%=customer.getCusFName()%></a>
                         <div class="user-menu">
-                            <a class="header-button" href="viewcustomer.jsp">Account Details</a>
-                            <a class="header-button" href="ViewOrdersController">My Orders</a>
-                            <a class="header-button" href="ViewPaymentHistoryController">Payment History</a>
+                            <a class="header-button" href="viewcustomer.jsp">View Account Details</a>
+                            <a class="header-button" href="ViewOrdersController">View Orders</a>
+                            <a class="header-button" href="ViewPaymentHistoryController">View Payment History</a>
                             <a class="header-button" href="logout.jsp">Logout</a>
                         </div>
                     </div>
@@ -48,18 +48,18 @@
             <nav>
                 <a class="nav-item" href="ShowProductsController">All Products</a>
             </nav>
-            <div class="content">
-                <table class="device-table">
-                    <caption><h3>Device Catalogue</h3></caption>
+            <div class="page-content">
+                <h1 class="title">Device Catalogue</h1>
+                <table>
                     <tr>
-                        <th class="device-table-header">Product ID</th>
-                        <th class="device-table-header">Product Name</th>
-                        <th class="device-table-header">Product Type</th>
-                        <th class="device-table-header">Product Supplier</th>
-                        <th class="device-table-header">Product Description</th>
-                        <th class="device-table-header">Product Cost</th>
-                        <th class="device-table-header">Quantity Available</th>
-                        <th class="device-table-header"></th>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Product Type</th>
+                        <th>Product Supplier</th>
+                        <th>Product Description</th>
+                        <th>Product Cost</th>
+                        <th>Quantity Available</th>
+                        <th></th>
                         <th></th>
                     </tr>
                     <% ArrayList<Product> productList = (ArrayList<Product>)session.getAttribute("productList");
