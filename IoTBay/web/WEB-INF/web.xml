@@ -116,6 +116,10 @@
         <servlet-name>ViewPaymentHistoryController</servlet-name>
         <servlet-class>uts.isd.controller.ViewPaymentHistoryController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchPaymentRecords</servlet-name>
+        <servlet-class>uts.isd.controller.SearchPaymentsController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddToOrderController</servlet-name>
         <url-pattern>/AddToOrderController</url-pattern>
@@ -231,6 +235,10 @@
     <servlet-mapping>
         <servlet-name>ViewPaymentHistoryController</servlet-name>
         <url-pattern>/ViewPaymentHistoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchPaymentRecords</servlet-name>
+        <url-pattern>/SearchPaymentRecords</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

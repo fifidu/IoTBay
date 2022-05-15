@@ -583,7 +583,7 @@ public class DBManager {
 
     // Update details
     public void updatePayment(int paymentID, String cardNumber, String cardName, String cardExpiry, int cvv, String paymentDate) throws SQLException {
-        st.executeUpdate("UPDATE IOTUSER.payment WHERE paymentID = " + paymentID + " SET cardnumber = '" + cardNumber + "', cardname = '" + cardName + "', cardexpiry = '" + cardExpiry + "', cardcvv = '" + cvv + "', '" + paymentDate + "'");
+        st.executeUpdate("UPDATE IOTUSER.payment SET cardnumber = '" + cardNumber + "', cardname = '" + cardName + "', cardexpiry = '" + cardExpiry + "', cardcvv = '" + cvv + "', '" + paymentDate + "' WHERE paymentID = " + paymentID);
     }
 
     // Delete details

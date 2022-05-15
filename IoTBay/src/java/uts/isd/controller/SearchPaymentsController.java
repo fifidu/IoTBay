@@ -22,21 +22,22 @@ import uts.isd.model.dao.DBManager;
  *
  * @author sr
  */
-public class ViewPaymentHistoryController extends HttpServlet {
 
+public class SearchPaymentsController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         DBManager manager = (DBManager) session.getAttribute("manager");
-        int customerID = Integer.parseInt(request.getParameter("customerID"));
+        String searched = request.getParameter("search-query");
+        int intSearched = Integer.parseInt("searched");
 
         try {
-            ArrayList<Payment> paymentDetails = manager.viewOrderHistory(customerID);
-            session.setAttribute("paymentDetails", paymentDetails);
+            ArrayList<Payment> paymentHistory = manager.searchPaymentRecords(intSearched, searched);
+            session.setAttribute("paymentHistory", paymentHistory);
         }
         catch (SQLException sqled) {
             Logger.getLogger(ViewPaymentHistoryController.class.getName()).log(Level.SEVERE, null, sqled);
-            System.out.println("Unable to view saved payment details due to: " + sqled);
+            System.out.println("Search failed with error: " + sqled);
         }
         request.getRequestDispatcher("paymenthistory.jsp").include(request, response);
     }
