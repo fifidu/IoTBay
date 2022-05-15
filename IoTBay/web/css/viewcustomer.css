@@ -4,16 +4,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 */
 /* 
     Created on : 15 May 2022, 1:12:48 am
-    Author     : tammi
-*/
-
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : 31 Mar 2022, 1:20:27 pm
-    Author     : someo
+    Author     : tammihn ha
 */
 
 body {
@@ -67,7 +58,7 @@ caption {
 .page-content {
     padding-top: 100px; /* to ensure that the content is safely below the header */
     margin: auto;
-    width: 400px; 
+    width: 30%; 
 }
 .main-link:link, .main-link:visited {
     height: 100%;

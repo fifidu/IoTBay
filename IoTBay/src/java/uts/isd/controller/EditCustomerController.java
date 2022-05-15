@@ -59,13 +59,19 @@ public class EditCustomerController extends HttpServlet {
             request.getRequestDispatcher("editcustomer.jsp").include(request, response);
         } else {
             try {
-                if (manager.checkCustomer(cusEmailAddress)) {
-                    session.setAttribute("existingAccountErr", "Email address is already used for an account");
-                    request.getRequestDispatcher("editcustomer.jsp").include(request, response);
+                if (!customer.getCusEmailAddress().equals(cusEmailAddress)) {
+                    if (manager.checkCustomer(cusEmailAddress)) {
+                        session.setAttribute("existingAccountErr", "Email address is already used for an account");
+                        request.getRequestDispatcher("editcustomer.jsp").include(request, response);
+                    } else {
+                        customer = manager.updateCustomer(customerID, cusFName, cusLName, cusEmailAddress, cusPass, cusContactNumber);
+                        session.setAttribute("customer", customer);
+                        request.getRequestDispatcher("viewcustomer.jsp").include(request, response);
+                    }
                 } else {
-                    customer = manager.updateCustomer(customerID, cusFName, cusLName, cusEmailAddress, cusPass, cusContactNumber);
-                    session.setAttribute("customer", customer);
-                    request.getRequestDispatcher("viewcustomer.jsp").include(request, response);
+                        customer = manager.updateCustomer(customerID, cusFName, cusLName, cusEmailAddress, cusPass, cusContactNumber);
+                        session.setAttribute("customer", customer);
+                        request.getRequestDispatcher("viewcustomer.jsp").include(request, response);
                 }
             }
             catch (SQLException ex) {
