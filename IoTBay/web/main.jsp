@@ -47,18 +47,18 @@
             <nav>
                 <a class="nav-item" href="ShowProductsController">All Products</a>
             </nav>
-            <div class="page-content">
-                <table>
+            <div class="content">
+                <table class="device-table">
                     <caption><h3>Device Catalogue</h3></caption>
                     <tr>
-                        <th>Product ID</th>
-                        <th>Product Name</th>
-                        <th>Product Type</th>
-                        <th>Product Supplier</th>
-                        <th>Product Description</th>
-                        <th>Product Cost</th>
-                        <th>Quantity Available</th>
-                        <th></th>
+                        <th class="device-table-header">Product ID</th>
+                        <th class="device-table-header">Product Name</th>
+                        <th class="device-table-header">Product Type</th>
+                        <th class="device-table-header">Product Supplier</th>
+                        <th class="device-table-header">Product Description</th>
+                        <th class="device-table-header">Product Cost</th>
+                        <th class="device-table-header">Quantity Available</th>
+                        <th class="device-table-header"></th>
                         <th></th>
                     </tr>
                     <% ArrayList<Product> productList = (ArrayList<Product>)session.getAttribute("productList");

@@ -28,17 +28,10 @@
         <div class="page-content"> <!<!-- Everything in the middle of the screen -->
             <h1>Welcome to IoTBay!</h1><br>
             <p>To place an order, please</p><br>
-            <div>
-                <a class="main-link" href = login.jsp>Login</a>
-                <br>
-                <br>
-                <a class="main-link" href = register.jsp>Register</a>
-                <br>
-                <br>
-                <a class="main-link" href = stafflogin.jsp>Staff Login</a>
-                <br>
-                <br>
-            </div>
+            <a class="main-link" href = login.jsp>Login</a> or  
+            <a class="main-link" href = register.jsp>Register</a> or
+            <a class="main-link" href = staffwelcome.jsp>Staff Welcome Bypass</a>
+            <a class="main-link" href = stafflogin.jsp>Staff Login</a>
         </div>
         <jsp:include page="/ConnServlet" flush="true" />
     </body>

@@ -59,6 +59,7 @@ caption {
 .page-content {
     padding-top: 100px; /* to ensure that the content is safely below the header */
     margin: auto;
+    width: 400px;
 }
 
 .success-msg {
@@ -69,6 +70,7 @@ caption {
 .view-delete-spacing {
     padding: 2%;
 }
+
 
 tr {
     width: 600px;
