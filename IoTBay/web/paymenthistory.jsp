@@ -50,17 +50,17 @@
         <nav>
             <a class="nav-item" href="ViewPaymentHistoryController">Payment History</a>
         </nav>
-        <div class="page-content">
-            <table>
+        <div class="content">
+            <table class="results-table">
                 <tr>
-                    <th>Payment ID</th>
-                    <th>Order ID</th>
-                    <th>Customer ID</th>
-                    <th>Card Number</th>
-                    <th>Card Name</th>
-                    <th>Card Expiry Date</th>
-                    <th>CVV</th>
-                    <th>Payment Date</th>
+                    <th class="results-table-header">Payment ID</th>
+                    <th class="results-table-header">Order ID</th>
+                    <th class="results-table-header">Customer ID</th>
+                    <th class="results-table-header">Card Number</th>
+                    <th class="results-table-header">Card Name</th>
+                    <th class="results-table-header">Card Expiry Date</th>
+                    <th class="results-table-header">CVV</th>
+                    <th class="results-table-header">Payment Date</th>
                 </tr>
                 <% 
                     ArrayList<Payment> paymentDetails = (ArrayList<Payment>)session.getAttribute("paymentDetails");

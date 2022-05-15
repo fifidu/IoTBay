@@ -56,7 +56,7 @@ caption {
     flex-grow: 1;
 }
 
-.device-table, .device-table-header {
+.results-table, .results-table-header {
     border: 1px solid;
 }
 

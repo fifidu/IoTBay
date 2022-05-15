@@ -473,7 +473,10 @@ public class TestDB {
                     testViewOrderHistory();
                     break;
                 case "s":
-                    testSearchPaymentRecords();
+                    testSearchPaymentRecordsID();
+                    break;
+                case "t":
+                    testSearchPaymentRecordsDate();
                     break;
                 case "u":
                     testUpdatePayment();
@@ -534,16 +537,38 @@ public class TestDB {
         }
     }
 
-    // Test searchPaymentRecords()
-    private void testSearchPaymentRecords() throws SQLException {
-        System.out.print("Payment ID: ");
-        int paymentID = Integer.parseInt(in.nextLine());
-        System.out.print("Payment Date: ");
-        String paymentDate = in.nextLine();
+    // Test searchPaymentRecordsID()
+    private void testSearchPaymentRecordsID() throws SQLException {
+        System.out.print("Enter string to be searched: ");
+        int searched = Integer.parseInt(in.nextLine());
 
         try {
-            if (db.searchPaymentRecords(paymentID,paymentDate) != null) {
-                ArrayList<Payment> payment = db.searchPaymentRecords(paymentID,paymentDate);
+            if (db.searchPaymentRecordsID(searched) != null) {
+                ArrayList<Payment> payment = db.searchPaymentRecordsID(searched);
+                System.out.println("Payment records found: ");
+
+                for (Payment p : payment) {
+                    System.out.printf("%-5s %-5s %-5s %-10s %-12s %-10s %-3s %-10s \n", p.getPaymentID(), p.getOrderID(), p.getCustomerID(), p.getCardNumber(), p.getCardName(), p.getCardExpiry(), p.getCvv(), p.getPaymentDate());
+                }
+            } else {
+                System.out.println("Payment records not found.");
+            }
+        }
+
+        catch (SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    // Test searchPaymentRecordsDate()
+    private void testSearchPaymentRecordsDate() throws SQLException {
+        System.out.print("Enter string to be searched: ");
+        String searched = in.nextLine();
+
+        try {
+            if (db.searchPaymentRecordsDate(searched) != null) {
+                ArrayList<Payment> payment = db.searchPaymentRecordsDate(searched);
+//                System.out.println(payment);
                 System.out.println("Payment records found: ");
 
                 for (Payment p : payment) {
@@ -575,11 +600,9 @@ public class TestDB {
         String cardExpiry = in.nextLine();
         System.out.print("CVV: ");
         int cvv = Integer.parseInt(in.nextLine());
-        System.out.print("Payment Date: ");
-        String paymentDate = in.nextLine();
 
         try {
-            db.createPayment(paymentID, orderID, customerID, cardNumber, cardName, cardExpiry, cvv, paymentDate);
+            db.createPayment(paymentID, orderID, customerID, cardNumber, cardName, cardExpiry, cvv);
             System.out.println("Payment details created!");
         }
 
@@ -600,11 +623,9 @@ public class TestDB {
         String cardExpiry = in.nextLine();
         System.out.print("CVV: ");
         int cvv = Integer.parseInt(in.nextLine());
-        System.out.print("Payment Date: ");
-        String paymentDate = in.nextLine();
 
         try {
-            db.updatePayment(paymentID, cardNumber, cardName, cardExpiry, cvv, paymentDate);
+            db.updatePayment(paymentID, cardNumber, cardName, cardExpiry, cvv);
             System.out.println("Payment details updated!");
         }
 

@@ -521,8 +521,10 @@ public class DBManager {
     }
     /* Payment Database */
     // Create details (links to orderID)
-    public void createPayment(int paymentID, int orderID, int customerID, String cardNumber, String cardName, String cardExpiry, int cvv, String paymentDate) throws SQLException {
+    public Payment createPayment(int paymentID, int orderID, int customerID, String cardNumber, String cardName, String cardExpiry, int cvv) throws SQLException {
+        LocalDate paymentDate = LocalDate.now();
         st.executeUpdate("INSERT INTO IOTUSER.payment VALUES (" + paymentID + ", " + orderID + ", " + customerID + ", '" + cardNumber + "', '" + cardName + "', '" + cardExpiry + "', '" + cvv + "', '" + paymentDate + "')");
+        return new Payment(paymentID, orderID, customerID, cardNumber, cardName, cardExpiry, cvv, paymentDate);
     }
 
     // View saved order payment details
@@ -540,8 +542,9 @@ public class DBManager {
                     String cardName = rs.getString(5);
                     String cardExpiry = rs.getString(6);
                     int cvv = rs.getInt(7);
-                    String paymentDate = rs.getString(8);
-                    temp.add(new Payment(paymentID, returnedOrderID, customerID, cardNumber, cardName, cardExpiry, cvv, paymentDate));
+                    Date paymentDate = rs.getDate(8);
+                    LocalDate changedPaymentDate = paymentDate.toLocalDate();
+                    temp.add(new Payment(paymentID, returnedOrderID, customerID, cardNumber, cardName, cardExpiry, cvv, changedPaymentDate));
             }
         }
         return temp;
@@ -562,30 +565,57 @@ public class DBManager {
                 String cardName = rs.getString(5);
                 String cardExpiry = rs.getString(6);
                 int cvv = rs.getInt(7);
-                String paymentDate = rs.getString(8);
-                temp.add(new Payment(paymentID,orderID,returnedCustomerID,cardNumber,cardName,cardExpiry,cvv,paymentDate));
+                Date paymentDate = rs.getDate(8);
+                LocalDate changedPaymentDate = paymentDate.toLocalDate();
+                temp.add(new Payment(paymentID,orderID,returnedCustomerID,cardNumber,cardName,cardExpiry,cvv,changedPaymentDate));
             }
         }
         return temp;
     }
 
-    // Search payment records based on paymentID and date
-    public ArrayList<Payment> searchPaymentRecords(int paymentID, String paymentDate) throws SQLException {
-        String fetch = "SELECT * from IOTUSER.payment WHERE paymentID = " + paymentID + " OR paymentDate = '" + paymentDate + "'";
+    // Search payment records based on paymentID
+    public ArrayList<Payment> searchPaymentRecordsID(int paymentID) throws SQLException {
+        String fetch = "SELECT * from IOTUSER.payment WHERE paymentID = " + paymentID;
         ResultSet rs = st.executeQuery(fetch);
         ArrayList<Payment> temp = new ArrayList();
 
         while (rs.next()) {
             int returnedPaymentID = rs.getInt(1);
-            String returnedPaymentDate = rs.getString(8);
-            if (returnedPaymentID==paymentID && returnedPaymentDate.equals(paymentDate)) {
+            if (returnedPaymentID == paymentID) {
                 int orderID = rs.getInt(2);
                 int customerID = rs.getInt(3);
                 String cardNumber = rs.getString(4);
                 String cardName = rs.getString(5);
                 String cardExpiry = rs.getString(6);
                 int cvv = rs.getInt(7);
-                temp.add(new Payment(returnedPaymentID,orderID,customerID,cardNumber,cardName,cardExpiry,cvv,returnedPaymentDate));
+                Date paymentDate = rs.getDate(8);
+                LocalDate changedPaymentDate = paymentDate.toLocalDate();
+                temp.add(new Payment(returnedPaymentID,orderID,customerID,cardNumber,cardName,cardExpiry,cvv,changedPaymentDate));
+                return temp;
+            }
+        }
+        return null;
+    }
+
+    // Search payment records based on paymentDate
+    public ArrayList<Payment> searchPaymentRecordsDate(String paymentDate) throws SQLException {
+        String fetch = "SELECT * from IOTUSER.payment WHERE paymentdate = '" + paymentDate + "'";
+        ResultSet rs = st.executeQuery(fetch);
+        ArrayList<Payment> temp = new ArrayList();
+        LocalDate searchedDate = LocalDate.parse(paymentDate);
+
+        while (rs.next()) {
+            Date returnedPaymentDate = rs.getDate(8);
+            LocalDate localDatePaymentDate = returnedPaymentDate.toLocalDate();
+            if (localDatePaymentDate.equals(searchedDate)) {
+                int paymentID = rs.getInt(1);
+                int orderID = rs.getInt(2);
+                int customerID = rs.getInt(3);
+                String cardNumber = rs.getString(4);
+                String cardName = rs.getString(5);
+                String cardExpiry = rs.getString(6);
+                int cvv = rs.getInt(7);
+                temp.add(new Payment(paymentID,orderID,customerID,cardNumber,cardName,cardExpiry,cvv,localDatePaymentDate));
                 return temp;
             }
         }
@@ -593,8 +623,9 @@ public class DBManager {
     }
 
     // Update details
-    public void updatePayment(int paymentID, String cardNumber, String cardName, String cardExpiry, int cvv, String paymentDate) throws SQLException {
-        st.executeUpdate("UPDATE IOTUSER.payment SET cardnumber = '" + cardNumber + "', cardname = '" + cardName + "', cardexpiry = '" + cardExpiry + "', cardcvv = '" + cvv + "', '" + paymentDate + "' WHERE paymentID = " + paymentID);
+    public void updatePayment(int paymentID, String cardNumber, String cardName, String cardExpiry, int cvv) throws SQLException {
+        LocalDate paymentDate = LocalDate.now();
+        st.executeUpdate("UPDATE IOTUSER.payment SET cardnumber = '" + cardNumber + "', cardname = '" + cardName + "', cardexpiry = '" + cardExpiry + "', cardcvv = '" + cvv + "', paymentDate = '" + paymentDate + "' WHERE paymentID = " + paymentID);
     }
 
     // Delete details

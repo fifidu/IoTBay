@@ -36,7 +36,6 @@ public class CreatePaymentController extends HttpServlet {
         String cardName = request.getParameter("cardName");
         String cardExp = request.getParameter("cardExp");
         String cvv = request.getParameter("cvv");
-        String payDate = request.getParameter("payDate");
 
         if (!validator.validateID(payID)) {
             session.setAttribute("payIDFormatErr", "Incorrect Payment ID Format - Numbers only");
@@ -66,22 +65,20 @@ public class CreatePaymentController extends HttpServlet {
             session.setAttribute("cvvFormatErr", "Incorrect CVV Format - 4 numbers");
             request.getRequestDispatcher("payment.jsp").include(request, response);
         }
-        else if (!validator.validatePaymentDatePattern(cardExp)) {
-            session.setAttribute("payDateFormatErr", "Incorrect Payment Date Format - yyyy-mm-dd");
-            request.getRequestDispatcher("payment.jsp").include(request, response);
-        }
         else {
             try {
                 int intPayID = Integer.parseInt(payID);
                 int intOrdID = Integer.parseInt(ordID);
                 int intCusID = Integer.parseInt(cusID);
                 int intCvv = Integer.parseInt(cvv);
-                if (manager.searchPaymentRecords(intPayID, payDate) != null) {
+                
+                if (manager.searchPaymentRecordsID(intPayID) != null) {
                     session.setAttribute("existingPaymentErr", "A payment with this ID already exists");
                     request.getRequestDispatcher("payment.jsp").include(request, response);
                 }
                 else {
-                    manager.createPayment(intPayID, intOrdID, intCusID, cardNo, cardName, cardExp, intCvv, payDate);
+                    Payment paymentDetails = manager.createPayment(intPayID, intOrdID, intCusID, cardNo, cardName, cardExp, intCvv);
+                    session.setAttribute("paymentDetails", paymentDetails);
                     session.setAttribute("paymentDetailsCreated", "Payment details processed!");
                     request.getRequestDispatcher("confirmpayment.jsp").include(request, response);
                 }

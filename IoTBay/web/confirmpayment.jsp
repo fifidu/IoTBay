@@ -14,7 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="./css/vieworder.css" rel="stylesheet" type="text/css" >
+        <link href="./css/payment.css" rel="stylesheet" type="text/css" >
         <link href="./css/header.css" rel="stylesheet" type="text/css" >
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>Confirm Payment Details - IoTBay</title>
@@ -50,17 +50,17 @@
         <nav>
             <a class="nav-item" href="ViewPaymentController">Saved Payment Details</a>
         </nav>
-        <div class="page-content">
-            <table>
+        <div class="content">
+            <table class="results-table">
                 <tr>
-                    <th>Payment ID</th>
-                    <th>Order ID</th>
-                    <th>Customer ID</th>
-                    <th>Card Number</th>
-                    <th>Card Name</th>
-                    <th>Card Expiry Date</th>
-                    <th>CVV</th>
-                    <th>Payment Date</th>
+                    <th class="results-table-header">Payment ID</th>
+                    <th class="results-table-header">Order ID</th>
+                    <th class="results-table-header">Customer ID</th>
+                    <th class="results-table-header">Card Number</th>
+                    <th class="results-table-header">Card Name</th>
+                    <th class="results-table-header">Card Expiry Date</th>
+                    <th class="results-table-header">CVV</th>
+                    <th class="results-table-header">Payment Date</th>
                 </tr>
                 <% 
                     ArrayList<Payment> paymentDetails = (ArrayList<Payment>)session.getAttribute("paymentDetails");

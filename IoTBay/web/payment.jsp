@@ -56,7 +56,7 @@
                 String cvvFormatErr = (String) session.getAttribute("cvvFormatErr");
                 String payDateFormatErr = (String) session.getAttribute("payDateFormatErr");
             %>
-            <div class="page-content">
+            <div class="content">
                 <form class="create-payment-form" method="post" action="CreatePaymentController">
                     <caption><h3>Enter your payment details</h3></caption><br>
                     <p><span class="err-msg"> <%=(existingPaymentErr != null ? existingPaymentErr : "")%></span></p>
@@ -74,8 +74,6 @@
                     <input class="create-payment-form-input" type="date" id="cardexp" name="cardExp"><br><br>
                     <label for="cvv"><b>CVV</b></label> <span class="err-msg"> <%=(cvvFormatErr != null ? cvvFormatErr : "")%></span><br>
                     <input class="create-payment-form-input" type="number" id="cvv" name="cvv"><br><br>
-                    <label for="paydate"><b>Payment Date</b> <span class="err-msg"> <%=(payDateFormatErr != null ? payDateFormatErr : "")%></span></label><br>
-                    <input class="create-payment-form-input" type="date" id="paydate" name="payDate"><br><br>
                     <input type="submit" value="Submit">
                 </form>
             </div>
