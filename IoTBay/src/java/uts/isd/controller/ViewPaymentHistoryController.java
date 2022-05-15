@@ -35,9 +35,9 @@ public class ViewPaymentHistoryController extends HttpServlet {
             session.setAttribute("paymentDetails", paymentDetails);
         }
         catch (SQLException sqled) {
-            Logger.getLogger(ViewPaymentController.class.getName()).log(Level.SEVERE, null, sqled);
+            Logger.getLogger(ViewPaymentHistoryController.class.getName()).log(Level.SEVERE, null, sqled);
             System.out.println("Unable to view saved payment details due to: " + sqled);
         }
-        request.getRequestDispatcher("confirmpayment.jsp").include(request, response);
+        request.getRequestDispatcher("paymenthistory.jsp").include(request, response);
     }
 }

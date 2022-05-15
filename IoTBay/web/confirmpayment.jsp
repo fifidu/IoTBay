@@ -64,18 +64,18 @@
                 </tr>
                 <% 
                     ArrayList<Payment> paymentDetails = (ArrayList<Payment>)session.getAttribute("paymentDetails");
-                    for (Payment pay: paymentDetails)
-                %>
-                <tr>
-                    <td><%=pay.getPaymentID()%></td>
-                    <td><%=pay.getOrderID()%></td>
-                    <td><%=pay.getCustomerID()%></td>
-                    <td><%=pay.getCardNumber()%></td>
-                    <td><%=pay.getCardName()%></td>
-                    <td><%=pay.getCardExpiry()%></td>
-                    <td><%=pay.getCvv()%></td>
-                    <td><%=pay.getPaymentDate()%></td>
-                </tr>
+                    for (Payment pay: paymentDetails) { %>
+                        <tr>
+                            <td><%=pay.getPaymentID()%></td>
+                            <td><%=pay.getOrderID()%></td>
+                            <td><%=pay.getCustomerID()%></td>
+                            <td><%=pay.getCardNumber()%></td>
+                            <td><%=pay.getCardName()%></td>
+                            <td><%=pay.getCardExpiry()%></td>
+                            <td><%=pay.getCvv()%></td>
+                            <td><%=pay.getPaymentDate()%></td>
+                        </tr>
+                    }
             </table>
             <a href="updatepayment.jsp">Update Payment Details</a>
             <a href="DeletePaymentController">Delete Payment Details</a>

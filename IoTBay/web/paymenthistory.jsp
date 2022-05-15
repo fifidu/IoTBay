@@ -13,7 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="./css/staffcreateproduct.css" rel="stylesheet" type="text/css" >
+        <link href="./css/payment.css" rel="stylesheet" type="text/css" >
         <link href="./css/header.css" rel="stylesheet" type="text/css" >
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>View Payment History - IoTBay</title>
@@ -23,6 +23,11 @@
             <div class="header-content">
                 <div class="header-start">
                     <a class="header-button" href="main.jsp"><h3>IoTBay</h3></a>
+                </div>
+                <div class="header-center">
+                    <form id="searchForm" action="">
+                        <input id="search" type="text" name="search-query" placeholder="Search"/>
+                    </form>
                 </div>
                 <%
                 Customer customer = (Customer) session.getAttribute("customer");
@@ -59,18 +64,18 @@
                 </tr>
                 <% 
                     ArrayList<Payment> paymentDetails = (ArrayList<Payment>)session.getAttribute("paymentDetails");
-                    for (Payment pay: paymentDetails)
-                %>
-                <tr>
-                    <td><%=pay.getPaymentID()%></td>
-                    <td><%=pay.getOrderID()%></td>
-                    <td><%=pay.getCustomerID()%></td>
-                    <td><%=pay.getCardNumber()%></td>
-                    <td><%=pay.getCardName()%></td>
-                    <td><%=pay.getCardExpiry()%></td>
-                    <td><%=pay.getCvv()%></td>
-                    <td><%=pay.getPaymentDate()%></td>
-                </tr>
+                    for (Payment pay: paymentDetails) { %>
+                        <tr>
+                            <td><%=pay.getPaymentID()%></td>
+                            <td><%=pay.getOrderID()%></td>
+                            <td><%=pay.getCustomerID()%></td>
+                            <td><%=pay.getCardNumber()%></td>
+                            <td><%=pay.getCardName()%></td>
+                            <td><%=pay.getCardExpiry()%></td>
+                            <td><%=pay.getCvv()%></td>
+                            <td><%=pay.getPaymentDate()%></td>
+                        </tr>
+                    }
             </table>
         </div>
     </main>

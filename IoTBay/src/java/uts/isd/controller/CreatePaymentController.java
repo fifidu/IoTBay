@@ -54,7 +54,7 @@ public class CreatePaymentController extends HttpServlet {
             session.setAttribute("cardNoFormatErr", "Incorrect Card Number Format - 16 numbers");
             request.getRequestDispatcher("payment.jsp").include(request, response);
         }
-        else if (!validator.validateName(cardName)) {
+        else if (!validator.validateCardName(cardName)) {
             session.setAttribute("cardNameFormatErr", "Incorrect Card Name Format");
             request.getRequestDispatcher("payment.jsp").include(request, response);
         }
