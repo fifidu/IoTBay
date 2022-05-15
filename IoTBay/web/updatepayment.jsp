@@ -64,9 +64,9 @@
                     <label for="cardname"><b>Card Name</b> <span class="err-msg"> <%=(cardNameFormatErr != null ? cardNameFormatErr : "")%></span></label><br>
                     <input class="create-payment-form-input" type="text" id="cardname" name="cardName"><br><br>
                     <label for="cardexp"><b>Card Expiry</b> <span class="err-msg"> <%=(cardExpFormatErr != null ? cardExpFormatErr : "")%></span></label><br>
-                    <input class="create-payment-form-input" type="date" id="cardexp" name="cardExp"><br><br>
+                    <input class="create-payment-form-input" type="text" id="cardexp" name="cardExp"><br><br>
                     <label for="cvv"><b>CVV</b></label> <span class="err-msg"> <%=(cvvFormatErr != null ? cvvFormatErr : "")%></span><br>
-                    <input class="create-payment-form-input" type="text" id="cvv" name="cvv"><br><br>
+                    <input class="create-payment-form-input" type="number" id="cvv" name="cvv"><br><br>
                     <label for="paydate"><b>Payment Date</b> <span class="err-msg"> <%=(payDateFormatErr != null ? payDateFormatErr : "")%></span></label><br>
                     <input class="create-payment-form-input" type="text" id="paydate" name="payDate"><br><br>
                     <input type="submit" value="Submit">

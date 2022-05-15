@@ -63,7 +63,7 @@ public class UpdatePaymentController extends HttpServlet {
                 if (manager.searchPaymentRecordsID(intPaymentID) != null) {
                     manager.updatePayment(intPaymentID, orderID, customerID, cardNo, cardName, cardExp, intCvv);
                     session.setAttribute("paymentDetailsCreated", "Payment details processed!");
-                    request.getRequestDispatcher("ViewPaymentController").include(request, response);
+                    request.getRequestDispatcher("confirmpayment.jsp").include(request, response);
                 }
                 else {
                     session.setAttribute("nonexistentPaymentErr", "A payment with this ID does not exist");
