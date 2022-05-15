@@ -29,9 +29,9 @@ public class EditCustomerController extends HttpServlet {
         DBManager manager = (DBManager) session.getAttribute("manager");
         Validator validator = new Validator();
         validator.clear(session);
-        Customer customer = null;
+        Customer customer = (Customer) session.getAttribute("customer");
         
-        int customerID = Integer.valueOf(request.getParameter("customerID"));
+        int customerID = customer.getCustomerID();
         String cusFName = request.getParameter("cusFName");
         String cusLName = request.getParameter("cusLName");
         String cusEmailAddress = request.getParameter("cusEmailAddress");
@@ -41,31 +41,31 @@ public class EditCustomerController extends HttpServlet {
 
         if (!validator.validateEmail(cusEmailAddress)) {
             session.setAttribute("emailFormatErr", "Incorrect Email Format");
-            request.getRequestDispatcher("editCustomer.jsp").include(request, response);
+            request.getRequestDispatcher("editcustomer.jsp").include(request, response);
         } else if (!validator.validatePassword(cusPass)) {
             session.setAttribute("passFormatErr", "Incorrect Password Format");
-            request.getRequestDispatcher("editCustomer.jsp").include(request, response);
+            request.getRequestDispatcher("editcustomer.jsp").include(request, response);
         } else if (!cusPass.equals(cusConfirmPass)) {
             session.setAttribute("confirmPassErr", "Passwords are not the same");
-            request.getRequestDispatcher("editCustomer.jsp").include(request, response);
+            request.getRequestDispatcher("editcustomer.jsp").include(request, response);
         } else if (!validator.validateName(cusFName)) {
             session.setAttribute("nameFormatErr", "Incorrect Name Format");
-            request.getRequestDispatcher("editCustomer.jsp").include(request, response);
+            request.getRequestDispatcher("editcustomer.jsp").include(request, response);
         } else if (!validator.validateName(cusLName)) {
             session.setAttribute("nameFormatErr", "Incorrect Name Format");
-            request.getRequestDispatcher("editCustomer.jsp").include(request, response);        
+            request.getRequestDispatcher("editcustomer.jsp").include(request, response);        
         } else if (!validator.validateContactNumber(cusContactNumber)) {
             session.setAttribute("contactFormatErr", "Incorrect Contact Number Format");
-            request.getRequestDispatcher("editCustomer.jsp").include(request, response);
+            request.getRequestDispatcher("editcustomer.jsp").include(request, response);
         } else {
             try {
                 if (manager.checkCustomer(cusEmailAddress)) {
                     session.setAttribute("existingAccountErr", "Email address is already used for an account");
-                    request.getRequestDispatcher("editCustomer.jsp").include(request, response);
+                    request.getRequestDispatcher("editcustomer.jsp").include(request, response);
                 } else {
                     customer = manager.updateCustomer(customerID, cusFName, cusLName, cusEmailAddress, cusPass, cusContactNumber);
                     session.setAttribute("customer", customer);
-                    request.getRequestDispatcher("viewCustomer.jsp").include(request, response);
+                    request.getRequestDispatcher("viewcustomer.jsp").include(request, response);
                 }
             }
             catch (SQLException ex) {
