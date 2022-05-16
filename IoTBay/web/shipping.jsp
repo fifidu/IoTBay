@@ -21,7 +21,7 @@
                 <div class="header-start">
                     <a class="header-button" href="ShowProductsController"><h3>IoTBay</h3></a>
                 </div>
-                
+
                 <%
                     Customer customer = (Customer) session.getAttribute("customer");
                 %>
@@ -44,7 +44,12 @@
             <form action="ShippingController" method="post">
                 <h1>Shipment details</h1>
                 <hr />
-                <label>Shipment Methods</label>
+                <label>Shipment Methods
+                    <% if (session.getAttribute("carrierCodeErr") != null) {%>
+                    <span class="warning-text"><%=session.getAttribute("carrierCodeErr")%></span>
+                    <% session.setAttribute("carrierCodeErr", null);
+                            } %>
+                </label>
                 <ul id="shipment-method">
                     <li>
                         <input type="radio" id="aup" name="shipment-method" value="AUP" required>
@@ -66,11 +71,21 @@
                     <input type="text" id="street" name="street" required>
                     <label for="city">City</label>
                     <input type="text" id="city" name="city" required>
-                    <label for="state">State</label>
+                    <label for="state">State 
+                        <% if (session.getAttribute("stateErr") != null) {%>
+                        <span class="warning-text"><%=session.getAttribute("stateErr")%></span>
+                        <% session.setAttribute("stateErr", null);
+                            } %>
+                    </label>
                     <input type="text" id="state" name="state" required>
                     <label for="country">Country</label>
                     <input type="text" id="country" name="country" required>
-                    <label for="postal">Postal Code</label>
+                    <label for="postal">Postal Code
+                        <% if (session.getAttribute("postalErr") != null) {%>
+                        <span class="warning-text"><%=session.getAttribute("postalErr")%></span>
+                        <% session.setAttribute("postalErr", null);
+                            }%>
+                    </label>
                     <input type="text" id="postal" name="postal" required>
                 </div>
                 <hr />

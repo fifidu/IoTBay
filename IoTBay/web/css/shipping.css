@@ -77,3 +77,7 @@ button[type="submit"]:after {
 button[type="submit"]:hover:after {
   width: 100%;
 }
+
+.warning-text {
+    color: red;
+}

@@ -65,17 +65,22 @@ public class ShippingController extends HttpServlet {
             String state = request.getParameter("state");
             String country = request.getParameter("country");
             String postal = request.getParameter("postal");
+            
+            boolean passed = true;
 
             if (!validator.validateCarrierCode(carrierCode)) {
                 session.setAttribute("carrierCodeErr", "Invalid Carrier");
-                request.getRequestDispatcher("shipping.jsp").include(request, response);
-            } else if (!validator.validateState(state)){
-                session.setAttribute("stateErr", "Invalid State, use state code");
-                request.getRequestDispatcher("shipping.jsp").include(request, response);
-            } else if (!validator.validatePostal(postal)){
+                passed = false;
+            } 
+            if (!validator.validateState(state)){
+                session.setAttribute("stateErr", "Invalid State, use state code with capital letters");
+                passed = false;
+            } 
+            if (!validator.validatePostal(postal)){
                 session.setAttribute("postalErr", "Invalid Postal Code");
-                request.getRequestDispatcher("shipping.jsp").include(request, response);
-            } else {
+                passed = false;
+            } 
+            if (passed){
                 try {
                     Order order = (Order) session.getAttribute("submittedOrder");
                     Shipping foundShipping = manager.findShipping(order.getCartID());
@@ -98,6 +103,8 @@ public class ShippingController extends HttpServlet {
                     Logger.getLogger(ShippingController.class.getName()).log(Level.SEVERE, null, ex);
                     System.out.println("Exception is: " + ex);
                 }
+            } else {
+                request.getRequestDispatcher("shipping.jsp").include(request, response);
             }
         }
     }
