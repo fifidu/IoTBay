@@ -4,6 +4,7 @@
     Author     : Minh Quan Tran
 --%>
 <%@page import="uts.isd.model.Customer"%>
+<%@page import="uts.isd.model.Shipping"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,15 +22,10 @@
                 <div class="header-start">
                     <a class="header-button" href="ShowProductsController"><h3>IoTBay</h3></a>
                 </div>
-
-                <div class="header-center">
-                    <form id="searchForm" action="">
-                        <input id="search" type="text" name="search-query" placeholder="Search"/>
-                    </form>
-                </div>
                 
                 <%
-                Customer customer = (Customer) session.getAttribute("customer");
+                    Customer customer = (Customer) session.getAttribute("customer");
+                    Shipping shipping = (Shipping) session.getAttribute("viewedShipping");
                 %>
 
                 <div class="header-end">
@@ -49,59 +45,52 @@
         </header>
                         
         <main>
-            <h1>Order no 123456</h1>
+            <% if (shipping == null){ %>
+            <h1>No delivery found!</h1>
+            <% } else { %>
+            <h1>Order no <%=shipping.getOrderID()%></h1>
             <div class="delivery">
-                <h3>Delivery no 123456 - Estimated delivery date 10/05/2022</h3>
+                <h3>Delivery no <%=shipping.getTrackingID()%> - Estimated delivery date <%=shipping.getDeliveryDate()%></h3>
                 <ul class="status">
                     <li>
                         <div class="check-icon">
                             <img src="https://img.icons8.com/color/48/000000/checkmark--v1.png"/>
                         </div>
                         <b>Order received</b>
-                        <p>1/5, 6:35 pm</p>
+                        <p><%=shipping.getReceivedDate()%></p>
                     </li>
                     <li>
                         <div class="check-icon">
-                            <img src="https://img.icons8.com/color/48/000000/checkmark--v1.png"/>
+                            <img src="https://img.icons8.com/color/48/000000/checkmark--v1.png" <% if (!shipping.getOrderStatus().equals("Despatched")) {%>class="hidden"'<%} %>/>
                         </div>
-                        <b>Order received</b>
-                        <p>1/5, 6:35 pm</p>
+                        <b>Despatched</b>
+                        <p><%=shipping.getDespatchDate()%></p>
                     </li>
                     <li>
                         <div class="check-icon">
-                            <img src="https://img.icons8.com/color/48/000000/checkmark--v1.png" class="hidden"/>
+                            <img src="https://img.icons8.com/color/48/000000/checkmark--v1.png" <% if (!shipping.getOrderStatus().equals("Delivered")) {%>class="hidden"'<%} %>/>
                         </div>
-                        <b>Order received</b>
-                        <p>1/5, 6:35 pm</p>
+                        <b>Delivered</b>
+                        <p><%=shipping.getDeliveryDate()%></p>
                     </li>
                 </ul>
+                <p>Shipment methods: <%=shipping.getCarrierName()%></p>  
+                <p>Street: <%=shipping.getAddressStreet()%></p>
+                <p>City: <%=shipping.getAddressCity()%></p>
+                <p>State: <%=shipping.getAddressState()%></p>
+                <p>Country: <%=shipping.getAddressCountry()%></p>
+                <p>Postal: <%=shipping.getAddressPostal()%></p>
+                <p>Order Status: <%=shipping.getOrderStatus()%></p>
+                <hr />
+                <div class="actions">
+                    <form action="ShippingController" method="post">
+                        <input type="hidden" name="order-to-update" value="<%=shipping.getOrderID()%>" />
+                        <button type="submit" name="action" class="update-button" value="update">Update</button>
+                        <button type="submit" name="action" class="delete-button" value="delete">Delete</button>
+                    </form>
+                </div>
             </div>
-            <div class="delivery">
-                <h3>Delivery no 123456 - Estimated delivery date 10/05/2022</h3>
-                <ul class="status">
-                    <li>
-                        <div class="check-icon">
-                            <img src="https://img.icons8.com/color/48/000000/checkmark--v1.png"/>
-                        </div>
-                        <b>Order received</b>
-                        <p>1/5, 6:35 pm</p>
-                    </li>
-                    <li>
-                        <div class="check-icon">
-                            <img src="https://img.icons8.com/color/48/000000/checkmark--v1.png"/>
-                        </div>
-                        <b>Order received</b>
-                        <p>1/5, 6:35 pm</p>
-                    </li>
-                    <li>
-                        <div class="check-icon">
-                            <img src="https://img.icons8.com/color/48/000000/checkmark--v1.png" class="hidden"/>
-                        </div>
-                        <b>Order received</b>
-                        <p>1/5, 6:35 pm</p>
-                    </li>
-                </ul>
-            </div>
+            <% } %>
         </main>
     </body>
 </html>

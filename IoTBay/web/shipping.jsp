@@ -23,7 +23,7 @@
                 </div>
                 
                 <%
-                Customer customer = (Customer) session.getAttribute("customer");
+                    Customer customer = (Customer) session.getAttribute("customer");
                 %>
 
                 <div class="header-end">
@@ -74,7 +74,7 @@
                     <input type="text" id="postal" name="postal" required>
                 </div>
                 <hr />
-                <button type="submit">Proceed to Checkout</button>
+                <button type="submit">Continue</button>
             </form>
         </main>
     </body>

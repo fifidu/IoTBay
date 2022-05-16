@@ -29,31 +29,75 @@ public class ShippingController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         DBManager manager = (DBManager) session.getAttribute("manager");
-        Validator validator = new Validator();
-        validator.clear(session);
         
-        String carrierCode = request.getParameter("shipment-method");
-        String street = request.getParameter("street");
-        String city = request.getParameter("city");
-        String state = request.getParameter("state");
-        String country = request.getParameter("country");
-        String postal = request.getParameter("postal");
+        String action = request.getParameter("action");
         
-        if (!validator.validateCarrierCode(carrierCode)) {
-            session.setAttribute("carrierCodeErr", "Invalid Carrier");
-            request.getRequestDispatcher("shipping.jsp").include(request, response);
-        } else if (!validator.validatePostal(postal)){
-            session.setAttribute("postalErr", "Invalid Postal Code");
-            request.getRequestDispatcher("shipping.jsp").include(request, response);
+        if (action != null){
+            if (action.equals("update")){
+                try {
+                    Order order = manager.findOrder( Integer.parseInt(request.getParameter("order-to-update")) );
+                    session.setAttribute("submittedOrder", order);
+
+                    request.getRequestDispatcher("shipping.jsp").include(request, response);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ShippingController.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("Exception is: " + ex);
+                }
+            } else if (action.equals("delete")){
+                try {
+                    Shipping shipping = manager.findShipping( Integer.parseInt(request.getParameter("order-to-update")) );
+                    manager.deleteShipping(shipping.getTrackingID());
+                    
+                    session.setAttribute("viewedShipping", null);
+                    request.getRequestDispatcher("delivery.jsp").include(request, response);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ShippingController.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("Exception is: " + ex);
+                }
+            }
         } else {
-            try {
-                Order order = (Order) session.getAttribute("activeOrder");
-                Shipping shipping = manager.addShipping(order.getOrderID(), carrierCode, street, city, state, country, postal);
-                session.setAttribute("activeShipping", shipping);
-                request.getRequestDispatcher("welcome.jsp").include(request, response);
-            } catch (SQLException ex) {
-                Logger.getLogger(ViewCartController.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("Exception is: " + ex);
+            Validator validator = new Validator();
+            validator.clear(session);
+
+            String carrierCode = request.getParameter("shipment-method");
+            String street = request.getParameter("street");
+            String city = request.getParameter("city");
+            String state = request.getParameter("state");
+            String country = request.getParameter("country");
+            String postal = request.getParameter("postal");
+
+            if (!validator.validateCarrierCode(carrierCode)) {
+                session.setAttribute("carrierCodeErr", "Invalid Carrier");
+                request.getRequestDispatcher("shipping.jsp").include(request, response);
+            } else if (!validator.validateState(state)){
+                session.setAttribute("stateErr", "Invalid State, use state code");
+                request.getRequestDispatcher("shipping.jsp").include(request, response);
+            } else if (!validator.validatePostal(postal)){
+                session.setAttribute("postalErr", "Invalid Postal Code");
+                request.getRequestDispatcher("shipping.jsp").include(request, response);
+            } else {
+                try {
+                    Order order = (Order) session.getAttribute("submittedOrder");
+                    Shipping foundShipping = manager.findShipping(order.getCartID());
+                    if (foundShipping != null){
+                        foundShipping.setCarrierCode(carrierCode);
+                        foundShipping.setAddressStreet(street);
+                        foundShipping.setAddressCity(city);
+                        foundShipping.setAddressState(state);
+                        foundShipping.setAddressCountry(country);
+                        foundShipping.setAddressPostal(postal);
+                        manager.updateShipping(foundShipping);
+                        session.setAttribute("viewedShipping", foundShipping);
+                        request.getRequestDispatcher("delivery.jsp").include(request, response);
+                    } else {
+                        Shipping shipping = manager.addShipping(order.getOrderID(), carrierCode, street, city, state, country, postal);
+                        session.setAttribute("activeShipping", shipping);
+                        request.getRequestDispatcher("payment.jsp").include(request, response);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(ShippingController.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("Exception is: " + ex);
+                }
             }
         }
     }

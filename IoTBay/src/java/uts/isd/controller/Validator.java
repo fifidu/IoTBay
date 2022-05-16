@@ -22,8 +22,9 @@ public class Validator implements Serializable {
     private String cardNamePattern = "([A-Z][a-z]*+[\\s])+[A-Z][a-z]*";
     private String paymentDatePattern = "202+[0-9]{1}+-+[0-1]{1}+[0-9]{1}+-+[0-3]{1}+[0-9]{1}";
     private String cvvPattern = "[0-9]{4}";
-    private String postalPattern = "[0-9]{5,}";
+    private String postalPattern = "[0-9]{3,5}";
     private String[] carrierCodes = {"AUP", "DHL", "FDX"};
+    private String statePattern = "[A-Z]{3,5}";
 
     public Validator(){}
 
@@ -133,6 +134,10 @@ public class Validator implements Serializable {
     
     public boolean validateCarrierCode(String carrierCode){
         return Arrays.asList(carrierCodes).contains(carrierCode);
+    }
+    
+    public boolean validateState(String state){
+        return validate(statePattern, state);
     }
     
     public boolean validatePostal(String postal) {

@@ -59,7 +59,7 @@ public class SubmitOrderController extends HttpServlet {
             System.out.println("Exception is: " + ex);
         }
 
-        request.getRequestDispatcher("payment.jsp").include(request, response);
+        request.getRequestDispatcher("shipping.jsp").include(request, response);
     }
 
 }

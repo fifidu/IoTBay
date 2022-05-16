@@ -50,6 +50,18 @@ public class Shipping {
     public String getCarrierCode() {
         return this.carrierCode;
     }
+    
+    public String getCarrierName() {
+        if (this.carrierCode.equals("AUP")){
+            return "Australia Post";
+        } else if (this.carrierCode.equals("DHL")){
+            return "DHL";
+        } else if (this.carrierCode.equals("FDX")){
+            return "FedEX";
+        } else {
+            return null;
+        }
+    }
 
     public String getAddressStreet() {
         return this.addressStreet;

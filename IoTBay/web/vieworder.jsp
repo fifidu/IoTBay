@@ -67,6 +67,7 @@
                         <li><a class="red-button" href="CancelOrderController?orderID=<%=viewedOrder.getOrderID()%>">Cancel Order</a></li>
                         <li><a href="SubmitOrderController?cartID=<%=viewedOrder.getCartID()%>">Submit Order</a></li>
                         <li><a href="ViewOrdersController">Return to Orders</a></li>
+                        <li><a href="ViewDeliveryController?orderID=<%=viewedOrder.getOrderID()%>">Delivery</a></li>
                     </ul>
                 </div>
                 <table class="center">

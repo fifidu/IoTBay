@@ -132,9 +132,13 @@
         <servlet-name>DeleteCustomerController</servlet-name>
         <servlet-class>uts.isd.controller.DeleteCustomerController</servlet-class>
     </servlet>
-    <servlet>    
+    <servlet>
         <servlet-name>ShippingController</servlet-name>
         <servlet-class>uts.isd.controller.ShippingController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewDeliveryController</servlet-name>
+        <servlet-class>uts.isd.controller.ViewDeliveryController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddToOrderController</servlet-name>
@@ -268,9 +272,13 @@
         <servlet-name>DeleteCustomerController</servlet-name>
         <url-pattern>/DeleteCustomerController</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>    
+    <servlet-mapping>
         <servlet-name>ShippingController</servlet-name>
         <url-pattern>/ShippingController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewDeliveryController</servlet-name>
+        <url-pattern>/ViewDeliveryController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

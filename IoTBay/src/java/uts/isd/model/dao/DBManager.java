@@ -831,12 +831,11 @@ public class DBManager {
         return true;
     }
 
-    // Adds new customer to database and creates Customer object to store information for display on the website
     public Shipping addShipping(int orderID, String carrierCode, String street, String city, String state, String country, String postal) throws SQLException {
         int trackingID = 1;
         String fetch = "SELECT TRACKINGID FROM IOTUSER.SHIPPING ORDER BY TRACKINGID";
         ResultSet rs = st.executeQuery(fetch);
-        while (rs.next() && (trackingID == rs.getInt("customerID")) ) {
+        while (rs.next() && (trackingID == rs.getInt("TRACKINGID")) ) {
             trackingID++;
         }
         if (!rs.next()){
@@ -862,5 +861,59 @@ public class DBManager {
         st.executeUpdate("INSERT INTO IOTUSER.SHIPPING VALUES (" + trackingID + ", " + orderID + ", '" + carrierCode + "', '"+ street + "', '" + city + "', '" + state + "', '" + country + "', '" + postal + "', 'Order received', '" + receivedDate + "', '" + despatchDate + "', '" + deliveryDate + "')");
 
         return new Shipping(trackingID, orderID, carrierCode, street, city, state, country, postal, "Order received", receivedDate, despatchDate, deliveryDate);
+    }
+    
+    public void updateShipping(Shipping shipping) throws SQLException{
+        LocalDate receivedDate = LocalDate.now();
+        LocalDate despatchDate = LocalDate.now().plusDays(1);
+        int daysBeforeDelivery = 0;
+        switch (shipping.getCarrierCode()){
+            case "AUP":
+                daysBeforeDelivery = 15;
+                break;
+            case "DHL":
+                daysBeforeDelivery = 5;
+                break;
+            case "FDX":
+                daysBeforeDelivery = 7;
+                break;
+        }
+        LocalDate deliveryDate = LocalDate.now().plusDays(daysBeforeDelivery);
+        
+        st.executeUpdate("UPDATE IOTUSER.SHIPPING SET "
+                + "CARRIERCODE = '" + shipping.getCarrierCode() 
+                + "', ADDRESSSTREET = '" + shipping.getAddressStreet()
+                + "', ADDRESSCITY = '" + shipping.getAddressCity()
+                + "', ADDRESSSTATE = '" + shipping.getAddressState()
+                + "', ADDRESSCOUNTRY = '" + shipping.getAddressCountry()
+                + "', ADDRESSPOSTAL = '" + shipping.getAddressPostal()
+                + "', RECEIVEDDATE = '" + receivedDate
+                + "', DESPATCHDATE = '" + despatchDate
+                + "', DELIVERYDATE = '" + deliveryDate
+                + "'WHERE TRACKINGID = " + shipping.getTrackingID());
+    }
+    
+    public Shipping findShipping(int orderID) throws SQLException {
+        String fetch = "SELECT * FROM IOTUSER.SHIPPING WHERE ORDERID = " + orderID;
+        ResultSet rs = st.executeQuery(fetch);
+        while (rs.next()){
+            int trackingID = rs.getInt("TRACKINGID");
+            String carrierCode = rs.getString("CARRIERCODE");
+            String street = rs.getString("ADDRESSSTREET");
+            String city = rs.getString("ADDRESSCITY");
+            String state = rs.getString("ADDRESSSTATE");
+            String country = rs.getString("ADDRESSCOUNTRY");
+            String postal = rs.getString("ADDRESSPOSTAL");
+            String orderStatus = rs.getString("ORDERSTATUS");
+            LocalDate receivedDate = LocalDate.parse(rs.getString("RECEIVEDDATE"));
+            LocalDate despatchDate = LocalDate.parse(rs.getString("DESPATCHDATE"));
+            LocalDate deliveryDate = LocalDate.parse(rs.getString("DELIVERYDATE"));
+            return new Shipping(trackingID, orderID, carrierCode, street, city, state, country, postal, orderStatus, receivedDate, despatchDate, deliveryDate);
+        }
+        return null;
+    }
+    
+    public void deleteShipping(int trackingID) throws SQLException {
+        st.executeUpdate("DELETE FROM IOTUSER.SHIPPING WHERE TRACKINGID = " + trackingID);
     }
 }
