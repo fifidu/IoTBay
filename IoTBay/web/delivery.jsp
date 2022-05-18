@@ -61,7 +61,7 @@
                     </li>
                     <li>
                         <div class="check-icon">
-                            <img src="https://img.icons8.com/color/48/000000/checkmark--v1.png" <% if (!shipping.getOrderStatus().equals("Despatched")) {%>class="hidden"'<%} %>/>
+                            <img src="https://img.icons8.com/color/48/000000/checkmark--v1.png" <% if (!shipping.getOrderStatus().equals("Despatched") && !shipping.getOrderStatus().equals("Delivered")) {%>class="hidden"'<%} %>/>
                         </div>
                         <b>Despatched</b>
                         <p><%=shipping.getDespatchDate()%></p>
